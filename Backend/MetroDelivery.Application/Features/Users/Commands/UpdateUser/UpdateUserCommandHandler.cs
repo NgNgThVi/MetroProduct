@@ -23,15 +23,25 @@ namespace MetroDelivery.Application.Features.Users.Commands.UpdateUser
         public async Task<Unit> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
         {
             // validate incoming data
+            var user = await _userRepository.GetByIdAsync(request.Id);
 
+            if (user == null) {
+                throw new Exception("User not found");
+            }
+            user.UserName = request.NewUserName;
+            user.Password = request.NewPassword;
+            user.Email = request.NewEmail;
+            user.Role = request.NewRole;
+            user.Address = request.NewAddress;
             // convert to domain entity object
-            var userUpdate = _mapper.Map<User>(request);
+            var userUpdate = _mapper.Map<User>(user);
 
             // add database
             await _userRepository.UpdateAsync(userUpdate);
 
+
             // return
-            return Unit.Value; 
+            return Unit.Value;
         }
     }
 }

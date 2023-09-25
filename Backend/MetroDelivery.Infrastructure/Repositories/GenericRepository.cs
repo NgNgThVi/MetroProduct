@@ -1,4 +1,5 @@
-﻿using MetroDelivery.Application.Contracts.Persistance;
+﻿using MediatR;
+using MetroDelivery.Application.Contracts.Persistance;
 using MetroDelivery.Domain.Common;
 using MetroDelivery.Infrastructure.DatabaseContext;
 using Microsoft.EntityFrameworkCore;
@@ -25,7 +26,12 @@ namespace MetroDelivery.Infrastructure.Repositories
 
         public async Task DeleteAsync(T entity)
         {
-            _metroDeliveryDatabaseContext.Remove(entity);
+            var findIdDelete = await _metroDeliveryDatabaseContext.Set<T>().AsNoTracking().Where(q => q.Id == entity.Id).FirstOrDefaultAsync();
+            if (findIdDelete == null || findIdDelete.IsDelete) {
+                throw new Exception("Not Found");
+            }
+            findIdDelete.IsDelete = true;
+            _metroDeliveryDatabaseContext.Set<T>().Update(findIdDelete);
             await _metroDeliveryDatabaseContext.SaveChangesAsync();
         }
 
@@ -36,7 +42,7 @@ namespace MetroDelivery.Infrastructure.Repositories
 
         public async Task<T> GetByIdAsync(Guid id)
         {
-            return await _metroDeliveryDatabaseContext.Set<T>().AsNoTracking().FirstOrDefaultAsync(q => q.Id == id);
+            return await _metroDeliveryDatabaseContext.Set<T>().AsNoTracking().Where(q => q.Id == id).FirstOrDefaultAsync();
         }
 
         public async Task UpdateAsync(T entity)

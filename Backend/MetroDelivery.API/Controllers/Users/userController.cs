@@ -2,7 +2,10 @@
 using MediatR;
 using MetroDelivery.Application.Features.Users;
 using MetroDelivery.Application.Features.Users.Commands.CreateUser;
+using MetroDelivery.Application.Features.Users.Commands.DeleteUser;
+using MetroDelivery.Application.Features.Users.Commands.UpdateUser;
 using MetroDelivery.Application.Features.Users.Queries.GetAllUsers;
+using MetroDelivery.Application.Features.Users.Queries.GetUserById;
 using MetroDelivery.Application.Features.Users.Queries.GetUserDetail;
 using MetroDelivery.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
@@ -40,22 +43,41 @@ namespace MetroDelivery.API.Controllers.Users
         // POST api/<userController>
         [HttpPost]
         [Route("register")]
-        public async Task<ActionResult> Post(CreateUserCommand request)
+        public async Task<ActionResult> CreateUser(CreateUserCommand request)
         {
             var response = await _mediator.Send(request);
             return CreatedAtAction(nameof(GetAllUser), new { id = response });
         }
 
-        // PUT api/<userController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        // GET api/<userController>/5
+        [HttpGet]
+        [Route("getUserById")]
+        public async Task<ActionResult<UserDto>> GetUserById([FromQuery] Guid request)
         {
+            var response = await _mediator.Send(new GetUserByIdQuery(request));
+            return Ok(response);
+        }
+
+        // PUT api/<userController>/5
+        [HttpPut]
+        [Route("updateUserById")]
+        public async Task<ActionResult<UserDto>> UpdateUser(Guid id, [FromBody] UpdateUserCommand request)
+        {
+            if (id != request.Id) {
+                return BadRequest();
+            }
+            var response = await _mediator.Send(request);
+            return Ok(response);
         }
 
         // DELETE api/<userController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete]
+        [Route("deleteUserById")]
+        public async Task<ActionResult> Delete([FromQuery] Guid request)
         {
+            var command = new DeleteUserCommand { Id = request };
+            var response = await _mediator.Send(command);
+            return Ok(response);
         }
     }
 }
