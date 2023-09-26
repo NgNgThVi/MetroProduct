@@ -1,5 +1,6 @@
 ﻿
 using MediatR;
+using MetroDelivery.Application.Common.Exceptions;
 using MetroDelivery.Application.Features.Users;
 using MetroDelivery.Application.Features.Users.Commands.CreateUser;
 using MetroDelivery.Application.Features.Users.Commands.DeleteUser;
@@ -9,6 +10,7 @@ using MetroDelivery.Application.Features.Users.Queries.GetUserById;
 using MetroDelivery.Application.Features.Users.Queries.GetUserDetail;
 using MetroDelivery.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
+using System.Reflection;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -43,10 +45,22 @@ namespace MetroDelivery.API.Controllers.Users
         // POST api/<userController>
         [HttpPost]
         [Route("register")]
-        public async Task<ActionResult> CreateUser(CreateUserCommand request)
+        [ProducesResponseType(201)]
+        [ProducesResponseType(400)]
+        public async Task<ActionResult> CreateUser([FromQuery] CreateUserCommand request)
         {
-            var response = await _mediator.Send(request);
-            return CreatedAtAction(nameof(GetAllUser), new { id = response });
+            /*try {*/
+                var response = await _mediator.Send(request);
+                return CreatedAtAction(nameof(GetAllUser), new {id = response});
+            /*}
+            catch (Exception ex) {
+                if(ex is ValidationException) {
+                    ValidationException error = (ValidationException)ex;
+                    var errorsDiction = new Dictionary<string, string[]>(error.Errors);
+                    return BadRequest(errorsDiction);
+                }
+                return BadRequest(ex.Message);
+            }*/
         }
 
         // GET api/<userController>/5
