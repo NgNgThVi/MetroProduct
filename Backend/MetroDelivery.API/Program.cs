@@ -1,8 +1,8 @@
 
 using MetroDelivery.API.Middleware;
 using MetroDelivery.Application;
+using MetroDelivery.Identity;
 using MetroDelivery.Infrastructure;
-using MetroDelivery.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,8 +11,8 @@ ConfigurationManager configuration = builder.Configuration;
 
 // Add services to the container.
 builder.Services.AddApplicationServices();
-builder.Services.AddPersistenceServices(builder.Configuration);
 builder.Services.AddInfrastructureServices(builder.Configuration);
+builder.Services.AddIdentityServices(builder.Configuration);
 
 builder.Services.AddControllers();
 
@@ -40,6 +40,7 @@ app.UseMiddleware<ExceptionMiddleware>();
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

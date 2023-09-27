@@ -27,8 +27,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Application\MetroDelivery.Application\MetroDelivery.Application.csproj" />
+    <ProjectReference Include="..\Infrastructure\MetroDelivery.Identity\MetroDelivery.Identity.csproj" />
     <ProjectReference Include="..\Infrastructure\MetroDelivery.Infrastructure\MetroDelivery.Infrastructure.csproj" />
-    <ProjectReference Include="..\Infrastructure\MetroDelivery.Persistence\MetroDelivery.Persistence.csproj" />
   </ItemGroup>
 
 </Project>
