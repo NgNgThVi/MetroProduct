@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MetroDelivery.Identity.Migrations
 {
     [DbContext(typeof(MetroPickupIdentityDbContext))]
-    [Migration("20230927034616_Initdatabase")]
-    partial class Initdatabase
+    [Migration("20230927132524_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -581,7 +581,7 @@ namespace MetroDelivery.Identity.Migrations
                             Id = new Guid("f9589c1a-3cbc-4215-bb84-b8fa7d719440"),
                             Address = "da nang",
                             ApplicationUserId = "2C0B43BB-B991-408E-A8F3-2FD3B4A2AB84",
-                            Created = new DateTime(2023, 9, 27, 10, 46, 16, 425, DateTimeKind.Local).AddTicks(7760),
+                            Created = new DateTime(2023, 9, 27, 20, 25, 24, 643, DateTimeKind.Local).AddTicks(4387),
                             Email = "Staff@gmail.com",
                             IsDelete = false,
                             Password = "MANAGER",
@@ -594,7 +594,7 @@ namespace MetroDelivery.Identity.Migrations
                             Id = new Guid("b9cf3487-3d04-4cbf-85b7-e33360566485"),
                             Address = "hcm",
                             ApplicationUserId = "2198E4CD-3305-49C5-B78A-0B54DD76898F",
-                            Created = new DateTime(2023, 9, 27, 10, 46, 16, 425, DateTimeKind.Local).AddTicks(7792),
+                            Created = new DateTime(2023, 9, 27, 20, 25, 24, 643, DateTimeKind.Local).AddTicks(4407),
                             Email = "Manager@gmail.com",
                             IsDelete = false,
                             Password = "MANAGER",
@@ -715,7 +715,7 @@ namespace MetroDelivery.Identity.Migrations
                         {
                             Id = "2198E4CD-3305-49C5-B78A-0B54DD76898F",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "39ced2ae-bac2-4478-8782-d41b7347ab34",
+                            ConcurrencyStamp = "3c824719-99ba-4580-85e8-309f3b984aec",
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
                             FirstName = "Nhan",
@@ -723,9 +723,9 @@ namespace MetroDelivery.Identity.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEAnmAIi2oF1/gagcQIJ0ZHEUthOMY4TjBddsfFMl0JPHYdOIXs6tMK5XVi8kHFarIQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFvv28vPuViHrsmLsdZUokzw3kKq/Kn7n7DLGbANMXe/eluKV+DlYcaM34M9bmBgkg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "0d5b7f4f-24b2-46f8-8de1-7e1206f9a3eb",
+                            SecurityStamp = "59df635a-2278-4e44-8531-66635163e4e0",
                             TwoFactorEnabled = false,
                             UserName = "admin@gmail.com"
                         },
@@ -733,7 +733,7 @@ namespace MetroDelivery.Identity.Migrations
                         {
                             Id = "E6DE8827-B7C2-46E9-9227-66E6ECE676A8",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "e853f042-a9bd-4eb5-8cd1-575febe7b176",
+                            ConcurrencyStamp = "d7ee7d5c-1274-490a-8753-953ef210283b",
                             Email = "enduser@gmail.com",
                             EmailConfirmed = true,
                             FirstName = "Vi",
@@ -741,9 +741,9 @@ namespace MetroDelivery.Identity.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ENDUSER@GMAIL.COM",
                             NormalizedUserName = "ENDUSER@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEIAPj88PKn/fRLFC9YHJiMv3bKtDUjwccPWkFJu/Hdq9X3LlBET7mnCqwdPphTQWvg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAELX9pdVEIDrQNVDQ9KhPy7FxxxPJEXFMtWzbIBFndj4rLUZQdrSG/oUxVNXv1Br9Xw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "e27de74d-2db1-42d3-9989-51c84d30b91a",
+                            SecurityStamp = "20cfca92-9663-4ee7-b422-32b3991225ea",
                             TwoFactorEnabled = false,
                             UserName = "enduser@gmail.com"
                         },
@@ -751,7 +751,7 @@ namespace MetroDelivery.Identity.Migrations
                         {
                             Id = "2C0B43BB-B991-408E-A8F3-2FD3B4A2AB84",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "10e11d13-d0a6-459a-a267-2fc8e680fb64",
+                            ConcurrencyStamp = "313c7894-98cf-4429-81aa-6b754a34b56c",
                             Email = "staff@gmail.com",
                             EmailConfirmed = true,
                             FirstName = "Vi",
@@ -759,9 +759,9 @@ namespace MetroDelivery.Identity.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "STAFF@GMAIL.COM",
                             NormalizedUserName = "STAFF@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJ+lJoIBuCfqOSHumE1dJMNdX94dtwM39uKD/ZPCgfUY3y3/jlPdP8uqkUp3W28Ehw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEEwwRaCork7Xkz9iDoC5wLds8ZKv6o6oUWnKppOqGLGSr74P+ZI+uq61GJpezOkZ0w==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "f52e51a1-bab4-44c4-aec8-c2dabbee3e9b",
+                            SecurityStamp = "bfeca4df-14a9-4b7d-85f5-345bd2f8951c",
                             TwoFactorEnabled = false,
                             UserName = "staff@gmail.com"
                         });
@@ -797,21 +797,21 @@ namespace MetroDelivery.Identity.Migrations
                         new
                         {
                             Id = "CF531396-C1CD-427B-9D17-0383B7675394",
-                            ConcurrencyStamp = "675baf5a-0469-4b9a-8990-1948f026b840",
+                            ConcurrencyStamp = "b5912287-c812-4ed5-aa70-406a4a86f1f3",
                             Name = "EndUser",
                             NormalizedName = "EndUser"
                         },
                         new
                         {
                             Id = "AF5EB4AC-219A-4BC1-99FE-8C23876536EA",
-                            ConcurrencyStamp = "d83cbe5a-fb17-493d-866f-91590dd86550",
+                            ConcurrencyStamp = "c536df70-881f-4a55-8017-883cba922416",
                             Name = "Administrator",
                             NormalizedName = "Administrator"
                         },
                         new
                         {
                             Id = "647D9649-F5A2-4F24-808F-6FC326EC2AA3",
-                            ConcurrencyStamp = "8731e61d-aa0f-46ea-91aa-e78d1ba60d12",
+                            ConcurrencyStamp = "7c967ddb-03c0-4e7c-8713-f51ca9f8fbd5",
                             Name = "Staff",
                             NormalizedName = "Staff"
                         });
