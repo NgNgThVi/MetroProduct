@@ -24,7 +24,7 @@ namespace MetroDelivery.Identity.Configurations
                     Phone = "03030303",
                     Address = "da nang",
                     Role = "1",
-                    ApplicationUserId = "2C0B43BB-B991-408E-A8F3-2FD3B4A2AB84"
+                    /*ApplicationUserId = "2C0B43BB-B991-408E-A8F3-2FD3B4A2AB84"*/
                 },
             new User
             {
@@ -35,7 +35,7 @@ namespace MetroDelivery.Identity.Configurations
                 Phone = "03030303",
                 Address = "hcm",
                 Role = "2",
-                ApplicationUserId = "2198E4CD-3305-49C5-B78A-0B54DD76898F"
+                /*ApplicationUserId = "2198E4CD-3305-49C5-B78A-0B54DD76898F"*/
             }
             );
         }

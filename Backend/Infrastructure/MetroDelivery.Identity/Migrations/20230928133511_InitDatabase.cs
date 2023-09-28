@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MetroDelivery.Identity.Migrations
 {
-    public partial class Initdatabase : Migration
+    public partial class InitDatabase : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -125,6 +125,28 @@ namespace MetroDelivery.Identity.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UserName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Role = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreateBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsDelete = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -231,35 +253,6 @@ namespace MetroDelivery.Identity.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Users",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    UserName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Role = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ApplicationUserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreateBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsDelete = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Users", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Users_AspNetUsers_ApplicationUserId",
-                        column: x => x.ApplicationUserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Menus",
                 columns: table => new
                 {
@@ -293,6 +286,7 @@ namespace MetroDelivery.Identity.Migrations
                     CategoryID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ProductName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ProductDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Image = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     stock = table.Column<int>(type: "int", nullable: false),
                     price = table.Column<double>(type: "float", nullable: false),
                     Created = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -556,9 +550,9 @@ namespace MetroDelivery.Identity.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "647D9649-F5A2-4F24-808F-6FC326EC2AA3", "8731e61d-aa0f-46ea-91aa-e78d1ba60d12", "Staff", "Staff" },
-                    { "AF5EB4AC-219A-4BC1-99FE-8C23876536EA", "d83cbe5a-fb17-493d-866f-91590dd86550", "Administrator", "Administrator" },
-                    { "CF531396-C1CD-427B-9D17-0383B7675394", "675baf5a-0469-4b9a-8990-1948f026b840", "EndUser", "EndUser" }
+                    { "647D9649-F5A2-4F24-808F-6FC326EC2AA3", "d4ae95b2-d47b-424d-8df2-4034c3b65457", "Staff", "Staff" },
+                    { "AF5EB4AC-219A-4BC1-99FE-8C23876536EA", "889d8d6b-5903-4588-abaf-2ec734021f0c", "Admin", "Admin" },
+                    { "CF531396-C1CD-427B-9D17-0383B7675394", "d4c0f5bf-1716-41be-ae04-3b052571aecc", "EndUser", "User" }
                 });
 
             migrationBuilder.InsertData(
@@ -566,29 +560,34 @@ namespace MetroDelivery.Identity.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "2198E4CD-3305-49C5-B78A-0B54DD76898F", 0, "39ced2ae-bac2-4478-8782-d41b7347ab34", "admin@gmail.com", true, "Nhan", "Admin", false, null, "ADMIN@GMAIL.COM", "ADMIN@GMAIL.COM", "AQAAAAEAACcQAAAAEAnmAIi2oF1/gagcQIJ0ZHEUthOMY4TjBddsfFMl0JPHYdOIXs6tMK5XVi8kHFarIQ==", null, false, "0d5b7f4f-24b2-46f8-8de1-7e1206f9a3eb", false, "admin@gmail.com" },
-                    { "2C0B43BB-B991-408E-A8F3-2FD3B4A2AB84", 0, "10e11d13-d0a6-459a-a267-2fc8e680fb64", "staff@gmail.com", true, "Vi", "Staff", false, null, "STAFF@GMAIL.COM", "STAFF@GMAIL.COM", "AQAAAAEAACcQAAAAEJ+lJoIBuCfqOSHumE1dJMNdX94dtwM39uKD/ZPCgfUY3y3/jlPdP8uqkUp3W28Ehw==", null, false, "f52e51a1-bab4-44c4-aec8-c2dabbee3e9b", false, "staff@gmail.com" },
-                    { "E6DE8827-B7C2-46E9-9227-66E6ECE676A8", 0, "e853f042-a9bd-4eb5-8cd1-575febe7b176", "enduser@gmail.com", true, "Vi", "EndUser", false, null, "ENDUSER@GMAIL.COM", "ENDUSER@GMAIL.COM", "AQAAAAEAACcQAAAAEIAPj88PKn/fRLFC9YHJiMv3bKtDUjwccPWkFJu/Hdq9X3LlBET7mnCqwdPphTQWvg==", null, false, "e27de74d-2db1-42d3-9989-51c84d30b91a", false, "enduser@gmail.com" }
+                    { "2198E4CD-3305-49C5-B78A-0B54DD76898F", 0, "148e1c1e-4fe7-42c6-a679-89d12ad4f422", "admin@gmail.com", true, "Nhan", "Admin", false, null, "ADMIN@GMAIL.COM", "ADMIN@GMAIL.COM", "AQAAAAEAACcQAAAAEHdgvTdbgn9Qe9TpzHp1qXYjYeC0Kiln/yyRX6wp+EKlOa2woICvFkn6eF5CbLgFAQ==", null, false, "29d8af4a-4688-4522-a5d4-ac42b46e4953", false, "admin@gmail.com" },
+                    { "2C0B43BB-B991-408E-A8F3-2FD3B4A2AB84", 0, "a7a4be33-4a26-41ee-9e0d-32c755bf1e9e", "staff@gmail.com", true, "Vi", "Staff", false, null, "STAFF@GMAIL.COM", "STAFF@GMAIL.COM", "AQAAAAEAACcQAAAAEOcOcUUsleW7h9Hl9JlYuX4nJY530wPLMJqIA+hiWVuXn51ns9AcFbQt7T0IlBDRtg==", null, false, "dbf90555-8828-4e9d-9280-18310e90cbe9", false, "staff@gmail.com" },
+                    { "E6DE8827-B7C2-46E9-9227-66E6ECE676A8", 0, "42849bec-e4bc-46a1-abd3-404ec0ef443a", "enduser@gmail.com", true, "Vi", "EndUser", false, null, "ENDUSER@GMAIL.COM", "ENDUSER@GMAIL.COM", "AQAAAAEAACcQAAAAEABBD0ZJ3hj6Nb5IC8kiC5K0Y+iPKCclCOzfAKz1YRYRpBM6jI4l7S7vXMAlWfpL6g==", null, false, "281cc051-6247-4b62-9fd8-6714524ec5fb", false, "enduser@gmail.com" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "Id", "Address", "CreateBy", "Created", "Email", "IsDelete", "LastModified", "LastModifiedBy", "Password", "Phone", "Role", "UserName" },
+                values: new object[,]
+                {
+                    { new Guid("b9cf3487-3d04-4cbf-85b7-e33360566485"), "hcm", null, new DateTime(2023, 9, 28, 20, 35, 10, 809, DateTimeKind.Local).AddTicks(1901), "Manager@gmail.com", false, null, null, "MANAGER", "03030303", "2", "Manager" },
+                    { new Guid("f9589c1a-3cbc-4215-bb84-b8fa7d719440"), "da nang", null, new DateTime(2023, 9, 28, 20, 35, 10, 809, DateTimeKind.Local).AddTicks(1875), "Staff@gmail.com", false, null, null, "MANAGER", "03030303", "1", "Staff" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[,]
-                {
-                    { "AF5EB4AC-219A-4BC1-99FE-8C23876536EA", "2198E4CD-3305-49C5-B78A-0B54DD76898F" },
-                    { "647D9649-F5A2-4F24-808F-6FC326EC2AA3", "2C0B43BB-B991-408E-A8F3-2FD3B4A2AB84" },
-                    { "CF531396-C1CD-427B-9D17-0383B7675394", "E6DE8827-B7C2-46E9-9227-66E6ECE676A8" }
-                });
+                values: new object[] { "AF5EB4AC-219A-4BC1-99FE-8C23876536EA", "2198E4CD-3305-49C5-B78A-0B54DD76898F" });
 
             migrationBuilder.InsertData(
-                table: "Users",
-                columns: new[] { "Id", "Address", "ApplicationUserId", "CreateBy", "Created", "Email", "IsDelete", "LastModified", "LastModifiedBy", "Password", "Phone", "Role", "UserName" },
-                values: new object[,]
-                {
-                    { new Guid("b9cf3487-3d04-4cbf-85b7-e33360566485"), "hcm", "2198E4CD-3305-49C5-B78A-0B54DD76898F", null, new DateTime(2023, 9, 27, 10, 46, 16, 425, DateTimeKind.Local).AddTicks(7792), "Manager@gmail.com", false, null, null, "MANAGER", "03030303", "2", "Manager" },
-                    { new Guid("f9589c1a-3cbc-4215-bb84-b8fa7d719440"), "da nang", "2C0B43BB-B991-408E-A8F3-2FD3B4A2AB84", null, new DateTime(2023, 9, 27, 10, 46, 16, 425, DateTimeKind.Local).AddTicks(7760), "Staff@gmail.com", false, null, null, "MANAGER", "03030303", "1", "Staff" }
-                });
+                table: "AspNetUserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[] { "647D9649-F5A2-4F24-808F-6FC326EC2AA3", "2C0B43BB-B991-408E-A8F3-2FD3B4A2AB84" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[] { "CF531396-C1CD-427B-9D17-0383B7675394", "E6DE8827-B7C2-46E9-9227-66E6ECE676A8" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -710,12 +709,6 @@ namespace MetroDelivery.Identity.Migrations
                 column: "TripID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Users_ApplicationUserId",
-                table: "Users",
-                column: "ApplicationUserId",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
                 name: "IX_WithDraws_UserID",
                 table: "WithDraws",
                 column: "UserID");
@@ -760,6 +753,9 @@ namespace MetroDelivery.Identity.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
+                name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
                 name: "Menus");
 
             migrationBuilder.DropTable(
@@ -785,9 +781,6 @@ namespace MetroDelivery.Identity.Migrations
 
             migrationBuilder.DropTable(
                 name: "Stores");
-
-            migrationBuilder.DropTable(
-                name: "AspNetUsers");
         }
     }
 }

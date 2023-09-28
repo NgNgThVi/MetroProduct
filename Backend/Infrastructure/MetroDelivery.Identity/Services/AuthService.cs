@@ -61,7 +61,8 @@ namespace MetroDelivery.Identity.Services
                 FirstName = request.FirstName,
                 LastName = request.LastName,
                 UserName = request.UserName,
-                EmailConfirmed = true
+                EmailConfirmed = true,
+                /*LockoutEnabled = false,*/
             };
 
             var result = await _userManager.CreateAsync(user, request.Password);
@@ -85,7 +86,7 @@ namespace MetroDelivery.Identity.Services
             var roles = await _userManager.GetRolesAsync(user);
             var roleClaims = roles.Select(q => new Claim(ClaimTypes.Role, q)).ToList();
 
-            var claims = new[]
+            var claims = new List<Claim>
             {
                 new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),

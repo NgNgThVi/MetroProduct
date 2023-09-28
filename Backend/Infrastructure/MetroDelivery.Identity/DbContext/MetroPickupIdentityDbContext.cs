@@ -1,4 +1,5 @@
-﻿using MetroDelivery.Domain.Common;
+﻿using MetroDelivery.Application.Contracts.Identity;
+using MetroDelivery.Domain.Common;
 using MetroDelivery.Domain.Entities;
 using MetroDelivery.Domain.IdentityModels;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -13,9 +14,11 @@ namespace MetroDelivery.Identity.DbContext
 {
     public class MetroPickupIdentityDbContext : IdentityDbContext<ApplicationUser>
     {
-        public MetroPickupIdentityDbContext(DbContextOptions<MetroPickupIdentityDbContext> options) : base(options)
+        /*private readonly IUserService _userService;*/
+        public MetroPickupIdentityDbContext(DbContextOptions<MetroPickupIdentityDbContext> options/*, 
+            IUserService userService*/) : base(options)
         {
-            
+            /*_userService = userService;*/
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -45,8 +48,10 @@ namespace MetroDelivery.Identity.DbContext
             foreach (var entry in base.ChangeTracker.Entries<BaseAuditableEntity>()
                 .Where(q => q.State == EntityState.Added || q.State == EntityState.Modified)) {
                 entry.Entity.LastModified = DateTime.Now;
+               /* entry.Entity.LastModifiedBy = _userService.UserId;*/
                 if (entry.State == EntityState.Added) {
                     entry.Entity.Created = DateTime.Now;
+                   /* entry.Entity.CreateBy = _userService.UserId;*/
                 }
             }
             return base.SaveChangesAsync(cancellationToken);

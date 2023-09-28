@@ -9,6 +9,7 @@ using MetroDelivery.Application.Features.Users.Queries.GetAllUsers;
 using MetroDelivery.Application.Features.Users.Queries.GetUserById;
 using MetroDelivery.Application.Features.Users.Queries.GetUserDetail;
 using MetroDelivery.Domain.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Reflection;
 
@@ -16,8 +17,10 @@ using System.Reflection;
 
 namespace MetroDelivery.API.Controllers.Users
 {
+    
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class userController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -36,6 +39,7 @@ namespace MetroDelivery.API.Controllers.Users
         // GET api/<userController>/5
         [HttpGet]
         [Route("getAllUser")]
+        /*[Authorize(Policy = "Admin")]*/
         public async Task<List<UserDto>> GetAllUser()
         {
             var response = await _mediator.Send(new GetListUserQuery());
@@ -66,6 +70,7 @@ namespace MetroDelivery.API.Controllers.Users
         // GET api/<userController>/5
         [HttpGet]
         [Route("getUserById")]
+        /*[Authorize(Policy = "Admin")]*/
         public async Task<ActionResult<UserDto>> GetUserById([FromQuery] Guid request)
         {
             var response = await _mediator.Send(new GetUserByIdQuery(request));

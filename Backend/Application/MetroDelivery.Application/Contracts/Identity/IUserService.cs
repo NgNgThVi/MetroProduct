@@ -6,5 +6,6 @@ namespace MetroDelivery.Application.Contracts.Identity
     {
         Task<List<EndUser>> GetUsers();
         Task<EndUser> GetUser(string userId);
+        /*public string UserId { get; }*/
     }
 }

@@ -18,13 +18,13 @@ namespace MetroDelivery.Identity.Configurations
                 {
                     Id = "CF531396-C1CD-427B-9D17-0383B7675394",
                     Name = "EndUser",
-                    NormalizedName = "EndUser",
+                    NormalizedName = "User",
                 },
                 new IdentityRole
                 {
                     Id = "AF5EB4AC-219A-4BC1-99FE-8C23876536EA",
-                    Name = "Administrator",
-                    NormalizedName = "Administrator",
+                    Name = "Admin",
+                    NormalizedName = "Admin",
                 },
                 new IdentityRole
                 {
