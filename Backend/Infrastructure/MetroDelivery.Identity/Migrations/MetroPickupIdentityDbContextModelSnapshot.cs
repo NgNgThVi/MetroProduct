@@ -575,7 +575,7 @@ namespace MetroDelivery.Identity.Migrations
                         {
                             Id = new Guid("f9589c1a-3cbc-4215-bb84-b8fa7d719440"),
                             Address = "da nang",
-                            Created = new DateTime(2023, 9, 28, 20, 35, 10, 809, DateTimeKind.Local).AddTicks(1875),
+                            Created = new DateTime(2023, 9, 28, 23, 55, 43, 290, DateTimeKind.Local).AddTicks(8824),
                             Email = "Staff@gmail.com",
                             IsDelete = false,
                             Password = "MANAGER",
@@ -587,7 +587,7 @@ namespace MetroDelivery.Identity.Migrations
                         {
                             Id = new Guid("b9cf3487-3d04-4cbf-85b7-e33360566485"),
                             Address = "hcm",
-                            Created = new DateTime(2023, 9, 28, 20, 35, 10, 809, DateTimeKind.Local).AddTicks(1901),
+                            Created = new DateTime(2023, 9, 28, 23, 55, 43, 290, DateTimeKind.Local).AddTicks(8855),
                             Email = "Manager@gmail.com",
                             IsDelete = false,
                             Password = "MANAGER",
@@ -708,7 +708,7 @@ namespace MetroDelivery.Identity.Migrations
                         {
                             Id = "2198E4CD-3305-49C5-B78A-0B54DD76898F",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "148e1c1e-4fe7-42c6-a679-89d12ad4f422",
+                            ConcurrencyStamp = "ba894e92-d942-4e69-9827-ef0b5e2a9558",
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
                             FirstName = "Nhan",
@@ -716,9 +716,9 @@ namespace MetroDelivery.Identity.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEHdgvTdbgn9Qe9TpzHp1qXYjYeC0Kiln/yyRX6wp+EKlOa2woICvFkn6eF5CbLgFAQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEF9+5eiLXCwLgvpmMcr0x3gys3vDHLfgd3okbh6deiBEINxESb0RVJUeVpPdHlTfVQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "29d8af4a-4688-4522-a5d4-ac42b46e4953",
+                            SecurityStamp = "0c371bb8-e781-4798-8d58-3112d0933fc9",
                             TwoFactorEnabled = false,
                             UserName = "admin@gmail.com"
                         },
@@ -726,7 +726,7 @@ namespace MetroDelivery.Identity.Migrations
                         {
                             Id = "E6DE8827-B7C2-46E9-9227-66E6ECE676A8",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "42849bec-e4bc-46a1-abd3-404ec0ef443a",
+                            ConcurrencyStamp = "b03798db-1edf-47fe-8258-a3ada71e7219",
                             Email = "enduser@gmail.com",
                             EmailConfirmed = true,
                             FirstName = "Vi",
@@ -734,9 +734,9 @@ namespace MetroDelivery.Identity.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ENDUSER@GMAIL.COM",
                             NormalizedUserName = "ENDUSER@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEABBD0ZJ3hj6Nb5IC8kiC5K0Y+iPKCclCOzfAKz1YRYRpBM6jI4l7S7vXMAlWfpL6g==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFHSuUuG/xw0uHb8XPIAZmyB8ETLHHLWcJ8XarqHj118jqgf8JVBAfLqJIxveY2iFA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "281cc051-6247-4b62-9fd8-6714524ec5fb",
+                            SecurityStamp = "51725c7f-515b-4409-a127-7bcf51be2c0a",
                             TwoFactorEnabled = false,
                             UserName = "enduser@gmail.com"
                         },
@@ -744,7 +744,7 @@ namespace MetroDelivery.Identity.Migrations
                         {
                             Id = "2C0B43BB-B991-408E-A8F3-2FD3B4A2AB84",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "a7a4be33-4a26-41ee-9e0d-32c755bf1e9e",
+                            ConcurrencyStamp = "4a81d760-0f6a-43ef-adf2-600c5f2613d5",
                             Email = "staff@gmail.com",
                             EmailConfirmed = true,
                             FirstName = "Vi",
@@ -752,9 +752,9 @@ namespace MetroDelivery.Identity.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "STAFF@GMAIL.COM",
                             NormalizedUserName = "STAFF@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEOcOcUUsleW7h9Hl9JlYuX4nJY530wPLMJqIA+hiWVuXn51ns9AcFbQt7T0IlBDRtg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEEE3U2L8Mn/2wXBURevzUcQVvfctk57FHJdTq8hLfNxfWIwQFt0OTjPGMMo1i95MNQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "dbf90555-8828-4e9d-9280-18310e90cbe9",
+                            SecurityStamp = "c22c306a-ba98-4fb3-8173-ae06db4d7a50",
                             TwoFactorEnabled = false,
                             UserName = "staff@gmail.com"
                         });
@@ -790,21 +790,21 @@ namespace MetroDelivery.Identity.Migrations
                         new
                         {
                             Id = "CF531396-C1CD-427B-9D17-0383B7675394",
-                            ConcurrencyStamp = "d4c0f5bf-1716-41be-ae04-3b052571aecc",
+                            ConcurrencyStamp = "07c8bdbf-839a-4d9d-8791-a93b7b35bcc8",
                             Name = "EndUser",
                             NormalizedName = "User"
                         },
                         new
                         {
                             Id = "AF5EB4AC-219A-4BC1-99FE-8C23876536EA",
-                            ConcurrencyStamp = "889d8d6b-5903-4588-abaf-2ec734021f0c",
+                            ConcurrencyStamp = "ca85d742-32ad-4024-ad4d-1b0576280df9",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         },
                         new
                         {
                             Id = "647D9649-F5A2-4F24-808F-6FC326EC2AA3",
-                            ConcurrencyStamp = "d4ae95b2-d47b-424d-8df2-4034c3b65457",
+                            ConcurrencyStamp = "9deb50f8-ab55-4e8a-a503-7e116827aeaf",
                             Name = "Staff",
                             NormalizedName = "Staff"
                         });

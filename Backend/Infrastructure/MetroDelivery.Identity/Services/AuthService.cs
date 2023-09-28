@@ -85,13 +85,12 @@ namespace MetroDelivery.Identity.Services
             var userClaims = await _userManager.GetClaimsAsync(user);
             var roles = await _userManager.GetRolesAsync(user);
             var roleClaims = roles.Select(q => new Claim(ClaimTypes.Role, q)).ToList();
-
             var claims = new List<Claim>
             {
                 new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new Claim(JwtRegisteredClaimNames.Email, user.Email),
-                new Claim("uid", user.Id)
+                new Claim("uid", user.Id),
             }
             .Union(userClaims)
             .Union(roleClaims);
@@ -104,7 +103,7 @@ namespace MetroDelivery.Identity.Services
                 issuer: _jwtSettings.Issuer,
                 audience: _jwtSettings.Audience,
                 claims: claims,
-                expires: DateTime.Now.AddMinutes(_jwtSettings.DurationInMinutes),
+                expires: DateTime.UtcNow.AddHours(7).AddMinutes(_jwtSettings.DurationInMinutes),
                 signingCredentials: sigingCredentials);
             return jwtSecurityToken;
         }
