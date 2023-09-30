@@ -10,8 +10,8 @@ namespace MetroDelivery.Domain.Entities
         [ForeignKey("Category")]
         public Guid CategoryID { get; set; }
         public string ProductName { get; set; }
-        public string ProductDescription { get; set; }
-        public string Image { get; set; }
+        public string? ProductDescription { get; set; }
+        public string? Image { get; set; }
         public int stock { get; set; }
         public double price { get; set; }
 

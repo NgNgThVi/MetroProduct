@@ -16,11 +16,20 @@ builder.Services.AddIdentityServices(builder.Configuration);
 
 builder.Services.AddControllers();
 
-builder.Services.AddCors(options =>
+/*builder.Services.AddCors(options =>
 {
     options.AddPolicy("all", builder => builder.AllowAnyOrigin()
     .AllowAnyHeader()
     .AllowAnyMethod());
+});*/
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+                      policy =>
+                      {
+                          policy.WithOrigins("*").AllowAnyHeader().AllowAnyMethod();
+                      });
 });
 
 /*builder.Services.AddHttpContextAccessor();*/
@@ -43,8 +52,9 @@ app.UseMiddleware<ExceptionMiddleware>();
 
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
+/*app.UseCors("all");*/
 app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapControllers();
 

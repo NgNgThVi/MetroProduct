@@ -55,14 +55,18 @@ namespace MetroDelivery.Identity.Services
 
         public async Task<RegistrationResponse> Register(RegistrationRequest request)
         {
+            var userExist = await _userManager.FindByEmailAsync(request.Email);
+            if (userExist != null) {
+                throw new BadRequestException($"Email {request.Email} is Existed!!");
+            }
             var user = new ApplicationUser
             {
                 Email = request.Email,
+                SecurityStamp = Guid.NewGuid().ToString(),
                 FirstName = request.FirstName,
                 LastName = request.LastName,
                 UserName = request.UserName,
                 EmailConfirmed = true,
-                /*LockoutEnabled = false,*/
             };
 
             var result = await _userManager.CreateAsync(user, request.Password);
@@ -104,7 +108,7 @@ namespace MetroDelivery.Identity.Services
                 issuer: _jwtSettings.Issuer,
                 audience: _jwtSettings.Audience,
                 claims: claims,
-                expires: DateTime.Now.AddMinutes(_jwtSettings.DurationInMinutes),
+                expires: DateTime.UtcNow.AddHours(7).AddMinutes(_jwtSettings.DurationInMinutes),
                 signingCredentials: sigingCredentials);
             return jwtSecurityToken;
         }

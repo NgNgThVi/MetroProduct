@@ -18,7 +18,7 @@ namespace MetroDelivery.Identity.Configurations
                 {
                     Id = "CF531396-C1CD-427B-9D17-0383B7675394",
                     Name = "EndUser",
-                    NormalizedName = "User",
+                    NormalizedName = "EndUser",
                 },
                 new IdentityRole
                 {

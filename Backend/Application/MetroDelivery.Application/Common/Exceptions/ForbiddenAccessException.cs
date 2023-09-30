@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace MetroDelivery.Application.Common.Exceptions
 {
-    public class ForbiddenAccessException
+    public class ForbiddenAccessException : Exception
     {
+        public ForbiddenAccessException() : base()
+        {
+            
+        }
     }
 }
