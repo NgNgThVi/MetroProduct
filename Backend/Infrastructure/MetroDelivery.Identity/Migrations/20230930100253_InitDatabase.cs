@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MetroDelivery.Identity.Migrations
 {
-    public partial class Initdatabase : Migration
+    public partial class InitDatabase : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -125,28 +125,6 @@ namespace MetroDelivery.Identity.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Users",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    UserName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Role = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreateBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsDelete = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Users", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -164,7 +142,7 @@ namespace MetroDelivery.Identity.Migrations
                         column: x => x.RoleId,
                         principalTable: "AspNetRoles",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -185,7 +163,7 @@ namespace MetroDelivery.Identity.Migrations
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -205,7 +183,7 @@ namespace MetroDelivery.Identity.Migrations
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -223,13 +201,13 @@ namespace MetroDelivery.Identity.Migrations
                         column: x => x.RoleId,
                         principalTable: "AspNetRoles",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_AspNetUserRoles_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -249,7 +227,61 @@ namespace MetroDelivery.Identity.Migrations
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Customers",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Birthday = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ApplicationUserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreateBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsDelete = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Customers", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Customers_AspNetUsers_ApplicationUserId",
+                        column: x => x.ApplicationUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Products",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CategoryID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ProductName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ProductDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Image = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    stock = table.Column<int>(type: "int", nullable: true),
+                    price = table.Column<double>(type: "float", nullable: false),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreateBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsDelete = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Products", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Products_Categories_CategoryID",
+                        column: x => x.CategoryID,
+                        principalTable: "Categories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -274,42 +306,7 @@ namespace MetroDelivery.Identity.Migrations
                         column: x => x.StoreID,
                         principalTable: "Stores",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Products",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    StoreID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CategoryID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ProductName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ProductDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Image = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    stock = table.Column<int>(type: "int", nullable: false),
-                    price = table.Column<double>(type: "float", nullable: false),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreateBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsDelete = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Products", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Products_Categories_CategoryID",
-                        column: x => x.CategoryID,
-                        principalTable: "Categories",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
-                    table.ForeignKey(
-                        name: "FK_Products_Stores_StoreID",
-                        column: x => x.StoreID,
-                        principalTable: "Stores",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -333,7 +330,7 @@ namespace MetroDelivery.Identity.Migrations
                         column: x => x.StoreID,
                         principalTable: "Stores",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -357,13 +354,13 @@ namespace MetroDelivery.Identity.Migrations
                         column: x => x.RouteID,
                         principalTable: "Routes",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Trip_Routes_Trips_TripID",
                         column: x => x.TripID,
                         principalTable: "Trips",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -376,6 +373,7 @@ namespace MetroDelivery.Identity.Migrations
                     StoreID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     TotalPrice = table.Column<double>(type: "float", nullable: false),
                     OrderTokenQR = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CustomerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Created = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreateBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -386,23 +384,23 @@ namespace MetroDelivery.Identity.Migrations
                 {
                     table.PrimaryKey("PK_Orders", x => x.Id);
                     table.ForeignKey(
+                        name: "FK_Orders_Customers_CustomerId",
+                        column: x => x.CustomerId,
+                        principalTable: "Customers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
                         name: "FK_Orders_Stores_StoreID",
                         column: x => x.StoreID,
                         principalTable: "Stores",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Orders_Trips_TripID",
                         column: x => x.TripID,
                         principalTable: "Trips",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
-                    table.ForeignKey(
-                        name: "FK_Orders_Users_UserID",
-                        column: x => x.UserID,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -411,7 +409,8 @@ namespace MetroDelivery.Identity.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UserID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Balance = table.Column<double>(type: "float", nullable: false),
+                    Balance = table.Column<double>(type: "float", nullable: true),
+                    CustomerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Created = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreateBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -422,11 +421,11 @@ namespace MetroDelivery.Identity.Migrations
                 {
                     table.PrimaryKey("PK_WithDraws", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_WithDraws_Users_UserID",
-                        column: x => x.UserID,
-                        principalTable: "Users",
+                        name: "FK_WithDraws_Customers_CustomerId",
+                        column: x => x.CustomerId,
+                        principalTable: "Customers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -450,13 +449,13 @@ namespace MetroDelivery.Identity.Migrations
                         column: x => x.MenuID,
                         principalTable: "Menus",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Menu_Products_Products_ProductID",
                         column: x => x.ProductID,
                         principalTable: "Products",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -480,13 +479,13 @@ namespace MetroDelivery.Identity.Migrations
                         column: x => x.RouteID,
                         principalTable: "Routes",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Route_Stations_Stations_StationID",
                         column: x => x.StationID,
                         principalTable: "Stations",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -512,13 +511,13 @@ namespace MetroDelivery.Identity.Migrations
                         column: x => x.OrderID,
                         principalTable: "Orders",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_OrderDetails_Products_ProductID",
                         column: x => x.ProductID,
                         principalTable: "Products",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -542,7 +541,7 @@ namespace MetroDelivery.Identity.Migrations
                         column: x => x.OrderID,
                         principalTable: "Orders",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
@@ -550,9 +549,9 @@ namespace MetroDelivery.Identity.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "647D9649-F5A2-4F24-808F-6FC326EC2AA3", "da927246-cb49-44a6-b367-4ab289ce2a5f", "Staff", "Staff" },
-                    { "AF5EB4AC-219A-4BC1-99FE-8C23876536EA", "b149e67b-3359-4eb0-b984-297f30362750", "Admin", "Admin" },
-                    { "CF531396-C1CD-427B-9D17-0383B7675394", "3f700f1b-ff4e-4778-a767-aee2f01cad6e", "EndUser", "EndUser" }
+                    { "647D9649-F5A2-4F24-808F-6FC326EC2AA3", "1d81b69d-1d0b-4384-ad62-520499776601", "Staff", "Staff" },
+                    { "AF5EB4AC-219A-4BC1-99FE-8C23876536EA", "af452c9a-f499-4956-aa66-ccbecdc33b61", "Admin", "Admin" },
+                    { "CF531396-C1CD-427B-9D17-0383B7675394", "5b77eb7e-7a3c-46f0-a3c3-fb91bb61bad6", "EndUser", "EndUser" }
                 });
 
             migrationBuilder.InsertData(
@@ -560,34 +559,29 @@ namespace MetroDelivery.Identity.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "2198E4CD-3305-49C5-B78A-0B54DD76898F", 0, "cb03d78c-be55-48fc-a815-24ebdbf195c0", "admin@gmail.com", true, "Nhan", "Admin", false, null, "ADMIN@GMAIL.COM", "ADMIN@GMAIL.COM", "AQAAAAEAACcQAAAAEO6NziqJ9ZNhuN1hnjLPcku+8a9Imr8XMEP2fJrpemV4xQGNGj0PRM4l61KbHx9O6g==", null, false, "7eda405e-ecca-467e-9df6-3b01e71b2dff", false, "admin@gmail.com" },
-                    { "2C0B43BB-B991-408E-A8F3-2FD3B4A2AB84", 0, "1ae2ae23-b53a-40f3-999c-58de09d3e8fd", "staff@gmail.com", true, "Vi", "Staff", false, null, "STAFF@GMAIL.COM", "STAFF@GMAIL.COM", "AQAAAAEAACcQAAAAELSqhphjJ77+HM6VLNjtTovvQ2uWbOU0rqIAFsPGSu0eoH5EtKqJa3QHLo+EkvbDug==", null, false, "c055e9ee-04ab-4563-9e4b-9debaa0541cc", false, "staff@gmail.com" },
-                    { "E6DE8827-B7C2-46E9-9227-66E6ECE676A8", 0, "7ef20e8c-108b-44da-ba40-e9d1968f9b7c", "enduser@gmail.com", true, "Vi", "EndUser", false, null, "ENDUSER@GMAIL.COM", "ENDUSER@GMAIL.COM", "AQAAAAEAACcQAAAAEKMqEtKhDOcl0hvhyR97/+FLhIa4okQ37hAK9ki/FsRfKgoO+b/IcpizA1ZDkPGd9Q==", null, false, "9a02159f-44dd-4775-b1ea-2abb05fc9f84", false, "enduser@gmail.com" }
+                    { "2198E4CD-3305-49C5-B78A-0B54DD76898F", 0, "d22a3872-e823-4279-9ef5-7f510f29cc93", "admin@gmail.com", true, "Nhan", "Admin", false, null, "ADMIN@GMAIL.COM", "ADMIN@GMAIL.COM", "AQAAAAEAACcQAAAAEBKNzs+hNcL9mu8awhuaum/6fq6hEh5x+AQ5YhoM1uRfuESLECivc6Bg+TOfTzXwQQ==", null, false, "49e1fe21-7012-4230-a644-af9f980aba06", false, "admin@gmail.com" },
+                    { "2C0B43BB-B991-408E-A8F3-2FD3B4A2AB84", 0, "430c6405-9caf-4ad3-b27c-5712825c0ebf", "staff@gmail.com", true, "Vi", "Staff", false, null, "STAFF@GMAIL.COM", "STAFF@GMAIL.COM", "AQAAAAEAACcQAAAAEHv8iDa2Da4DqOnaQnhcguFXzuEzIwmm7smNCMeHBo0LUNzrbGZI6rbGqdOt3OC1Vw==", null, false, "611f762a-5d5e-4d0f-bc6d-58765ec40ff2", false, "staff@gmail.com" },
+                    { "E6DE8827-B7C2-46E9-9227-66E6ECE676A8", 0, "13e221a7-4db8-4b39-90ea-7982d30e340d", "enduser@gmail.com", true, "Vi", "EndUser", false, null, "ENDUSER@GMAIL.COM", "ENDUSER@GMAIL.COM", "AQAAAAEAACcQAAAAEH26ut7h91DonW1RDVYsdvvW6iO8m3AWSfRdW5kTtDjXuXC11GBIOacuJcJ2eHBOtw==", null, false, "8ff995fb-5967-417e-b1bc-a2d89d26ac40", false, "enduser@gmail.com" }
                 });
 
             migrationBuilder.InsertData(
-                table: "Users",
-                columns: new[] { "Id", "Address", "CreateBy", "Created", "Email", "IsDelete", "LastModified", "LastModifiedBy", "Password", "Phone", "Role", "UserName" },
+                table: "AspNetUserRoles",
+                columns: new[] { "RoleId", "UserId" },
                 values: new object[,]
                 {
-                    { new Guid("b9cf3487-3d04-4cbf-85b7-e33360566485"), "hcm", null, new DateTime(2023, 9, 30, 0, 32, 15, 233, DateTimeKind.Local).AddTicks(4666), "Manager@gmail.com", false, null, null, "MANAGER", "03030303", "2", "Manager" },
-                    { new Guid("f9589c1a-3cbc-4215-bb84-b8fa7d719440"), "da nang", null, new DateTime(2023, 9, 30, 0, 32, 15, 233, DateTimeKind.Local).AddTicks(4637), "Staff@gmail.com", false, null, null, "MANAGER", "03030303", "1", "Staff" }
+                    { "AF5EB4AC-219A-4BC1-99FE-8C23876536EA", "2198E4CD-3305-49C5-B78A-0B54DD76898F" },
+                    { "647D9649-F5A2-4F24-808F-6FC326EC2AA3", "2C0B43BB-B991-408E-A8F3-2FD3B4A2AB84" },
+                    { "CF531396-C1CD-427B-9D17-0383B7675394", "E6DE8827-B7C2-46E9-9227-66E6ECE676A8" }
                 });
 
             migrationBuilder.InsertData(
-                table: "AspNetUserRoles",
-                columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "AF5EB4AC-219A-4BC1-99FE-8C23876536EA", "2198E4CD-3305-49C5-B78A-0B54DD76898F" });
-
-            migrationBuilder.InsertData(
-                table: "AspNetUserRoles",
-                columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "647D9649-F5A2-4F24-808F-6FC326EC2AA3", "2C0B43BB-B991-408E-A8F3-2FD3B4A2AB84" });
-
-            migrationBuilder.InsertData(
-                table: "AspNetUserRoles",
-                columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "CF531396-C1CD-427B-9D17-0383B7675394", "E6DE8827-B7C2-46E9-9227-66E6ECE676A8" });
+                table: "Customers",
+                columns: new[] { "Id", "Address", "ApplicationUserId", "Birthday", "CreateBy", "Created", "IsDelete", "LastModified", "LastModifiedBy", "Phone" },
+                values: new object[,]
+                {
+                    { new Guid("b9cf3487-3d04-4cbf-85b7-e33360566485"), "hcm", "2198E4CD-3305-49C5-B78A-0B54DD76898F", new DateTime(2010, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(2023, 9, 30, 17, 2, 53, 168, DateTimeKind.Local).AddTicks(3092), false, null, null, "03030303" },
+                    { new Guid("f9589c1a-3cbc-4215-bb84-b8fa7d719440"), "da nang", "2C0B43BB-B991-408E-A8F3-2FD3B4A2AB84", new DateTime(2002, 10, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(2023, 9, 30, 17, 2, 53, 168, DateTimeKind.Local).AddTicks(3015), false, null, null, "03030303" }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -629,6 +623,12 @@ namespace MetroDelivery.Identity.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Customers_ApplicationUserId",
+                table: "Customers",
+                column: "ApplicationUserId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Menu_Products_MenuID",
                 table: "Menu_Products",
                 column: "MenuID");
@@ -654,6 +654,11 @@ namespace MetroDelivery.Identity.Migrations
                 column: "ProductID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Orders_CustomerId",
+                table: "Orders",
+                column: "CustomerId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Orders_StoreID",
                 table: "Orders",
                 column: "StoreID");
@@ -664,11 +669,6 @@ namespace MetroDelivery.Identity.Migrations
                 column: "TripID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Orders_UserID",
-                table: "Orders",
-                column: "UserID");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_PaymentMethods_OrderID",
                 table: "PaymentMethods",
                 column: "OrderID");
@@ -677,11 +677,6 @@ namespace MetroDelivery.Identity.Migrations
                 name: "IX_Products_CategoryID",
                 table: "Products",
                 column: "CategoryID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Products_StoreID",
-                table: "Products",
-                column: "StoreID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Route_Stations_RouteID",
@@ -709,9 +704,9 @@ namespace MetroDelivery.Identity.Migrations
                 column: "TripID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_WithDraws_UserID",
+                name: "IX_WithDraws_CustomerId",
                 table: "WithDraws",
-                column: "UserID");
+                column: "CustomerId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -753,9 +748,6 @@ namespace MetroDelivery.Identity.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
                 name: "Menus");
 
             migrationBuilder.DropTable(
@@ -774,13 +766,16 @@ namespace MetroDelivery.Identity.Migrations
                 name: "Categories");
 
             migrationBuilder.DropTable(
+                name: "Customers");
+
+            migrationBuilder.DropTable(
                 name: "Trips");
 
             migrationBuilder.DropTable(
-                name: "Users");
+                name: "Stores");
 
             migrationBuilder.DropTable(
-                name: "Stores");
+                name: "AspNetUsers");
         }
     }
 }

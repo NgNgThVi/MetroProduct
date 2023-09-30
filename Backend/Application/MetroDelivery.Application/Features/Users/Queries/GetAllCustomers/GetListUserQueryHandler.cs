@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+﻿/*using AutoMapper;
 using MediatR;
 using MetroDelivery.Application.Contracts.Persistance;
 using MetroDelivery.Domain.Entities;
@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace MetroDelivery.Application.Features.Users.Queries.GetAllUsers
 {
-    public class GetListUserQueryHandler : IRequestHandler<GetListUserQuery, List<UserDto>>
+    public class GetListUserQueryHandler : IRequestHandler<GetListUserQuery, List<CustomerDto>>
     {
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
@@ -21,16 +21,17 @@ namespace MetroDelivery.Application.Features.Users.Queries.GetAllUsers
             this._userRepository = userRepository;
         }
 
-        public async Task<List<UserDto>> Handle (GetListUserQuery request, CancellationToken cancellationToken)
+        public async Task<List<CustomerDto>> Handle (GetListUserQuery request, CancellationToken cancellationToken)
         {
             // query the database
             var users = await _userRepository.GetAsync();
 
             // convert data objects to Dto objects
-            var data = _mapper.Map<List<UserDto>>(users);
+            var data = _mapper.Map<List<CustomerDto>>(users);
 
             // return list of Dto object
             return data;
         }
     }
 }
+*/

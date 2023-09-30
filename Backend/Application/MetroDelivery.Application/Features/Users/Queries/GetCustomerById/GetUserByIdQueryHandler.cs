@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+﻿/*using AutoMapper;
 using MediatR;
 using MetroDelivery.Application.Common.Exceptions;
 using MetroDelivery.Application.Contracts.Persistance;
@@ -6,7 +6,7 @@ using MetroDelivery.Domain.Entities;
 
 namespace MetroDelivery.Application.Features.Users.Queries.GetUserById
 {
-    public class GetUserByIdQueryHandler : IRequestHandler<GetUserByIdQuery, UserDto>
+    public class GetUserByIdQueryHandler : IRequestHandler<GetUserByIdQuery, CustomerDto>
     {
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
@@ -16,7 +16,7 @@ namespace MetroDelivery.Application.Features.Users.Queries.GetUserById
             this._mapper = mapper;
         }
 
-        public async Task<UserDto> Handle(GetUserByIdQuery request, CancellationToken cancellationToken)
+        public async Task<CustomerDto> Handle(GetUserByIdQuery request, CancellationToken cancellationToken)
         {
             //add to datbase 
             var userById = await _userRepository.GetByIdAsync(request.id);
@@ -26,10 +26,11 @@ namespace MetroDelivery.Application.Features.Users.Queries.GetUserById
             }
 
             //convert data to dto
-            var data = _mapper.Map<UserDto>(userById);
+            var data = _mapper.Map<CustomerDto>(userById);
 
             //return
             return data;
         }
     }
 }
+*/

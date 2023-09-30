@@ -16,7 +16,7 @@ namespace MetroDelivery.Domain.Entities
         public string? OrderTokenQR { get; set; }
 
         //relationship
-        public virtual User User { get; private set; }
+        public virtual Customer Customer { get; private set; }
         public virtual Trip Trip { get; private set; }
         public virtual Store Store { get; private set; }
         public IList<PaymentMethod> PaymentMethods { get; private set; }

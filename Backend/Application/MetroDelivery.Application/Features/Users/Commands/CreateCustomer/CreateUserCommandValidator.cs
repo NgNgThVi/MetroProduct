@@ -8,15 +8,26 @@ using System.Threading.Tasks;
 
 namespace MetroDelivery.Application.Features.Users.Commands.CreateUser
 {
-    public class CreateUserCommandValidator : AbstractValidator<CreateUserCommand>
+    public class CreateUserCommandValidator : AbstractValidator<CreateCustomerCommand>
     {
-        private IUserRepository _userRepository;
-        public CreateUserCommandValidator(IUserRepository userRepository)
+        private ICustomerRepository _customerRepository;
+        public CreateUserCommandValidator(ICustomerRepository customerRepository)
         {
             RuleFor(p => p.UserName)
                 .NotEmpty().WithMessage("{UserName} is required")
                 .NotNull()
-                .MaximumLength(100).WithMessage("{UserName} must be fewer than 100 characters");
+                .MaximumLength(100).WithMessage("{UserName} must be fewer than 100 characters")
+                .MustAsync(BeUniqueCustomerName).WithMessage("UserName already exist!");
+
+            RuleFor(p => p.FirstName)
+                .NotEmpty().WithMessage("{FirstName} is required")
+                .NotNull()
+                .MaximumLength(10).WithMessage("{FirstName} must be fewer than 10 characters");
+
+            RuleFor(p => p.LastName)
+                .NotEmpty().WithMessage("{LastName} is required")
+                .NotNull()
+                .MaximumLength(10).WithMessage("{LastName} must be fewer than 10 characters");
 
             RuleFor(p => p.Password)
                 .NotEmpty().WithMessage("Password is required")
@@ -24,7 +35,7 @@ namespace MetroDelivery.Application.Features.Users.Commands.CreateUser
                 .MaximumLength(50).WithMessage("Password must be fewer than 50 characters")
                 .Matches(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&+=!]).+$")
                 .WithMessage("Password must contain at least one lowercase letter, one uppercase letter, one digit, and one special character.");
-            
+
             RuleFor(p => p.Email)
                 .NotEmpty().WithMessage("Email is required")
                 .NotNull()
@@ -43,16 +54,16 @@ namespace MetroDelivery.Application.Features.Users.Commands.CreateUser
                 .NotNull()
                 .MaximumLength(100).WithMessage("Address must be fewer than 100 chrarcters");
 
-            RuleFor(q => q)
-                .MustAsync(UserEmailUnique)
-                .WithMessage("Email type already exists");
+            RuleFor(p => p.Birthday)
+                .NotEmpty().WithMessage("Birthday is required")
+                .NotNull();
 
-            this._userRepository = userRepository;
+            this._customerRepository = customerRepository;
         }
 
-        private Task<bool> UserEmailUnique(CreateUserCommand command, CancellationToken token)
+        private Task<bool> BeUniqueCustomerName(string customerName, CancellationToken token)
         {
-            return _userRepository.IsUserEmailUnique(command.Email);
+            return _customerRepository.IsBeUniqueCustomerName(customerName);
         }
     }
 }

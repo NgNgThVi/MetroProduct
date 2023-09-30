@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+﻿/*using AutoMapper;
 using MediatR;
 using MetroDelivery.Application.Common.Exceptions;
 using MetroDelivery.Application.Contracts.Logging;
@@ -7,7 +7,7 @@ using MetroDelivery.Domain.Entities;
 
 namespace MetroDelivery.Application.Features.Users.Queries.GetUserDetail
 {
-    public class GetUserDetailQueryHandler : IRequestHandler<GetUserDetailQuery, UserDto>
+    public class GetUserDetailQueryHandler : IRequestHandler<GetUserDetailQuery, CustomerDto>
     {
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
@@ -20,10 +20,10 @@ namespace MetroDelivery.Application.Features.Users.Queries.GetUserDetail
             this._logger = logger;
         }
 
-        public async Task<UserDto> Handle(GetUserDetailQuery request, CancellationToken cancellationToken)
+        public async Task<CustomerDto> Handle(GetUserDetailQuery request, CancellationToken cancellationToken)
         {
             var user = await _userRepository.GetUserByEmailAndPassword(request.Email, request.Password);
-            var result = _mapper.Map<UserDto>(user);
+            var result = _mapper.Map<CustomerDto>(user);
 
             if (user == null) {
                 throw new NotFoundExcrption(nameof(User), request.Password);
@@ -34,3 +34,4 @@ namespace MetroDelivery.Application.Features.Users.Queries.GetUserDetail
         }
     }
 }
+*/

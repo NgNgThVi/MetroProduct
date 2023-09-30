@@ -1,7 +1,9 @@
 ﻿using MediatR;
 using MetroDelivery.Application.Contracts.Persistance;
 using MetroDelivery.Domain.Common;
+using MetroDelivery.Domain.IdentityModels;
 using MetroDelivery.Identity.DbContext;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -14,6 +16,7 @@ namespace MetroDelivery.Identity.Repositories
     public class GenericRepository<T> : IGenericRepository<T> where T : BaseAuditableEntity
     {
         protected readonly MetroPickupIdentityDbContext _metroDeliveryDatabaseContext;
+
         public GenericRepository(MetroPickupIdentityDbContext context)
         {
             _metroDeliveryDatabaseContext = context;
@@ -26,12 +29,8 @@ namespace MetroDelivery.Identity.Repositories
 
         public async Task DeleteAsync(T entity)
         {
-            var findIdDelete = await _metroDeliveryDatabaseContext.Set<T>().AsNoTracking().Where(q => q.Id == entity.Id).FirstOrDefaultAsync();
-            if (findIdDelete == null || findIdDelete.IsDelete) {
-                throw new Exception("Not Found");
-            }
-            findIdDelete.IsDelete = true;
-            _metroDeliveryDatabaseContext.Set<T>().Update(findIdDelete);
+            entity.IsDelete = true;
+            _metroDeliveryDatabaseContext.Set<T>().Update(entity);
             await _metroDeliveryDatabaseContext.SaveChangesAsync();
         }
 

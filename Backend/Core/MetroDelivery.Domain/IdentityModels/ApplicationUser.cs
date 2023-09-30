@@ -14,7 +14,7 @@ namespace MetroDelivery.Domain.IdentityModels
         public string LastName { get; set; }
 
         // relationship
-        /*public virtual User User { get; set; }*/
+        public virtual Customer Customer { get; set; }
 
     }
 }

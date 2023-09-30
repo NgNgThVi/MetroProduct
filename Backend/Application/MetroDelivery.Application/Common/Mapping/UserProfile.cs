@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+﻿/*using AutoMapper;
 using MetroDelivery.Application.Features.Users;
 using MetroDelivery.Application.Features.Users.Commands.CreateUser;
 using MetroDelivery.Application.Features.Users.Commands.UpdateUser;
@@ -15,11 +15,14 @@ namespace MetroDelivery.Application.Common.MappingProfiles
     {
         public UserProfile() 
         {
-            CreateMap<UserDto, User>().ReverseMap();
-            CreateMap<User, UserDto>().ReverseMap();
-            CreateMap<CreateUserCommand, User>().ReverseMap();
-            CreateMap<UpdateUserCommand, User>().ReverseMap();
+            CreateMap<CustomerDto, Customer>()
+                .ForMember(cDto => cDto.ApplicationUserId, opt => opt.MapFrom(src => src.Email))
+                .ForMember(cDto => cDto.Pass;
+            *//*CreateMap<User, CustomerDto>().ReverseMap();
+            CreateMap<CreateCustomerCommand, User>().ReverseMap();
+            CreateMap<UpdateUserCommand, User>().ReverseMap();*//*
         }
 
     }
 }
+*/

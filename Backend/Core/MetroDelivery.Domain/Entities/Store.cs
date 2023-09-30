@@ -12,7 +12,6 @@ namespace MetroDelivery.Domain.Entities
         // relationship
         public IList<Order> Orders { get; private set; }
         public IList<Station> Stations { get; private set; }
-        public IList<Product> Products { get; private set; }
         public IList<Menu> Menus { get; private set; }
     }
 }

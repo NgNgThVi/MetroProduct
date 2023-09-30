@@ -18,21 +18,21 @@ using System.Reflection;
 namespace MetroDelivery.API.Controllers.Users
 {
     
-    [Route("api/[controller]")]
+    [Route("api/v1/customer")]
     [ApiController]
     
-    public class userController : ControllerBase
+    public class CustomerController : ControllerBase
     {
         private readonly IMediator _mediator;
 
-        public userController(IMediator mediator)
+        public CustomerController(IMediator mediator)
         {
             _mediator = mediator;
         }
         [HttpGet]
         [Route("getUserDetail")]
         [Authorize(Roles = "Admin,Staff")]
-        public async Task<UserDto> GetUserDetail([FromQuery]GetUserDetailQuery request)
+        public async Task<CustomerDto> GetUserDetail([FromQuery]GetUserDetailQuery request)
         {
             var response = await _mediator.Send(request);
             return response;
@@ -41,7 +41,7 @@ namespace MetroDelivery.API.Controllers.Users
         [HttpGet]
         [Route("getAllUser")]
         [Authorize(Roles = "Admin")]
-        public async Task<List<UserDto>> GetAllUser()
+        public async Task<List<CustomerDto>> GetAllUser()
         {
             var response = await _mediator.Send(new GetListUserQuery());
             return response;
@@ -52,7 +52,7 @@ namespace MetroDelivery.API.Controllers.Users
         [Route("register")]
         [ProducesResponseType(201)]
         [ProducesResponseType(400)]
-        public async Task<ActionResult> CreateUser([FromQuery] CreateUserCommand request)
+        public async Task<ActionResult> CreateUser([FromQuery] CreateCustomerCommand request)
         {
             /*try {*/
                 var response = await _mediator.Send(request);
@@ -72,7 +72,7 @@ namespace MetroDelivery.API.Controllers.Users
         [HttpGet]
         [Route("getUserById")]
         [Authorize(Roles = "Staff")]
-        public async Task<ActionResult<UserDto>> GetUserById([FromQuery] Guid request)
+        public async Task<ActionResult<CustomerDto>> GetUserById([FromQuery] Guid request)
         {
             var response = await _mediator.Send(new GetUserByIdQuery(request));
             return Ok(response);
@@ -80,23 +80,25 @@ namespace MetroDelivery.API.Controllers.Users
 
         // PUT api/<userController>/5
         [HttpPut]
-        [Route("updateUserById")]
-        public async Task<ActionResult<UserDto>> UpdateUser(Guid id, [FromBody] UpdateUserCommand request)
+        [Route("updateCustomerById")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesDefaultResponseType]
+        public async Task<ActionResult<CustomerDto>> UpdateCustomer(UpdateCustomerCommand request)
         {
-            if (id != request.Id) {
-                return BadRequest();
-            }
             var response = await _mediator.Send(request);
-            return Ok(response);
+            return Ok("Update Customer Successfully");
         }
 
         // DELETE api/<userController>/5
         [HttpDelete]
-        [Route("deleteUserById")]
-        public async Task<ActionResult> Delete([FromQuery] Guid request)
+        [Route("deleteCustomerById")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesDefaultResponseType]
+        public async Task<ActionResult> Delete([FromQuery] DeleteUserCommand request)
         {
-            var command = new DeleteUserCommand { Id = request };
-            var response = await _mediator.Send(command);
+            var response = await _mediator.Send(request);
             return Ok(response);
         }
     }

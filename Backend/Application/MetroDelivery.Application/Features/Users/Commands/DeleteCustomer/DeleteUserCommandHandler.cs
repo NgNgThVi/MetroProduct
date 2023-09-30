@@ -14,21 +14,23 @@ namespace MetroDelivery.Application.Features.Users.Commands.DeleteUser
 {
     public class DeleteUserCommandHandler : IRequestHandler<DeleteUserCommand, Unit>
     {
-        private readonly IUserRepository _userRepository;
-        public DeleteUserCommandHandler(IUserRepository userRepository) => this._userRepository = userRepository;
+        private readonly ICustomerRepository _customerRepository;
+        public DeleteUserCommandHandler(ICustomerRepository customerRepository) => this._customerRepository = customerRepository;
 
         public async Task<Unit> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
         {
             // retrieve domain entity object
-            var userDelete = await _userRepository.GetByIdAsync(request.Id);
-
-            // verify that record exists
-            if(userDelete == null) {
-                throw new NotFoundExcrption(nameof(User.UserName), request.Id);
+            var customerDelete = await _customerRepository.CustomerIdMusBeExist(request.Id);
+            if (customerDelete == null) {
+                throw new NotFoundExcrption(nameof(customerDelete.ApplicationUser.Email), request.Id);
+            }
+            else if (customerDelete.IsDelete == true) {
+                throw new NotFoundExcrption("The customer have been deleted");
             }
 
+
             // rmove database
-            await _userRepository.DeleteAsync(userDelete);
+            await _customerRepository.DeleteAsync(customerDelete);
 
             // return
             return Unit.Value;

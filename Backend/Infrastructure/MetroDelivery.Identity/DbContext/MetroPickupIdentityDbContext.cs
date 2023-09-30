@@ -40,7 +40,7 @@ namespace MetroDelivery.Identity.DbContext
         public DbSet<Store> Stores { get; set; }
         public DbSet<Trip> Trips { get; set; }
         public DbSet<Trip_Route> Trip_Routes { get; set; }
-        public DbSet<User> Users { get; set; }
+        public DbSet<Customer> Customers { get; set; }
         public DbSet<WithDraw> WithDraws { get; set; }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)

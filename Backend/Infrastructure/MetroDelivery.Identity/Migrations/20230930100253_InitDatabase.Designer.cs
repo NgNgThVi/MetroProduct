@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MetroDelivery.Identity.Migrations
 {
     [DbContext(typeof(MetroPickupIdentityDbContext))]
-    [Migration("20230929173215_Initdatabase")]
-    partial class Initdatabase
+    [Migration("20230930100253_InitDatabase")]
+    partial class InitDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -52,6 +52,72 @@ namespace MetroDelivery.Identity.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
+                });
+
+            modelBuilder.Entity("MetroDelivery.Domain.Entities.Customer", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ApplicationUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("Birthday")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreateBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastModified")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId")
+                        .IsUnique();
+
+                    b.ToTable("Customers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("f9589c1a-3cbc-4215-bb84-b8fa7d719440"),
+                            Address = "da nang",
+                            ApplicationUserId = "2C0B43BB-B991-408E-A8F3-2FD3B4A2AB84",
+                            Birthday = new DateTime(2002, 10, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Created = new DateTime(2023, 9, 30, 17, 2, 53, 168, DateTimeKind.Local).AddTicks(3015),
+                            IsDelete = false,
+                            Phone = "03030303"
+                        },
+                        new
+                        {
+                            Id = new Guid("b9cf3487-3d04-4cbf-85b7-e33360566485"),
+                            Address = "hcm",
+                            ApplicationUserId = "2198E4CD-3305-49C5-B78A-0B54DD76898F",
+                            Birthday = new DateTime(2010, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Created = new DateTime(2023, 9, 30, 17, 2, 53, 168, DateTimeKind.Local).AddTicks(3092),
+                            IsDelete = false,
+                            Phone = "03030303"
+                        });
                 });
 
             modelBuilder.Entity("MetroDelivery.Domain.Entities.Menu", b =>
@@ -139,6 +205,9 @@ namespace MetroDelivery.Identity.Migrations
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
 
+                    b.Property<Guid>("CustomerId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<bool>("IsDelete")
                         .HasColumnType("bit");
 
@@ -165,11 +234,11 @@ namespace MetroDelivery.Identity.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CustomerId");
+
                     b.HasIndex("StoreID");
 
                     b.HasIndex("TripID");
-
-                    b.HasIndex("UserID");
 
                     b.ToTable("Orders");
                 });
@@ -285,20 +354,15 @@ namespace MetroDelivery.Identity.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("StoreID")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<double>("price")
                         .HasColumnType("float");
 
-                    b.Property<int>("stock")
+                    b.Property<int?>("stock")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryID");
-
-                    b.HasIndex("StoreID");
 
                     b.ToTable("Products");
                 });
@@ -520,89 +584,13 @@ namespace MetroDelivery.Identity.Migrations
                     b.ToTable("Trip_Routes");
                 });
 
-            modelBuilder.Entity("MetroDelivery.Domain.Entities.User", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CreateBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDelete")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("LastModified")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("LastModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Phone")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Role")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Users");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("f9589c1a-3cbc-4215-bb84-b8fa7d719440"),
-                            Address = "da nang",
-                            Created = new DateTime(2023, 9, 30, 0, 32, 15, 233, DateTimeKind.Local).AddTicks(4637),
-                            Email = "Staff@gmail.com",
-                            IsDelete = false,
-                            Password = "MANAGER",
-                            Phone = "03030303",
-                            Role = "1",
-                            UserName = "Staff"
-                        },
-                        new
-                        {
-                            Id = new Guid("b9cf3487-3d04-4cbf-85b7-e33360566485"),
-                            Address = "hcm",
-                            Created = new DateTime(2023, 9, 30, 0, 32, 15, 233, DateTimeKind.Local).AddTicks(4666),
-                            Email = "Manager@gmail.com",
-                            IsDelete = false,
-                            Password = "MANAGER",
-                            Phone = "03030303",
-                            Role = "2",
-                            UserName = "Manager"
-                        });
-                });
-
             modelBuilder.Entity("MetroDelivery.Domain.Entities.WithDraw", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<double>("Balance")
+                    b.Property<double?>("Balance")
                         .HasColumnType("float");
 
                     b.Property<string>("CreateBy")
@@ -610,6 +598,9 @@ namespace MetroDelivery.Identity.Migrations
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
+
+                    b.Property<Guid>("CustomerId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("IsDelete")
                         .HasColumnType("bit");
@@ -625,7 +616,7 @@ namespace MetroDelivery.Identity.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserID");
+                    b.HasIndex("CustomerId");
 
                     b.ToTable("WithDraws");
                 });
@@ -707,7 +698,7 @@ namespace MetroDelivery.Identity.Migrations
                         {
                             Id = "2198E4CD-3305-49C5-B78A-0B54DD76898F",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "cb03d78c-be55-48fc-a815-24ebdbf195c0",
+                            ConcurrencyStamp = "d22a3872-e823-4279-9ef5-7f510f29cc93",
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
                             FirstName = "Nhan",
@@ -715,9 +706,9 @@ namespace MetroDelivery.Identity.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEO6NziqJ9ZNhuN1hnjLPcku+8a9Imr8XMEP2fJrpemV4xQGNGj0PRM4l61KbHx9O6g==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEBKNzs+hNcL9mu8awhuaum/6fq6hEh5x+AQ5YhoM1uRfuESLECivc6Bg+TOfTzXwQQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "7eda405e-ecca-467e-9df6-3b01e71b2dff",
+                            SecurityStamp = "49e1fe21-7012-4230-a644-af9f980aba06",
                             TwoFactorEnabled = false,
                             UserName = "admin@gmail.com"
                         },
@@ -725,7 +716,7 @@ namespace MetroDelivery.Identity.Migrations
                         {
                             Id = "E6DE8827-B7C2-46E9-9227-66E6ECE676A8",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "7ef20e8c-108b-44da-ba40-e9d1968f9b7c",
+                            ConcurrencyStamp = "13e221a7-4db8-4b39-90ea-7982d30e340d",
                             Email = "enduser@gmail.com",
                             EmailConfirmed = true,
                             FirstName = "Vi",
@@ -733,9 +724,9 @@ namespace MetroDelivery.Identity.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ENDUSER@GMAIL.COM",
                             NormalizedUserName = "ENDUSER@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEKMqEtKhDOcl0hvhyR97/+FLhIa4okQ37hAK9ki/FsRfKgoO+b/IcpizA1ZDkPGd9Q==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEH26ut7h91DonW1RDVYsdvvW6iO8m3AWSfRdW5kTtDjXuXC11GBIOacuJcJ2eHBOtw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "9a02159f-44dd-4775-b1ea-2abb05fc9f84",
+                            SecurityStamp = "8ff995fb-5967-417e-b1bc-a2d89d26ac40",
                             TwoFactorEnabled = false,
                             UserName = "enduser@gmail.com"
                         },
@@ -743,7 +734,7 @@ namespace MetroDelivery.Identity.Migrations
                         {
                             Id = "2C0B43BB-B991-408E-A8F3-2FD3B4A2AB84",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "1ae2ae23-b53a-40f3-999c-58de09d3e8fd",
+                            ConcurrencyStamp = "430c6405-9caf-4ad3-b27c-5712825c0ebf",
                             Email = "staff@gmail.com",
                             EmailConfirmed = true,
                             FirstName = "Vi",
@@ -751,9 +742,9 @@ namespace MetroDelivery.Identity.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "STAFF@GMAIL.COM",
                             NormalizedUserName = "STAFF@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAELSqhphjJ77+HM6VLNjtTovvQ2uWbOU0rqIAFsPGSu0eoH5EtKqJa3QHLo+EkvbDug==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHv8iDa2Da4DqOnaQnhcguFXzuEzIwmm7smNCMeHBo0LUNzrbGZI6rbGqdOt3OC1Vw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "c055e9ee-04ab-4563-9e4b-9debaa0541cc",
+                            SecurityStamp = "611f762a-5d5e-4d0f-bc6d-58765ec40ff2",
                             TwoFactorEnabled = false,
                             UserName = "staff@gmail.com"
                         });
@@ -789,21 +780,21 @@ namespace MetroDelivery.Identity.Migrations
                         new
                         {
                             Id = "CF531396-C1CD-427B-9D17-0383B7675394",
-                            ConcurrencyStamp = "3f700f1b-ff4e-4778-a767-aee2f01cad6e",
+                            ConcurrencyStamp = "5b77eb7e-7a3c-46f0-a3c3-fb91bb61bad6",
                             Name = "EndUser",
                             NormalizedName = "EndUser"
                         },
                         new
                         {
                             Id = "AF5EB4AC-219A-4BC1-99FE-8C23876536EA",
-                            ConcurrencyStamp = "b149e67b-3359-4eb0-b984-297f30362750",
+                            ConcurrencyStamp = "af452c9a-f499-4956-aa66-ccbecdc33b61",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         },
                         new
                         {
                             Id = "647D9649-F5A2-4F24-808F-6FC326EC2AA3",
-                            ConcurrencyStamp = "da927246-cb49-44a6-b367-4ab289ce2a5f",
+                            ConcurrencyStamp = "1d81b69d-1d0b-4384-ad62-520499776601",
                             Name = "Staff",
                             NormalizedName = "Staff"
                         });
@@ -932,6 +923,17 @@ namespace MetroDelivery.Identity.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("MetroDelivery.Domain.Entities.Customer", b =>
+                {
+                    b.HasOne("MetroDelivery.Domain.IdentityModels.ApplicationUser", "ApplicationUser")
+                        .WithOne("Customer")
+                        .HasForeignKey("MetroDelivery.Domain.Entities.Customer", "ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ApplicationUser");
+                });
+
             modelBuilder.Entity("MetroDelivery.Domain.Entities.Menu", b =>
                 {
                     b.HasOne("MetroDelivery.Domain.Entities.Store", "Store")
@@ -964,6 +966,12 @@ namespace MetroDelivery.Identity.Migrations
 
             modelBuilder.Entity("MetroDelivery.Domain.Entities.Order", b =>
                 {
+                    b.HasOne("MetroDelivery.Domain.Entities.Customer", "Customer")
+                        .WithMany("Orders")
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("MetroDelivery.Domain.Entities.Store", "Store")
                         .WithMany("Orders")
                         .HasForeignKey("StoreID")
@@ -976,17 +984,11 @@ namespace MetroDelivery.Identity.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MetroDelivery.Domain.Entities.User", "User")
-                        .WithMany("Orders")
-                        .HasForeignKey("UserID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("Customer");
 
                     b.Navigation("Store");
 
                     b.Navigation("Trip");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("MetroDelivery.Domain.Entities.OrderDetail", b =>
@@ -1027,15 +1029,7 @@ namespace MetroDelivery.Identity.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MetroDelivery.Domain.Entities.Store", "Store")
-                        .WithMany("Products")
-                        .HasForeignKey("StoreID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Category");
-
-                    b.Navigation("Store");
                 });
 
             modelBuilder.Entity("MetroDelivery.Domain.Entities.Route_Station", b =>
@@ -1089,13 +1083,13 @@ namespace MetroDelivery.Identity.Migrations
 
             modelBuilder.Entity("MetroDelivery.Domain.Entities.WithDraw", b =>
                 {
-                    b.HasOne("MetroDelivery.Domain.Entities.User", "User")
+                    b.HasOne("MetroDelivery.Domain.Entities.Customer", "Customer")
                         .WithMany("WithDraws")
-                        .HasForeignKey("UserID")
+                        .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("User");
+                    b.Navigation("Customer");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -1149,6 +1143,13 @@ namespace MetroDelivery.Identity.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("MetroDelivery.Domain.Entities.Customer", b =>
+                {
+                    b.Navigation("Orders");
+
+                    b.Navigation("WithDraws");
+                });
+
             modelBuilder.Entity("MetroDelivery.Domain.Entities.Menu", b =>
                 {
                     b.Navigation("Menu_Products");
@@ -1186,8 +1187,6 @@ namespace MetroDelivery.Identity.Migrations
 
                     b.Navigation("Orders");
 
-                    b.Navigation("Products");
-
                     b.Navigation("Stations");
                 });
 
@@ -1198,11 +1197,10 @@ namespace MetroDelivery.Identity.Migrations
                     b.Navigation("Trip_Routes");
                 });
 
-            modelBuilder.Entity("MetroDelivery.Domain.Entities.User", b =>
+            modelBuilder.Entity("MetroDelivery.Domain.IdentityModels.ApplicationUser", b =>
                 {
-                    b.Navigation("Orders");
-
-                    b.Navigation("WithDraws");
+                    b.Navigation("Customer")
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
