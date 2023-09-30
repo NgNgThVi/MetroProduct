@@ -7,7 +7,6 @@ using MetroDelivery.Application.Features.Users.Commands.DeleteUser;
 using MetroDelivery.Application.Features.Users.Commands.UpdateUser;
 using MetroDelivery.Application.Features.Users.Queries.GetAllUsers;
 using MetroDelivery.Application.Features.Users.Queries.GetUserById;
-using MetroDelivery.Application.Features.Users.Queries.GetUserDetail;
 using MetroDelivery.Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -35,7 +34,7 @@ namespace MetroDelivery.API.Controllers.Users
         [Authorize(Roles = "Admin")]
         public async Task<List<CustomerDto>> GetAllUser()
         {
-            var response = await _mediator.Send(new GetListUserQuery());
+            var response = await _mediator.Send(new GetListCustomerQuery());
             return response;
         }
 
@@ -74,6 +73,7 @@ namespace MetroDelivery.API.Controllers.Users
         [HttpPut]
         [Route("updateCustomerById")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(400)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
         public async Task<ActionResult<CustomerDto>> UpdateCustomer(UpdateCustomerCommand request)
