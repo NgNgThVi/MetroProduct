@@ -29,14 +29,6 @@ namespace MetroDelivery.API.Controllers.Users
         {
             _mediator = mediator;
         }
-        [HttpGet]
-        [Route("getUserDetail")]
-        [Authorize(Roles = "Admin,Staff")]
-        public async Task<CustomerDto> GetUserDetail([FromQuery]GetUserDetailQuery request)
-        {
-            var response = await _mediator.Send(request);
-            return response;
-        }
         // GET api/<userController>/5
         [HttpGet]
         [Route("getAllUser")]
@@ -71,10 +63,10 @@ namespace MetroDelivery.API.Controllers.Users
         // GET api/<userController>/5
         [HttpGet]
         [Route("getUserById")]
-        [Authorize(Roles = "Staff")]
-        public async Task<ActionResult<CustomerDto>> GetUserById([FromQuery] Guid request)
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult<CustomerDto>> GetUserById([FromQuery] GetCustomerByIdQuery request)
         {
-            var response = await _mediator.Send(new GetUserByIdQuery(request));
+            var response = await _mediator.Send(request);
             return Ok(response);
         }
 

@@ -14,5 +14,6 @@ namespace MetroDelivery.Application.Features.Users.Queries.GetAllUsers
 
     public record GetListUserQuery : IRequest<List<CustomerDto>>
     {
+
     }
 }

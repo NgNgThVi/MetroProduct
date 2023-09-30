@@ -1,6 +1,9 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using MediatR;
 using MetroDelivery.Application.Common.Exceptions;
 using MetroDelivery.Application.Contracts.Persistance;
+using MetroDelivery.Application.Features.Users;
 using MetroDelivery.Domain.Entities;
 using MetroDelivery.Domain.IdentityModels;
 using MetroDelivery.Identity.DbContext;
@@ -10,8 +13,10 @@ namespace MetroDelivery.Identity.Repositories
 {
     public class CustomerRepository : GenericRepository<Customer>, ICustomerRepository
     {
+        
         public CustomerRepository(MetroPickupIdentityDbContext metroDeliveryDatabaseContext) : base(metroDeliveryDatabaseContext)
         {
+            
         }
 
         public async Task<bool> IsCustomerEmailUnique(string email)
@@ -28,6 +33,5 @@ namespace MetroDelivery.Identity.Repositories
         {
             return await _metroDeliveryDatabaseContext.Customers.AllAsync(x => x.ApplicationUser.UserName == customerName) == false;
         }
-
     }
 }

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MetroDelivery.Application.Features.Users
 {
-    public class CustomerDto : IMapFrom<Customer>
+    public class CustomerDto
     {
         public Guid Id { get; set; }
         [ForeignKey("ApplicationUser")]
@@ -18,15 +18,5 @@ namespace MetroDelivery.Application.Features.Users
         public string Phone { get; set; }
         public string Address { get; set; }
         public DateTime Birthday { get; set; }
-
-        public DateTime Created { get; set; }
-
-        public string? CreateBy { get; set; }
-
-        public DateTime? LastModified { get; set; }
-
-        public string? LastModifiedBy { get; set; }
-
-        public bool IsDelete { get; set; }
     }
 }

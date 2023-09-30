@@ -36,7 +36,7 @@ namespace MetroDelivery.Identity.Repositories
 
         public async Task<IReadOnlyList<T>> GetAsync()
         {
-            return await _metroDeliveryDatabaseContext.Set<T>().AsNoTracking().ToListAsync();
+            return await _metroDeliveryDatabaseContext.Set<T>().AsNoTracking().Where(c => c.IsDelete == false).ToListAsync();
         }
 
         public async Task<T> GetByIdAsync(Guid id)
