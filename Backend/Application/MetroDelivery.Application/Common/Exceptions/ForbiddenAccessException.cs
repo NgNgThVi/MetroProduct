@@ -12,5 +12,9 @@ namespace MetroDelivery.Application.Common.Exceptions
         {
             
         }
+        public ForbiddenAccessException(string message) : base(message)
+        {
+
+        }
     }
 }

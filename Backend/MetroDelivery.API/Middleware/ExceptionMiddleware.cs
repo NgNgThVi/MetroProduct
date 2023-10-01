@@ -39,14 +39,24 @@ namespace MetroDelivery.API.Middleware
                     };
 
                     break;
-                case NotFoundExcrption NotFound:
+                case NotFoundExcrption notFound:
                     statusCode = HttpStatusCode.NotFound;
                     problem = new CustomProblemDetails
                     {
-                        Title = NotFound.Message,
+                        Title = notFound.Message,
                         Status = (int)statusCode,
                         Type = nameof(NotFoundExcrption),
-                        Detail = NotFound.InnerException?.Message
+                        Detail = notFound.InnerException?.Message
+                    };
+                    break;
+                 case ForbiddenAccessException forbidden:
+                    statusCode = HttpStatusCode.Forbidden;
+                    problem = new CustomProblemDetails
+                    {
+                        Title = forbidden.Message,
+                        Status = (int)statusCode,
+                        Detail = forbidden.InnerException?.Message,
+                        Type = nameof(ForbiddenAccessException)
                     };
                     break;
                 default:

@@ -5,8 +5,8 @@ namespace MetroDelivery.Domain.Entities
 {
     public class Order : BaseAuditableEntity
     {
-        [ForeignKey("User")]
-        public Guid UserID { get; set; }
+        [ForeignKey("Customer")]
+        public Guid CustomerID { get; set; }
         [ForeignKey("Trip")]
         public Guid TripID { get; set; }
         [ForeignKey("Store")]

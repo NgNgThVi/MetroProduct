@@ -10,8 +10,8 @@ namespace MetroDelivery.Domain.Entities
         public string ProductName { get; set; }
         public string? ProductDescription { get; set; }
         public string? Image { get; set; }
-        public int? stock { get; set; }
-        public double price { get; set; }
+        public int? Stock { get; set; }
+        public double Price { get; set; }
 
         //relationship
         public virtual Category Category { get; set; }

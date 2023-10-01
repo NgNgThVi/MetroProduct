@@ -5,8 +5,8 @@ namespace MetroDelivery.Domain.Entities
 {
     public class WithDraw : BaseAuditableEntity
     {
-        [ForeignKey("User")]
-        public Guid UserID { get; set; }
+        [ForeignKey("Customer")]
+        public Guid CustomerID { get; set; }
         public double? Balance { get; set; }
 
         // relationship

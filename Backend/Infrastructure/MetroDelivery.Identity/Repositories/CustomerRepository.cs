@@ -1,11 +1,5 @@
-﻿using AutoMapper;
-using AutoMapper.QueryableExtensions;
-using MediatR;
-using MetroDelivery.Application.Common.Exceptions;
-using MetroDelivery.Application.Contracts.Persistance;
-using MetroDelivery.Application.Features.Users;
+﻿using MetroDelivery.Application.Contracts.Persistance;
 using MetroDelivery.Domain.Entities;
-using MetroDelivery.Domain.IdentityModels;
 using MetroDelivery.Identity.DbContext;
 using Microsoft.EntityFrameworkCore;
 

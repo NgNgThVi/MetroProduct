@@ -19,4 +19,14 @@
     <ProjectReference Include="..\..\Core\MetroDelivery.Domain\MetroDelivery.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\Menus\Commands\DeleteMenu\" />
+    <Folder Include="Features\Menus\Commands\UpdateMenu\" />
+    <Folder Include="Features\Menus\Queries\" />
+    <Folder Include="Features\Orders\Commands\DeleteOrder\" />
+    <Folder Include="Features\Orders\Queries\" />
+    <Folder Include="Features\Orders\Commands\UpdateOrder\" />
+    <Folder Include="Features\Stores\Commands\" />
+  </ItemGroup>
+
 </Project>
