@@ -26,7 +26,7 @@ namespace MetroDelivery.Application.Features.Stores.Queries.GetAllStores
         }
         public Task<List<StoreDto>> Handle(GetListStoreQueries request, CancellationToken cancellationToken)
         {
-            var 
+            throw new NotImplementedException();
         }
     }
 }

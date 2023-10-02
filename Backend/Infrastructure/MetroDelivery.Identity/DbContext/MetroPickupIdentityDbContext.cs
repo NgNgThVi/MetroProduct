@@ -1,4 +1,5 @@
-﻿using MetroDelivery.Application.Contracts.Identity;
+﻿using MetroDelivery.Application.Common.Interface;
+using MetroDelivery.Application.Contracts.Identity;
 using MetroDelivery.Domain.Common;
 using MetroDelivery.Domain.Entities;
 using MetroDelivery.Domain.IdentityModels;
@@ -12,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace MetroDelivery.Identity.DbContext
 {
-    public class MetroPickupIdentityDbContext : IdentityDbContext<ApplicationUser>
+    public class MetroPickupIdentityDbContext : IdentityDbContext<ApplicationUser>, IApplicationDbcontext
     {
         /*private readonly IUserService _userService;*/
         public MetroPickupIdentityDbContext(DbContextOptions<MetroPickupIdentityDbContext> options/*, 
@@ -55,6 +56,11 @@ namespace MetroDelivery.Identity.DbContext
                 }
             }
             return base.SaveChangesAsync(cancellationToken);
+        }
+
+        public int SaveChanges(CancellationToken cancellationToken = default)
+        {
+            throw new NotImplementedException();
         }
     }
 }

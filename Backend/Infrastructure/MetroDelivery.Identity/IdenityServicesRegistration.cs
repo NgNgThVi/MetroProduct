@@ -1,4 +1,5 @@
-﻿using MetroDelivery.Application.Contracts.Identity;
+﻿using MetroDelivery.Application.Common.Interface;
+using MetroDelivery.Application.Contracts.Identity;
 using MetroDelivery.Application.Contracts.Persistance;
 using MetroDelivery.Application.Models.Identity;
 using MetroDelivery.Domain.IdentityModels;
@@ -37,7 +38,7 @@ namespace MetroDelivery.Identity
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<MetroPickupIdentityDbContext>()
                 .AddDefaultTokenProviders();
-
+            services.AddScoped<IApplicationDbcontext,MetroPickupIdentityDbContext>();
             services.AddTransient<IAuthService, AuthService>();
             services.AddTransient<IUserService, UserService>();
 

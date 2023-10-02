@@ -7,8 +7,8 @@ namespace MetroDelivery.Domain.Entities
     {
         [ForeignKey("Store")]
         public Guid StoreID { get; set; }   
-        public DateTime StartTimeService { get; set; }
-        public DateTime EndTimeService { get; set;}
+        public TimeSpan StartTimeService { get; set; }
+        public TimeSpan EndTimeService { get; set;}
 
         //relationship
         public virtual Store Store { get; set; }

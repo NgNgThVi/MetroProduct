@@ -12,6 +12,7 @@ namespace MetroDelivery.Identity.Configurations.EntityConfiguration
                 new Product
                 {
                     Id = Guid.NewGuid(),
+                    StoreID = Guid.Parse("AA2610A8-DE94-42B7-B12B-1CF8710E05D8"),
                     CategoryID = Guid.Parse("175D4C8D-D2F0-441B-85CB-45A1CB0B6756"),
                     ProductName = "Keo bông gòn",
                     Image = null,
@@ -23,6 +24,7 @@ namespace MetroDelivery.Identity.Configurations.EntityConfiguration
 
                 {
                     Id = Guid.NewGuid(),
+                    StoreID = Guid.Parse("AA2610A8-DE94-42B7-B12B-1CF8710E05D8"),
                     CategoryID = Guid.Parse("175D4C8D-D2F0-441B-85CB-45A1CB0B6756"),
                     ProductName = "Kẹo lạc",
                     Image = null,
@@ -31,9 +33,9 @@ namespace MetroDelivery.Identity.Configurations.EntityConfiguration
                     Price = 3000
                 },
                 new Product
-
                 {
-                    Id = Guid.NewGuid(),
+                    Id = Guid.Parse("45CDF6ED-820F-40DF-8E4B-BAAAD897D8DF"),
+                    StoreID = Guid.Parse("AA2610A8-DE94-42B7-B12B-1CF8710E05D8"),
                     CategoryID = Guid.Parse("175D4C8D-D2F0-441B-85CB-45A1CB0B6756"),
                     ProductName = "Kẹo chup",
                     Image = null,
@@ -43,7 +45,8 @@ namespace MetroDelivery.Identity.Configurations.EntityConfiguration
                 },
                 new Product
                 {
-                    Id = Guid.NewGuid(),
+                    Id = Guid.Parse("DC38C67E-7B6B-45AF-95A9-FC8B0097C2C8"),
+                    StoreID = Guid.Parse("AA2610A8-DE94-42B7-B12B-1CF8710E05D8"),
                     CategoryID = Guid.Parse("8908EA98-B421-420B-9634-03ED356BB921"),
                     ProductName = "Khoai tây chiên",
                     Image = null,
@@ -53,7 +56,8 @@ namespace MetroDelivery.Identity.Configurations.EntityConfiguration
                 },
                 new Product
                 {
-                    Id = Guid.NewGuid(),
+                    Id = Guid.Parse("CEA11A52-6D68-424C-89A7-D9541B383432"),
+                    StoreID = Guid.Parse("AA2610A8-DE94-42B7-B12B-1CF8710E05D8"),
                     CategoryID = Guid.Parse("175D4C8D-D2F0-441B-85CB-45A1CB0B6756"),
                     ProductName = "Kẹo dẻo",
                     Image = null,
@@ -64,7 +68,7 @@ namespace MetroDelivery.Identity.Configurations.EntityConfiguration
                 }, new Product
                 {
                     Id = Guid.NewGuid(),
-
+                    StoreID = Guid.Parse("AA2610A8-DE94-42B7-B12B-1CF8710E05D8"),
                     CategoryID = Guid.Parse("9AFCDFAC-1A27-496B-84E5-0C8E5804E40E"),
                     ProductName = "Cơm gà xé",
                     Image = null,
@@ -75,6 +79,7 @@ namespace MetroDelivery.Identity.Configurations.EntityConfiguration
                 new Product
                 {
                     Id = Guid.NewGuid(),
+                    StoreID = Guid.Parse("AA2610A8-DE94-42B7-B12B-1CF8710E05D8"),
                     CategoryID = Guid.Parse("9B2CCCB2-F5FA-4358-8265-0FE4F7A52253"),
                     ProductName = "Bánh quy giòn",
                     Image = null,
@@ -85,6 +90,7 @@ namespace MetroDelivery.Identity.Configurations.EntityConfiguration
                 new Product
                 {
                     Id = Guid.NewGuid(),
+                    StoreID = Guid.Parse("AA2610A8-DE94-42B7-B12B-1CF8710E05D8"),
                     CategoryID = Guid.Parse("175D4C8D-D2F0-441B-85CB-45A1CB0B6756"),
                     ProductName = "Kẹo Socola",
                     Image = null,
@@ -96,6 +102,7 @@ namespace MetroDelivery.Identity.Configurations.EntityConfiguration
                 new Product
                 {
                     Id = Guid.NewGuid(),
+                    StoreID = Guid.Parse("AA2610A8-DE94-42B7-B12B-1CF8710E05D8"),
                     CategoryID = Guid.Parse("175D4C8D-D2F0-441B-85CB-45A1CB0B6756"),
                     ProductName = "Kẹo dâu",
                     Image = null,
@@ -107,6 +114,7 @@ namespace MetroDelivery.Identity.Configurations.EntityConfiguration
 
                 {
                     Id = Guid.NewGuid(),
+                    StoreID = Guid.Parse("AA2610A8-DE94-42B7-B12B-1CF8710E05D8"),
                     CategoryID = Guid.Parse("9AFCDFAC-1A27-496B-84E5-0C8E5804E40E"),
                     ProductName = "Gà rán",
                     Image = null,
@@ -117,6 +125,7 @@ namespace MetroDelivery.Identity.Configurations.EntityConfiguration
                 new Product
                 {
                     Id = Guid.NewGuid(),
+                    StoreID = Guid.Parse("AA2610A8-DE94-42B7-B12B-1CF8710E05D8"),
                     CategoryID = Guid.Parse("9AFCDFAC-1A27-496B-84E5-0C8E5804E40E"),
                     ProductName = "Cá chiên",
                     Image = null,
@@ -129,6 +138,7 @@ namespace MetroDelivery.Identity.Configurations.EntityConfiguration
 
                 {
                     Id = Guid.NewGuid(),
+                    StoreID = Guid.Parse("AA2610A8-DE94-42B7-B12B-1CF8710E05D8"),
                     CategoryID = Guid.Parse("175D4C8D-D2F0-441B-85CB-45A1CB0B6756"),
                     ProductName = "Kẹo bạc hà",
                     Image = null,
@@ -140,6 +150,7 @@ namespace MetroDelivery.Identity.Configurations.EntityConfiguration
 
                 {
                     Id = Guid.NewGuid(),
+                    StoreID = Guid.Parse("AA2610A8-DE94-42B7-B12B-1CF8710E05D8"),
                     CategoryID = Guid.Parse("175D4C8D-D2F0-441B-85CB-45A1CB0B6756"),
                     ProductName = "Kẹo mút",
                     Image = null,
@@ -151,6 +162,7 @@ namespace MetroDelivery.Identity.Configurations.EntityConfiguration
                 new Product
                 {
                     Id = Guid.NewGuid(),
+                    StoreID = Guid.Parse("AA2610A8-DE94-42B7-B12B-1CF8710E05D8"),
                     CategoryID = Guid.Parse("9AFCDFAC-1A27-496B-84E5-0C8E5804E40E"),
                     ProductName = "Gà nướng",
                     Image = null,
@@ -161,6 +173,7 @@ namespace MetroDelivery.Identity.Configurations.EntityConfiguration
                 new Product
                 {
                     Id = Guid.NewGuid(),
+                    StoreID = Guid.Parse("AA2610A8-DE94-42B7-B12B-1CF8710E05D8"),
                     CategoryID = Guid.Parse("9AFCDFAC-1A27-496B-84E5-0C8E5804E40E"),
                     ProductName = "Cơm chiên dương châu",
                     Image = null,
