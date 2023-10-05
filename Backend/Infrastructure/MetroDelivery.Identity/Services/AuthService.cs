@@ -3,37 +3,40 @@ using MetroDelivery.Application.Contracts.Identity;
 using MetroDelivery.Application.Models.Identity;
 using MetroDelivery.Domain.IdentityModels;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Collections.Generic;
+using System.Collections.Concurrent;
+using System.Data;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace MetroDelivery.Identity.Services
 {
     public class AuthService : IAuthService
     {
+        private static readonly ConcurrentDictionary<string, Guid> _refreshTokens = new ConcurrentDictionary<string, Guid>();
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _siginInManager;
         private readonly JwtSettings _jwtSettings;
+        private readonly IConfiguration _configuration;
 
         public AuthService(UserManager<ApplicationUser> userManager, 
             SignInManager<ApplicationUser> siginInManager, 
-            IOptions<JwtSettings> jwtSettings)
+            IOptions<JwtSettings> jwtSettings, 
+            IConfiguration configuration)
         {
             this._userManager = userManager;
             this._siginInManager = siginInManager;
             this._jwtSettings = jwtSettings.Value;
+            this._configuration = configuration;
         }
         public async Task<AuthResponse> Login(AuthRequest request)
         {
             var user = await _userManager.FindByEmailAsync(request.Email);
             if(user == null) {
-                throw new NotFoundExcrption($"User with {request.Email} not found.", request.Email);
+                throw new NotFoundException($"User with {request.Email} not found.", request.Email);
             }
 
             var result = await _siginInManager.CheckPasswordSignInAsync(user, request.Password, false);
@@ -46,10 +49,31 @@ namespace MetroDelivery.Identity.Services
             var response = new AuthResponse
             {
                 Id = user.Id,
-                Token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken),
+                AccessToken = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken),
                 Email = user.Email,
-                UserName = user.UserName
+                UserName = user.UserName,
+                RefreshToken = GenerateRefreshToken(user.UserName).ToString("D"),
+                Expires = DateTime.Now.AddHours(7).AddMinutes(_jwtSettings.DurationInMinutes)
+        };
+            return response;
+        }
+
+        public async Task<AuthenticationResult> Refresh(AuthenticationResult request)
+        {
+            
+            if(!IsValid(request, out string userName)) {
+                return null;
+            }
+            var user = await _userManager.FindByNameAsync(userName);
+            JwtSecurityToken jwtSecurityToken = await GenerateToken(user);
+
+            var response = new AuthenticationResult
+            { 
+                AccessToken = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken),
+                RefreshToken = GenerateRefreshToken(user.UserName).ToString("D"),
+                Expires = DateTime.Now.AddHours(7).AddMinutes(_jwtSettings.DurationInMinutes)
             };
+
             return response;
         }
 
@@ -84,11 +108,58 @@ namespace MetroDelivery.Identity.Services
             }
         }
 
+        private bool IsValid(AuthenticationResult authResult, out string userName)
+        {
+            userName = string.Empty;
+            ClaimsPrincipal principal = GetPrincipalFromExpiredToken(authResult.AccessToken);
+            if(principal is null) {
+                throw new UnauthorizedAccessException("No principal");
+            }
+            userName = principal.FindFirstValue(ClaimTypes.NameIdentifier);
+            if(string.IsNullOrEmpty(userName)) {
+                throw new UnauthorizedAccessException("No user name");
+            }
+            if(!Guid.TryParse(authResult.RefreshToken, out Guid givenRefreshToken)) {
+                throw new UnauthorizedAccessException("Refresh token malformed");
+            }
+            if(!_refreshTokens.TryGetValue(userName, out Guid currentRefreshToken)) {
+                throw new UnauthorizedAccessException("No valid refresh token in system");
+            }
+
+            if(currentRefreshToken != givenRefreshToken) {
+                throw new UnauthorizedAccessException("Invalid refesh token");
+            }
+            return true;
+        }
+
+        private ClaimsPrincipal GetPrincipalFromExpiredToken(string accessToken)
+        {
+            TokenValidationParameters tokenValidationParameters = new TokenValidationParameters {
+                ValidateIssuerSigningKey = true,
+                ValidateIssuer = true,
+                ValidateAudience = true,
+                ValidateLifetime = false,
+                ValidIssuer = _configuration["JwtSettings:Issuer"],
+                ValidAudience = _configuration["JwtSettings:Audience"],
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JwtSettings:Key"])),
+                NameClaimType = JwtRegisteredClaimNames.Sub,
+                RoleClaimType = ClaimTypes.Role,
+            };
+
+            JwtSecurityTokenHandler token = new JwtSecurityTokenHandler();
+            ClaimsPrincipal principal = token.ValidateToken(accessToken, tokenValidationParameters, out SecurityToken securityToken);
+            if(securityToken is not JwtSecurityToken jwtSecurityToken ||
+                !jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256, StringComparison.InvariantCulture)) {
+                throw new SecurityTokenException("Invalid token");
+            }
+            return principal;
+        }
+
         private async Task<JwtSecurityToken> GenerateToken(ApplicationUser user)
         {
             var userClaims = await _userManager.GetClaimsAsync(user);
             var roles = await _userManager.GetRolesAsync(user);
-            var roleClaims = roles.Select(q => new Claim(ClaimTypes.Role, q)).ToList();
+            var roleClaims = roles.Select(q => new Claim("role", q)).ToList();
 
             var claims = new List<Claim>
             {
@@ -108,9 +179,54 @@ namespace MetroDelivery.Identity.Services
                 issuer: _jwtSettings.Issuer,
                 audience: _jwtSettings.Audience,
                 claims: claims,
-                expires: DateTime.UtcNow.AddHours(7).AddMinutes(_jwtSettings.DurationInMinutes),
+                expires: DateTime.Now.AddHours(7).AddMinutes(_jwtSettings.DurationInMinutes),
                 signingCredentials: sigingCredentials);
             return jwtSecurityToken;
         }
+
+        /*private async Task<AuthenticationResult> GetAccessToken(ApplicationUser user)
+        {
+
+            var userClaims = await _userManager.GetClaimsAsync(user);
+            var roles = await _userManager.GetRolesAsync(user);
+            var roleClaims = roles.Select(q => new Claim("role", q)).ToList();
+
+            var claims = new List<Claim>
+            {
+                new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                new Claim(JwtRegisteredClaimNames.Email, user.Email),
+                new Claim("uid", user.Id)
+            }
+            .Union(userClaims)
+            .Union(roleClaims);
+
+            var symmetricSecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.Key));
+
+            var sigingCredentials = new SigningCredentials(symmetricSecurityKey, SecurityAlgorithms.HmacSha256);
+
+            var expiry = DateTime.UtcNow.AddSeconds(_jwtSettings.DurationInMinutes);
+
+            var jwtSecurityToken = new JwtSecurityToken(
+                issuer: _jwtSettings.Issuer,
+                audience: _jwtSettings.Audience,
+                claims: claims,
+                expires: expiry,
+                signingCredentials: sigingCredentials);
+            return new AuthenticationResult()
+            {
+                AccessToken = (new JwtSecurityTokenHandler()).WriteToken(jwtSecurityToken),
+                RefreshToken = GenerateRefreshToken(user.UserName).ToString("D"),
+                Expires = expiry,
+            };
+        }*/
+
+        private Guid GenerateRefreshToken(string userName)
+        {
+            Guid newToken = _refreshTokens.AddOrUpdate(userName, u => Guid.NewGuid(), (u, o) => Guid.NewGuid());
+            return newToken;
+        }
+
+        
     }
 }

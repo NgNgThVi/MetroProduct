@@ -24,17 +24,15 @@ namespace MetroDelivery.Application.Features.Auth.Queries.ResetPassword
 
         public async Task<string> Handle(ResetPasswordQuery request, CancellationToken cancellationToken)
         {
-            try
-            {
+            try {
                 var user = await _userManager.FindByEmailAsync(request.Email);
                 if (user == null)
-                    throw new NotFoundExcrption(nameof(ApplicationUser), request.Email);
+                    throw new NotFoundException(nameof(ApplicationUser), request.Email);
 
                 var newPassword = GenerateRandomPassword();
 
                 var resetPasswordResult = await _userManager.ResetPasswordAsync(user, await _userManager.GeneratePasswordResetTokenAsync(user), newPassword);
-                if (!resetPasswordResult.Succeeded)
-                {
+                if (!resetPasswordResult.Succeeded) {
                     throw new BadRequestException("Password reset failed.");
                 }
 
@@ -47,16 +45,14 @@ namespace MetroDelivery.Application.Features.Auth.Queries.ResetPassword
 
         private string GenerateRandomPassword()
         {
-            try
-            {
+            try {
                 const string validChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
                 const string specialChars = "!@#$%^&*()";
                 var random = new Random();
                 var password = new StringBuilder();
 
 
-                for (int i = 0; i < 5; i++)
-                {
+                for (int i = 0; i < 5; i++) {
                     password.Append(validChars[random.Next(validChars.Length)]);
                 }
 
@@ -64,8 +60,7 @@ namespace MetroDelivery.Application.Features.Auth.Queries.ResetPassword
                 password.Append(specialChars[random.Next(specialChars.Length)]);
 
 
-                for (int i = password.Length - 1; i > 0; i--)
-                {
+                for (int i = password.Length - 1; i > 0; i--) {
                     int j = random.Next(i + 1);
                     char temp = password[i];
                     password[i] = password[j];
@@ -79,10 +74,9 @@ namespace MetroDelivery.Application.Features.Auth.Queries.ResetPassword
 
         private async Task SendEmailAsync(string email, string subject, string body)
         {
-            try
-            {
+            try {
                 var message = new MimeMessage();
-                message.From.Add(new MailboxAddress("LogOT", "pansy19@ethereal.email"));
+                message.From.Add(new MailboxAddress("LogOT","pansy19@ethereal.email"));
                 message.To.Add(new MailboxAddress("pansy19@ethereal.email", email));
                 message.Subject = subject;
 
@@ -91,8 +85,7 @@ namespace MetroDelivery.Application.Features.Auth.Queries.ResetPassword
                     Text = body
                 };
 
-                using (var client = new MailKit.Net.Smtp.SmtpClient())
-                {
+                using (var client = new MailKit.Net.Smtp.SmtpClient()) {
                     await client.ConnectAsync("smtp.ethereal.email", 587, SecureSocketOptions.StartTls);
                     await client.AuthenticateAsync("pansy19@ethereal.email", "ApmhjVB3GZeHJ9tkfH"); //Tài khoản gmail và mạt khẩu on ethereal.email
                     await client.SendAsync(message);

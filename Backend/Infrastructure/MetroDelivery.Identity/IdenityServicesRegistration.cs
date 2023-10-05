@@ -1,8 +1,10 @@
-﻿using MetroDelivery.Application.Contracts.Identity;
+﻿using MetroDelivery.Application.Common.Interface;
+using MetroDelivery.Application.Contracts.Identity;
 using MetroDelivery.Application.Contracts.Persistance;
 using MetroDelivery.Application.Models.Identity;
 using MetroDelivery.Domain.IdentityModels;
-using MetroDelivery.Identity.DbContext;
+using MetroDelivery.Identity.DbContexts;
+using MetroDelivery.Identity.DbContexts.Interceptor;
 using MetroDelivery.Identity.Repositories;
 using MetroDelivery.Identity.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -28,18 +30,24 @@ namespace MetroDelivery.Identity
         public static IServiceCollection AddIdentityServices(this IServiceCollection services,
             IConfiguration configuration)
         {
+            services.AddScoped<AuditableEntitySaveChangesInterceptor>();
             services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
             services.AddDbContext<MetroPickupIdentityDbContext>(option =>
             {
-                option.UseSqlServer(configuration.GetConnectionString("MetroDeliveryConnectionString"));
+                option.UseSqlServer(configuration.GetConnectionString("MetroDeliveryConnectionString"),
+                    builder => builder.MigrationsAssembly(typeof(MetroPickupIdentityDbContext).Assembly.FullName));
             });
+
+            services.AddScoped<IMetroPickUpDbContext>(provider => provider.GetRequiredService<MetroPickupIdentityDbContext>());
+            
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<MetroPickupIdentityDbContext>()
                 .AddDefaultTokenProviders();
 
             services.AddTransient<IAuthService, AuthService>();
-            services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IDateTime, DateTimeService>();
+
 
             services.AddAuthentication(options =>
             {

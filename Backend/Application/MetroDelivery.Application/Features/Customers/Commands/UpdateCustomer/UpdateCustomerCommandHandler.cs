@@ -34,10 +34,10 @@ namespace MetroDelivery.Application.Features.Customers.Commands.UpdateCustomer
             // validate incoming data
             var customer = await _customerRepository.CustomerIdMusBeExist(request.CustomerId);
             if (customer == null) {
-                throw new NotFoundExcrption("Customer does not exist !");
+                throw new NotFoundException("Customer does not exist !");
             }
             else if (customer.IsDelete == true) {
-                throw new NotFoundExcrption("The customer have been deleted");
+                throw new NotFoundException("The customer have been deleted");
             }
             var validator = new UpdateCustomerCommandValidator(_customerRepository);
             var validationResult = await validator.ValidateAsync(request);

@@ -29,7 +29,7 @@ namespace MetroDelivery.API.Controllers.Customers
         // GET api/<userController>/5
         [HttpGet]
         [Route("get-all-customer")]
-        [Authorize(Roles = "Admin")]
+        
         public async Task<List<CustomerDto>> GetAllUser()
         {
             var response = await _mediator.Send(new GetListCustomerQuery());
@@ -41,7 +41,7 @@ namespace MetroDelivery.API.Controllers.Customers
         [Route("register-customer")]
         [ProducesResponseType(201)]
         [ProducesResponseType(400)]
-        [Authorize(Roles = "EndUser")]
+        
         public async Task<ActionResult> CreateCustomer([FromQuery] CreateCustomerCommand request)
         {
             /*try {*/
@@ -61,7 +61,7 @@ namespace MetroDelivery.API.Controllers.Customers
         // GET api/<userController>/5
         [HttpGet]
         [Route("get-customer-by-id")]
-        [Authorize(Roles = "Admin")]
+        /*[Authorize(Roles = "Admin")]*/
         public async Task<ActionResult<CustomerDto>> GetUserById([FromQuery] GetCustomerByIdQuery request)
         {
             var response = await _mediator.Send(request);

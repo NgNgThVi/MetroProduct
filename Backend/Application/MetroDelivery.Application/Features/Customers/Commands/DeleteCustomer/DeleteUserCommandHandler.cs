@@ -14,10 +14,10 @@ namespace MetroDelivery.Application.Features.Customers.Commands.DeleteCustomer
             // retrieve domain entity object
             var customerDelete = await _customerRepository.CustomerIdMusBeExist(request.Id);
             if (customerDelete == null) {
-                throw new NotFoundExcrption(nameof(customerDelete.ApplicationUser.Email), request.Id);
+                throw new NotFoundException(nameof(customerDelete.ApplicationUser.Email), request.Id);
             }
             else if (customerDelete.IsDelete == true) {
-                throw new NotFoundExcrption("The customer have been deleted");
+                throw new NotFoundException("The customer have been deleted");
             }
 
 

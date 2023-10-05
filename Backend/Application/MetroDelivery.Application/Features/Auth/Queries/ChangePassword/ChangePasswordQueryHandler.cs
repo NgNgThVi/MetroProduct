@@ -20,14 +20,14 @@ namespace MetroDelivery.Application.Features.Auth.Queries.ChangePassword
         {
             var emailUser = await _userManager.FindByEmailAsync(request.Email);
             if (emailUser == null)
-                throw new NotFoundExcrption("Email " + request.Email + " not exist!");
+                throw new NotFoundException("Email " + request.Email + " not exist!");
 
             var isPasswordCorrect = await _userManager.CheckPasswordAsync(emailUser, request.CurrentPassword);
             if (!isPasswordCorrect) {
                 throw new BadRequestException("Current password is incorrect.");
             }
 
-            
+
             var changePasswordResult = await _userManager.ChangePasswordAsync(emailUser, request.CurrentPassword, request.NewPassword);
             if (!changePasswordResult.Succeeded) {
                 throw new BadRequestException("Unable to change password");

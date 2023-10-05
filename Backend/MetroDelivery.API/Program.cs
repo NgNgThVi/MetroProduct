@@ -13,6 +13,7 @@ ConfigurationManager configuration = builder.Configuration;
 builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices(builder.Configuration);
 builder.Services.AddIdentityServices(builder.Configuration);
+builder.Services.AddWebUIServices();
 
 builder.Services.AddControllers();
 
@@ -22,6 +23,7 @@ builder.Services.AddControllers();
     .AllowAnyHeader()
     .AllowAnyMethod());
 });*/
+builder.Services.AddHttpContextAccessor();
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 builder.Services.AddCors(options =>
 {
@@ -32,9 +34,6 @@ builder.Services.AddCors(options =>
                       });
 });
 
-/*builder.Services.AddHttpContextAccessor();*/
-
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -52,7 +51,7 @@ app.UseMiddleware<ExceptionMiddleware>();
 
 app.UseHttpsRedirection();
 
-/*app.UseCors("all");*/
+app.UseCors(MyAllowSpecificOrigins);
 app.UseAuthentication();
 app.UseAuthorization();
 

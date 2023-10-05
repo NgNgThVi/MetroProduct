@@ -40,6 +40,15 @@ namespace MetroDelivery.API.Controllers.Auth
             return Ok(await _authenticationService.Login(request));
         }
 
+        [HttpPost("refresh")]
+        public async Task<ActionResult<AuthenticationResult>> GetRefreshToken(AuthenticationResult request)
+        {
+            if (User.Identity.IsAuthenticated) {
+                return BadRequest("You have logged in.");
+            }
+            return Ok(await _authenticationService.Refresh(request));
+        }
+
         [HttpPost("register-user")]
         public async Task<ActionResult<RegistrationResponse>> RegisterUser(RegistrationRequest request)
         {

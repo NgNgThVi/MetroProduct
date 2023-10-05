@@ -39,13 +39,13 @@ namespace MetroDelivery.API.Middleware
                     };
 
                     break;
-                case NotFoundExcrption notFound:
+                case NotFoundException notFound:
                     statusCode = HttpStatusCode.NotFound;
                     problem = new CustomProblemDetails
                     {
                         Title = notFound.Message,
                         Status = (int)statusCode,
-                        Type = nameof(NotFoundExcrption),
+                        Type = nameof(NotFoundException),
                         Detail = notFound.InnerException?.Message
                     };
                     break;

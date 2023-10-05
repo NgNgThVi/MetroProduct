@@ -22,10 +22,10 @@ namespace MetroDelivery.Application.Features.Customers.Queries.GetCustomerById
             var userById = await _customerRepository.CustomerIdMusBeExist(request.id);
 
             if (userById == null) {
-                throw new NotFoundExcrption(nameof(userById.ApplicationUser.UserName), request.id);
+                throw new NotFoundException(nameof(userById.ApplicationUser.UserName), request.id);
             }
             else if (userById.IsDelete == true) {
-                throw new NotFoundExcrption("The customer have been deleted");
+                throw new NotFoundException("The customer have been deleted");
             }
 
             //convert data to dto
