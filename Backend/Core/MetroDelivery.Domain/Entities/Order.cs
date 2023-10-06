@@ -19,7 +19,7 @@ namespace MetroDelivery.Domain.Entities
         public virtual Customer Customer { get; private set; }
         public virtual Trip Trip { get; private set; }
         public virtual Store Store { get; private set; }
-        public IList<PaymentMethod> PaymentMethods { get; private set; }
+        
         public IList<OrderDetail> OrderDetail { get; private set; }
     }
 }

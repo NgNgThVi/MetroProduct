@@ -7,9 +7,12 @@ namespace MetroDelivery.Domain.Entities
     {
         [ForeignKey("Customer")]
         public Guid CustomerID { get; set; }
+        [ForeignKey("PaymentMethod")]
+        public Guid PaymentMethodID { get; set; }
         public double? Balance { get; set; }
 
         // relationship
         public virtual Customer Customer { get; set; }
+        public virtual PaymentMethod PaymentMethod { get; set; }
     }
 }

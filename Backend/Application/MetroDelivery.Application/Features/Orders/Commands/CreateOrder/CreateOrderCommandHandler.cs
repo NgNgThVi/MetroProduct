@@ -1,4 +1,4 @@
-﻿using MediatR;
+﻿/*using MediatR;
 using MetroDelivery.Application.Common.CRUDResponse;
 using MetroDelivery.Application.Common.Interface;
 using MetroDelivery.Application.Contant;
@@ -91,7 +91,7 @@ namespace MetroDelivery.Application.Features.Orders.Commands.CreateOrder
                     _dbContext.Products.Update(product);
                     await _dbContext.SaveChangesAsync();
                     //Update Product stock
-                    /*                    var product = await _productRepository.GetByIdAsync(Guid.Parse(item.ProductId));
+                    *//*                    var product = await _productRepository.GetByIdAsync(Guid.Parse(item.ProductId));
                                         var resultStock = product.Stock - item.Quantity;
                                         if (resultStock < 0)
                                         {
@@ -112,7 +112,7 @@ namespace MetroDelivery.Application.Features.Orders.Commands.CreateOrder
                                             {
                                                 Message = Extension.Fail
                                             };
-                                        }*/
+                                        }*//*
                 }
                 return new MetroPickUpResponse
                 {
@@ -128,3 +128,4 @@ namespace MetroDelivery.Application.Features.Orders.Commands.CreateOrder
         }
     }
 }
+*/

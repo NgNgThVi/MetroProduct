@@ -12,7 +12,7 @@ namespace MetroDelivery.Identity.Repositories
         {
         }
 
-        public async Task<MetroPickUpResponse> CheckMinusProduct(string productID, string storeId)
+        /*public async Task<MetroPickUpResponse> CheckMinusProduct(string productID, string storeId)
         {
             var product = _metroDeliveryDatabaseContext.Products.Where(x => x.Id == Guid.Parse(productID) && x.StoreID == Guid.Parse(storeId)).SingleOrDefault();
 
@@ -30,6 +30,6 @@ namespace MetroDelivery.Identity.Repositories
             {
                 Message = Extension.OutOfStock
             }); ;
-        }
+        }*/
     }
 }
