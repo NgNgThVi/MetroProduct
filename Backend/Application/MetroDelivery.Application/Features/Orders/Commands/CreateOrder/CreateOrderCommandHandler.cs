@@ -91,28 +91,26 @@ namespace MetroDelivery.Application.Features.Orders.Commands.CreateOrder
                     _dbContext.Products.Update(product);
                     await _dbContext.SaveChangesAsync();
                     //Update Product stock
-                    *//*                    var product = await _productRepository.GetByIdAsync(Guid.Parse(item.ProductId));
-                                        var resultStock = product.Stock - item.Quantity;
-                                        if (resultStock < 0)
-                                        {
-                                            return new MetroPickUpResponse
-                                            {
-                                                Message = Extension.CreateOrderFailedBecauseSomeProductWasOutOfStock
-                                            };
-                                        }
-                                        //await _productRepository.UpdateAsync(product);
-                                        var productRequest = new UpdateProductCommand()
-                                        {
-                                            Product = product,
-                                        };
-                                        var productResponse = await _mediator.Send(productRequest);
-                                        if (productResponse.Message != Extension.Ok)
-                                        {
-                                            return new MetroPickUpResponse
-                                            {
-                                                Message = Extension.Fail
-                                            };
-                                        }*//*
+                    var product = await _productRepository.GetByIdAsync(Guid.Parse(item.ProductId));
+                    var resultStock = product.Stock - item.Quantity;
+                    if (resultStock < 0) {
+                        return new MetroPickUpResponse
+                        {
+                            Message = Extension.CreateOrderFailedBecauseSomeProductWasOutOfStock
+                        };
+                    }
+                    //await _productRepository.UpdateAsync(product);
+                    var productRequest = new UpdateProductCommand()
+                    {
+                        Product = product,
+                    };
+                    var productResponse = await _mediator.Send(productRequest);
+                    if (productResponse.Message != Extension.Ok) {
+                        return new MetroPickUpResponse
+                        {
+                            Message = Extension.Fail
+                        };
+                    }
                 }
                 return new MetroPickUpResponse
                 {
