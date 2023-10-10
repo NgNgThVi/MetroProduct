@@ -5,8 +5,8 @@ namespace MetroDelivery.Domain.Entities
 {
     public class Menu : BaseAuditableEntity
     {   
-        public DateTime StartTimeService { get; set; }
-        public DateTime EndTimeService { get; set;}
+        public TimeSpan StartTimeService { get; set; }
+        public TimeSpan EndTimeService { get; set;}
 
         //relationship
         public IList<Store_Menu> Store_Menu { get; set; }

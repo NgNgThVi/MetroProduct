@@ -1,4 +1,4 @@
-﻿/*using MetroDelivery.Domain.Entities;
+﻿using MetroDelivery.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -28,10 +28,14 @@ namespace MetroDelivery.Identity.Configurations.EntityConfiguration
                 {
                     TripID = Guid.Parse("5b30c4e9-31ab-456c-b212-dc6b2ba9a3e7"),
                     RouteID = Guid.Parse("B9F8F712-92EE-4611-AD55-000A8E1B84C6")
+                },
+                new Trip_Route
+                {
+                    TripID = Guid.Parse("9c2ab923-4c57-44d7-9c1a-b44c0d3e6b00"),
+                    RouteID = Guid.Parse("42F184EB-58B3-4B9B-BE52-1DA57F8FFB3F")
                 }
             );
         }
     }
 
 }
-*/

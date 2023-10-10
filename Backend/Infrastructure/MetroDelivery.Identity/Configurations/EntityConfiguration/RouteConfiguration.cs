@@ -1,4 +1,4 @@
-﻿/*using MetroDelivery.Domain.Entities;
+﻿using MetroDelivery.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -38,9 +38,15 @@ namespace MetroDelivery.Identity.Configurations.EntityConfiguration
                     Id = Guid.Parse("B9F8F712-92EE-4611-AD55-000A8E1B84C6"),
                     FromLocation = "Quận 1, Tp.Hcm",
                     ToLocation = "Bến xe Miền Đông",
-                });
+                },
+                new Route
+                {
+                    Id = Guid.Parse("42F184EB-58B3-4B9B-BE52-1DA57F8FFB3F"),
+                    FromLocation = "Quận Bình Thạnh",
+                    ToLocation = "Bến Thành, Quận 1, TP HCM",
+                }
+            );
         }
     }
 
 }
-*/

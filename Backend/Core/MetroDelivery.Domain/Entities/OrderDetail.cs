@@ -9,8 +9,8 @@ namespace MetroDelivery.Domain.Entities
         public Guid OrderID { get; set; }
         [ForeignKey("Product")]
         public Guid ProductID { get; set; }
-        public int quanity { get; set; }
-        public double price { get; set; }
+        public int? Quanity { get; set; }
+        public double? Price { get; set; }
 
         // relationship
         public virtual Order Order { get; private set; }
