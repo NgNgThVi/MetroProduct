@@ -3,6 +3,7 @@ using MetroDelivery.API.Middleware;
 using MetroDelivery.Application;
 using MetroDelivery.Identity;
 using MetroDelivery.Infrastructure;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -36,6 +37,10 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddControllers()
+        .AddJsonOptions(options => {
+            options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+        });
 
 // Add Database Service
 

@@ -24,12 +24,18 @@
     <Folder Include="Features\Menus\Commands\UpdateMenu\" />
     <Folder Include="Features\Menus\Queries\" />
     <Folder Include="Features\Menu_Product\Commands\" />
+    <Folder Include="Features\Routes\Commands\" />
     <Folder Include="Features\Orders\Commands\DeleteOrder\" />
     <Folder Include="Features\Orders\Queries\" />
     <Folder Include="Features\Orders\Commands\UpdateOrder\" />
+    <Folder Include="Features\Stations\Commands\CreateStation\" />
+    <Folder Include="Features\Stations\Commands\DeleteStation\" />
+    <Folder Include="Features\Stations\Commands\UpdateStation\" />
     <Folder Include="Features\Stores\Commands\CreateStores\" />
     <Folder Include="Features\Stores\Commands\DeleteStore\" />
     <Folder Include="Features\Stores\Commands\UpdateStore\" />
+    <Folder Include="Features\Trips\Commands\DeleteTrip\" />
+    <Folder Include="Features\Trips\Commands\UpdateTrip\" />
   </ItemGroup>
 
 </Project>
