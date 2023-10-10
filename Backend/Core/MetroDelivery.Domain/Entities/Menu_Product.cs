@@ -10,6 +10,8 @@ namespace MetroDelivery.Domain.Entities
         [ForeignKey("Product")]
         public Guid ProductID {  get; set; }
 
+        public double? PriceOfProductBelongToTimeService { get; set; }
+
         // relationship
         public virtual Menu Menu { get; set; }
         public virtual Product Products { get; set; }

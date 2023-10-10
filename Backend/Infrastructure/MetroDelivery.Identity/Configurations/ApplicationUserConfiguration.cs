@@ -46,7 +46,44 @@ namespace MetroDelivery.Identity.Configurations
                     NormalizedUserName = "STAFF@GMAIL.COM",
                     PasswordHash = hasher.HashPassword(null, "P@ssw0rd1"),
                     EmailConfirmed = true
-                });
+                },
+                new ApplicationUser
+                {
+                    Id = "2E089AF6-3437-4DD6-9956-BB792E783AFB",
+                    Email = "nguyenthanhn537@gmail.com",
+                    NormalizedEmail = "NGUYENTHANHN537@GMAIL.COM",
+                    FirstName = "Nhân",
+                    LastName = "Nguyễn",
+                    UserName = "nguyenthanhn537@gmail.com",
+                    NormalizedUserName = "NGUYENTHANHN537@GMAIL.COM",
+                    PasswordHash = hasher.HashPassword(null, "P@ssw0rd1"),
+                    EmailConfirmed = true
+                },
+                new ApplicationUser
+                {
+                    Id = "1F11BA64-2870-43F7-BB03-867112867F25",
+                    Email = "thaivin537@gmail.com",
+                    NormalizedEmail = "THAIVIN537@GMAIL.COM",
+                    FirstName = "Thái",
+                    LastName = "Vĩ",
+                    UserName = "thaivin537@gmail.com",
+                    NormalizedUserName = "THAIVIN537@GMAIL.COM",
+                    PasswordHash = hasher.HashPassword(null, "P@ssw0rd1"),
+                    EmailConfirmed = true
+                },
+                new ApplicationUser
+                {
+                    Id = "C4EE82A1-DB88-49A6-81A8-4B9521FF01F9",
+                    Email = "anhjenda537@gmail.com",
+                    NormalizedEmail = "ANHJENDA537@GMAIL.COM",
+                    FirstName = "Anh",
+                    LastName = "Da Đen",
+                    UserName = "anhjenda537@gmail.com",
+                    NormalizedUserName = "ANHJENDA537@GMAIL.COM",
+                    PasswordHash = hasher.HashPassword(null, "P@ssw0rd1"),
+                    EmailConfirmed = true
+                }
+            );
         }
     }
 }

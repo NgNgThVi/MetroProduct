@@ -10,6 +10,8 @@ namespace MetroDelivery.Domain.Entities
         [ForeignKey("PaymentMethod")]
         public Guid PaymentMethodID { get; set; }
         public double? Balance { get; set; }
+        public double? Deposit { get; set; }
+        public DateTime? CreateTimeOfWithdraw { get; set; }
 
         // relationship
         public virtual Customer Customer { get; set; }

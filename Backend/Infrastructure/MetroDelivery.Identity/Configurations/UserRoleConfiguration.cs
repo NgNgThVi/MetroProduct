@@ -26,7 +26,28 @@ namespace MetroDelivery.Identity.Configurations
                     // admin
                     RoleId = "AF5EB4AC-219A-4BC1-99FE-8C23876536EA",
                     UserId = "2198E4CD-3305-49C5-B78A-0B54DD76898F"
-                });
+                }
+
+                ,
+                new IdentityUserRole<string>
+                {
+                    // anh da den
+                    RoleId = "CF531396-C1CD-427B-9D17-0383B7675394",
+                    UserId = "C4EE82A1-DB88-49A6-81A8-4B9521FF01F9"
+                },
+                new IdentityUserRole<string>
+                {
+                    // nguyễn thành nhân
+                    RoleId = "CF531396-C1CD-427B-9D17-0383B7675394",
+                    UserId = "2E089AF6-3437-4DD6-9956-BB792E783AFB"
+                },
+                new IdentityUserRole<string>
+                {
+                    // trần ngọc thái vĩ
+                    RoleId = "CF531396-C1CD-427B-9D17-0383B7675394",
+                    UserId = "1F11BA64-2870-43F7-BB03-867112867F25"
+                }
+            );
         }
     }
 }

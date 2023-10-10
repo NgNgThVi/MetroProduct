@@ -63,7 +63,7 @@ namespace MetroDelivery.Application.Features.Customers.Commands.CreateCustomer
             {
                 Phone = request.Phone,
                 Address = request.Address,
-                Birthday = request.Birthday,
+                /*Birthday = request.Birthday,*/
                 ApplicationUserId = user.Id,
             };
 
