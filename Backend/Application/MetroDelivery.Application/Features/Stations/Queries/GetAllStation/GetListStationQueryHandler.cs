@@ -17,7 +17,7 @@ namespace MetroDelivery.Application.Features.Stations.Queries.GetAllStation
         }
         public async Task<List<StationResponse>> Handle(GetListStationQuery request, CancellationToken cancellationToken)
         {
-            var station = await _metroPickUpDbContext.Stations.ToListAsync();
+            var station = await _metroPickUpDbContext.Stations.Where(s => s.IsDelete == false).ToListAsync();
             if(!station.Any()) {
                 throw new NotFoundException("Not found station!!!");
             }

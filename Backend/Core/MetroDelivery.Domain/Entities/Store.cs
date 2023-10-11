@@ -6,8 +6,8 @@ namespace MetroDelivery.Domain.Entities
     {
         public string StoreName { get; set; }
         public string StoreLocation { get; set; }
-        public TimeSpan StoreOpenTime { get; set; }
-        public TimeSpan StoreCloseTime { get; set;}
+        public TimeSpan? StoreOpenTime { get; set; }
+        public TimeSpan? StoreCloseTime { get; set;}
 
         // relationship
         public IList<Order> Orders { get; private set; }

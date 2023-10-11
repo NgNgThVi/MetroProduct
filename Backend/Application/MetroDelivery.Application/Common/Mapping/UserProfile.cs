@@ -1,6 +1,9 @@
 ﻿using AutoMapper;
+using MetroDelivery.Application.Features.Categorys.Queries;
 using MetroDelivery.Application.Features.Customers;
 using MetroDelivery.Application.Features.Menu_Product;
+using MetroDelivery.Application.Features.Products.Queries;
+using MetroDelivery.Application.Features.Routes.Queries;
 using MetroDelivery.Application.Features.Stations;
 using MetroDelivery.Application.Features.Stations.Queries;
 using MetroDelivery.Application.Features.Stores;
@@ -41,6 +44,18 @@ namespace MetroDelivery.Application.Common.MappingProfiles
             //Trip
             CreateMap<TripDto, Trip>().ReverseMap();
             CreateMap<Trip, TripDto>().ReverseMap();
+
+            //Route
+            CreateMap<RouteResponse, Route>().ReverseMap();
+            CreateMap<Route, RouteResponse>().ReverseMap();
+
+            //Product
+            CreateMap<ProductResponse, Product>().ReverseMap();
+            CreateMap<Product, ProductResponse>().ReverseMap();
+
+            //Category
+            CreateMap<CategoryResponse, Category>().ReverseMap();
+            CreateMap<Category, CategoryResponse>().ReverseMap();
         }
 
     }

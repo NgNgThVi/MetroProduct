@@ -14,7 +14,7 @@ namespace MetroDelivery.Application.Features.Trips.Commands.CreateTrip
             RuleFor(p => p.TripName)
                 .NotEmpty().WithMessage("{TripName} is required")
                 .NotNull()
-                .MaximumLength(100).WithMessage("{UserName} must be fewer than 100 characters");
+                .MaximumLength(100).WithMessage("{TripName} must be fewer than 100 characters");
 
             RuleFor(p => p.TripStartTime)
                 .NotEmpty().WithMessage("{TripStartTime} is required")
