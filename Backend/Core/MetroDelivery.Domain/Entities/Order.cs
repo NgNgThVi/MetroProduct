@@ -12,7 +12,7 @@ namespace MetroDelivery.Domain.Entities
         [ForeignKey("Store")]
         public Guid StoreID { get; set; }
 
-        public double TotalPrice { get; set; }
+        public double? TotalPrice { get; set; }
         public string? OrderTokenQR { get; set; }
 
         //relationship

@@ -1,8 +1,14 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using FluentValidation;
+using MediatR;
 using MetroDelivery.Application.Common.CRUDResponse;
+using MetroDelivery.Application.Common.Exceptions;
+using MetroDelivery.Application.Common.Interface;
 using MetroDelivery.Application.Contant;
 using MetroDelivery.Application.Contracts.Persistance;
+using MetroDelivery.Application.Features.Products.Commands.CreateProducts;
 using MetroDelivery.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,33 +19,59 @@ namespace MetroDelivery.Application.Features.Products.Commands.UpdateProducts
 {
     public class UpdateProductCommand : IRequest<MetroPickUpResponse>
     {
-        public Product Product { get; set; } = null!;
+        public Guid ProductId {  get; set; }
+
+        public Guid CategoryID { get; set; }
+        public string ProductName { get; set; }
+        public string? ProductDescription { get; set; }
+        public string? Image { get; set; }
+        public double? Price { get; set; }
     }
 
     public class UpdateProductCommandHandler : IRequestHandler<UpdateProductCommand, MetroPickUpResponse>
     {
-        private IProductRepository _productRepository;
-
-        public UpdateProductCommandHandler(IProductRepository productRepository)
+        private readonly IMetroPickUpDbContext _metroPickUpDbContext;
+        private readonly IMapper _mapper;
+        public UpdateProductCommandHandler(IMetroPickUpDbContext metroPickUpDbContext, IMapper mapper)
         {
-            _productRepository = productRepository;
+            _metroPickUpDbContext = metroPickUpDbContext;
+            _mapper = mapper;
         }
 
         public async Task<MetroPickUpResponse> Handle(UpdateProductCommand request, CancellationToken cancellationToken)
         {
-            try {
-                await _productRepository.UpdateAsync(request.Product);
-                return new MetroPickUpResponse
-                {
-                    Message = Extension.Ok
-                };
+            var productExistId = await _metroPickUpDbContext.Products.Where(p => p.Id == request.ProductId).SingleOrDefaultAsync();
+            if (productExistId == null) {
+                throw new NotFoundException($"ProductId {request.ProductId} không tồn tại");
             }
-            catch (Exception ex) {
-                return new MetroPickUpResponse
-                {
-                    Message = ex.Message
-                };
+            if (productExistId.IsDelete == true) {
+                throw new NotFoundException($"ProductId {request.ProductId} đã bị xóa khỏi danh sách Product");
             }
+
+            var checkCategory = await _metroPickUpDbContext.Categories.Where(c => c.Id == request.CategoryID && !c.IsDelete).SingleOrDefaultAsync();
+            if (checkCategory == null) {
+                throw new NotFoundException($"CategoryId này {request.CategoryID} không tồn tại trong danh sách category");
+            }
+
+            var validator = new UpdateProductCommandValidator();
+            var validatorResult = await validator.ValidateAsync(request);
+            if (validatorResult.Errors.Any()) {
+                throw new BadRequestException("Invalid Create user", validatorResult);
+            }
+
+            productExistId.CategoryID = checkCategory.Id;
+            productExistId.ProductName = request.ProductName;
+            productExistId.ProductDescription = request.ProductDescription;
+            productExistId.Image = request.Image;
+            productExistId.Price = request.Price;
+
+            _metroPickUpDbContext.Products.Update(productExistId);
+            await _metroPickUpDbContext.SaveChangesAsync();
+
+            return new MetroPickUpResponse
+            {
+                Message = "Update product successfully"
+            };
         }
     }
 }

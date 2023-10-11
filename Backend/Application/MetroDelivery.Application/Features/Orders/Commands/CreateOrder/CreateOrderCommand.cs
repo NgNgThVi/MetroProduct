@@ -11,21 +11,18 @@ namespace MetroDelivery.Application.Features.Orders.Commands.CreateOrder
     public class CreateOrderCommand : IRequest<MetroPickUpResponse>
     {
         //Customer
-        public string CustomerId { get; set; } = null!;
+        public Guid CustomerId { get; set; }
 
         // Trip
-        public string TripId { get; set; } = null!;
+        public Guid TripId { get; set; }
 
         //Store
-        public string StoreId { get; set; } = null!;
+        public Guid StoreId { get; set; }
 
-        public List<ProductAndQuantity>? ProductAndQuantity { get; set; }
+        
         // order
         public string? OrderTokenQR { get; set; }
+        public double? TotalPrice { get; set; }
     }
-    public class ProductAndQuantity
-    {
-        public string ProductId { get; set; } = null!;
-        public int Quantity { get; set; } = 0;
-    }
+    
 }
