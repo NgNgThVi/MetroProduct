@@ -1,11 +1,14 @@
 ﻿using AutoMapper;
 using MetroDelivery.Application.Features.Categorys.Queries;
 using MetroDelivery.Application.Features.Customers;
-using MetroDelivery.Application.Features.Menu_Product;
+using MetroDelivery.Application.Features.Menu_Products;
+using MetroDelivery.Application.Features.Menus.Queries;
+using MetroDelivery.Application.Features.OrderDetails.Queries;
 using MetroDelivery.Application.Features.Products.Queries;
 using MetroDelivery.Application.Features.Routes.Queries;
 using MetroDelivery.Application.Features.Stations;
 using MetroDelivery.Application.Features.Stations.Queries;
+using MetroDelivery.Application.Features.Store_Menus.Queries;
 using MetroDelivery.Application.Features.Stores;
 using MetroDelivery.Application.Features.Trips.Queries;
 using MetroDelivery.Domain.Entities;
@@ -26,8 +29,8 @@ namespace MetroDelivery.Application.Common.MappingProfiles
             CreateMap<Store, StoreDto>().ReverseMap();
 
             //Menu_Product
-            CreateMap<Menu_ProductDto, Menu_Product>().ReverseMap();
-            CreateMap<Menu_Product, Menu_ProductDto>().ReverseMap();
+            CreateMap<MenuProductResponse, Menu_Product>().ReverseMap();
+            CreateMap<Menu_Product, MenuProductResponse>().ReverseMap();
 
             //Station
             CreateMap<StationData, Station>().ReverseMap();
@@ -56,6 +59,23 @@ namespace MetroDelivery.Application.Common.MappingProfiles
             //Category
             CreateMap<CategoryResponse, Category>().ReverseMap();
             CreateMap<Category, CategoryResponse>().ReverseMap();
+
+            //Order
+            CreateMap<OrderData, Order>().ReverseMap();
+            CreateMap<Order, OrderData>().ReverseMap();
+
+            //Product
+            CreateMap<ProductData, Product>().ReverseMap();
+            CreateMap<Product, ProductData>().ReverseMap();
+
+            //Menu
+            CreateMap<MenuResponse, Menu>().ReverseMap();
+            CreateMap<Menu, MenuResponse>().ReverseMap();
+
+            //Store_Menu
+            CreateMap<MenuData, Menu>().ReverseMap();
+            CreateMap<Menu, MenuData>().ReverseMap();
+
         }
 
     }
