@@ -10,8 +10,8 @@ namespace MetroDelivery.Application.Features.Customers.Commands.UpdateCustomer
 {
     public class UpdateCustomerCommandValidator : AbstractValidator<UpdateCustomerCommand>
     {
-        private ICustomerRepository _customerRepository;
-        public UpdateCustomerCommandValidator(ICustomerRepository customerRepository)
+        
+        public UpdateCustomerCommandValidator()
         {
 
             RuleFor(p => p.FirstName)
@@ -36,7 +36,7 @@ namespace MetroDelivery.Application.Features.Customers.Commands.UpdateCustomer
                 .MaximumLength(100).WithMessage("Address must be fewer than 100 chrarcters");
 
 
-            _customerRepository = customerRepository;
+            
         }
     }
 }

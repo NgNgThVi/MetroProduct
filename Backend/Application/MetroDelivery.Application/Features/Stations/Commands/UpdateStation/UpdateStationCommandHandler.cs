@@ -33,7 +33,7 @@ namespace MetroDelivery.Application.Features.Stations.Commands.UpdateStation
             
 
             _metroPickUpDbContext.Stations.Update(stationExist);
-            await _metroPickUpDbContext.SaveChangesAsync();
+            await _metroPickUpDbContext.SaveChangesAsync(cancellationToken);
 
             return new MetroPickUpResponse
             {

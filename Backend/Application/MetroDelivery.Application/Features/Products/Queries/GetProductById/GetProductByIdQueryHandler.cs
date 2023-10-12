@@ -39,7 +39,7 @@ namespace MetroDelivery.Application.Features.Products.Queries.GetProductById
                                                             Image = products.Image,
                                                             Price = products.Price,
                                                             CategoryID = products.CategoryID,
-                                                            Category = category,
+                                                            CategoryData = category,
                                                         }
                                                     )
                                                     .SingleOrDefaultAsync();

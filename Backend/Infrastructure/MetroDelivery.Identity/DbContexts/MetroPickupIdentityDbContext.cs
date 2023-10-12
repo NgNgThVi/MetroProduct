@@ -17,8 +17,8 @@ namespace MetroDelivery.Identity.DbContexts
 {
     public class MetroPickupIdentityDbContext : IdentityDbContext<ApplicationUser>, IMetroPickUpDbContext
     {
-        private readonly IUserService _userService;
-        private readonly IMediator _mediator;
+        /*private readonly IUserService _userService;
+        private readonly IMediator _mediator;*/
         private readonly AuditableEntitySaveChangesInterceptor _auditableEntitySaveChangesInterceptor;
 
         public DbSet<Category> Categories { get; set; }
@@ -65,11 +65,22 @@ namespace MetroDelivery.Identity.DbContexts
             optionsBuilder.AddInterceptors(_auditableEntitySaveChangesInterceptor);
         }
 
-        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        /*public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             await _mediator.DispatchDomainEvents(this);
 
             return await base.SaveChangesAsync(cancellationToken);
+        }*/
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            foreach (var entry in base.ChangeTracker.Entries<BaseAuditableEntity>()
+                .Where(q => q.State == EntityState.Added || q.State == EntityState.Modified)) {
+                entry.Entity.LastModified = DateTime.Now;
+                if (entry.State == EntityState.Added) {
+                    entry.Entity.Created = DateTime.Now;
+                }
+            }
+            return base.SaveChangesAsync(cancellationToken);
         }
 
         public int SaveChanges(CancellationToken cancellationToken = default)

@@ -1,24 +1,26 @@
 ﻿using AutoMapper;
 using MediatR;
 using MetroDelivery.Application.Common.Exceptions;
+using MetroDelivery.Application.Common.Interface;
 using MetroDelivery.Application.Contracts.Persistance;
 using MetroDelivery.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace MetroDelivery.Application.Features.Stores.Queries.GetStoreById
 {
     public class GetStoreByIdQueriesHandler : IRequestHandler<GetStoreByIdQueries, StoreDto>
     {
-        private readonly IStoreRepository _storeReposity;
+        private readonly IMetroPickUpDbContext _metroPickUpDbContext;
         private readonly IMapper _mapper;
-        public GetStoreByIdQueriesHandler(IStoreRepository storeRepository, IMapper mapper)
+        public GetStoreByIdQueriesHandler(IMetroPickUpDbContext metroPickUpDbContext, IMapper mapper)
         {
-            this._storeReposity = storeRepository;
-            this._mapper = mapper;
+            _metroPickUpDbContext = metroPickUpDbContext;
+            _mapper = mapper;
         }
 
         public async Task<StoreDto> Handle(GetStoreByIdQueries request, CancellationToken cancellationToken)
         {
-            var storeId = await _storeReposity.GetByIdAsync(request.Id);
+            var storeId = await _metroPickUpDbContext.Stores.Where(s => s.Id == request.Id).SingleOrDefaultAsync();
             if (storeId == null) {
                 throw new NotFoundException(nameof(Store), request.Id);
             }
