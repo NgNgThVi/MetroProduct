@@ -27,9 +27,9 @@ namespace MetroDelivery.Application.Features.Store_Menus.Queries.GetAllStoreMenu
 
         public async Task<List<StoreMenuResponse>> Handle(GetListStoreMenuQuery request, CancellationToken cancellationToken)
         {
-            var listResult = await _metroPickUpDbContext.Store_Menus.Where(s => !s.IsDelete)
+            var listResult = await _metroPickUpDbContext.Store_Menu.Where(s => !s.IsDelete)
                                                                 .Join(
-                                                                    _metroPickUpDbContext.Stores,
+                                                                    _metroPickUpDbContext.Store,
                                                                     storeMenu => storeMenu.StoreId,
                                                                     store => store.Id,
                                                                     (storeMenu, store) => new
@@ -39,7 +39,7 @@ namespace MetroDelivery.Application.Features.Store_Menus.Queries.GetAllStoreMenu
                                                                     }
                                                                 )
                                                                 .Join(
-                                                                    _metroPickUpDbContext.Menus,
+                                                                    _metroPickUpDbContext.Menu,
                                                                     combined => combined.StoreMenus.MenuId,
                                                                     menu => menu.Id,
                                                                     (combined, menu) => new StoreMenuResponse

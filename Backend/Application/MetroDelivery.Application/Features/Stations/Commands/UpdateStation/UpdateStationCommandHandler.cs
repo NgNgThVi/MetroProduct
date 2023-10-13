@@ -21,7 +21,7 @@ namespace MetroDelivery.Application.Features.Stations.Commands.UpdateStation
         public async Task<MetroPickUpResponse> Handle(UpdateStationCommand request, CancellationToken cancellationToken)
         {
             // không được sủa StoreID trong station, nếu muốn sửa thì phải xóa sân ga và create sân ga mới có storeId
-            var stationExist = await _metroPickUpDbContext.Stations.Where(s => s.IsDelete == false && s.Id == request.Id).SingleOrDefaultAsync();
+            var stationExist = await _metroPickUpDbContext.Station.Where(s => s.IsDelete == false && s.Id == request.Id).SingleOrDefaultAsync();
             if(stationExist == null) {
                 throw new NotFoundException("StationId này không tồn tại hoặc đã bị xóa");
             }
@@ -32,7 +32,7 @@ namespace MetroDelivery.Application.Features.Stations.Commands.UpdateStation
             stationExist.StationName = request.StationName;
             
 
-            _metroPickUpDbContext.Stations.Update(stationExist);
+            _metroPickUpDbContext.Station.Update(stationExist);
             await _metroPickUpDbContext.SaveChangesAsync(cancellationToken);
 
             return new MetroPickUpResponse

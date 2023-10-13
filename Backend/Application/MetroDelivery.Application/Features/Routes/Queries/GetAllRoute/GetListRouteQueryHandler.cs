@@ -18,7 +18,7 @@ namespace MetroDelivery.Application.Features.Routes.Queries.GetAllRoute
 
         public async Task<List<RouteResponse>> Handle(GetListRouteQuery request, CancellationToken cancellationToken)
         {
-            var routeList = await _metroPickUpDbContext.Routes.Where(r => r.IsDelete == false).ToListAsync();
+            var routeList = await _metroPickUpDbContext.Route.Where(r => r.IsDelete == false).ToListAsync();
             if(!routeList.Any()) {
                 throw new NotFoundException("Không có route nào tồn tại trong Database");
             }

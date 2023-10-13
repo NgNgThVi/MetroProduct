@@ -22,9 +22,9 @@ namespace MetroDelivery.Application.Features.Menu_Products.Queries.GetListMenu_P
         }
         public async Task<List<MenuProductResponse>> Handle(GetAllMenu_Products request, CancellationToken cancellationToken)
         {
-            var menuProductList = await _metroPickUpDbContext.Menu_Products.Where(s => !s.IsDelete)
+            var menuProductList = await _metroPickUpDbContext.Menu_Product.Where(s => !s.IsDelete)
                                                                 .Join(
-                                                                    _metroPickUpDbContext.Menus,
+                                                                    _metroPickUpDbContext.Menu,
                                                                     menuProduct => menuProduct.MenuID,
                                                                     menu => menu.Id,
                                                                     (menuProduct, menu) => new
@@ -34,7 +34,7 @@ namespace MetroDelivery.Application.Features.Menu_Products.Queries.GetListMenu_P
                                                                     }
                                                                 )
                                                                 .Join(
-                                                                    _metroPickUpDbContext.Products,
+                                                                    _metroPickUpDbContext.Product,
                                                                     combined => combined.MenuProducts.ProductID,
                                                                     product => product.Id,
                                                                     (combined, product) => new MenuProductResponse
@@ -42,6 +42,7 @@ namespace MetroDelivery.Application.Features.Menu_Products.Queries.GetListMenu_P
                                                                         Id = combined.MenuProducts.Id,
                                                                         MenuID = combined.MenuProducts.MenuID,
                                                                         ProductID = combined.MenuProducts.ProductID,
+                                                                        PriceOfProductBelongToTimeService = combined.MenuProducts.PriceOfProductBelongToTimeService,
                                                                         Created = combined.MenuProducts.Created,
 
                                                                         MenuData = _mapper.Map<MenuResponse>(combined.Menus),

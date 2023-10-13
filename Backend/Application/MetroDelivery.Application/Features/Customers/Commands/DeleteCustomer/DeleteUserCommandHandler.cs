@@ -23,7 +23,7 @@ namespace MetroDelivery.Application.Features.Customers.Commands.DeleteCustomer
         {
             // retrieve domain entity object
             /*var customerDelete = await _customerRepository.CustomerIdMusBeExist(request.Id);*/
-            var customerDelete = await _metroPickUpDbContext.Customers.Where(c => c.Id == request.Id).SingleOrDefaultAsync();
+            var customerDelete = await _metroPickUpDbContext.Customer.Where(c => c.Id == request.Id).SingleOrDefaultAsync();
             if (customerDelete == null) {
                 throw new NotFoundException(nameof(customerDelete.ApplicationUser.Email), request.Id);
             }
@@ -35,7 +35,7 @@ namespace MetroDelivery.Application.Features.Customers.Commands.DeleteCustomer
             // rmove database
            /* await _customerRepository.DeleteAsync(customerDelete);*/
             customerDelete.IsDelete = true;
-            _metroPickUpDbContext.Customers.Update(customerDelete);
+            _metroPickUpDbContext.Customer.Update(customerDelete);
             await _metroPickUpDbContext.SaveChangesAsync();
 
             // return

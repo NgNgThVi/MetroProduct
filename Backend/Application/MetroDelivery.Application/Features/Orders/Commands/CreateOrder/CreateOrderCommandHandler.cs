@@ -45,7 +45,7 @@ namespace MetroDelivery.Application.Features.Orders.Commands.CreateOrder
                 StoreID = request.StoreId
             };
 
-            _metroPickUpDbContext.Orders.Add(order);
+            _metroPickUpDbContext.Order.Add(order);
             await _metroPickUpDbContext.SaveChangesAsync();
 
             return order.Id;

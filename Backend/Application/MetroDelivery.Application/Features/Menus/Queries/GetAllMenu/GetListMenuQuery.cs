@@ -26,7 +26,7 @@ namespace MetroDelivery.Application.Features.Menus.Queries.GetAllMenu
 
         public async Task<List<MenuResponse>> Handle(GetListMenuQuery request, CancellationToken cancellationToken)
         {
-            var listMenu = await _metroPickUpDbContext.Menus.Where(m => !m.IsDelete).ToListAsync();
+            var listMenu = await _metroPickUpDbContext.Menu.Where(m => !m.IsDelete).ToListAsync();
 
             var data = _mapper.Map<List<MenuResponse>>(listMenu);
 

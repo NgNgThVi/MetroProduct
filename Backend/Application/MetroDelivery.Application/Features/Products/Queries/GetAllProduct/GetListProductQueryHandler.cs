@@ -23,7 +23,7 @@ namespace MetroDelivery.Application.Features.Products.Queries.GetAllProduct
                 throw new NotFoundException("Không có bất kì product nào");
             }*/
 
-            var product = await _metroPickUpDbContext.Products.Where(p => !p.IsDelete)
+            var product = await _metroPickUpDbContext.Product.Where(p => !p.IsDelete)
                                                     .Join(
                                                         _metroPickUpDbContext.Categories,
                                                         products => products.CategoryID,

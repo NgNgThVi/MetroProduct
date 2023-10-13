@@ -20,12 +20,12 @@ namespace MetroDelivery.Application.Features.OrderDetails.Commands.CreateOrderDe
 
         public async Task<Guid> Handle(CreateOrderDetailCommand request, CancellationToken cancellationToken)
         {
-            var productExist = await _metroPickUpDbContext.Products.Where(p => p.Id == request.ProductID && !p.IsDelete).SingleOrDefaultAsync();
+            var productExist = await _metroPickUpDbContext.Product.Where(p => p.Id == request.ProductID && !p.IsDelete).SingleOrDefaultAsync();
             if(productExist == null) {
                 throw new NotFoundException("ProductId không tồn tại");
             }
 
-            var orderExist = await _metroPickUpDbContext.Orders.Where(p => p.Id == request.OrderID && !p.IsDelete).SingleOrDefaultAsync();
+            var orderExist = await _metroPickUpDbContext.Order.Where(p => p.Id == request.OrderID && !p.IsDelete).SingleOrDefaultAsync();
             if (orderExist == null) {
                 throw new NotFoundException("OrderId không tồn tại");
             }
@@ -45,7 +45,7 @@ namespace MetroDelivery.Application.Features.OrderDetails.Commands.CreateOrderDe
                 Price = request.Price,
             };
 
-            _metroPickUpDbContext.OrderDetails.Add(orderDetail);
+            _metroPickUpDbContext.OrderDetail.Add(orderDetail);
             await _metroPickUpDbContext.SaveChangesAsync();
             return orderDetail.Id;
         }

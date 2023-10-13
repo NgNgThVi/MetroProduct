@@ -11,21 +11,21 @@ namespace MetroDelivery.Application.Common.Interface
     public interface IMetroPickUpDbContext
     {
         public DbSet<Category> Categories { get; set; }
-        public DbSet<Menu> Menus { get; set; }
-        public DbSet<Menu_Product> Menu_Products { get; set; }
-        public DbSet<Order> Orders { get; set; }
-        public DbSet<OrderDetail> OrderDetails { get; set; }
-        public DbSet<PaymentMethod> PaymentMethods { get; set; }
-        public DbSet<Product> Products { get; set; }
-        public DbSet<Route> Routes { get; set; }
-        public DbSet<Route_Station> Route_Stations { get; set; }
-        public DbSet<Station> Stations { get; set; }
-        public DbSet<Store> Stores { get; set; }
-        public DbSet<Store_Menu> Store_Menus { get; set; }
-        public DbSet<Trip> Trips { get; set; }
-        public DbSet<Trip_Route> Trip_Routes { get; set; }
-        public DbSet<Customer> Customers { get; set; }
-        public DbSet<WithDraw> WithDraws { get; set; }
+        public DbSet<Menu> Menu { get; set; }
+        public DbSet<Menu_Product> Menu_Product { get; set; }
+        public DbSet<Order> Order { get; set; }
+        public DbSet<OrderDetail> OrderDetail { get; set; }
+        public DbSet<PaymentMethod> PaymentMethod { get; set; }
+        public DbSet<Product> Product { get; set; }
+        public DbSet<Route> Route { get; set; }
+        public DbSet<Route_Station> Route_Station { get; set; }
+        public DbSet<Station> Station { get; set; }
+        public DbSet<Store> Store { get; set; }
+        public DbSet<Store_Menu> Store_Menu { get; set; }
+        public DbSet<Trip> Trip { get; set; }
+        public DbSet<Station_Trip> Station_Trip { get; set; }
+        public DbSet<Customer> Customer { get; set; }
+        public DbSet<WithDraw> WithDraw { get; set; }
 
         public Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
         public int SaveChanges(CancellationToken cancellationToken = default);

@@ -52,7 +52,7 @@ namespace MetroDelivery.Application.Features.Customers.Commands.UpdateCustomer
         {
             // validate incoming data
             /*var customer = await _customerRepository.CustomerIdMusBeExist(request.CustomerId);*/
-            var customer = await _metroPickUpDbContext.Customers.Where(c => c.Id == request.CustomerId).SingleOrDefaultAsync();
+            var customer = await _metroPickUpDbContext.Customer.Where(c => c.Id == request.CustomerId).SingleOrDefaultAsync();
             if (customer == null) {
                 throw new NotFoundException("Customer does not exist !");
             }
@@ -78,7 +78,7 @@ namespace MetroDelivery.Application.Features.Customers.Commands.UpdateCustomer
 
             // add database
             /*await _customerRepository.UpdateAsync(customer);*/
-            _metroPickUpDbContext.Customers.Update(customer);
+            _metroPickUpDbContext.Customer.Update(customer);
             await _metroPickUpDbContext.SaveChangesAsync();
 
 

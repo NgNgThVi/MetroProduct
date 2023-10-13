@@ -42,7 +42,7 @@ namespace MetroDelivery.Application.Features.Products.Commands.CreateProducts
                 Price = request.Price,
             };
 
-            _metroPickUpDbContext.Products.Add(product);
+            _metroPickUpDbContext.Product.Add(product);
             await _metroPickUpDbContext.SaveChangesAsync();
 
             return product.Id;

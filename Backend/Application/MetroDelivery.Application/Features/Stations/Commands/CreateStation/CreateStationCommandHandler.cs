@@ -20,7 +20,7 @@ namespace MetroDelivery.Application.Features.Stations.Commands.CreateStation
 
         public async Task<Guid> Handle(CreateStationCommand request, CancellationToken cancellationToken)
         {
-            var stationExistStore = await _metroPickUpDbContext.Stations.Where(s => s.StoreID == request.StoreID && s.IsDelete == false).SingleOrDefaultAsync();
+            var stationExistStore = await _metroPickUpDbContext.Station.Where(s => s.StoreID == request.StoreID && s.IsDelete == false).SingleOrDefaultAsync();
 
             if (stationExistStore != null) {
                 throw new NotFoundException($"Cửa hàng rồi đã tồn tại ở sân ga {stationExistStore.Id} rồi!!!!");
@@ -32,7 +32,7 @@ namespace MetroDelivery.Application.Features.Stations.Commands.CreateStation
                 StationName = request.StationName,
             };
 
-            _metroPickUpDbContext.Stations.Add(station);
+            _metroPickUpDbContext.Station.Add(station);
             await _metroPickUpDbContext.SaveChangesAsync();
 
             return station.StoreID;

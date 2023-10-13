@@ -11,5 +11,6 @@ namespace MetroDelivery.Application.Features.Routes.Queries
         public Guid Id { get; set; }
         public string FromLocation { get; set; }
         public string ToLocation { get; set; }
+
     }
 }

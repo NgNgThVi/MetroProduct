@@ -17,9 +17,9 @@ namespace MetroDelivery.Application.Features.Orders.Queries.GetAllOrder
 
         public async Task<List<OrderResponse>> Handle(GetListOrderQuery request, CancellationToken cancellationToken)
         {
-            var orderList = await _metroPickUpDbContext.Orders.Where(o => !o.IsDelete)
+            var orderList = await _metroPickUpDbContext.Order.Where(o => !o.IsDelete)
                                                             .Join(
-                                                                _metroPickUpDbContext.Customers,
+                                                                _metroPickUpDbContext.Customer,
                                                                 orders => orders.CustomerID,
                                                                 customer => customer.Id,
                                                                 (orders, customer) => new
@@ -29,13 +29,13 @@ namespace MetroDelivery.Application.Features.Orders.Queries.GetAllOrder
                                                                 }
                                                             )
                                                             .Join(
-                                                                _metroPickUpDbContext.Trips,
+                                                                _metroPickUpDbContext.Trip,
                                                                 orderCustomer => orderCustomer.Orders.TripID,
                                                                 trip => trip.Id,
                                                                 (orderCutomer, trip) => new {OrderCustomer = orderCutomer, Trips = trip}
                                                             )
                                                             .Join(
-                                                                _metroPickUpDbContext.Stores,
+                                                                _metroPickUpDbContext.Store,
                                                                 orderCutomerTrip => orderCutomerTrip.OrderCustomer.Orders.StoreID,
                                                                 store => store.Id,
                                                                 (orderCutomerTrip, store) => new OrderResponse

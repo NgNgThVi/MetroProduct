@@ -8,7 +8,7 @@ namespace MetroDelivery.Domain.Entities
         public string ToLocation { get; set; }
 
         //relationship
-        public IList<Trip_Route> Trip_Routes { get; private set; }
+        public IList<Trip> Trip { get; private set; }
         public IList<Route_Station> Route_Stations { get; private set; }
 
     }
