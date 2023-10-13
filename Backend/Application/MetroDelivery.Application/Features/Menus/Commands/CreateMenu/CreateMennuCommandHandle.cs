@@ -24,7 +24,7 @@ namespace MetroDelivery.Application.Features.Menus.Commands.CreateMenu
             if (validatorResult.Errors.Any()) {
                 throw new BadRequestException("Invalid Create user", validatorResult);
             }
-            var checkMenuExist = await _metroPickUpDbContext.Menus.Where(m => m.StartTimeService == request.StartTimeService && m.EndTimeService == request.EndTimeService && !m.IsDelete).SingleOrDefaultAsync();
+            var checkMenuExist = await _metroPickUpDbContext.Menu.Where(m => m.StartTimeService == request.StartTimeService && m.EndTimeService == request.EndTimeService && !m.IsDelete).SingleOrDefaultAsync();
             if(checkMenuExist != null) {
                 throw new NotFoundException("Menu này đã tạo rồi");
             }
@@ -34,7 +34,7 @@ namespace MetroDelivery.Application.Features.Menus.Commands.CreateMenu
                 EndTimeService = request.EndTimeService,    
             };
 
-            _metroPickUpDbContext.Menus.Add(menu);
+            _metroPickUpDbContext.Menu.Add(menu);
             await _metroPickUpDbContext.SaveChangesAsync();
 
             return menu.Id;

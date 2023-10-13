@@ -139,7 +139,6 @@ namespace MetroDelivery.Identity
             services.AddScoped<IRouteRepository, RouteRepository>();
             services.AddScoped<IRouteStationRepository, RouteStationRepository>();
             services.AddScoped<IStationRepository, StationRepository>();
-            services.AddScoped<ITripRouteRepository, TripRouteRepository>();
             services.AddScoped<IStoreRepository, StoreRepository>();
             services.AddScoped<ITripRepository, TripRepository>();
             services.AddScoped<IWithDrawRepository, WithDrawRepository>();

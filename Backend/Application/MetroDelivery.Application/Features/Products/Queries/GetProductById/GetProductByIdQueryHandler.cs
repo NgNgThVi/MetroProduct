@@ -26,7 +26,7 @@ namespace MetroDelivery.Application.Features.Products.Queries.GetProductById
                 throw new NotFoundException($"{request.Id} đã bị xóa khỏi product");
             }*/
 
-            var product = await _metroPickUpDbContext.Products.Where(p => !p.IsDelete && p.Id == request.Id)
+            var product = await _metroPickUpDbContext.Product.Where(p => !p.IsDelete && p.Id == request.Id)
                                                     .Join(
                                                         _metroPickUpDbContext.Categories,
                                                         products => products.CategoryID,

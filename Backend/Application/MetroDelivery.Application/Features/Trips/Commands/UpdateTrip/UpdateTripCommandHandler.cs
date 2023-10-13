@@ -21,19 +21,27 @@ namespace MetroDelivery.Application.Features.Trips.Commands.UpdateTrip
 
         public async Task<MetroPickUpResponse> Handle(UpdateTripCommand request, CancellationToken cancellationToken)
         {
-            var tripId = await _metroPickUpDbContext.Trips.Where(t => t.Id == request.TripId).SingleOrDefaultAsync();
-            if(tripId == null) {
+            var tripId = await _metroPickUpDbContext.Trip.Where(t => t.Id == request.TripId).SingleOrDefaultAsync();
+            var routeId = await _metroPickUpDbContext.Route.Where(r => r.Id == request.RouteId).SingleOrDefaultAsync();
+            if (tripId == null) {
                 throw new NotFoundException("Not found trip");
             }
             if(tripId.IsDelete == true) {
                 throw new NotFoundException("Trip is delete!!");
             }
+            if (routeId == null) {
+                throw new NotFoundException("Not found route");
+            }
+            if (routeId.IsDelete == true) {
+                throw new NotFoundException("Route is delete!!");
+            }
 
             tripId.TripName = request.TripName;
             tripId.TripStartTime = request.TripStartTime;
             tripId.TripEndTime = request.TripEndTime;
+            tripId.RouteId = request.RouteId;
             
-            _metroPickUpDbContext.Trips.Update(tripId);
+            _metroPickUpDbContext.Trip.Update(tripId);
             await _metroPickUpDbContext.SaveChangesAsync();
 
             return new MetroPickUpResponse

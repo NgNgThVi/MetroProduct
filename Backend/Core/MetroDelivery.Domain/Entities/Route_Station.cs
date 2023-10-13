@@ -9,6 +9,9 @@ namespace MetroDelivery.Domain.Entities
         public Guid RouteID { get; set; }
         [ForeignKey("Station")]
         public Guid StationID {  get; set; }
+        public int? Index { get; set; }
+        public TimeSpan? Duration { get; set; }
+        public TimeSpan? StopTime { get; set; }
 
         //relationship
         public virtual Route Route { get; set; }

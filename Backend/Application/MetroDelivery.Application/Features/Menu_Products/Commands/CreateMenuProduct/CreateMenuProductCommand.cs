@@ -2,6 +2,7 @@
 using MediatR;
 using MetroDelivery.Application.Common.Exceptions;
 using MetroDelivery.Application.Common.Interface;
+using MetroDelivery.Application.Features.OrderDetails.Queries;
 using MetroDelivery.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -16,9 +17,15 @@ namespace MetroDelivery.Application.Features.Menu_Products.Commands.CreateMenuPr
     public class CreateMenuProductCommand : IRequest<Guid>
     {
         public Guid MenuID { get; set; }
-        public List<Guid> ProductID { get; init; }
+        /*public TimeSpan StartTimeService { get; set; }
+        public TimeSpan EndTimeService { get; set; }*/
 
-        /*public double? PriceOfProductBelongToTimeService { get; set; }*/
+        public List<ProductList> ProductData { get; init; }
+    }
+    public class ProductList
+    {
+        public Guid ProductID { get; init; }
+        public double? PriceOfProductBelongToTimeService { get; set; }
     }
 
     public class CreateMenuProductCommandHandler : IRequestHandler<CreateMenuProductCommand, Guid>
@@ -33,18 +40,23 @@ namespace MetroDelivery.Application.Features.Menu_Products.Commands.CreateMenuPr
 
         public async Task<Guid> Handle(CreateMenuProductCommand request, CancellationToken cancellationToken)
         {
-            var productExist = await _metroPickUpDbContext.Products.Where(p => request.ProductID.Contains(p.Id) && !p.IsDelete).ToListAsync();
-            if(productExist.Count() == 0) {
+            var productIs = request.ProductData.Select(s => s.ProductID).ToList();
+            var productExist = await _metroPickUpDbContext.Product.Where(p => productIs.Contains(p.Id) && !p.IsDelete).ToListAsync();
+            if (productExist.Count() == 0) {
                 throw new NotFoundException($"Không tìm thấy Product nào!");
             }
-            
-            foreach( var product in productExist) {
+
+            foreach ( var productData in request.ProductData) {
+                var product = productExist.FirstOrDefault(p => p.Id == productData.ProductID);
+                if(product == null) {
+                    throw new NotFoundException($"Không tìm thấy product {product} này!");
+                }
                 var entityMenuProduct = new Menu_Product();
                 entityMenuProduct.MenuID = request.MenuID;
                 entityMenuProduct.ProductID = product.Id;
-                entityMenuProduct.PriceOfProductBelongToTimeService = product.Price * 0.02; // dựa theo price của bảng product để thay đổi giá cả
+                entityMenuProduct.PriceOfProductBelongToTimeService = productData.PriceOfProductBelongToTimeService;
             
-                _metroPickUpDbContext.Menu_Products.Add(entityMenuProduct);
+                _metroPickUpDbContext.Menu_Product.Add(entityMenuProduct);
             }
 
             await _metroPickUpDbContext.SaveChangesAsync(); 

@@ -48,9 +48,9 @@ namespace MetroDelivery.Application.Features.OrderDetails.Queries.GetAllOrderDet
                                                                         ).ToListAsync();*/
 
             
-            var listOrderDetail = await _metroPickUpDbContext.OrderDetails.Where(o => !o.IsDelete)
+            var listOrderDetail = await _metroPickUpDbContext.OrderDetail.Where(o => !o.IsDelete)
                                                                         .Join(
-                                                                            _metroPickUpDbContext.Orders,
+                                                                            _metroPickUpDbContext.Order,
                                                                             orderDetail => orderDetail.OrderID,
                                                                             order => order.Id,
                                                                             (orderDetail, order) => new
@@ -60,7 +60,7 @@ namespace MetroDelivery.Application.Features.OrderDetails.Queries.GetAllOrderDet
                                                                             }
                                                                         )
                                                                         .Join(
-                                                                            _metroPickUpDbContext.Products,
+                                                                            _metroPickUpDbContext.Product,
                                                                             combined => combined.OrderDetails.ProductID,
                                                                             product => product.Id,
                                                                             (combined, product) => new OrderDetailResponse

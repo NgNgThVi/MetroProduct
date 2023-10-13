@@ -43,11 +43,10 @@ namespace MetroDelivery.Application.Common.MappingProfiles
             //Trip
             CreateMap<TripResponse, Trip>().ReverseMap();
             CreateMap<Trip, TripResponse>().ReverseMap();
-
-            //Trip
-            CreateMap<TripDto, Trip>().ReverseMap();
-            CreateMap<Trip, TripDto>().ReverseMap();
-
+            
+            //Route
+            CreateMap<RouteData, Route>().ReverseMap();
+            CreateMap<Route, RouteData>().ReverseMap();
             //Route
             CreateMap<RouteResponse, Route>().ReverseMap();
             CreateMap<Route, RouteResponse>().ReverseMap();

@@ -90,7 +90,7 @@ namespace MetroDelivery.Application.Features.Customers.Commands.CreateCustomer
 
             // add to database
             /*await _customerRepository.CreateAsync(customer);*/
-            _metroPickUpDbContext.Customers.Add(customer);
+            _metroPickUpDbContext.Customer.Add(customer);
             await _metroPickUpDbContext.SaveChangesAsync();
 
             // return record id

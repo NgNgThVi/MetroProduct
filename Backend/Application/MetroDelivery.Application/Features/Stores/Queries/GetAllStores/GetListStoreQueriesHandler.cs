@@ -17,7 +17,7 @@ namespace MetroDelivery.Application.Features.Stores.Queries.GetAllStores
         }
         public async Task<List<StoreDto>> Handle(GetListStoreQueries request, CancellationToken cancellationToken)
         {
-            var storeList = await _metroPickUpDbContext.Stores.Where(s => !s.IsDelete).ToListAsync();
+            var storeList = await _metroPickUpDbContext.Store.Where(s => !s.IsDelete).ToListAsync();
 
             var data = _mapper.Map<List<StoreDto>>(storeList);
 

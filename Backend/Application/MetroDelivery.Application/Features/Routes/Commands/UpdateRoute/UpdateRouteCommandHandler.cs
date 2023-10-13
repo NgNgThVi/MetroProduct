@@ -20,7 +20,7 @@ namespace MetroDelivery.Application.Features.Routes.Commands.UpdateRoute
 
         public async Task<MetroPickUpResponse> Handle(UpdateRouteCommand request, CancellationToken cancellationToken)
         {
-            var routeExist = await _metroPickUpDbContext.Routes.Where(r => r.Id == request.Id).SingleOrDefaultAsync();
+            var routeExist = await _metroPickUpDbContext.Route.Where(r => r.Id == request.Id).SingleOrDefaultAsync();
             if(routeExist == null) {
                 throw new NotFoundException("RouteId do not exsit!!!");
             }
@@ -31,7 +31,7 @@ namespace MetroDelivery.Application.Features.Routes.Commands.UpdateRoute
             routeExist.FromLocation = request.FromLocation;
             routeExist.ToLocation = request.ToLocation;
 
-            _metroPickUpDbContext.Routes.Update(routeExist);
+            _metroPickUpDbContext.Route.Update(routeExist);
             await _metroPickUpDbContext.SaveChangesAsync();
 
             return new MetroPickUpResponse { 

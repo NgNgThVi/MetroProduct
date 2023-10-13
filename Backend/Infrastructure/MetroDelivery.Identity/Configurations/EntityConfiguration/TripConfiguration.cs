@@ -8,6 +8,8 @@ namespace MetroDelivery.Identity.Configurations.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Trip> builder)
         {
+            builder.Property(p => p.Id);
+
             builder.HasData(
             new Trip
             {
@@ -15,7 +17,7 @@ namespace MetroDelivery.Identity.Configurations.EntityConfiguration
                 TripName = "Camping Trip",
                 TripStartTime = DateTime.Parse("7/15/2023 8:00 AM"),
                 TripEndTime = DateTime.Parse("7/17/2023 12:00 PM"),
-
+                RouteId = Guid.Parse("EA675490-EECD-4308-BB71-61B72A9C979F")
             },
             new Trip
             {
@@ -23,15 +25,15 @@ namespace MetroDelivery.Identity.Configurations.EntityConfiguration
                 TripName = "Road Trip",
                 TripStartTime = DateTime.Parse("5/20/2023 9:00 AM"),
                 TripEndTime = DateTime.Parse("5/25/2023 8:00 PM"),
-
+                RouteId = Guid.Parse("001A254C-02D4-40E7-A01F-95F393FB41EF")
             },
             new Trip
             {
                 Id = Guid.Parse("02859382-d88c-4e69-8c47-b8e0456677d5"),
                 TripName = "Cruise Vacation",
-                TripStartTime = DateTime.Parse("9/10/2023 3:00 PM"),
+                TripStartTime = DateTime.Parse("9/10/2023 9:00 AM"),
                 TripEndTime = DateTime.Parse("9/15/2023 1:00 PM"),
-
+                RouteId = Guid.Parse("A437B242-55FC-4146-A2B9-8C952B107E3A")
             },
             new Trip
             {
@@ -39,7 +41,7 @@ namespace MetroDelivery.Identity.Configurations.EntityConfiguration
                 TripName = "Hiking Adventure",
                 TripStartTime = DateTime.Parse("11/12/2023 9:00 AM"),
                 TripEndTime = DateTime.Parse("11/14/2023 5:00 PM"),
-
+                RouteId = Guid.Parse("CCC66514-0597-4D43-AAFF-0C5D8EE59FFA")
             },
             new Trip
             {
@@ -47,7 +49,7 @@ namespace MetroDelivery.Identity.Configurations.EntityConfiguration
                 TripName = "Ski Getaway",
                 TripStartTime = DateTime.Parse("12/20/2023 8:00 AM"),
                 TripEndTime = DateTime.Parse("12/23/2023 2:00 PM"),
-
+                RouteId = Guid.Parse("001A254C-02D4-40E7-A01F-95F393FB41EF")
             },
             new Trip
             {
@@ -55,7 +57,7 @@ namespace MetroDelivery.Identity.Configurations.EntityConfiguration
                 TripName = "Tropical Vacation",
                 TripStartTime = DateTime.Parse("8/13/2023 11:00 AM"),
                 TripEndTime = DateTime.Parse("8/18/2023 9:00 PM"),
-
+                RouteId = Guid.Parse("42F184EB-58B3-4B9B-BE52-1DA57F8FFB3F")
             },
             new Trip
             {
@@ -63,7 +65,7 @@ namespace MetroDelivery.Identity.Configurations.EntityConfiguration
                 TripName = "Amusement Park Fun",
                 TripStartTime = DateTime.Parse("7/4/2023 9:00 AM"),
                 TripEndTime = DateTime.Parse("7/6/2023 11:00 PM"),
-
+                RouteId = Guid.Parse("A437B242-55FC-4146-A2B9-8C952B107E3A")
             },
             new Trip
             {
@@ -71,7 +73,7 @@ namespace MetroDelivery.Identity.Configurations.EntityConfiguration
                 TripName = "African Safari",
                 TripStartTime = DateTime.Parse("9/28/2023 7:00 AM"),
                 TripEndTime = DateTime.Parse("10/3/2023 5:00 PM"),
-
+                RouteId = Guid.Parse("B9F8F712-92EE-4611-AD55-000A8E1B84C6")
             },
             new Trip
             {
@@ -79,7 +81,7 @@ namespace MetroDelivery.Identity.Configurations.EntityConfiguration
                 TripName = "Botanical Gardens Tour",
                 TripStartTime = DateTime.Parse("5/6/2023 1:00 PM"),
                 TripEndTime = DateTime.Parse("5/8/2023 3:00 PM"),
-
+                RouteId = Guid.Parse("A437B242-55FC-4146-A2B9-8C952B107E3A")
             }
             );
         }

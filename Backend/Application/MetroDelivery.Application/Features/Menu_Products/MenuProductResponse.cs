@@ -14,6 +14,7 @@ namespace MetroDelivery.Application.Features.Menu_Products
         public Guid Id { get; set; }
         public Guid MenuID { get; set; }
         public Guid ProductID { get; set; }
+        public double? PriceOfProductBelongToTimeService { get; set; }
         public DateTime? Created { get; set; }
 
         public MenuResponse? MenuData { get; set; }

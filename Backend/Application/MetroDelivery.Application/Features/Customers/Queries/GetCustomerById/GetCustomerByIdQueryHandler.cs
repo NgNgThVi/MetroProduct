@@ -29,7 +29,7 @@ namespace MetroDelivery.Application.Features.Customers.Queries.GetCustomerById
         {
             //add to datbase 
             /* var userById = await _customerRepository.CustomerIdMusBeExist(request.id);*/
-            var userById = await _metroPickUpDbContext.Customers.Where(c => c.Id == request.id).SingleOrDefaultAsync();
+            var userById = await _metroPickUpDbContext.Customer.Where(c => c.Id == request.id).SingleOrDefaultAsync();
 
             if (userById == null) {
                 throw new NotFoundException(nameof(userById.ApplicationUser.UserName), request.id);

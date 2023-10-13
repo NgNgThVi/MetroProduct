@@ -30,7 +30,7 @@ namespace MetroDelivery.Application.Features.Store_Menus.Commands.CreateStoreMen
 
         public async Task<Guid> Handle(CreateStoreMenuCommand request, CancellationToken cancellationToken)
         {
-            var menuIds = await _metroPickUpDbContext.Menus.Where(m => request.MenuIds.Contains(m.Id)).ToListAsync();
+            var menuIds = await _metroPickUpDbContext.Menu.Where(m => request.MenuIds.Contains(m.Id)).ToListAsync();
 
             if(menuIds.Count() == 0) {
                 throw new NotFoundException($"Không tìm thấy Menu nào!");
@@ -43,7 +43,7 @@ namespace MetroDelivery.Application.Features.Store_Menus.Commands.CreateStoreMen
                     StoreId = request.StoreId,
                 };
 
-                _metroPickUpDbContext.Store_Menus.Add(storeMenu);
+                _metroPickUpDbContext.Store_Menu.Add(storeMenu);
             }
             await _metroPickUpDbContext.SaveChangesAsync();
             return menuIds[0].Id;

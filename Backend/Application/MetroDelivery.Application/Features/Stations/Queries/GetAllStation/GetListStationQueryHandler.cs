@@ -17,7 +17,7 @@ namespace MetroDelivery.Application.Features.Stations.Queries.GetAllStation
         }
         public async Task<List<StationResponse>> Handle(GetListStationQuery request, CancellationToken cancellationToken)
         {
-            var station = await _metroPickUpDbContext.Stations.Where(s => s.IsDelete == false).ToListAsync();
+            var station = await _metroPickUpDbContext.Station.Where(s => s.IsDelete == false).ToListAsync();
             if(!station.Any()) {
                 throw new NotFoundException("Not found station!!!");
             }
@@ -25,7 +25,7 @@ namespace MetroDelivery.Application.Features.Stations.Queries.GetAllStation
             foreach (var item in station) {
                 try {
                     var stationData = _mapper.Map<StationData>(item);
-                    var storeId = await _metroPickUpDbContext.Stores.Where(s => s.Id ==  item.StoreID).SingleOrDefaultAsync();
+                    var storeId = await _metroPickUpDbContext.Store.Where(s => s.Id ==  item.StoreID).SingleOrDefaultAsync();
                     var storeData = _mapper.Map<StoreData>(storeId);
                     var result = new StationResponse
                     {

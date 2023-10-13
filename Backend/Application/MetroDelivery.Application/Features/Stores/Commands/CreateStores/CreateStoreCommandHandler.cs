@@ -20,7 +20,7 @@ namespace MetroDelivery.Application.Features.Stores.Commands.CreateStores
 
         public async Task<Guid> Handle(CreateStoreCommand request, CancellationToken cancellationToken)
         {
-            var storeExistLocation = await _metroPickUpDbContext.Stores.Where(s => s.StoreLocation == request.StoreLocation && s.IsDelete == false).SingleOrDefaultAsync();
+            var storeExistLocation = await _metroPickUpDbContext.Store.Where(s => s.StoreLocation == request.StoreLocation && s.IsDelete == false).SingleOrDefaultAsync();
             if (storeExistLocation != null) {
                 throw new NotFoundException("Cửa hàng này đã tồn tại rồi!!!");
             }
@@ -33,7 +33,7 @@ namespace MetroDelivery.Application.Features.Stores.Commands.CreateStores
                 StoreCloseTime = request.StoreCloseTime
             };
 
-            _metroPickUpDbContext.Stores.Add(store);
+            _metroPickUpDbContext.Store.Add(store);
             await _metroPickUpDbContext.SaveChangesAsync();
 
             return store.Id;

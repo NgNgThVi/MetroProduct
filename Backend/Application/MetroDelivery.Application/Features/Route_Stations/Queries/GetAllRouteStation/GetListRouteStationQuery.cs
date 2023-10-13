@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
 using MetroDelivery.Application.Common.Interface;
-using MetroDelivery.Application.Features.Trip_Routes.Queries;
 using MetroDelivery.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -28,9 +27,9 @@ namespace MetroDelivery.Application.Features.Route_Stations.Queries.GetAllRouteS
 
         public async Task<List<RouteStationResponse>> Handle(GetListRouteStationQuery request, CancellationToken cancellationToken)
         {
-            var routeStation = await _metroPickUpDbContext.Route_Stations.Where(r => r.IsDelete == false)
+            var routeStation = await _metroPickUpDbContext.Route_Station.Where(r => r.IsDelete == false)
                                     .Join(
-                                        _metroPickUpDbContext.Routes,
+                                        _metroPickUpDbContext.Route,
                                         routeAndStation => routeAndStation.RouteID,
                                         route => route.Id,
                                         (routeAndStation, route) => new
@@ -40,7 +39,7 @@ namespace MetroDelivery.Application.Features.Route_Stations.Queries.GetAllRouteS
                                         }
                                      )
                                     .Join(
-                                        _metroPickUpDbContext.Stations,
+                                        _metroPickUpDbContext.Station,
                                         combined => combined.Route_Stations.StationID,
                                         station => station.Id,
                                         (combined, station) => new RouteStationResponse
@@ -48,6 +47,11 @@ namespace MetroDelivery.Application.Features.Route_Stations.Queries.GetAllRouteS
                                             Id = combined.Route_Stations.Id,
                                             RouteID = combined.Route_Stations.RouteID,
                                             StationID = combined.Route_Stations.StationID,
+                                            Index = combined.Route_Stations.Index,
+                                            Duration = combined.Route_Stations.Duration,
+                                            StopTime = combined.Route_Stations.StopTime,
+                                            Created = combined.Route_Stations.Created,
+
                                             RouteData = combined.Routes,
                                             StationData = station
                                         }

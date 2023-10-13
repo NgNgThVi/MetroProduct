@@ -19,7 +19,7 @@ namespace MetroDelivery.Application.Features.Stores.Commands.DeleteStore
 
         public async Task<MetroPickUpResponse> Handle(DeleteStoreCommand request, CancellationToken cancellationToken)
         {
-            var storeExist = await _metroPickUpDbContext.Stores.Where(s => s.Id == request.Id).SingleOrDefaultAsync();
+            var storeExist = await _metroPickUpDbContext.Store.Where(s => s.Id == request.Id).SingleOrDefaultAsync();
             if(storeExist == null) {
                 throw new NotFoundException("Không tìm thấy cửa hàng!!!");
             }
@@ -28,7 +28,7 @@ namespace MetroDelivery.Application.Features.Stores.Commands.DeleteStore
             }
 
             storeExist.IsDelete = true;
-            _metroPickUpDbContext.Stores.Update(storeExist);
+            _metroPickUpDbContext.Store.Update(storeExist);
             await _metroPickUpDbContext.SaveChangesAsync();
 
             return new MetroPickUpResponse

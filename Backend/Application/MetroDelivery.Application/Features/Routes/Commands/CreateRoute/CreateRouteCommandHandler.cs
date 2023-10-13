@@ -20,7 +20,7 @@ namespace MetroDelivery.Application.Features.Routes.Commands.CreateRoute
 
         public async Task<Guid> Handle(CreateRouteCommand request, CancellationToken cancellationToken)
         {
-            var routeExist = await _metroPickUpDbContext.Routes.Where(r => r.FromLocation == request.FromLocation
+            var routeExist = await _metroPickUpDbContext.Route.Where(r => r.FromLocation == request.FromLocation
                                                                             && r.ToLocation == request.ToLocation 
                                                                             && r.IsDelete == false)
                                                                             .SingleOrDefaultAsync();
@@ -33,7 +33,7 @@ namespace MetroDelivery.Application.Features.Routes.Commands.CreateRoute
                 FromLocation = request.FromLocation,
                 ToLocation = request.ToLocation,
             };
-            _metroPickUpDbContext.Routes.Add(route);
+            _metroPickUpDbContext.Route.Add(route);
             await _metroPickUpDbContext.SaveChangesAsync();
 
             return route.Id;

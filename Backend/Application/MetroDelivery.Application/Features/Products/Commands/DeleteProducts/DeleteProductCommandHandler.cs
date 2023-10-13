@@ -19,7 +19,7 @@ namespace MetroDelivery.Application.Features.Products.Commands.DeleteProducts
 
         public async Task<MetroPickUpResponse> Handle(DeleteProductCommand request, CancellationToken cancellationToken)
         {
-            var productIdExisted = await _metroPickUpDbContext.Products.Where(p => p.Id == request.Id).SingleOrDefaultAsync();
+            var productIdExisted = await _metroPickUpDbContext.Product.Where(p => p.Id == request.Id).SingleOrDefaultAsync();
             if (productIdExisted == null) {
                 throw new NotFoundException($"ProductId {request.Id} không tồn tại");
             }
@@ -28,7 +28,7 @@ namespace MetroDelivery.Application.Features.Products.Commands.DeleteProducts
             }
 
             productIdExisted.IsDelete = true;
-            _metroPickUpDbContext.Products.Update(productIdExisted);
+            _metroPickUpDbContext.Product.Update(productIdExisted);
             await _metroPickUpDbContext.SaveChangesAsync();
 
             return new MetroPickUpResponse

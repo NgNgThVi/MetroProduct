@@ -29,7 +29,7 @@ namespace MetroDelivery.Application.Features.Stations.Commands.DeleteStation
 
         public async Task<MetroPickUpResponse> Handle(DeleteStationCommand request, CancellationToken cancellationToken)
         {
-            var stationExist = await _metroPickUpDbContext.Stations.Where(s => s.Id == request.Id).SingleOrDefaultAsync();
+            var stationExist = await _metroPickUpDbContext.Station.Where(s => s.Id == request.Id).SingleOrDefaultAsync();
             if (stationExist == null) {
                 throw new NotFoundException("StationId này không tồn tại");
             }
@@ -38,7 +38,7 @@ namespace MetroDelivery.Application.Features.Stations.Commands.DeleteStation
             }
 
             stationExist.IsDelete = true;
-            _metroPickUpDbContext.Stations.Update(stationExist);
+            _metroPickUpDbContext.Station.Update(stationExist);
             await _metroPickUpDbContext.SaveChangesAsync();
 
             return new MetroPickUpResponse

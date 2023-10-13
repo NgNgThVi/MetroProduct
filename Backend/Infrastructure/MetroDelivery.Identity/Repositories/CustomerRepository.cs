@@ -15,17 +15,17 @@ namespace MetroDelivery.Identity.Repositories
 
         public async Task<bool> IsCustomerEmailUnique(string email)
         {
-            return await _metroDeliveryDatabaseContext.Customers.AllAsync(x => x.ApplicationUser.Email == email) == false;
+            return await _metroDeliveryDatabaseContext.Customer.AllAsync(x => x.ApplicationUser.Email == email) == false;
         }
 
         public async Task<Customer> CustomerIdMusBeExist(Guid id)
         {
-            return await _metroDeliveryDatabaseContext.Customers.Include(q => q.ApplicationUser).FirstOrDefaultAsync(q => q.Id == id);
+            return await _metroDeliveryDatabaseContext.Customer.Include(q => q.ApplicationUser).FirstOrDefaultAsync(q => q.Id == id);
         }
 
         public async Task<bool> IsBeUniqueCustomerName(string customerName)
         {
-            return await _metroDeliveryDatabaseContext.Customers.AllAsync(x => x.ApplicationUser.UserName == customerName) == false;
+            return await _metroDeliveryDatabaseContext.Customer.AllAsync(x => x.ApplicationUser.UserName == customerName) == false;
         }
     }
 }

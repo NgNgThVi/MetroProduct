@@ -11,6 +11,7 @@ namespace MetroDelivery.Domain.Entities
 
         // relationship 
         public IList<Route_Station> Route_Stations { get; private set;}
+        public IList<Station_Trip> Station_Trip { get; private set; }
         public virtual Store Store { get; set; }
     }
 }

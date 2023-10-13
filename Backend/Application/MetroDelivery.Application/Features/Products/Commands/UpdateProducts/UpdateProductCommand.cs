@@ -40,7 +40,7 @@ namespace MetroDelivery.Application.Features.Products.Commands.UpdateProducts
 
         public async Task<MetroPickUpResponse> Handle(UpdateProductCommand request, CancellationToken cancellationToken)
         {
-            var productExistId = await _metroPickUpDbContext.Products.Where(p => p.Id == request.ProductId).SingleOrDefaultAsync();
+            var productExistId = await _metroPickUpDbContext.Product.Where(p => p.Id == request.ProductId).SingleOrDefaultAsync();
             if (productExistId == null) {
                 throw new NotFoundException($"ProductId {request.ProductId} không tồn tại");
             }
@@ -65,7 +65,7 @@ namespace MetroDelivery.Application.Features.Products.Commands.UpdateProducts
             productExistId.Image = request.Image;
             productExistId.Price = request.Price;
 
-            _metroPickUpDbContext.Products.Update(productExistId);
+            _metroPickUpDbContext.Product.Update(productExistId);
             await _metroPickUpDbContext.SaveChangesAsync();
 
             return new MetroPickUpResponse

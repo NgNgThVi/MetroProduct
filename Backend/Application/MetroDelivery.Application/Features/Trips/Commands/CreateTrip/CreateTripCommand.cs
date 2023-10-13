@@ -12,5 +12,7 @@ namespace MetroDelivery.Application.Features.Trips.Commands.CreateTrip
         public string TripName { get; set; }
         public DateTime TripStartTime { get; set; }
         public DateTime TripEndTime { get; set; }
+        public Guid RouteId { get; set; }
+
     }
 }

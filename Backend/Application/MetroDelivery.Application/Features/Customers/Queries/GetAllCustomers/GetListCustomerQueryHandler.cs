@@ -41,7 +41,7 @@ namespace MetroDelivery.Application.Features.Customers.Queries.GetAllCustomers
         {
             // query the database
             /*var users = await _customerRepository.GetAsync();*/
-            var users = await _metroPickUpDbContext.Customers.Where(c => !c.IsDelete).ToListAsync();
+            var users = await _metroPickUpDbContext.Customer.Where(c => !c.IsDelete).ToListAsync();
 
             // convert data objects to Dto objects
             var data = _mapper.Map<List<CustomerDto>>(users);

@@ -22,7 +22,7 @@ namespace MetroDelivery.Application.Features.Store_Menus.Queries
 
     /*public class StoreData
     {
-        public Guid StoreId { get; set; }
+        public Guid Id { get; set; }
         public string StoreName { get; set; }
         public string StoreLocation { get; set; }
         public TimeSpan? StoreOpenTime { get; set; }
@@ -32,7 +32,7 @@ namespace MetroDelivery.Application.Features.Store_Menus.Queries
 
     public class MenuData
     {
-        public Guid MenuId { get; set; }
+        public Guid Id { get; set; }
         public TimeSpan StartTimeService { get; set; }
         public TimeSpan EndTimeService { get; set; }
         public DateTime Create { get; set; }

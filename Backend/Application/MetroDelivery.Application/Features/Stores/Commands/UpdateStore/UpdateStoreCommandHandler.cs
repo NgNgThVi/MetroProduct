@@ -20,7 +20,7 @@ namespace MetroDelivery.Application.Features.Stores.Commands.UpdateStore
 
         public async Task<MetroPickUpResponse> Handle(UpdateStoreCommand request, CancellationToken cancellationToken)
         {
-            var storeExist = await _metroPickUpDbContext.Stores.Where(s => s.Id == request.Id).SingleOrDefaultAsync();
+            var storeExist = await _metroPickUpDbContext.Store.Where(s => s.Id == request.Id).SingleOrDefaultAsync();
             if (storeExist == null) {
                 throw new NotFoundException("Không tìm thấy cửa hàng!!!");
             }
@@ -33,7 +33,7 @@ namespace MetroDelivery.Application.Features.Stores.Commands.UpdateStore
             storeExist.StoreOpenTime = request.StoreOpenTime;
             storeExist.StoreCloseTime = request.StoreCloseTime;
 
-            _metroPickUpDbContext.Stores.Update(storeExist);
+            _metroPickUpDbContext.Store.Update(storeExist);
             await _metroPickUpDbContext.SaveChangesAsync();
 
             return new MetroPickUpResponse

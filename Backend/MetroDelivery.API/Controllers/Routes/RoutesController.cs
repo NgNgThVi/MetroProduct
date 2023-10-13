@@ -1,5 +1,7 @@
 ﻿using MediatR;
 using MetroDelivery.Application.Common.CRUDResponse;
+using MetroDelivery.Application.Features.Customers.Queries.GetCustomerById;
+using MetroDelivery.Application.Features.Customers;
 using MetroDelivery.Application.Features.Routes.Commands.CreateRoute;
 using MetroDelivery.Application.Features.Routes.Commands.DeleteRoute;
 using MetroDelivery.Application.Features.Routes.Commands.UpdateRoute;
@@ -9,6 +11,7 @@ using MetroDelivery.Application.Features.Trips.Commands.CreateTrip;
 using MetroDelivery.Application.Features.Trips.Commands.DeleteTrip;
 using MetroDelivery.Application.Features.Trips.Commands.UpdateTrip;
 using Microsoft.AspNetCore.Mvc;
+using MetroDelivery.Application.Features.Routes.Queries.GetByFromToRoute;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -33,11 +36,12 @@ namespace MetroDelivery.API.Controllers.Routes
             return response;
         }
 
-        // GET api/<RoutesController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet]
+        [Route("get-route-by-id")]
+        public async Task<ActionResult<CustomerDto>> GetUserById([FromQuery] GetRouteByFromToQuery request)
         {
-            return "value";
+            var response = await _mediator.Send(request);
+            return Ok(response);
         }
 
         [HttpPost]

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using MetroDelivery.Application.Common.Interface;
+using MetroDelivery.Application.Features.Route_Stations.Queries;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -10,11 +11,11 @@ using System.Threading.Tasks;
 
 namespace MetroDelivery.Application.Features.Trips.Queries.GetAllTrip
 {
-    public class GetListTripQuery : IRequest<List<TripDto>>
+    public class GetListTripQuery : IRequest<List<TripResponse>>
     {
     }
 
-    public class GetListTripQueryHandler : IRequestHandler<GetListTripQuery, List<TripDto>>
+    public class GetListTripQueryHandler : IRequestHandler<GetListTripQuery, List<TripResponse>>
     {
         private readonly IMetroPickUpDbContext _metroPickUpDbContext;
         private readonly IMapper _mapper;
@@ -24,13 +25,27 @@ namespace MetroDelivery.Application.Features.Trips.Queries.GetAllTrip
             _mapper = mapper;
         }
 
-        public async Task<List<TripDto>> Handle(GetListTripQuery request, CancellationToken cancellationToken)
+        public async Task<List<TripResponse>> Handle(GetListTripQuery request, CancellationToken cancellationToken)
         {
-            var list = await _metroPickUpDbContext.Trips.Where(t => t.IsDelete == false).ToListAsync();
+            var list = await _metroPickUpDbContext.Trip.Where(t => !t.IsDelete)
+                                                    .Join(
+                                                        _metroPickUpDbContext.Route,
+                                                        trip => trip.RouteId,
+                                                        route => route.Id,
+                                                        (trip, route) => new TripResponse
+                                                        {
+                                                            Id = trip.Id,
+                                                            TripName = trip.TripName,
+                                                            TripStartTime = trip.TripStartTime,
+                                                            TripEndTime = trip.TripEndTime,
+                                                            RouteId = trip.RouteId,
 
-            var data = _mapper.Map<List<TripDto>>(list);
+                                                            RouteData = _mapper.Map<RouteData>(route)
+                                                        }
+                                                    )
+                                                    .ToListAsync();
 
-            return data;
+            return list;
         }
     }
 }
