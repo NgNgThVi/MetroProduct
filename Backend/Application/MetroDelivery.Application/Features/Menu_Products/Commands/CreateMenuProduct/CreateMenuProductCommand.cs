@@ -16,9 +16,9 @@ namespace MetroDelivery.Application.Features.Menu_Products.Commands.CreateMenuPr
 {
     public class CreateMenuProductCommand : IRequest<Guid>
     {
-        public Guid MenuID { get; set; }
-        /*public TimeSpan StartTimeService { get; set; }
-        public TimeSpan EndTimeService { get; set; }*/
+        /*public Guid MenuID { get; set; }*/
+        public TimeSpan StartTimeService { get; set; }
+        public TimeSpan EndTimeService { get; set; }
 
         public List<ProductList> ProductData { get; init; }
     }
@@ -42,6 +42,22 @@ namespace MetroDelivery.Application.Features.Menu_Products.Commands.CreateMenuPr
         {
             var productIs = request.ProductData.Select(s => s.ProductID).ToList();
             var productExist = await _metroPickUpDbContext.Product.Where(p => productIs.Contains(p.Id) && !p.IsDelete).ToListAsync();
+
+            // tạo menu
+            var checkMenuExist = await _metroPickUpDbContext.Menu.Where(m => m.StartTimeService == request.StartTimeService && m.EndTimeService == request.EndTimeService && !m.IsDelete).SingleOrDefaultAsync();
+            if (checkMenuExist != null) {
+                throw new NotFoundException("Menu này đã tạo trong Menu_Product rồi");
+            }
+            var menu = new Menu
+            {
+                StartTimeService = request.StartTimeService,
+                EndTimeService = request.EndTimeService,
+            };
+
+            _metroPickUpDbContext.Menu.Add(menu);
+            await _metroPickUpDbContext.SaveChangesAsync();
+
+            // tạo menu_product
             if (productExist.Count() == 0) {
                 throw new NotFoundException($"Không tìm thấy Product nào!");
             }
@@ -52,7 +68,7 @@ namespace MetroDelivery.Application.Features.Menu_Products.Commands.CreateMenuPr
                     throw new NotFoundException($"Không tìm thấy product {product} này!");
                 }
                 var entityMenuProduct = new Menu_Product();
-                entityMenuProduct.MenuID = request.MenuID;
+                entityMenuProduct.MenuID = menu.Id;
                 entityMenuProduct.ProductID = product.Id;
                 entityMenuProduct.PriceOfProductBelongToTimeService = productData.PriceOfProductBelongToTimeService;
             

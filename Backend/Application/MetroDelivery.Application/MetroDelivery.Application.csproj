@@ -27,7 +27,10 @@
     <Folder Include="Features\OrderDetails\Queries\GetByIdOrderDetail\" />
     <Folder Include="Features\Orders\Commands\DeleteOrder\" />
     <Folder Include="Features\Orders\Commands\UpdateOrder\" />
+    <Folder Include="Features\PaymentMethods\Commands\UpdatePaymentMethod\" />
     <Folder Include="Features\Station_Trips\Commands\CreateStationTrip\" />
+    <Folder Include="Features\Withdraw\Commands\CreateWithdraw\" />
+    <Folder Include="Features\Withdraw\Queries\GetAllWithdraw\" />
   </ItemGroup>
 
 </Project>
