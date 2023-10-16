@@ -5,6 +5,7 @@ using MetroDelivery.Application.Features.Trips.Commands.DeleteTrip;
 using MetroDelivery.Application.Features.Trips.Commands.UpdateTrip;
 using MetroDelivery.Application.Features.Trips.Queries;
 using MetroDelivery.Application.Features.Trips.Queries.GetAllTrip;
+using MetroDelivery.Application.Features.Trips.Queries.GetRouteInTrips;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MetroDelivery.API.Controllers.Trips
@@ -25,6 +26,14 @@ namespace MetroDelivery.API.Controllers.Trips
         public async Task<List<TripResponse>> GetAllTrip()
         {
             var response = await _mediator.Send(new GetListTripQuery());
+            return response;
+        }
+
+        [HttpGet]
+        [Route("get-route-in-trip")]
+        public async Task<List<TripResponse>> GetRouteInTrip([FromQuery]GetRouteInTripQuery request)
+        {
+            var response = await _mediator.Send(request);
             return response;
         }
 

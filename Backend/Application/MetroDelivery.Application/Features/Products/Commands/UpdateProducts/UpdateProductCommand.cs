@@ -56,7 +56,7 @@ namespace MetroDelivery.Application.Features.Products.Commands.UpdateProducts
             var validator = new UpdateProductCommandValidator();
             var validatorResult = await validator.ValidateAsync(request);
             if (validatorResult.Errors.Any()) {
-                throw new BadRequestException("Invalid Create user", validatorResult);
+                throw new BadRequestException("Invalid update product", validatorResult);
             }
 
             productExistId.CategoryID = checkCategory.Id;

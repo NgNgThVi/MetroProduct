@@ -10,40 +10,41 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MetroDelivery.Application.Features.PaymentMethods.Commands.DeletePaymentMethod
+namespace MetroDelivery.Application.Features.PaymentMethods.Commands.UpdatePaymentMethod
 {
-    public class DeletePaymentMethodCommand : IRequest<MetroPickUpResponse>
+    public class UpdatePaymentMethodCommand : IRequest<MetroPickUpResponse>
     {
         public Guid Id { get; set; }
+        public string PaymentMethodName { get; set; }
     }
 
-    public class DeletePaymentMethodCommandHandler : IRequestHandler<DeletePaymentMethodCommand, MetroPickUpResponse>
+    public class UpdatePaymentMethodCommandHandler : IRequestHandler<UpdatePaymentMethodCommand, MetroPickUpResponse>
     {
         private readonly IMetroPickUpDbContext _metroPickUpDbContext;
         private readonly IMapper _mapper;
-        public DeletePaymentMethodCommandHandler(IMetroPickUpDbContext metroPickUpDbContext, IMapper mapper)
+        public UpdatePaymentMethodCommandHandler(IMetroPickUpDbContext metroPickUpDbContext, IMapper mapper)
         {
             _metroPickUpDbContext = metroPickUpDbContext;
             _mapper = mapper;
         }
 
-        public async Task<MetroPickUpResponse> Handle(DeletePaymentMethodCommand request, CancellationToken cancellationToken)
+        public async Task<MetroPickUpResponse> Handle(UpdatePaymentMethodCommand request, CancellationToken cancellationToken)
         {
-            var paymentExist = await _metroPickUpDbContext.PaymentMethod.Where(p => p.Id == request.Id).SingleOrDefaultAsync();
-            if (paymentExist == null) {
+            var response = await _metroPickUpDbContext.PaymentMethod.Where(p => p.Id == request.Id).SingleOrDefaultAsync();
+            if (response == null) {
                 throw new NotFoundException("paymentMethod không tồn tại!");
             }
-            if (paymentExist.IsDelete == true) {
+            if (response.IsDelete == true) {
                 throw new NotFoundException("paymentMethod đã bị xóa!");
             }
 
-            paymentExist.IsDelete = true;
-            _metroPickUpDbContext.PaymentMethod.Update(paymentExist);
+            response.PaymentMethodName = request.PaymentMethodName;
+            _metroPickUpDbContext.PaymentMethod.Update(response);
             await _metroPickUpDbContext.SaveChangesAsync();
 
             return new MetroPickUpResponse
             {
-                Message = "Delete paymentMethod Successfull"
+                Message = "Update Successfully"
             };
         }
     }

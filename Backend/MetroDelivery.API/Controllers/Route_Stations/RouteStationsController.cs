@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using MetroDelivery.Application.Features.Route_Stations.Queries;
 using MetroDelivery.Application.Features.Route_Stations.Queries.GetAllRouteStation;
+using MetroDelivery.Application.Features.Route_Stations.Queries.GetRouteInStation;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -25,6 +26,13 @@ namespace MetroDelivery.API.Controllers.Route_Stations
             return response;
         }
 
-        
+        [HttpGet]
+        [Route("route-in-station")]
+        public async Task<List<RouteStationResponse>> Get([FromQuery] GetRouteInStationQuery request)
+        {
+            var response = await _mediator.Send(request);
+            return response;
+        }
+
     }
 }

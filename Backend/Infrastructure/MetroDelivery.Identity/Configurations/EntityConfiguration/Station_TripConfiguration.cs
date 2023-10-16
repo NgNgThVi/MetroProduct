@@ -38,6 +38,18 @@ namespace MetroDelivery.Identity.Configurations.EntityConfiguration
                     TripID = Guid.Parse("9c2ab923-4c57-44d7-9c1a-b44c0d3e6b00"),
                     StationID = Guid.Parse("50CB67F8-421E-4AEC-85ED-7114E763D6C8"),
                     Arrived = DateTime.Parse("5/25/2023 8:00 PM")
+                },
+                new Station_Trip
+                {
+                    TripID = Guid.Parse("9c2ab923-4c57-44d7-9c1a-b44c0d3e6b00"),
+                    StationID = Guid.Parse("50CB67F8-421E-4AEC-85ED-7114E763D6C6"),
+                    Arrived = DateTime.Parse("5/26/2023 8:00 PM")
+                },
+                new Station_Trip
+                {
+                    TripID = Guid.Parse("9c2ab923-4c57-44d7-9c1a-b44c0d3e6b00"),
+                    StationID = Guid.Parse("50CB67F8-421E-4AEC-85ED-7114E763D6C5"),
+                    Arrived = DateTime.Parse("6/16/2023 7:00 PM")
                 }
             );
         }
