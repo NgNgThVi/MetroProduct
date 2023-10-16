@@ -34,11 +34,11 @@ namespace MetroDelivery.Identity.Configurations.EntityConfiguration
                 ,
                 new Route_Station
                 {
-                    // bến thành -> quận thủ đức, tại ga quận thủ đức
+                    // bến thành -> quận thủ đức, tại ga bình thạnh(Ba Son)
                     // index: 0 là bến thành, 1 là bình thạnh(Ba Son), 2 là thủ đức, 3 là khu công nghê cao, 4 là suối tiên, 5 bến xe miền đông
                     Id = Guid.Parse("2FF9D0D9-474C-4466-B9A8-707B730F415C"),
                     RouteID = Guid.Parse("A437B242-55FC-4146-A2B9-8C952B107E3A"),
-                    StationID = Guid.Parse("50CB67F8-421E-4AEC-85ED-7114E763D6C6"),
+                    StationID = Guid.Parse("50CB67F8-421E-4AEC-85ED-7114E763D6C5"),
                     Index = 1,
                     Duration = TimeSpan.Parse("00:30"),
                     StopTime = TimeSpan.Parse("01:00")
@@ -49,9 +49,31 @@ namespace MetroDelivery.Identity.Configurations.EntityConfiguration
                     // index: 0 là bến thành, 1 là bình thạnh(Ba Son), 2 là thủ đức, 3 là khu công nghê cao, 4 là suối tiên, 5 bến xe miền đông
                     Id = Guid.Parse("AB2099B4-E511-42FF-9E6A-EE71BDDCD482"),
                     RouteID = Guid.Parse("001A254C-02D4-40E7-A01F-95F393FB41EF"),
-                    StationID = Guid.Parse("50CB67F8-421E-4AEC-85ED-7114E763D6C8"),
+                    StationID = Guid.Parse("50CB67F8-421E-4AEC-85ED-7114E763D6C5"),
+                    Index = 1,
+                    Duration = TimeSpan.Parse("00:30"),
+                    StopTime = TimeSpan.Parse("02:00")
+                },
+                new Route_Station
+                {
+                    // bến thành -> quận Ga Metro Suối Tiên, tại ga suối tiên
+                    // index: 0 là bến thành, 1 là bình thạnh(Ba Son), 2 là thủ đức, 3 là khu công nghê cao, 4 là suối tiên, 5 bến xe miền đông
+                    Id = Guid.Parse("15FEFDBF-B178-49BA-AA7C-7B3E2DD575BC"),
+                    RouteID = Guid.Parse("001A254C-02D4-40E7-A01F-95F393FB41EF"),
+                    StationID = Guid.Parse("50CB67F8-421E-4AEC-85ED-7114E763D6C6"),
                     Index = 2,
                     Duration = TimeSpan.Parse("01:00"),
+                    StopTime = TimeSpan.Parse("02:00")
+                },
+                new Route_Station
+                {
+                    // bến thành -> quận Ga Metro Suối Tiên, tại ga suối tiên
+                    // index: 0 là bến thành, 1 là bình thạnh(Ba Son), 2 là thủ đức, 3 là khu công nghê cao, 4 là suối tiên, 5 bến xe miền đông
+                    Id = Guid.Parse("8DE6ED00-50C8-434E-95CE-CC921426E697"),
+                    RouteID = Guid.Parse("001A254C-02D4-40E7-A01F-95F393FB41EF"),
+                    StationID = Guid.Parse("50CB67F8-421E-4AEC-85ED-7114E763D6C7"),
+                    Index = 3,
+                    Duration = TimeSpan.Parse("01:30"),
                     StopTime = TimeSpan.Parse("02:00")
                 },
                 new Route_Station

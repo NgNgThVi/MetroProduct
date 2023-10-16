@@ -4,6 +4,7 @@ using MetroDelivery.Application.Features.Customers;
 using MetroDelivery.Application.Features.Menu_Products;
 using MetroDelivery.Application.Features.Menus.Queries;
 using MetroDelivery.Application.Features.OrderDetails.Queries;
+using MetroDelivery.Application.Features.PaymentMethods.Queries;
 using MetroDelivery.Application.Features.Products.Queries;
 using MetroDelivery.Application.Features.Routes.Queries;
 using MetroDelivery.Application.Features.Stations;
@@ -11,6 +12,7 @@ using MetroDelivery.Application.Features.Stations.Queries;
 using MetroDelivery.Application.Features.Store_Menus.Queries;
 using MetroDelivery.Application.Features.Stores;
 using MetroDelivery.Application.Features.Trips.Queries;
+using MetroDelivery.Application.Features.Withdraws.Queries;
 using MetroDelivery.Domain.Entities;
 
 namespace MetroDelivery.Application.Common.MappingProfiles
@@ -74,6 +76,14 @@ namespace MetroDelivery.Application.Common.MappingProfiles
             //Store_Menu
             CreateMap<MenuData, Menu>().ReverseMap();
             CreateMap<Menu, MenuData>().ReverseMap();
+
+            //PaymentMEdthod
+            CreateMap<PaymentMethodResponse, PaymentMethod>().ReverseMap();
+            CreateMap<PaymentMethod, PaymentMethodResponse>().ReverseMap();
+
+            //CustomerData
+            CreateMap<CustomerData, Customer>().ReverseMap();
+            CreateMap<Customer, CustomerData>().ReverseMap();
 
         }
 

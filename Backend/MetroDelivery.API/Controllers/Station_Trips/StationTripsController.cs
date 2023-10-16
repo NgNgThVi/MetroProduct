@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using MetroDelivery.Application.Features.Station_Trips.Queries;
 using MetroDelivery.Application.Features.Station_Trips.Queries.GetAllStationTrip;
+using MetroDelivery.Application.Features.Station_Trips.Queries.GetStationByTripId;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -26,6 +27,13 @@ namespace MetroDelivery.API.Controllers.Station_Trips
             return response;
         }
 
-        
+        [HttpGet]
+        [Route("station-by-trip-id")]
+        public async Task<List<StationTripResponse>> Get([FromQuery] GetStationByTripIdQuery request)
+        {
+            var response = await _mediator.Send(request);
+            return response;
+        }
+
     }
 }

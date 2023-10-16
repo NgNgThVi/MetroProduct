@@ -2,6 +2,7 @@
 using MetroDelivery.Application.Features.Menu_Products;
 using MetroDelivery.Application.Features.Menu_Products.Commands.CreateMenuProduct;
 using MetroDelivery.Application.Features.Menu_Products.Queries.GetListMenu_Product;
+using MetroDelivery.Application.Features.Menu_Products.Queries.GetMenuProductByTimeService;
 using MetroDelivery.Application.Features.Menus.Commands.CreateMenu;
 using Microsoft.AspNetCore.Mvc;
 
@@ -24,6 +25,14 @@ namespace MetroDelivery.API.Controllers.Menu_Products
         public async Task<List<MenuProductResponse>> GetAll()
         {
             var response = await _mediator.Send(new GetAllMenu_Products());
+            return response;
+        }
+
+        [HttpGet]
+        [Route("get-menu-product-by-time-service")]
+        public async Task<List<MenuProductResponse>> Get([FromQuery] GetMenuProductByTimeServiceQuery request)
+        {
+            var response = await _mediator.Send(request);
             return response;
         }
 
