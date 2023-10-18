@@ -1,10 +1,4 @@
-﻿using FluentValidation;
-using MetroDelivery.Application.Features.OrderDetails.Commands.CreateOrderDetail;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿/*using FluentValidation;
 
 namespace MetroDelivery.Application.Features.Orders.Commands.CreateOrder
 {
@@ -18,3 +12,4 @@ namespace MetroDelivery.Application.Features.Orders.Commands.CreateOrder
         }
     }
 }
+*/

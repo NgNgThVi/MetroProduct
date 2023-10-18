@@ -22,7 +22,6 @@
   <ItemGroup>
     <Folder Include="Features\OrderDetails\Commands\DeleteOrderDetail\" />
     <Folder Include="Features\OrderDetails\Commands\UpdateOrderDetail\" />
-    <Folder Include="Features\OrderDetails\Queries\GetByIdOrderDetail\" />
     <Folder Include="Features\Orders\Commands\DeleteOrder\" />
     <Folder Include="Features\Orders\Commands\UpdateOrder\" />
   </ItemGroup>

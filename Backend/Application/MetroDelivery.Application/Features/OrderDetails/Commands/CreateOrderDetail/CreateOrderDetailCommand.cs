@@ -1,4 +1,4 @@
-﻿using MediatR;
+﻿/*using MediatR;
 using MetroDelivery.Application.Features.Products.Commands.CreateProducts;
 using System;
 using System.Collections.Generic;
@@ -15,6 +15,7 @@ namespace MetroDelivery.Application.Features.OrderDetails.Commands.CreateOrderDe
         public Guid ProductID { get; set; }
 
         public int? Quanity { get; set; }
-        public double? Price { get; set; }
+        *//*public double? Price { get; set; }*//*
     }
 }
+*/

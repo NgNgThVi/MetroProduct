@@ -1,9 +1,8 @@
 ﻿using MediatR;
 using MetroDelivery.Application.Contracts.Persistance;
-using MetroDelivery.Application.Features.OrderDetails.Commands.CreateOrderDetail;
 using MetroDelivery.Application.Features.OrderDetails.Queries;
 using MetroDelivery.Application.Features.OrderDetails.Queries.GetAllOrderDetail;
-using MetroDelivery.Application.Features.Trips.Commands.CreateTrip;
+using MetroDelivery.Application.Features.OrderDetails.Queries.GetByIdOrderDetail;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -28,7 +27,15 @@ namespace MetroDelivery.API.Controllers.OrderDetails
             return response;
         }
 
-        [HttpPost]
+        [HttpGet]
+        [Route("get-product-by-id")]
+        public async Task<OrderDetailResponse> Get([FromQuery] GetOrderDetailByIdQuery request)
+        {
+            var response = await _mediator.Send(request);
+            return response;
+        }
+
+        /*[HttpPost]
         [Route("create")]
         [ProducesResponseType(201)]
         [ProducesResponseType(400)]
@@ -36,7 +43,7 @@ namespace MetroDelivery.API.Controllers.OrderDetails
         {
             var response = await _mediator.Send(request);
             return CreatedAtAction(nameof(GetAll), new { id = response });
-        }
+        }*/
         
     }
 }

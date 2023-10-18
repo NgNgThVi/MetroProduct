@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+﻿/*using AutoMapper;
 using FluentValidation;
 using MediatR;
 using MetroDelivery.Application.Common.Exceptions;
@@ -30,6 +30,20 @@ namespace MetroDelivery.Application.Features.OrderDetails.Commands.CreateOrderDe
                 throw new NotFoundException("OrderId không tồn tại");
             }
 
+            var createdOrder = orderExist.Created;
+            var menus = await _metroPickUpDbContext.Menu.Where(m => (m.StartTimeService <= createdOrder.TimeOfDay) && (m.EndTimeService > createdOrder.TimeOfDay)).SingleOrDefaultAsync();
+            if (menus == null) {
+                throw new NotFoundException("Cửa hàng đã đóng cửa, xin quý khách quay lại vào 6h sáng mai");
+            }
+            var store = await _metroPickUpDbContext.Store.Where(s => s.Id == orderExist.StoreID && !s.IsDelete).SingleOrDefaultAsync();
+            if (store == null) {
+                throw new NotFoundException("StoreId không tồn tại trong order");
+            }
+            var menuProduct = await _metroPickUpDbContext.Menu_Product.Where(s => !s.IsDelete && s.ProductID == request.ProductID && s.Menu.StartTimeService == menus.StartTimeService && s.Menu.EndTimeService == menus.EndTimeService).SingleOrDefaultAsync();
+            if(menuProduct == null) {
+                throw new NotFoundException("không tồn tại product trong khoảng thời gian phục vụ này");
+            }
+
             var validator = new CreateOrderDetailCommandValidator();
             var validatorResult = await validator.ValidateAsync(request);
             if (validatorResult.Errors.Any()) {
@@ -38,11 +52,11 @@ namespace MetroDelivery.Application.Features.OrderDetails.Commands.CreateOrderDe
 
             var orderDetail = new OrderDetail
             {
-                ProductID = request.ProductID,
+                ProductID = menuProduct.ProductID,
                 OrderID = request.OrderID,
                 
                 Quanity = request.Quanity,
-                Price = request.Price,
+                Price = menuProduct.PriceOfProductBelongToTimeService,
             };
 
             _metroPickUpDbContext.OrderDetail.Add(orderDetail);
@@ -51,3 +65,4 @@ namespace MetroDelivery.Application.Features.OrderDetails.Commands.CreateOrderDe
         }
     }
 }
+*/
