@@ -23,7 +23,7 @@ namespace MetroDelivery.Identity.Configurations.EntityConfiguration
                 },
                 new Menu_Product
                 {
-                    MenuID = Guid.Parse("5263453C-DAE9-45E4-8204-5430A7256CDE"),
+                    MenuID = Guid.Parse("E7A15238-5DB0-49BD-94E6-D5F8B77AE6CE"),
                     ProductID = Guid.Parse("FFB05663-954D-4AF3-8A41-91AF39446F81"),
                     PriceOfProductBelongToTimeService = 1000    // 1000/1cay
                 },
@@ -35,37 +35,37 @@ namespace MetroDelivery.Identity.Configurations.EntityConfiguration
                 },
                 new Menu_Product
                 {
-                    MenuID = Guid.Parse("9B08173A-E338-45EF-B479-6B0E95F2B055"),
+                    MenuID = Guid.Parse("E7A15238-5DB0-49BD-94E6-D5F8B77AE6CE"),
                     ProductID = Guid.Parse("107F1F75-B23B-4BC4-92D7-F2E90D067D1F"),
                     PriceOfProductBelongToTimeService = 50000
                 },
                 new Menu_Product
                 {
-                    MenuID = Guid.Parse("9B08173A-E338-45EF-B479-6B0E95F2B055"),
+                    MenuID = Guid.Parse("5263453C-DAE9-45E4-8204-5430A7256CDE"),
                     ProductID = Guid.Parse("1616CC05-8C82-4F8B-A6E0-F60AB3DE0D38"),
                     PriceOfProductBelongToTimeService = 35000
                 },
                 new Menu_Product
                 {
-                    MenuID = Guid.Parse("9B08173A-E338-45EF-B479-6B0E95F2B055"),
+                    MenuID = Guid.Parse("5263453C-DAE9-45E4-8204-5430A7256CDE"),
                     ProductID = Guid.Parse("43203CE4-D82C-4C78-8794-2AEF22D7EC5B"),
                     PriceOfProductBelongToTimeService = 35000
                 },
                 new Menu_Product
                 {
-                    MenuID = Guid.Parse("D6184EA2-9833-499F-9A56-8138C3B60C78"),
+                    MenuID = Guid.Parse("5263453C-DAE9-45E4-8204-5430A7256CDE"),
                     ProductID = Guid.Parse("4C9EC4B9-1C16-4C7A-90BF-D620AAB257B6"),
                     PriceOfProductBelongToTimeService = 159000
                 },
                 new Menu_Product
                 {
-                    MenuID = Guid.Parse("D6184EA2-9833-499F-9A56-8138C3B60C78"),
+                    MenuID = Guid.Parse("5263453C-DAE9-45E4-8204-5430A7256CDE"),
                     ProductID = Guid.Parse("0C308B93-B26A-4224-9D63-28294711AA15"),
                     PriceOfProductBelongToTimeService = 100000 // 100/4mieng ga
                 },
                 new Menu_Product
                 {
-                    MenuID = Guid.Parse("D6184EA2-9833-499F-9A56-8138C3B60C78"),
+                    MenuID = Guid.Parse("5263453C-DAE9-45E4-8204-5430A7256CDE"),
                     ProductID = Guid.Parse("B834CF11-CC28-4E7D-9846-2ACC8AD33D8C"),
                     PriceOfProductBelongToTimeService = 25000 
                 }
