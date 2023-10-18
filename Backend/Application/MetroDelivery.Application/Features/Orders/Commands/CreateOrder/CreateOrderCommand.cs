@@ -12,7 +12,7 @@ namespace MetroDelivery.Application.Features.Orders.Commands.CreateOrder
     public class CreateOrderCommand : IRequest<Guid>
     {
         //Customer
-        public Guid CustomerId { get; set; }
+        public string ApplicationUserID { get; set; }
 
         // Trip
         public Guid TripId { get; set; }

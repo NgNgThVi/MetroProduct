@@ -1,6 +1,8 @@
-﻿/*using AutoMapper;
+﻿using AutoMapper;
 using MediatR;
 using MetroDelivery.Application.Common.Interface;
+using MetroDelivery.Application.Features.Customers;
+using MetroDelivery.Domain.IdentityModels;
 using Microsoft.EntityFrameworkCore;
 
 namespace MetroDelivery.Application.Features.Orders.Queries.GetAllOrder
@@ -19,20 +21,20 @@ namespace MetroDelivery.Application.Features.Orders.Queries.GetAllOrder
         {
             var orderList = await _metroPickUpDbContext.Order.Where(o => !o.IsDelete)
                                                             .Join(
-                                                                _metroPickUpDbContext.Customer,
-                                                                orders => orders.CustomerID,
-                                                                customer => customer.Id,
-                                                                (orders, customer) => new
+                                                                _metroPickUpDbContext.ApplicationUsers,
+                                                                orders => orders.ApplicationUserID,
+                                                                applicationUser => applicationUser.Id,
+                                                                (orders, applicationUser) => new
                                                                 {
                                                                     Orders = orders,
-                                                                    Customers = customer
+                                                                    ApplicationUser = applicationUser
                                                                 }
                                                             )
                                                             .Join(
                                                                 _metroPickUpDbContext.Trip,
                                                                 orderCustomer => orderCustomer.Orders.TripID,
                                                                 trip => trip.Id,
-                                                                (orderCutomer, trip) => new {OrderCustomer = orderCutomer, Trips = trip}
+                                                                (orderCutomer, trip) => new { OrderCustomer = orderCutomer, Trips = trip }
                                                             )
                                                             .Join(
                                                                 _metroPickUpDbContext.Store,
@@ -44,11 +46,11 @@ namespace MetroDelivery.Application.Features.Orders.Queries.GetAllOrder
                                                                     TotalPrice = orderCutomerTrip.OrderCustomer.Orders.TotalPrice,
                                                                     OrderTokenQR = orderCutomerTrip.OrderCustomer.Orders.OrderTokenQR,
 
-                                                                    CustomerId = orderCutomerTrip.OrderCustomer.Orders.CustomerID,
+                                                                    ApplicationUserID = orderCutomerTrip.OrderCustomer.Orders.ApplicationUserID,
                                                                     TripId = orderCutomerTrip.OrderCustomer.Orders.TripID,
                                                                     StoreId = orderCutomerTrip.OrderCustomer.Orders.StoreID,
 
-                                                                    CustomerData = orderCutomerTrip.OrderCustomer.Customers,
+                                                                    CustomerData = _mapper.Map<CustomerResponse>(orderCutomerTrip.OrderCustomer.ApplicationUser),
                                                                     TripData = orderCutomerTrip.Trips,
                                                                     StoreData = store
                                                                 }
@@ -57,4 +59,3 @@ namespace MetroDelivery.Application.Features.Orders.Queries.GetAllOrder
         }
     }
 }
-*/

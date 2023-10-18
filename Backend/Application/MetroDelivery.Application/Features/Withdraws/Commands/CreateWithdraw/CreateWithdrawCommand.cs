@@ -1,4 +1,4 @@
-﻿/*using AutoMapper;
+﻿using AutoMapper;
 using MediatR;
 using MetroDelivery.Application.Common.Interface;
 using MetroDelivery.Domain.Entities;
@@ -12,7 +12,7 @@ namespace MetroDelivery.Application.Features.Withdraws.Commands.CreateWithdraw
 {
     public class CreateWithdrawCommand : IRequest<Guid>
     {
-        public Guid CustomerID { get; set; }
+        public string ApplicationUserID { get; set; }
         public Guid PaymentMethodID { get; set; }
         public double? Balance { get; set; }
         public double? Deposit { get; set; }
@@ -36,7 +36,7 @@ namespace MetroDelivery.Application.Features.Withdraws.Commands.CreateWithdraw
             // insert
             var withdraw = new WithDraw
             {
-                CustomerID = request.CustomerID,
+                ApplicationUserID = request.ApplicationUserID,
                 PaymentMethodID = request.PaymentMethodID,
                 Balance = request.Balance,
                 Deposit = request.Deposit,
@@ -50,4 +50,3 @@ namespace MetroDelivery.Application.Features.Withdraws.Commands.CreateWithdraw
         }
     }
 }
-*/

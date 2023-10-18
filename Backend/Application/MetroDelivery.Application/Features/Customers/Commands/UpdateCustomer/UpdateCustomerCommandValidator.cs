@@ -1,4 +1,4 @@
-﻿/*using FluentValidation;
+﻿using FluentValidation;
 using MetroDelivery.Application.Contracts.Persistance;
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ namespace MetroDelivery.Application.Features.Customers.Commands.UpdateCustomer
 {
     public class UpdateCustomerCommandValidator : AbstractValidator<UpdateCustomerCommand>
     {
-        
+
         public UpdateCustomerCommandValidator()
         {
 
@@ -36,8 +36,7 @@ namespace MetroDelivery.Application.Features.Customers.Commands.UpdateCustomer
                 .MaximumLength(100).WithMessage("Address must be fewer than 100 chrarcters");
 
 
-            
+
         }
     }
 }
-*/

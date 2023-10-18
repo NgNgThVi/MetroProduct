@@ -1,4 +1,4 @@
-﻿/*using MetroDelivery.Application.Features.PaymentMethods.Queries;
+﻿using MetroDelivery.Application.Features.PaymentMethods.Queries;
 using MetroDelivery.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -13,7 +13,7 @@ namespace MetroDelivery.Application.Features.Withdraws.Queries
     {
         public Guid Id { get; set; }
 
-        public Guid CustomerID { get; set; }
+        public string ApplicationUserID { get; set; }
         public Guid PaymentMethodID { get; set; }
         public double? Balance { get; set; }
         public double? Deposit { get; set; }
@@ -26,12 +26,14 @@ namespace MetroDelivery.Application.Features.Withdraws.Queries
 
     public class CustomerData
     {
-        public Guid Id { get; set; }
-        public string ApplicationUserId { get; set; }
+        public string Id { get; set; }
 
-        public string Phone { get; set; }
+        public string Email { get; set; }
+        public string PhoneNumber { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public double? Wallet { get; set; }
         public string Address { get; set; }
         public DateTime Birthday { get; set; }
     }
 }
-*/

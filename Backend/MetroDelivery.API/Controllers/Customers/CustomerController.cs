@@ -1,7 +1,10 @@
 ﻿
 using MediatR;
+using MetroDelivery.Application.Common.CRUDResponse;
 using MetroDelivery.Application.Features.Customers;
 using MetroDelivery.Application.Features.Customers.Commands.CreateCustomer;
+using MetroDelivery.Application.Features.Customers.Commands.DeleteCustomer;
+using MetroDelivery.Application.Features.Customers.Commands.UpdateCustomer;
 using MetroDelivery.Application.Features.Customers.Queries.GetAllCustomers;
 using MetroDelivery.Application.Features.Customers.Queries.GetCustomerById;
 using MetroDelivery.Domain.Entities;
@@ -64,15 +67,6 @@ namespace MetroDelivery.API.Controllers.Customers
             return Ok(response);
         }
 
-        /*[HttpGet]
-        [Route("get-aplication-by-id")]
-        [Authorize(Roles = "Admin")]
-        public async Task<ActionResult<CustomerResponse>> Get([FromQuery] GetCustomerByApplicationIdQuery request)
-        {
-            var response = await _mediator.Send(request);
-            return Ok(response);
-        }
-
         // PUT api/<userController>/5
         [HttpPut]
         [Route("update-customer-by-id")]
@@ -80,10 +74,10 @@ namespace MetroDelivery.API.Controllers.Customers
         [ProducesResponseType(400)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
-        public async Task<ActionResult<CustomerDto>> UpdateCustomer(UpdateCustomerCommand request)
+        public async Task<MetroPickUpResponse> UpdateCustomer(UpdateCustomerCommand request)
         {
             var response = await _mediator.Send(request);
-            return Ok("Update Customer Successfully");
+            return response;
         }
 
         // DELETE api/<userController>/5
@@ -92,10 +86,10 @@ namespace MetroDelivery.API.Controllers.Customers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
-        public async Task<ActionResult> Delete([FromQuery] DeleteUserCommand request)
+        public async Task<MetroPickUpResponse> Delete([FromQuery] DeleteCustomerCommand request)
         {
             var response = await _mediator.Send(request);
-            return Ok(response);
-        }*/
+            return response;
+        }
     }
 }

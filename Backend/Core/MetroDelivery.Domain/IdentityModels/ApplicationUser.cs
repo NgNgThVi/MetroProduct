@@ -1,4 +1,5 @@
-﻿using MetroDelivery.Domain.Entities;
+﻿using MetroDelivery.Domain.Common;
+using MetroDelivery.Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
@@ -16,8 +17,9 @@ namespace MetroDelivery.Domain.IdentityModels
         public DateTime? Birthday { get; set; }
         public double? Wallet { get ; set; }
 
+
         // relationship
-        
+
         public IList<Order> Orders { get; private set; }
         public IList<WithDraw> WithDraws { get; private set; }
 

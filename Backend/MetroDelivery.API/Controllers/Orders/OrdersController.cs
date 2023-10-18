@@ -1,4 +1,4 @@
-﻿/*using MediatR;
+﻿using MediatR;
 using MetroDelivery.Application.Common.CRUDResponse;
 using MetroDelivery.Application.Contracts.Persistance;
 using MetroDelivery.Application.Features.Orders.Commands.CreateOrder;
@@ -54,4 +54,3 @@ namespace MetroDelivery.API.Controllers.Orders
         }
     }
 }
-*/

@@ -29,7 +29,7 @@ namespace MetroDelivery.Application.Features.Customers.Queries.GetAllCustomers
         public async Task<List<CustomerResponse>> Handle(GetListCustomerQuery request, CancellationToken cancellationToken)
         {
             // query the database
-            var users = await _metroPickUpDbContext.ApplicationUsers
+            var users = await _metroPickUpDbContext.ApplicationUsers.Where(a => a.EmailConfirmed == true)
                             /*.Select(u => new CustomerResponse
                             {
                                 Id = u.Id,
