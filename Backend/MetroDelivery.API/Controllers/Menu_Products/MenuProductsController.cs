@@ -29,8 +29,8 @@ namespace MetroDelivery.API.Controllers.Menu_Products
         }
 
         [HttpGet]
-        [Route("get-menu-product-by-time-service")]
-        public async Task<List<MenuProductResponse>> Get([FromQuery] GetMenuProductByTimeServiceQuery request)
+        [Route("get-menu-product-by-station-id")]
+        public async Task<List<MenuProductResponse>> Get([FromQuery] GetMenuProductByStationIdQuery request)
         {
             var response = await _mediator.Send(request);
             return response;
