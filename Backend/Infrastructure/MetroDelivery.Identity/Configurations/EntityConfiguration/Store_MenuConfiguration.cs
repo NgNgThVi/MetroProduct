@@ -43,6 +43,16 @@ namespace MetroDelivery.Identity.Configurations.EntityConfiguration
                 {
                     StoreId = Guid.Parse("AA2610A8-DE94-42B7-B12B-1CF8710E05D8"),
                     MenuId = Guid.Parse("4CBF8910-C204-46FE-91D4-E8E4C94FF695")
+                },
+                new Store_Menu
+                {
+                    StoreId = Guid.Parse("70C6A937-F285-4495-8407-B20A0C9B10F3"),
+                    MenuId = Guid.Parse("5263453C-DAE9-45E4-8204-5430A7256CDE")
+                },
+                new Store_Menu
+                {
+                    StoreId = Guid.Parse("2F3EEE35-1B8E-43AF-956F-EACD94EEA7CD"),
+                    MenuId = Guid.Parse("9B08173A-E338-45EF-B479-6B0E95F2B055")
                 }
             );
         }

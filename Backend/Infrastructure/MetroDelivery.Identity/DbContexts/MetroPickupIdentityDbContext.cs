@@ -19,7 +19,7 @@ namespace MetroDelivery.Identity.DbContexts
     {
         /*private readonly IUserService _userService;
         private readonly IMediator _mediator;*/
-        private readonly AuditableEntitySaveChangesInterceptor _auditableEntitySaveChangesInterceptor;
+        /*private readonly AuditableEntitySaveChangesInterceptor _auditableEntitySaveChangesInterceptor;*/
 
         public DbSet<Category> Categories { get; set; }
         public DbSet<Menu> Menu { get; set; }
@@ -60,10 +60,10 @@ namespace MetroDelivery.Identity.DbContexts
 
 
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        /*protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.AddInterceptors(_auditableEntitySaveChangesInterceptor);
-        }
+        }*/
 
         /*public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MetroDelivery.Identity.Migrations
 {
     [DbContext(typeof(MetroPickupIdentityDbContext))]
-    [Migration("20231015081534_InitDatabase")]
+    [Migration("20231017151347_InitDatabase")]
     partial class InitDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -58,49 +58,49 @@ namespace MetroDelivery.Identity.Migrations
                         {
                             Id = new Guid("9afcdfac-1a27-496b-84e5-0c8e5804e40e"),
                             CategoryName = "Food",
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(4815),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 440, DateTimeKind.Local).AddTicks(9854),
                             IsDelete = false
                         },
                         new
                         {
                             Id = new Guid("4078ef19-ba53-481d-9c5a-1c37dfe0e0dc"),
                             CategoryName = "Beverages",
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(4837),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 440, DateTimeKind.Local).AddTicks(9896),
                             IsDelete = false
                         },
                         new
                         {
                             Id = new Guid("b7a3a853-73c6-4f02-913b-9765019e9bd0"),
                             CategoryName = "Bread",
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(4839),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 440, DateTimeKind.Local).AddTicks(9900),
                             IsDelete = false
                         },
                         new
                         {
                             Id = new Guid("175d4c8d-d2f0-441b-85cb-45a1cb0b6756"),
                             CategoryName = "Candy",
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(4843),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 440, DateTimeKind.Local).AddTicks(9902),
                             IsDelete = false
                         },
                         new
                         {
                             Id = new Guid("8908ea98-b421-420b-9634-03ed356bb921"),
                             CategoryName = "Chips",
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(4846),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(6),
                             IsDelete = false
                         },
                         new
                         {
                             Id = new Guid("9b2cccb2-f5fa-4358-8265-0fe4f7a52253"),
                             CategoryName = "Cookies",
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(4852),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(9),
                             IsDelete = false
                         },
                         new
                         {
                             Id = new Guid("39696f0c-2c8a-480f-b917-141b7da708e4"),
                             CategoryName = "Dairy",
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(4855),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(11),
                             IsDelete = false
                         });
                 });
@@ -155,7 +155,7 @@ namespace MetroDelivery.Identity.Migrations
                             Address = "da nang",
                             ApplicationUserId = "2C0B43BB-B991-408E-A8F3-2FD3B4A2AB84",
                             Birthday = new DateTime(2002, 10, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(8092),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(3098),
                             IsDelete = false,
                             Phone = "03030303"
                         },
@@ -165,7 +165,7 @@ namespace MetroDelivery.Identity.Migrations
                             Address = "hcm",
                             ApplicationUserId = "2198E4CD-3305-49C5-B78A-0B54DD76898F",
                             Birthday = new DateTime(2010, 3, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(8121),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(3134),
                             IsDelete = false,
                             Phone = "03030303"
                         },
@@ -175,7 +175,7 @@ namespace MetroDelivery.Identity.Migrations
                             Address = "Cần Thơ",
                             ApplicationUserId = "C4EE82A1-DB88-49A6-81A8-4B9521FF01F9",
                             Birthday = new DateTime(2002, 5, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(8127),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(3191),
                             IsDelete = false,
                             Phone = "0961868641"
                         },
@@ -185,7 +185,7 @@ namespace MetroDelivery.Identity.Migrations
                             Address = "Đắk Lắk",
                             ApplicationUserId = "1F11BA64-2870-43F7-BB03-867112867F25",
                             Birthday = new DateTime(1899, 8, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(8131),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(3197),
                             IsDelete = false,
                             Phone = "0903182861"
                         },
@@ -195,7 +195,7 @@ namespace MetroDelivery.Identity.Migrations
                             Address = "Gia Lai",
                             ApplicationUserId = "2E089AF6-3437-4DD6-9956-BB792E783AFB",
                             Birthday = new DateTime(1998, 2, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(8138),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(3205),
                             IsDelete = false,
                             Phone = "0914009910"
                         });
@@ -236,7 +236,7 @@ namespace MetroDelivery.Identity.Migrations
                         new
                         {
                             Id = new Guid("e7a15238-5db0-49bd-94e6-d5f8b77ae6ce"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(5338),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(369),
                             EndTimeService = new TimeSpan(0, 8, 0, 0, 0),
                             IsDelete = false,
                             StartTimeService = new TimeSpan(0, 6, 0, 0, 0)
@@ -244,7 +244,7 @@ namespace MetroDelivery.Identity.Migrations
                         new
                         {
                             Id = new Guid("5263453c-dae9-45e4-8204-5430a7256cde"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(5378),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(417),
                             EndTimeService = new TimeSpan(0, 11, 0, 0, 0),
                             IsDelete = false,
                             StartTimeService = new TimeSpan(0, 8, 0, 0, 0)
@@ -252,7 +252,7 @@ namespace MetroDelivery.Identity.Migrations
                         new
                         {
                             Id = new Guid("9b08173a-e338-45ef-b479-6b0e95f2b055"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(5384),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(424),
                             EndTimeService = new TimeSpan(0, 13, 0, 0, 0),
                             IsDelete = false,
                             StartTimeService = new TimeSpan(0, 11, 0, 0, 0)
@@ -260,7 +260,7 @@ namespace MetroDelivery.Identity.Migrations
                         new
                         {
                             Id = new Guid("47a91dd5-f999-461a-8f80-935d169ca0c3"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(5389),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(431),
                             EndTimeService = new TimeSpan(0, 17, 0, 0, 0),
                             IsDelete = false,
                             StartTimeService = new TimeSpan(0, 13, 0, 0, 0)
@@ -268,7 +268,7 @@ namespace MetroDelivery.Identity.Migrations
                         new
                         {
                             Id = new Guid("d6184ea2-9833-499f-9a56-8138c3b60c78"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(5397),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(437),
                             EndTimeService = new TimeSpan(0, 20, 0, 0, 0),
                             IsDelete = false,
                             StartTimeService = new TimeSpan(0, 17, 0, 0, 0)
@@ -276,7 +276,7 @@ namespace MetroDelivery.Identity.Migrations
                         new
                         {
                             Id = new Guid("bbc7d071-5f5b-40be-b25e-3aa07a6c3e7c"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(5403),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(443),
                             EndTimeService = new TimeSpan(0, 0, 0, 0, 0),
                             IsDelete = false,
                             StartTimeService = new TimeSpan(0, 20, 0, 0, 0)
@@ -284,7 +284,7 @@ namespace MetroDelivery.Identity.Migrations
                         new
                         {
                             Id = new Guid("4cbf8910-c204-46fe-91d4-e8e4c94ff695"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(5408),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(449),
                             EndTimeService = new TimeSpan(0, 5, 0, 0, 0),
                             IsDelete = false,
                             StartTimeService = new TimeSpan(0, 1, 0, 0, 0)
@@ -332,8 +332,8 @@ namespace MetroDelivery.Identity.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("6801c210-ee3a-43ca-a274-1272e0fc6e4b"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(5105),
+                            Id = new Guid("c79f6284-ca72-4bf0-a9cf-74e555e4088f"),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(184),
                             IsDelete = false,
                             MenuID = new Guid("e7a15238-5db0-49bd-94e6-d5f8b77ae6ce"),
                             PriceOfProductBelongToTimeService = 20000.0,
@@ -341,8 +341,8 @@ namespace MetroDelivery.Identity.Migrations
                         },
                         new
                         {
-                            Id = new Guid("ace461f5-4f2f-4a70-86e9-d6314efb452c"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(5113),
+                            Id = new Guid("61a73ef4-67b2-433c-9dad-66eeea446a10"),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(198),
                             IsDelete = false,
                             MenuID = new Guid("e7a15238-5db0-49bd-94e6-d5f8b77ae6ce"),
                             PriceOfProductBelongToTimeService = 15000.0,
@@ -350,8 +350,8 @@ namespace MetroDelivery.Identity.Migrations
                         },
                         new
                         {
-                            Id = new Guid("76f3b024-871f-4ffc-b19f-3f1790595f80"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(5116),
+                            Id = new Guid("7c999e10-cc4e-487c-ab5d-ff463c86c4b9"),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(206),
                             IsDelete = false,
                             MenuID = new Guid("5263453c-dae9-45e4-8204-5430a7256cde"),
                             PriceOfProductBelongToTimeService = 1000.0,
@@ -359,8 +359,8 @@ namespace MetroDelivery.Identity.Migrations
                         },
                         new
                         {
-                            Id = new Guid("dc89ea4e-c0a8-4a92-9b0f-e9fbda719836"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(5118),
+                            Id = new Guid("ea8342af-8b9c-4ee5-b549-86d73ab6cdf9"),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(209),
                             IsDelete = false,
                             MenuID = new Guid("5263453c-dae9-45e4-8204-5430a7256cde"),
                             PriceOfProductBelongToTimeService = 30000.0,
@@ -368,8 +368,8 @@ namespace MetroDelivery.Identity.Migrations
                         },
                         new
                         {
-                            Id = new Guid("a3d264b8-60aa-478e-94a9-5a9e354bddc2"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(5121),
+                            Id = new Guid("20af074e-7279-40d1-83f8-5e45ed63df6f"),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(212),
                             IsDelete = false,
                             MenuID = new Guid("9b08173a-e338-45ef-b479-6b0e95f2b055"),
                             PriceOfProductBelongToTimeService = 50000.0,
@@ -377,8 +377,8 @@ namespace MetroDelivery.Identity.Migrations
                         },
                         new
                         {
-                            Id = new Guid("1c2349ff-c3e1-4f55-a982-d38eb06e06c8"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(5123),
+                            Id = new Guid("249bb782-77a6-477b-b129-3028b507959b"),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(214),
                             IsDelete = false,
                             MenuID = new Guid("9b08173a-e338-45ef-b479-6b0e95f2b055"),
                             PriceOfProductBelongToTimeService = 35000.0,
@@ -386,8 +386,8 @@ namespace MetroDelivery.Identity.Migrations
                         },
                         new
                         {
-                            Id = new Guid("598dcf2c-b581-469b-8a3d-9bad68853309"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(5194),
+                            Id = new Guid("4d5eabe6-0096-4a4e-9e47-ea4cb3efd740"),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(217),
                             IsDelete = false,
                             MenuID = new Guid("9b08173a-e338-45ef-b479-6b0e95f2b055"),
                             PriceOfProductBelongToTimeService = 35000.0,
@@ -395,8 +395,8 @@ namespace MetroDelivery.Identity.Migrations
                         },
                         new
                         {
-                            Id = new Guid("bc80d539-ffbe-400c-bded-b0bc8615dcda"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(5197),
+                            Id = new Guid("f9fd9a11-ef45-4f59-9ebb-fa65fd810562"),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(219),
                             IsDelete = false,
                             MenuID = new Guid("d6184ea2-9833-499f-9a56-8138c3b60c78"),
                             PriceOfProductBelongToTimeService = 159000.0,
@@ -404,8 +404,8 @@ namespace MetroDelivery.Identity.Migrations
                         },
                         new
                         {
-                            Id = new Guid("30618ad8-138d-44b4-8af2-9df4f71e55f0"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(5199),
+                            Id = new Guid("8c318ef6-e78b-4013-ba71-d525a167f18b"),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(222),
                             IsDelete = false,
                             MenuID = new Guid("d6184ea2-9833-499f-9a56-8138c3b60c78"),
                             PriceOfProductBelongToTimeService = 100000.0,
@@ -413,8 +413,8 @@ namespace MetroDelivery.Identity.Migrations
                         },
                         new
                         {
-                            Id = new Guid("d95da7b9-393f-45fa-bd7a-b7b501e4fa61"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(5201),
+                            Id = new Guid("b964fc1c-d875-40e4-bd15-36dc7c7d45d3"),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(225),
                             IsDelete = false,
                             MenuID = new Guid("d6184ea2-9833-499f-9a56-8138c3b60c78"),
                             PriceOfProductBelongToTimeService = 25000.0,
@@ -472,7 +472,7 @@ namespace MetroDelivery.Identity.Migrations
                         new
                         {
                             Id = new Guid("a8af2f67-447f-4f70-b660-4dd08fa47d4d"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(5538),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(585),
                             CustomerID = new Guid("0512a248-0054-4616-ade5-ae412f4f07bd"),
                             IsDelete = false,
                             OrderTokenQR = "1231212QR",
@@ -483,7 +483,7 @@ namespace MetroDelivery.Identity.Migrations
                         new
                         {
                             Id = new Guid("d68ee4e5-980e-4ec7-8060-df214d458c79"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(5546),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(597),
                             CustomerID = new Guid("ecf95bf5-d766-4b6e-94a7-d33ea29c0618"),
                             IsDelete = false,
                             OrderTokenQR = "11789212QR",
@@ -494,7 +494,7 @@ namespace MetroDelivery.Identity.Migrations
                         new
                         {
                             Id = new Guid("814860c5-ab72-4605-bb47-7e78c78d6fb0"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(5551),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(602),
                             CustomerID = new Guid("01d31c40-14c9-444c-a2fe-f58ea0fbc08a"),
                             IsDelete = false,
                             OrderTokenQR = "1231212QR",
@@ -549,7 +549,7 @@ namespace MetroDelivery.Identity.Migrations
                         new
                         {
                             Id = new Guid("f6d015a9-d5bb-40e8-a287-623f0af19fc9"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(5659),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(787),
                             IsDelete = false,
                             OrderID = new Guid("a8af2f67-447f-4f70-b660-4dd08fa47d4d"),
                             Price = 60000.0,
@@ -559,7 +559,7 @@ namespace MetroDelivery.Identity.Migrations
                         new
                         {
                             Id = new Guid("a8b7026d-5def-44ef-9666-6b78682a77cc"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(5665),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(794),
                             IsDelete = false,
                             OrderID = new Guid("d68ee4e5-980e-4ec7-8060-df214d458c79"),
                             Price = 30000.0,
@@ -569,7 +569,7 @@ namespace MetroDelivery.Identity.Migrations
                         new
                         {
                             Id = new Guid("05a027a2-01b0-40d2-91f7-2a33fc29753f"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(5671),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(800),
                             IsDelete = false,
                             OrderID = new Guid("814860c5-ab72-4605-bb47-7e78c78d6fb0"),
                             Price = 125000.0,
@@ -611,28 +611,28 @@ namespace MetroDelivery.Identity.Migrations
                         new
                         {
                             Id = new Guid("71b4bf27-e569-47a0-b16a-e484533bd9f2"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(5798),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(1021),
                             IsDelete = false,
                             PaymentMethodName = "thanh toán tiền mặt"
                         },
                         new
                         {
                             Id = new Guid("7db43916-e061-42cb-b0a7-9734423d00cd"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(5806),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(1026),
                             IsDelete = false,
                             PaymentMethodName = "thanh toán ngân hàng"
                         },
                         new
                         {
                             Id = new Guid("47bd4dd4-3fb4-463e-b9b9-5ebfb7e1f960"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(5808),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(1028),
                             IsDelete = false,
                             PaymentMethodName = "thanh toán qua momo"
                         },
                         new
                         {
                             Id = new Guid("36672051-5437-4d2c-a42e-c71a9b67a2b1"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(5810),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(1034),
                             IsDelete = false,
                             PaymentMethodName = "thanh toán trên app MetroPickUp"
                         });
@@ -686,7 +686,7 @@ namespace MetroDelivery.Identity.Migrations
                         {
                             Id = new Guid("45da4260-ba13-489b-995a-1f6adb13ab75"),
                             CategoryID = new Guid("175d4c8d-d2f0-441b-85cb-45a1cb0b6756"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(5964),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(1160),
                             IsDelete = false,
                             Price = 5000.5,
                             ProductDescription = "Kẹo thơm ngon được tạo ra từ các loại đường, được làm nóng và tạo nên hương vị ngọt ngào",
@@ -696,7 +696,7 @@ namespace MetroDelivery.Identity.Migrations
                         {
                             Id = new Guid("7d661a30-e180-498c-9a77-cb6112a7cb22"),
                             CategoryID = new Guid("175d4c8d-d2f0-441b-85cb-45a1cb0b6756"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(5969),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(1166),
                             IsDelete = false,
                             Price = 3000.0,
                             ProductDescription = "Kẹo lạc thơm ngon, giòn tan",
@@ -706,7 +706,7 @@ namespace MetroDelivery.Identity.Migrations
                         {
                             Id = new Guid("7da34092-5747-42b7-b059-4a5aad57e740"),
                             CategoryID = new Guid("175d4c8d-d2f0-441b-85cb-45a1cb0b6756"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(5973),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(1169),
                             IsDelete = false,
                             Price = 3000.0,
                             ProductDescription = "Kẹo lạc thơm ngon, giòn tan",
@@ -716,7 +716,7 @@ namespace MetroDelivery.Identity.Migrations
                         {
                             Id = new Guid("b834cf11-cc28-4e7d-9846-2acc8ad33d8c"),
                             CategoryID = new Guid("8908ea98-b421-420b-9634-03ed356bb921"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(5978),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(1172),
                             IsDelete = false,
                             Price = 10000.0,
                             ProductDescription = "Khoai tây chiên giòn tan",
@@ -726,7 +726,7 @@ namespace MetroDelivery.Identity.Migrations
                         {
                             Id = new Guid("6d60bf44-b775-4d87-bb47-aace85d49ac4"),
                             CategoryID = new Guid("175d4c8d-d2f0-441b-85cb-45a1cb0b6756"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(5981),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(1175),
                             IsDelete = false,
                             Price = 2500.0,
                             ProductDescription = "Kẹo dẻo mềm, đàn hồi",
@@ -736,7 +736,7 @@ namespace MetroDelivery.Identity.Migrations
                         {
                             Id = new Guid("1616cc05-8c82-4f8b-a6e0-f60ab3de0d38"),
                             CategoryID = new Guid("9afcdfac-1a27-496b-84e5-0c8e5804e40e"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(5983),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(1179),
                             IsDelete = false,
                             Price = 30000.0,
                             ProductDescription = "Cơm gà xé thơm ngon",
@@ -746,7 +746,7 @@ namespace MetroDelivery.Identity.Migrations
                         {
                             Id = new Guid("d4fe048d-ff12-4715-93e7-3250f49c15c8"),
                             CategoryID = new Guid("9b2cccb2-f5fa-4358-8265-0fe4f7a52253"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(5986),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(1182),
                             IsDelete = false,
                             Price = 5000.0,
                             ProductDescription = "Bánh quy giòn tan trong miệng",
@@ -756,7 +756,7 @@ namespace MetroDelivery.Identity.Migrations
                         {
                             Id = new Guid("f31c789c-4a46-45c7-9009-d36681d788c5"),
                             CategoryID = new Guid("175d4c8d-d2f0-441b-85cb-45a1cb0b6756"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(5989),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(1191),
                             IsDelete = false,
                             Price = 10000.0,
                             ProductDescription = "Kẹo sô cô la ngọt thanh",
@@ -766,7 +766,7 @@ namespace MetroDelivery.Identity.Migrations
                         {
                             Id = new Guid("4ecd72e3-f43d-490f-8b46-8e92ea29f85c"),
                             CategoryID = new Guid("175d4c8d-d2f0-441b-85cb-45a1cb0b6756"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(5991),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(1196),
                             IsDelete = false,
                             Price = 15000.0,
                             ProductDescription = "Kẹo dâu tây thơm ngon",
@@ -776,7 +776,7 @@ namespace MetroDelivery.Identity.Migrations
                         {
                             Id = new Guid("0c308b93-b26a-4224-9d63-28294711aa15"),
                             CategoryID = new Guid("9afcdfac-1a27-496b-84e5-0c8e5804e40e"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(5994),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(1199),
                             IsDelete = false,
                             Price = 50000.0,
                             ProductDescription = "Gà rán giòn tan thơm ngon",
@@ -786,7 +786,7 @@ namespace MetroDelivery.Identity.Migrations
                         {
                             Id = new Guid("107f1f75-b23b-4bc4-92d7-f2e90d067d1f"),
                             CategoryID = new Guid("9afcdfac-1a27-496b-84e5-0c8e5804e40e"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(5997),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(1202),
                             IsDelete = false,
                             Price = 65000.0,
                             ProductDescription = "Cá chiên giòn rụm",
@@ -796,7 +796,7 @@ namespace MetroDelivery.Identity.Migrations
                         {
                             Id = new Guid("55265d3b-fa02-4e09-84db-d4e8c8a9a9b5"),
                             CategoryID = new Guid("175d4c8d-d2f0-441b-85cb-45a1cb0b6756"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(6001),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(1206),
                             IsDelete = false,
                             Price = 5000.0,
                             ProductDescription = "Kẹo bạc hà mát lạnh",
@@ -806,7 +806,7 @@ namespace MetroDelivery.Identity.Migrations
                         {
                             Id = new Guid("ffb05663-954d-4af3-8a41-91af39446f81"),
                             CategoryID = new Guid("175d4c8d-d2f0-441b-85cb-45a1cb0b6756"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(6004),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(1211),
                             IsDelete = false,
                             Price = 2500.0,
                             ProductDescription = "Kẹo mút mềm dẻo",
@@ -816,7 +816,7 @@ namespace MetroDelivery.Identity.Migrations
                         {
                             Id = new Guid("4c9ec4b9-1c16-4c7a-90bf-d620aab257b6"),
                             CategoryID = new Guid("9afcdfac-1a27-496b-84e5-0c8e5804e40e"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(6007),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(1216),
                             IsDelete = false,
                             Price = 80000.0,
                             ProductDescription = "Gà nướng thơm phức",
@@ -826,7 +826,7 @@ namespace MetroDelivery.Identity.Migrations
                         {
                             Id = new Guid("43203ce4-d82c-4c78-8794-2aef22d7ec5b"),
                             CategoryID = new Guid("9afcdfac-1a27-496b-84e5-0c8e5804e40e"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(6010),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(1219),
                             IsDelete = false,
                             Price = 25000.0,
                             ProductDescription = "Cơm chiên dương châu thơm ngon",
@@ -836,7 +836,7 @@ namespace MetroDelivery.Identity.Migrations
                         {
                             Id = new Guid("e802b6c5-f08e-4eff-b7e7-af95514b4341"),
                             CategoryID = new Guid("b7a3a853-73c6-4f02-913b-9765019e9bd0"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(6012),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(1224),
                             IsDelete = false,
                             Price = 25000.0,
                             ProductDescription = "Bánh mì siêu topping thịt trứng cút, ăn là ghiền!!!",
@@ -881,7 +881,7 @@ namespace MetroDelivery.Identity.Migrations
                         new
                         {
                             Id = new Guid("ea675490-eecd-4308-bb71-61b72a9c979f"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(6450),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(1686),
                             FromLocation = "Quận 1, Tp.Hcm",
                             IsDelete = false,
                             ToLocation = "Quận 9, Tp.Hcm"
@@ -889,7 +889,7 @@ namespace MetroDelivery.Identity.Migrations
                         new
                         {
                             Id = new Guid("001a254c-02d4-40e7-a01f-95f393fb41ef"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(6454),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(1690),
                             FromLocation = "Quận 1, Tp.Hcm",
                             IsDelete = false,
                             ToLocation = "Suối Tiên, Đồng Nai"
@@ -897,7 +897,7 @@ namespace MetroDelivery.Identity.Migrations
                         new
                         {
                             Id = new Guid("a437b242-55fc-4146-a2b9-8c952b107e3a"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(6456),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(1693),
                             FromLocation = "Quận 1, Tp.Hcm",
                             IsDelete = false,
                             ToLocation = "Quận Thủ Đức, Tp.Hcm"
@@ -905,7 +905,7 @@ namespace MetroDelivery.Identity.Migrations
                         new
                         {
                             Id = new Guid("ccc66514-0597-4d43-aaff-0c5d8ee59ffa"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(6528),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(1695),
                             FromLocation = "Quận 1, Tp.Hcm",
                             IsDelete = false,
                             ToLocation = "Quận Bình Thạnh, Tp.Hcm"
@@ -913,7 +913,7 @@ namespace MetroDelivery.Identity.Migrations
                         new
                         {
                             Id = new Guid("b9f8f712-92ee-4611-ad55-000a8e1b84c6"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(6531),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(1697),
                             FromLocation = "Quận 1, Tp.Hcm",
                             IsDelete = false,
                             ToLocation = "Bến xe Miền Đông"
@@ -921,7 +921,7 @@ namespace MetroDelivery.Identity.Migrations
                         new
                         {
                             Id = new Guid("42f184eb-58b3-4b9b-be52-1da57f8ffb3f"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(6533),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(1699),
                             FromLocation = "Quận Bình Thạnh",
                             IsDelete = false,
                             ToLocation = "Bến Thành, Quận 1, TP HCM"
@@ -976,7 +976,7 @@ namespace MetroDelivery.Identity.Migrations
                         new
                         {
                             Id = new Guid("6e841857-2712-4da3-a15f-aed820adef5a"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(6250),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(1407),
                             Duration = new TimeSpan(0, 0, 30, 0, 0),
                             Index = 2,
                             IsDelete = false,
@@ -987,7 +987,7 @@ namespace MetroDelivery.Identity.Migrations
                         new
                         {
                             Id = new Guid("1b22bdb7-1688-42fa-8fae-4af92e32df7f"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(6268),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(1429),
                             Duration = new TimeSpan(0, 0, 30, 0, 0),
                             Index = 1,
                             IsDelete = false,
@@ -998,7 +998,7 @@ namespace MetroDelivery.Identity.Migrations
                         new
                         {
                             Id = new Guid("2ff9d0d9-474c-4466-b9a8-707b730f415c"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(6277),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(1437),
                             Duration = new TimeSpan(0, 0, 30, 0, 0),
                             Index = 1,
                             IsDelete = false,
@@ -1009,7 +1009,7 @@ namespace MetroDelivery.Identity.Migrations
                         new
                         {
                             Id = new Guid("ab2099b4-e511-42ff-9e6a-ee71bddcd482"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(6287),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(1446),
                             Duration = new TimeSpan(0, 0, 30, 0, 0),
                             Index = 1,
                             IsDelete = false,
@@ -1020,7 +1020,7 @@ namespace MetroDelivery.Identity.Migrations
                         new
                         {
                             Id = new Guid("15fefdbf-b178-49ba-aa7c-7b3e2dd575bc"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(6295),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(1498),
                             Duration = new TimeSpan(0, 1, 0, 0, 0),
                             Index = 2,
                             IsDelete = false,
@@ -1031,7 +1031,7 @@ namespace MetroDelivery.Identity.Migrations
                         new
                         {
                             Id = new Guid("8de6ed00-50c8-434e-95ce-cc921426e697"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(6302),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(1506),
                             Duration = new TimeSpan(0, 1, 30, 0, 0),
                             Index = 3,
                             IsDelete = false,
@@ -1042,7 +1042,7 @@ namespace MetroDelivery.Identity.Migrations
                         new
                         {
                             Id = new Guid("6a82db5a-23cf-4764-b7d1-ccabce5cc317"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(6309),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(1513),
                             Duration = new TimeSpan(0, 1, 40, 0, 0),
                             Index = 3,
                             IsDelete = false,
@@ -1053,7 +1053,7 @@ namespace MetroDelivery.Identity.Migrations
                         new
                         {
                             Id = new Guid("5004477e-1446-467d-8157-972185d64290"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(6316),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(1529),
                             Duration = new TimeSpan(0, 0, 40, 0, 0),
                             Index = 0,
                             IsDelete = false,
@@ -1101,7 +1101,7 @@ namespace MetroDelivery.Identity.Migrations
                         new
                         {
                             Id = new Guid("50cb67f8-421e-4aec-85ed-7114e763d6c4"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(6915),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(2277),
                             IsDelete = false,
                             StationName = "Ga Metro Bến Thành",
                             StoreID = new Guid("aa2610a8-de94-42b7-b12b-1cf8710e05d8")
@@ -1109,7 +1109,7 @@ namespace MetroDelivery.Identity.Migrations
                         new
                         {
                             Id = new Guid("50cb67f8-421e-4aec-85ed-7114e763d6c5"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(6920),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(2282),
                             IsDelete = false,
                             StationName = "Ga Metro Vincom Bình Thạnh",
                             StoreID = new Guid("d3599df7-877e-41c7-832d-14850e5c88bd")
@@ -1117,7 +1117,7 @@ namespace MetroDelivery.Identity.Migrations
                         new
                         {
                             Id = new Guid("50cb67f8-421e-4aec-85ed-7114e763d6c6"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(6922),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(2288),
                             IsDelete = false,
                             StationName = "Ga Metro Chợ Thủ Đức",
                             StoreID = new Guid("2f3eee35-1b8e-43af-956f-eacd94eea7cd")
@@ -1125,7 +1125,7 @@ namespace MetroDelivery.Identity.Migrations
                         new
                         {
                             Id = new Guid("50cb67f8-421e-4aec-85ed-7114e763d6c7"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(6926),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(2292),
                             IsDelete = false,
                             StationName = "Ga Metro Khu Công Nghệ Cao",
                             StoreID = new Guid("70c6a937-f285-4495-8407-b20a0c9b10f3")
@@ -1133,7 +1133,7 @@ namespace MetroDelivery.Identity.Migrations
                         new
                         {
                             Id = new Guid("50cb67f8-421e-4aec-85ed-7114e763d6c8"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(6929),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(2300),
                             IsDelete = false,
                             StationName = "Ga Metro Suối Tiên",
                             StoreID = new Guid("ef443e4b-886c-4c06-8528-51e9cf623867")
@@ -1141,7 +1141,7 @@ namespace MetroDelivery.Identity.Migrations
                         new
                         {
                             Id = new Guid("50cb67f8-421e-4aec-85ed-7114e763d6c9"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(6932),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(2303),
                             IsDelete = false,
                             StationName = "Ga Metro Bến xe Miền Đông",
                             StoreID = new Guid("6507b7db-7255-4274-87a4-6e2dc3d8a3c4")
@@ -1189,47 +1189,65 @@ namespace MetroDelivery.Identity.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("648cc34e-59ac-4be0-8e72-f90657a239a3"),
+                            Id = new Guid("a05b099b-63d1-4e08-9bc6-91e5fcf70d25"),
                             Arrived = new DateTime(2023, 7, 17, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(6667),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(1965),
                             IsDelete = false,
                             StationID = new Guid("50cb67f8-421e-4aec-85ed-7114e763d6c7"),
                             TripID = new Guid("823ad122-7b51-4dab-9d37-b0f238d4a2ff")
                         },
                         new
                         {
-                            Id = new Guid("a975b7e8-c5ca-4e81-b8b8-fc840002a511"),
+                            Id = new Guid("72462d68-6ca2-4f22-9f60-85321e3eafed"),
                             Arrived = new DateTime(2023, 9, 15, 13, 0, 0, 0, DateTimeKind.Unspecified),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(6760),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(2081),
                             IsDelete = false,
                             StationID = new Guid("50cb67f8-421e-4aec-85ed-7114e763d6c6"),
                             TripID = new Guid("02859382-d88c-4e69-8c47-b8e0456677d5")
                         },
                         new
                         {
-                            Id = new Guid("c212b592-2556-4307-84e6-6dfb2154d0da"),
+                            Id = new Guid("990c6758-35b5-48ad-9152-7f140bf462a9"),
                             Arrived = new DateTime(2023, 11, 14, 17, 0, 0, 0, DateTimeKind.Unspecified),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(6770),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(2093),
                             IsDelete = false,
                             StationID = new Guid("50cb67f8-421e-4aec-85ed-7114e763d6c5"),
                             TripID = new Guid("27421cac-1da7-4df8-9928-7fb636ca42aa")
                         },
                         new
                         {
-                            Id = new Guid("589bfc9b-f77f-4845-925f-b2d08c3e3c04"),
+                            Id = new Guid("e1853150-d7e5-44f1-af9b-e7048b792343"),
                             Arrived = new DateTime(2023, 12, 23, 14, 0, 0, 0, DateTimeKind.Unspecified),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(6778),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(2101),
                             IsDelete = false,
                             StationID = new Guid("50cb67f8-421e-4aec-85ed-7114e763d6c8"),
                             TripID = new Guid("5b30c4e9-31ab-456c-b212-dc6b2ba9a3e7")
                         },
                         new
                         {
-                            Id = new Guid("4f492978-0dd9-4641-bfb0-90701603f13f"),
+                            Id = new Guid("3fcecee0-5e0b-48c8-91ca-ac50f0d25e86"),
                             Arrived = new DateTime(2023, 5, 25, 20, 0, 0, 0, DateTimeKind.Unspecified),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(6785),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(2109),
                             IsDelete = false,
                             StationID = new Guid("50cb67f8-421e-4aec-85ed-7114e763d6c8"),
+                            TripID = new Guid("9c2ab923-4c57-44d7-9c1a-b44c0d3e6b00")
+                        },
+                        new
+                        {
+                            Id = new Guid("f7c9daba-7c20-406c-a752-04305d97a598"),
+                            Arrived = new DateTime(2023, 5, 26, 20, 0, 0, 0, DateTimeKind.Unspecified),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(2117),
+                            IsDelete = false,
+                            StationID = new Guid("50cb67f8-421e-4aec-85ed-7114e763d6c6"),
+                            TripID = new Guid("9c2ab923-4c57-44d7-9c1a-b44c0d3e6b00")
+                        },
+                        new
+                        {
+                            Id = new Guid("e63fdb64-4445-4e49-a372-af0abcfec5b2"),
+                            Arrived = new DateTime(2023, 6, 16, 19, 0, 0, 0, DateTimeKind.Unspecified),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(2124),
+                            IsDelete = false,
+                            StationID = new Guid("50cb67f8-421e-4aec-85ed-7114e763d6c5"),
                             TripID = new Guid("9c2ab923-4c57-44d7-9c1a-b44c0d3e6b00")
                         });
                 });
@@ -1277,7 +1295,7 @@ namespace MetroDelivery.Identity.Migrations
                         new
                         {
                             Id = new Guid("aa2610a8-de94-42b7-b12b-1cf8710e05d8"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(7169),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(2645),
                             IsDelete = false,
                             StoreCloseTime = new TimeSpan(0, 23, 0, 0, 0),
                             StoreLocation = "Số 2, Đường Lê Lai, Quận 1",
@@ -1287,7 +1305,7 @@ namespace MetroDelivery.Identity.Migrations
                         new
                         {
                             Id = new Guid("d3599df7-877e-41c7-832d-14850e5c88bd"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(7181),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(2661),
                             IsDelete = false,
                             StoreCloseTime = new TimeSpan(0, 6, 0, 0, 0),
                             StoreLocation = "Số 3, Vincom, Quận Bình Thạnh",
@@ -1297,7 +1315,7 @@ namespace MetroDelivery.Identity.Migrations
                         new
                         {
                             Id = new Guid("2f3eee35-1b8e-43af-956f-eacd94eea7cd"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(7229),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(2667),
                             IsDelete = false,
                             StoreCloseTime = new TimeSpan(0, 6, 0, 0, 0),
                             StoreLocation = "Số 1, Võ Văn Ngân, Thành Phố Thủ Đức",
@@ -1307,7 +1325,7 @@ namespace MetroDelivery.Identity.Migrations
                         new
                         {
                             Id = new Guid("70c6a937-f285-4495-8407-b20a0c9b10f3"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(7238),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(2677),
                             IsDelete = false,
                             StoreCloseTime = new TimeSpan(0, 6, 0, 0, 0),
                             StoreLocation = "Khu Công Nghệ Cao Thành Phố Thủ Đức ",
@@ -1317,7 +1335,7 @@ namespace MetroDelivery.Identity.Migrations
                         new
                         {
                             Id = new Guid("ef443e4b-886c-4c06-8528-51e9cf623867"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(7243),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(2691),
                             IsDelete = false,
                             StoreCloseTime = new TimeSpan(0, 6, 0, 0, 0),
                             StoreLocation = "Suối tiên",
@@ -1327,7 +1345,7 @@ namespace MetroDelivery.Identity.Migrations
                         new
                         {
                             Id = new Guid("6507b7db-7255-4274-87a4-6e2dc3d8a3c4"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(7249),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(2697),
                             IsDelete = false,
                             StoreCloseTime = new TimeSpan(0, 6, 0, 0, 0),
                             StoreLocation = "Bến Xe Miền Đông",
@@ -1374,59 +1392,75 @@ namespace MetroDelivery.Identity.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("bea6ac1c-bafd-4e68-bcf2-4fc1d91e5ef0"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(7038),
+                            Id = new Guid("7860d205-6e69-456e-ba3b-3bb5dbb8b44e"),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(2474),
                             IsDelete = false,
                             MenuId = new Guid("e7a15238-5db0-49bd-94e6-d5f8b77ae6ce"),
                             StoreId = new Guid("aa2610a8-de94-42b7-b12b-1cf8710e05d8")
                         },
                         new
                         {
-                            Id = new Guid("6480b2fc-29b9-497b-b45a-7885707ee702"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(7042),
+                            Id = new Guid("885d8f26-64f2-4ca8-990a-1c4d040a7f79"),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(2479),
                             IsDelete = false,
                             MenuId = new Guid("5263453c-dae9-45e4-8204-5430a7256cde"),
                             StoreId = new Guid("aa2610a8-de94-42b7-b12b-1cf8710e05d8")
                         },
                         new
                         {
-                            Id = new Guid("82d2ec5c-0c7a-4ff1-983c-9122df296acd"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(7048),
+                            Id = new Guid("cdfe80e6-7610-476e-a8da-288bacfa47bf"),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(2482),
                             IsDelete = false,
                             MenuId = new Guid("9b08173a-e338-45ef-b479-6b0e95f2b055"),
                             StoreId = new Guid("aa2610a8-de94-42b7-b12b-1cf8710e05d8")
                         },
                         new
                         {
-                            Id = new Guid("164bcfb2-dae1-4eef-846d-82d0a3fe6285"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(7050),
+                            Id = new Guid("b79065f8-36f0-4a27-a968-20a9aee4b834"),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(2484),
                             IsDelete = false,
                             MenuId = new Guid("47a91dd5-f999-461a-8f80-935d169ca0c3"),
                             StoreId = new Guid("aa2610a8-de94-42b7-b12b-1cf8710e05d8")
                         },
                         new
                         {
-                            Id = new Guid("d2758738-8ee6-4705-b83d-db58fd1086d0"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(7053),
+                            Id = new Guid("d78230d2-a0dc-49d8-b113-810f51be8bd4"),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(2490),
                             IsDelete = false,
                             MenuId = new Guid("d6184ea2-9833-499f-9a56-8138c3b60c78"),
                             StoreId = new Guid("aa2610a8-de94-42b7-b12b-1cf8710e05d8")
                         },
                         new
                         {
-                            Id = new Guid("fe178469-5c64-44bc-b9ce-11d39cd9e113"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(7055),
+                            Id = new Guid("c8c78bcd-e951-4596-a1a2-53ed033575ec"),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(2493),
                             IsDelete = false,
                             MenuId = new Guid("bbc7d071-5f5b-40be-b25e-3aa07a6c3e7c"),
                             StoreId = new Guid("aa2610a8-de94-42b7-b12b-1cf8710e05d8")
                         },
                         new
                         {
-                            Id = new Guid("4a6d18e0-3648-4398-9f4f-f24f80de4668"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(7057),
+                            Id = new Guid("7f1b4fae-81a1-4de5-b1c2-95ad60af4c27"),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(2496),
                             IsDelete = false,
                             MenuId = new Guid("4cbf8910-c204-46fe-91d4-e8e4c94ff695"),
                             StoreId = new Guid("aa2610a8-de94-42b7-b12b-1cf8710e05d8")
+                        },
+                        new
+                        {
+                            Id = new Guid("9f0ced7a-33a8-444c-b73d-4808372315d8"),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(2499),
+                            IsDelete = false,
+                            MenuId = new Guid("5263453c-dae9-45e4-8204-5430a7256cde"),
+                            StoreId = new Guid("70c6a937-f285-4495-8407-b20a0c9b10f3")
+                        },
+                        new
+                        {
+                            Id = new Guid("4ec5e41a-4481-415d-b9fc-ca1a8627b745"),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(2502),
+                            IsDelete = false,
+                            MenuId = new Guid("9b08173a-e338-45ef-b479-6b0e95f2b055"),
+                            StoreId = new Guid("2f3eee35-1b8e-43af-956f-eacd94eea7cd")
                         });
                 });
 
@@ -1474,7 +1508,7 @@ namespace MetroDelivery.Identity.Migrations
                         new
                         {
                             Id = new Guid("823ad122-7b51-4dab-9d37-b0f238d4a2ff"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(7824),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(2833),
                             IsDelete = false,
                             RouteId = new Guid("ea675490-eecd-4308-bb71-61b72a9c979f"),
                             TripEndTime = new DateTime(2023, 7, 17, 12, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1484,7 +1518,7 @@ namespace MetroDelivery.Identity.Migrations
                         new
                         {
                             Id = new Guid("9c2ab923-4c57-44d7-9c1a-b44c0d3e6b00"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(7857),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(2865),
                             IsDelete = false,
                             RouteId = new Guid("001a254c-02d4-40e7-a01f-95f393fb41ef"),
                             TripEndTime = new DateTime(2023, 5, 25, 20, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1494,7 +1528,7 @@ namespace MetroDelivery.Identity.Migrations
                         new
                         {
                             Id = new Guid("02859382-d88c-4e69-8c47-b8e0456677d5"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(7868),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(2878),
                             IsDelete = false,
                             RouteId = new Guid("a437b242-55fc-4146-a2b9-8c952b107e3a"),
                             TripEndTime = new DateTime(2023, 9, 15, 13, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1504,7 +1538,7 @@ namespace MetroDelivery.Identity.Migrations
                         new
                         {
                             Id = new Guid("27421cac-1da7-4df8-9928-7fb636ca42aa"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(7879),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(2890),
                             IsDelete = false,
                             RouteId = new Guid("ccc66514-0597-4d43-aaff-0c5d8ee59ffa"),
                             TripEndTime = new DateTime(2023, 11, 14, 17, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1514,7 +1548,7 @@ namespace MetroDelivery.Identity.Migrations
                         new
                         {
                             Id = new Guid("5b30c4e9-31ab-456c-b212-dc6b2ba9a3e7"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(7890),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(2902),
                             IsDelete = false,
                             RouteId = new Guid("001a254c-02d4-40e7-a01f-95f393fb41ef"),
                             TripEndTime = new DateTime(2023, 12, 23, 14, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1524,7 +1558,7 @@ namespace MetroDelivery.Identity.Migrations
                         new
                         {
                             Id = new Guid("9b4d232c-0fda-4ec0-beed-ecd649ee9c52"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(7903),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(2917),
                             IsDelete = false,
                             RouteId = new Guid("42f184eb-58b3-4b9b-be52-1da57f8ffb3f"),
                             TripEndTime = new DateTime(2023, 8, 18, 21, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1534,7 +1568,7 @@ namespace MetroDelivery.Identity.Migrations
                         new
                         {
                             Id = new Guid("bf736039-33e9-466f-ac4e-78c89f3317e6"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(7914),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(2930),
                             IsDelete = false,
                             RouteId = new Guid("a437b242-55fc-4146-a2b9-8c952b107e3a"),
                             TripEndTime = new DateTime(2023, 7, 6, 23, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1544,7 +1578,7 @@ namespace MetroDelivery.Identity.Migrations
                         new
                         {
                             Id = new Guid("8a2ba7d5-7019-49c6-a47d-ab0a072e7932"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(7926),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(2943),
                             IsDelete = false,
                             RouteId = new Guid("b9f8f712-92ee-4611-ad55-000a8e1b84c6"),
                             TripEndTime = new DateTime(2023, 10, 3, 17, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1554,7 +1588,7 @@ namespace MetroDelivery.Identity.Migrations
                         new
                         {
                             Id = new Guid("d9852f0d-e836-4a6e-94f4-d229b297933d"),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(7937),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(2956),
                             IsDelete = false,
                             RouteId = new Guid("a437b242-55fc-4146-a2b9-8c952b107e3a"),
                             TripEndTime = new DateTime(2023, 5, 8, 15, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1613,7 +1647,7 @@ namespace MetroDelivery.Identity.Migrations
                             Id = new Guid("4e917707-0edb-49da-b6f4-804d2c52821b"),
                             Balance = 150000.0,
                             CreateTimeOfWithdraw = new DateTime(2023, 5, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(8263),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(3341),
                             CustomerID = new Guid("0512a248-0054-4616-ade5-ae412f4f07bd"),
                             Deposit = 60000.0,
                             IsDelete = false,
@@ -1624,7 +1658,7 @@ namespace MetroDelivery.Identity.Migrations
                             Id = new Guid("8efb8acc-2eb9-448d-bfa2-825995f50b59"),
                             Balance = 0.0,
                             CreateTimeOfWithdraw = new DateTime(2023, 9, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(8274),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(3354),
                             CustomerID = new Guid("ecf95bf5-d766-4b6e-94a7-d33ea29c0618"),
                             Deposit = 30000.0,
                             IsDelete = false,
@@ -1635,7 +1669,7 @@ namespace MetroDelivery.Identity.Migrations
                             Id = new Guid("0bd9818a-5ef1-45e3-a6fe-0c932f970fe8"),
                             Balance = 2000000.0,
                             CreateTimeOfWithdraw = new DateTime(2022, 12, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Created = new DateTime(2023, 10, 15, 15, 15, 33, 878, DateTimeKind.Local).AddTicks(8280),
+                            Created = new DateTime(2023, 10, 17, 22, 13, 46, 441, DateTimeKind.Local).AddTicks(3364),
                             CustomerID = new Guid("01d31c40-14c9-444c-a2fe-f58ea0fbc08a"),
                             Deposit = 125000.0,
                             IsDelete = false,
@@ -1720,7 +1754,7 @@ namespace MetroDelivery.Identity.Migrations
                         {
                             Id = "2198E4CD-3305-49C5-B78A-0B54DD76898F",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "1683165e-adcd-42b4-9abd-86282f2e86d2",
+                            ConcurrencyStamp = "73cf226a-4ec5-4dab-a038-1561fe7dad47",
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
                             FirstName = "Nhan",
@@ -1728,9 +1762,9 @@ namespace MetroDelivery.Identity.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEFLHJCskxm4a7oZojShQkJgaHQWbpJ2fF8iylLSVqdREMdjxGI9p2CcB7m6IRSq+yw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAELVMM545M79C1nBxD/Yy9zP2mwssQFMJLH0IdBnfOIKxyqVSE0XZ9axiZMN6d/uVaw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "7c328cb2-6c8a-4dd6-926c-1ac756d21d4f",
+                            SecurityStamp = "5f4f2405-3f10-473c-8d3a-2115132135b6",
                             TwoFactorEnabled = false,
                             UserName = "admin@gmail.com"
                         },
@@ -1738,7 +1772,7 @@ namespace MetroDelivery.Identity.Migrations
                         {
                             Id = "E6DE8827-B7C2-46E9-9227-66E6ECE676A8",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "a3396787-e5dd-4eee-a28e-0009d6c19693",
+                            ConcurrencyStamp = "7c6904f4-f4f2-423a-8f09-13b03618e3c9",
                             Email = "enduser@gmail.com",
                             EmailConfirmed = true,
                             FirstName = "Vi",
@@ -1746,9 +1780,9 @@ namespace MetroDelivery.Identity.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ENDUSER@GMAIL.COM",
                             NormalizedUserName = "ENDUSER@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEEycGZ/6c2wfZZEnEfuKxBkeqtYrmpwMKmYzIXRfB9VJaZWPy2rzqXdZ+/99km6eOg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAELkrMLbP7exyylpKNTwZ9FqzIekdsWAOqib7NX4EfVeH2Fsa3R5FSQYqwwCe1JWjZQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "595070c6-6499-4f17-acee-5ff7e6e1280f",
+                            SecurityStamp = "29ff9d31-d9ff-44bc-b3c1-51f39a871d36",
                             TwoFactorEnabled = false,
                             UserName = "enduser@gmail.com"
                         },
@@ -1756,7 +1790,7 @@ namespace MetroDelivery.Identity.Migrations
                         {
                             Id = "2C0B43BB-B991-408E-A8F3-2FD3B4A2AB84",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d31cf4e8-969a-4342-8f6a-f520182d8f31",
+                            ConcurrencyStamp = "c9f60228-71d1-4cbb-a0ca-d7a7a52827f7",
                             Email = "staff@gmail.com",
                             EmailConfirmed = true,
                             FirstName = "Vi",
@@ -1764,9 +1798,9 @@ namespace MetroDelivery.Identity.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "STAFF@GMAIL.COM",
                             NormalizedUserName = "STAFF@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEAMCN9Ba0qxYstaWP+PrT79Dzfin7EL3V1fvCzV35n2Xt9q594oMBHM0OrMnXmtEGg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAENDeQMPaL1iBKrhPX4MLSnqEH4NTmcLyIJh2eggNjpQmKCgok7CFmqv8DmyVGeT0nw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "0a379b66-9df4-41e9-95af-eef7e44cfda5",
+                            SecurityStamp = "12cf9893-2fd2-4ba8-9c63-b0364b4581d1",
                             TwoFactorEnabled = false,
                             UserName = "staff@gmail.com"
                         },
@@ -1774,7 +1808,7 @@ namespace MetroDelivery.Identity.Migrations
                         {
                             Id = "2E089AF6-3437-4DD6-9956-BB792E783AFB",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "31405d3f-cab9-4d40-84c6-0f9bee04a447",
+                            ConcurrencyStamp = "eb86872e-63e2-446b-8a29-4a5b3011cd95",
                             Email = "nguyenthanhn537@gmail.com",
                             EmailConfirmed = true,
                             FirstName = "Nhân",
@@ -1782,9 +1816,9 @@ namespace MetroDelivery.Identity.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "NGUYENTHANHN537@GMAIL.COM",
                             NormalizedUserName = "NGUYENTHANHN537@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEN3jwVC6m9RVOCoRRnqTjNCjhYN5tVGi5Ac8ST7gcrS3JoGWZ5x5XcJkf6IpyWgTUA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEG9/DT39QRBwjhcZm6GymRXkKTyTIraAyDg0ptZBBmR+zz5TDP63/W49J1LEHrhUIA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "57e29c19-2711-4c4b-85c5-fa745c739b6e",
+                            SecurityStamp = "085e8d2c-c098-4e46-9d51-4a0b9e495e45",
                             TwoFactorEnabled = false,
                             UserName = "nguyenthanhn537@gmail.com"
                         },
@@ -1792,7 +1826,7 @@ namespace MetroDelivery.Identity.Migrations
                         {
                             Id = "1F11BA64-2870-43F7-BB03-867112867F25",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "15d7f975-9d22-45ab-8b71-4b8aeb439924",
+                            ConcurrencyStamp = "487b3bf4-08ab-4b4a-8110-fe95371b3fc2",
                             Email = "thaivin537@gmail.com",
                             EmailConfirmed = true,
                             FirstName = "Thái",
@@ -1800,9 +1834,9 @@ namespace MetroDelivery.Identity.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "THAIVIN537@GMAIL.COM",
                             NormalizedUserName = "THAIVIN537@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAECB3cG8o9WxwyxlwsFop5SDibZ0XVe/aLpnFthfqN7iizbzBliv0NjDnXQMkYWSZIQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHOpkMueqjazVWiCNcTjGYKYpyXVjLrP6nRiDOH+NaYpygyFWZdw5jb6fO/2WHF5eA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "df6b23dc-d6a4-4f43-9b6f-88224cfe3adb",
+                            SecurityStamp = "5375ea16-16e9-422e-b066-675debb330de",
                             TwoFactorEnabled = false,
                             UserName = "thaivin537@gmail.com"
                         },
@@ -1810,7 +1844,7 @@ namespace MetroDelivery.Identity.Migrations
                         {
                             Id = "C4EE82A1-DB88-49A6-81A8-4B9521FF01F9",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f31e6499-3d1e-4f08-8ae1-5cc7c3e40443",
+                            ConcurrencyStamp = "4bd4283a-ce1b-4682-a572-d128f39109be",
                             Email = "anhjenda537@gmail.com",
                             EmailConfirmed = true,
                             FirstName = "Anh",
@@ -1818,9 +1852,9 @@ namespace MetroDelivery.Identity.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ANHJENDA537@GMAIL.COM",
                             NormalizedUserName = "ANHJENDA537@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAELpqQhTVuZkXzkjgr67ujRfE0rMHKv5v9VVnDG5MmbcgdeBUlx2aYd61VehavV9nTg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAECGEmMWcdQxlJQ7D0WQ3bBDW284yZZK6UnXhANgGvZDYXCxgFqPqFrtMLPioosmmpQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "71d3e29f-2bad-4106-91d8-a300a520ee5d",
+                            SecurityStamp = "d7fa4efb-8d32-4856-8613-c33f28d7e587",
                             TwoFactorEnabled = false,
                             UserName = "anhjenda537@gmail.com"
                         });
@@ -1856,21 +1890,21 @@ namespace MetroDelivery.Identity.Migrations
                         new
                         {
                             Id = "CF531396-C1CD-427B-9D17-0383B7675394",
-                            ConcurrencyStamp = "99b0fa29-5e15-4aa0-b168-33cb3cebbc8c",
+                            ConcurrencyStamp = "8c65f54f-6322-4d7a-b1a3-589d08d8016f",
                             Name = "EndUser",
                             NormalizedName = "EndUser"
                         },
                         new
                         {
                             Id = "AF5EB4AC-219A-4BC1-99FE-8C23876536EA",
-                            ConcurrencyStamp = "ee582322-ac88-453f-81f8-f5975e3c7161",
+                            ConcurrencyStamp = "16bcdf85-bdf4-46a8-bfc6-99cbcd62f8cc",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         },
                         new
                         {
                             Id = "647D9649-F5A2-4F24-808F-6FC326EC2AA3",
-                            ConcurrencyStamp = "1df2c155-af10-4968-997d-7403fc9ba335",
+                            ConcurrencyStamp = "bed37c01-16d7-411f-9eb4-2eebd3565bde",
                             Name = "Staff",
                             NormalizedName = "Staff"
                         });

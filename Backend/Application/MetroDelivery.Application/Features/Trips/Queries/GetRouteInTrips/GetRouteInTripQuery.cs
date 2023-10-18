@@ -58,5 +58,6 @@ namespace MetroDelivery.Application.Features.Trips.Queries.GetRouteInTrips
 
             return list;
         }
+        
     }
 }
