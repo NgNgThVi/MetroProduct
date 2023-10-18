@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using MetroDelivery.Application.Common.CRUDResponse;
+using MetroDelivery.Application.Features.Orders.Queries;
 using MetroDelivery.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace MetroDelivery.Application.Features.Orders.Commands.CreateOrder
 {
-    public class CreateOrderCommand : IRequest<Guid>
+    public class CreateOrderCommand : IRequest<OrderResponseMessage>
     {
         //Customer
         public string ApplicationUserID { get; set; }
@@ -23,7 +24,17 @@ namespace MetroDelivery.Application.Features.Orders.Commands.CreateOrder
         
         // order
         public string? OrderTokenQR { get; set; }
-        public double? TotalPrice { get; set; }
+        /*public double? TotalPrice { get; set; }*/
+
+        // 1 list product được chọn từ MenuProduct
+        public List<ProductRequest> Products { get; set; }
     }
-    
+
+    public class ProductRequest
+    {
+        public Guid ProductId { get; set; }
+        public int Quantity { get; set; }
+        public double PriceOfProductBelongToTimeService { get; set; }
+    }
+
 }

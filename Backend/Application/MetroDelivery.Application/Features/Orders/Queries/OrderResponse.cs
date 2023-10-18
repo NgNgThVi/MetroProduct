@@ -29,4 +29,10 @@ namespace MetroDelivery.Application.Features.Orders.Queries
         public Trip? TripData { get; set; }
         public Store? StoreData { get; set; }
     }
+
+    public class OrderResponseMessage
+    {
+        public Guid OrderId { get; set; }
+        public Guid OrderDetailId { get; set; }
+    }
 }

@@ -47,7 +47,7 @@ namespace MetroDelivery.API.Controllers.Orders
         [Route("orders")]
         [ProducesResponseType(201)]
         [ProducesResponseType(400)]
-        public async Task<Guid> CreateOrder(CreateOrderCommand request)
+        public async Task<OrderResponseMessage> CreateOrder(CreateOrderCommand request)
         {
             var response = await _mediator.Send(request);
             return response;

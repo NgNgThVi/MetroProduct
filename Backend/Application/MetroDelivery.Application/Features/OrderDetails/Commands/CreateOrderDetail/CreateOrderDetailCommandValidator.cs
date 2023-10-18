@@ -1,4 +1,4 @@
-﻿using FluentValidation;
+﻿/*using FluentValidation;
 
 namespace MetroDelivery.Application.Features.OrderDetails.Commands.CreateOrderDetail
 {
@@ -12,3 +12,4 @@ namespace MetroDelivery.Application.Features.OrderDetails.Commands.CreateOrderDe
         }
     }
 }
+*/
