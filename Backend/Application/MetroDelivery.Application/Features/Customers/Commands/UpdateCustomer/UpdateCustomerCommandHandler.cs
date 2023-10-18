@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using MetroDelivery.Application.Common.CRUDResponse;
 using MetroDelivery.Application.Common.Exceptions;
 using MetroDelivery.Application.Common.Interface;
 using MetroDelivery.Application.Contracts.Logging;
@@ -12,25 +13,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MetroDelivery.Application.Features.Customers.Commands.UpdateCustomer
 {
-    public class UpdateCustomerCommandHandler : IRequestHandler<UpdateCustomerCommand, Unit>
+    public class UpdateCustomerCommandHandler : IRequestHandler<UpdateCustomerCommand, MetroPickUpResponse>
     {
-        /*private readonly IMapper _mapper;
-        private readonly ICustomerRepository _customerRepository;
-        private readonly IAppLogger<UpdateCustomerCommand> _logger;
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly RoleManager<IdentityRole> _roleManager;
-        private readonly SignInManager<ApplicationUser> _signInManager;
-
-        public UpdateCustomerCommandHandler(IMapper mapper, ICustomerRepository userRepository, IAppLogger<UpdateCustomerCommand> logger,
-            UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, SignInManager<ApplicationUser> signInManager)
-        {
-            _mapper = mapper;
-            _customerRepository = userRepository;
-            _logger = logger;
-            _userManager = userManager;
-            _roleManager = roleManager;
-            _signInManager = signInManager;
-        }*/
         private readonly IMetroPickUpDbContext _metroPickUpDbContext;
         private readonly IMapper _mapper;
         private readonly IAppLogger<GetListCustomerQuery> _logger;
@@ -48,41 +32,38 @@ namespace MetroDelivery.Application.Features.Customers.Commands.UpdateCustomer
             _signInManager = signInManager;
         }
 
-        public async Task<Unit> Handle(UpdateCustomerCommand request, CancellationToken cancellationToken)
+        public async Task<MetroPickUpResponse> Handle(UpdateCustomerCommand request, CancellationToken cancellationToken)
         {
             // validate incoming data
-            /*var customer = await _customerRepository.CustomerIdMusBeExist(request.CustomerId);*/
-            var customer = await _metroPickUpDbContext.Customer.Where(c => c.Id == request.CustomerId).SingleOrDefaultAsync();
+            var customer = await _metroPickUpDbContext.ApplicationUsers.Where(c => c.Id == request.Id).SingleOrDefaultAsync();
             if (customer == null) {
                 throw new NotFoundException("Customer does not exist !");
             }
-            else if (customer.IsDelete == true) {
+            else if (customer.EmailConfirmed == false) {
                 throw new NotFoundException("The customer have been deleted");
             }
             var validator = new UpdateCustomerCommandValidator();
             var validationResult = await validator.ValidateAsync(request);
 
             if (validationResult.Errors.Any()) {
-                _logger.LogWarning("Validation errors in update for {0} - {1}", nameof(Customer), request.CustomerId);
+                _logger.LogWarning("Validation errors in update for {0} - {1}", nameof(ApplicationUser), request.Id);
                 throw new BadRequestException("Invalid Customer", validationResult);
             }
 
-            customer.Phone = request.Phone;
+            customer.PhoneNumber = request.Phone;
             customer.Birthday = request.Birthday;
             customer.Address = request.Address;
-
-            if (customer.ApplicationUser != null) {
-                customer.ApplicationUser.FirstName = request.FirstName;
-                customer.ApplicationUser.LastName = request.LastName;
-            }
+            customer.Wallet = request.Wallet;
+            customer.FirstName = request.FirstName;
+            customer.LastName = request.LastName;
+            
 
             // add database
-            /*await _customerRepository.UpdateAsync(customer);*/
-            _metroPickUpDbContext.Customer.Update(customer);
+            _metroPickUpDbContext.ApplicationUsers.Update(customer);
             await _metroPickUpDbContext.SaveChangesAsync();
 
 
-            var user = await _userManager.FindByIdAsync(customer.ApplicationUser.Id);
+            var user = await _userManager.FindByIdAsync(customer.Id);
             if (user != null) {
                 var userRoles = await _userManager.GetRolesAsync(user);
                 // Xóa role hiện tại
@@ -92,7 +73,9 @@ namespace MetroDelivery.Application.Features.Customers.Commands.UpdateCustomer
             }
 
             // return
-            return Unit.Value;
+            return new MetroPickUpResponse { 
+                Message = "Update Customer Successfully" 
+            };
         }
     }
 }

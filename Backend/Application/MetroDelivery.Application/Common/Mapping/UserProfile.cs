@@ -1,14 +1,12 @@
 ﻿using AutoMapper;
 using MetroDelivery.Application.Features.Categorys.Queries;
 using MetroDelivery.Application.Features.Customers;
-using MetroDelivery.Application.Features.Customers.Queries.GetCustomerByApplicationUserId;
 using MetroDelivery.Application.Features.Menu_Products;
 using MetroDelivery.Application.Features.Menus.Queries;
 using MetroDelivery.Application.Features.OrderDetails.Queries;
 using MetroDelivery.Application.Features.PaymentMethods.Queries;
 using MetroDelivery.Application.Features.Products.Queries;
 using MetroDelivery.Application.Features.Routes.Queries;
-using MetroDelivery.Application.Features.Stations;
 using MetroDelivery.Application.Features.Stations.Queries;
 using MetroDelivery.Application.Features.Store_Menus.Queries;
 using MetroDelivery.Application.Features.Stores;
@@ -23,11 +21,11 @@ namespace MetroDelivery.Application.Common.MappingProfiles
     {
         public UserProfile()
         {
-            CreateMap<CustomerDto, Customer>().ReverseMap();
-            CreateMap<Customer, CustomerDto>().ReverseMap();
+            CreateMap<CustomerResponse, ApplicationUser>().ReverseMap();
+            CreateMap<ApplicationUser, CustomerResponse>().ReverseMap();
 
-            CreateMap<ApplicationUserData, ApplicationUser>().ReverseMap();
-            CreateMap<ApplicationUser, ApplicationUserData>().ReverseMap();
+            /*CreateMap<ApplicationUserData, ApplicationUser>().ReverseMap();
+            CreateMap<ApplicationUser, ApplicationUserData>().ReverseMap();*/
             /*CreateMap<CreateCustomerCommand, User>().ReverseMap();
             CreateMap<UpdateUserCommand, User>().ReverseMap();*/
 
@@ -87,8 +85,8 @@ namespace MetroDelivery.Application.Common.MappingProfiles
             CreateMap<PaymentMethod, PaymentMethodResponse>().ReverseMap();
 
             //CustomerData
-            CreateMap<CustomerData, Customer>().ReverseMap();
-            CreateMap<Customer, CustomerData>().ReverseMap();
+            CreateMap<CustomerData, ApplicationUser>().ReverseMap();
+            CreateMap<ApplicationUser, CustomerData>().ReverseMap();
 
         }
 

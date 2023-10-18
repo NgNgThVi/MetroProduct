@@ -29,13 +29,13 @@ namespace MetroDelivery.Application.Features.Withdraws.Queries.GetAllWithdraw
         {
             var listWithdraw = await _metroPickUpDbContext.WithDraw.Where(w => !w.IsDelete)
                                                                 .Join(
-                                                                    _metroPickUpDbContext.Customer,
-                                                                    withdraws => withdraws.CustomerID,
-                                                                    customer => customer.Id,
-                                                                    (withdraws, customer) => new
+                                                                    _metroPickUpDbContext.ApplicationUsers,
+                                                                    withdraws => withdraws.ApplicationUserID,
+                                                                    applicationUser => applicationUser.Id,
+                                                                    (withdraws, applicationUser) => new
                                                                     {
                                                                         WithDraws = withdraws,
-                                                                        Customers = customer 
+                                                                        ApplicationUsers = applicationUser
                                                                     }
                                                                 )
                                                                 .Join(
@@ -47,11 +47,11 @@ namespace MetroDelivery.Application.Features.Withdraws.Queries.GetAllWithdraw
                                                                         Id = combined.WithDraws.Id,
                                                                         Balance = combined.WithDraws.Balance,
                                                                         Deposit = combined.WithDraws.Deposit,
-                                                                        CustomerID = combined.WithDraws.CustomerID,
+                                                                        ApplicationUserID = combined.WithDraws.ApplicationUserID,
                                                                         PaymentMethodID = combined.WithDraws.PaymentMethodID,
                                                                         CreateTimeOfWithdraw = combined.WithDraws.CreateTimeOfWithdraw,
 
-                                                                        CustomerData = _mapper.Map<CustomerData>(combined.Customers),
+                                                                        CustomerData = _mapper.Map<CustomerData>(combined.ApplicationUsers),
                                                                         PaymentMethodData = _mapper.Map<PaymentMethodResponse>(payment)
                                                                     }
                                                                 ).ToListAsync();

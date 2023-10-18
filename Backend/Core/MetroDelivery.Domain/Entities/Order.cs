@@ -1,12 +1,13 @@
 ﻿using MetroDelivery.Domain.Common;
+using MetroDelivery.Domain.IdentityModels;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MetroDelivery.Domain.Entities
 {
     public class Order : BaseAuditableEntity
     {
-        [ForeignKey("Customer")]
-        public Guid CustomerID { get; set; }
+        [ForeignKey("ApplicationUser")]
+        public string ApplicationUserID { get; set; }
         [ForeignKey("Trip")]
         public Guid TripID { get; set; }
         [ForeignKey("Store")]
@@ -16,7 +17,7 @@ namespace MetroDelivery.Domain.Entities
         public string? OrderTokenQR { get; set; }
 
         //relationship
-        public virtual Customer Customer { get; private set; }
+        public virtual ApplicationUser ApplicationUser { get; private set; }
         public virtual Trip Trip { get; private set; }
         public virtual Store Store { get; private set; }
         

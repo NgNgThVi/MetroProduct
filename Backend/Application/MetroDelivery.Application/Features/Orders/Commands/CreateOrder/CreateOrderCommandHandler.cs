@@ -40,7 +40,7 @@ namespace MetroDelivery.Application.Features.Orders.Commands.CreateOrder
                 TotalPrice = request.TotalPrice,
                 OrderTokenQR = request.OrderTokenQR,
 
-                CustomerID = request.CustomerId,
+                ApplicationUserID = request.ApplicationUserID,
                 TripID = request.TripId,
                 StoreID = request.StoreId
             };

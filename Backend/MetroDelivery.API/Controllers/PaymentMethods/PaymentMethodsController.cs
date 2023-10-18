@@ -1,9 +1,7 @@
 ﻿using MediatR;
-using MetroDelivery.Application.Features.Customers;
 using MetroDelivery.Application.Features.PaymentMethods.Queries;
 using MetroDelivery.Application.Features.PaymentMethods.Queries.GetAllPaymentMethod;
 using MetroDelivery.Application.Features.PaymentMethods.Queries.GetByIdPaymentMethod;
-using MetroDelivery.Application.Features.Routes.Queries.GetByFromToRoute;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860

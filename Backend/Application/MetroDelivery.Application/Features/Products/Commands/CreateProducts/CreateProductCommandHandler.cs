@@ -3,8 +3,6 @@ using FluentValidation;
 using MediatR;
 using MetroDelivery.Application.Common.Exceptions;
 using MetroDelivery.Application.Common.Interface;
-using MetroDelivery.Application.Contracts.Persistance;
-using MetroDelivery.Application.Features.Customers.Commands.CreateCustomer;
 using MetroDelivery.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 

@@ -128,7 +128,7 @@ namespace MetroDelivery.Identity
             });
 
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-            services.AddScoped<ICustomerRepository, CustomerRepository>();
+            /*services.AddScoped<ICustomerRepository, CustomerRepository>();*/
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IMenuProductRepository, MenuProductRepository>();
             services.AddScoped<IMenuRepository, MenuRepository>();

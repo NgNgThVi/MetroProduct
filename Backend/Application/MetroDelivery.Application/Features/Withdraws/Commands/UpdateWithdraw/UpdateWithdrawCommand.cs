@@ -15,7 +15,7 @@ namespace MetroDelivery.Application.Features.Withdraws.Commands.UpdateWithdraw
     public class UpdateWithdrawCommand : IRequest<MetroPickUpResponse>
     {
         public Guid Id { get; set; }
-        public Guid CustomerID { get; set; }
+        public string ApplicationUserID { get; set; }
         public Guid PaymentMethodID { get; set; }
         public double? Balance { get; set; }
         public double? Deposit { get; set; }
@@ -33,7 +33,7 @@ namespace MetroDelivery.Application.Features.Withdraws.Commands.UpdateWithdraw
         }
         public async Task<MetroPickUpResponse> Handle(UpdateWithdrawCommand request, CancellationToken cancellationToken)
         {
-            var customerExist = await _metroPickUpDbContext.Customer.Where(c => c.Id == request.CustomerID).SingleOrDefaultAsync();
+            var customerExist = await _metroPickUpDbContext.ApplicationUsers.Where(c => c.Id == request.ApplicationUserID).SingleOrDefaultAsync();
             var paymentMethodExist = await _metroPickUpDbContext.PaymentMethod.Where(c => c.Id == request.PaymentMethodID).SingleOrDefaultAsync();
             var withdrawExist = await _metroPickUpDbContext.WithDraw.Where(c => c.Id == request.Id).SingleOrDefaultAsync();
             if (withdrawExist == null) {
@@ -45,7 +45,7 @@ namespace MetroDelivery.Application.Features.Withdraws.Commands.UpdateWithdraw
             if (customerExist == null) {
                 throw new NotFoundException("CustomerId không tồn tại");
             }
-            if (customerExist.IsDelete == true) {
+            if (customerExist.EmailConfirmed == false) {
                 throw new NotFoundException("CustomerId đã bị xóa");
             }
             if (paymentMethodExist == null) {
@@ -55,7 +55,7 @@ namespace MetroDelivery.Application.Features.Withdraws.Commands.UpdateWithdraw
                 throw new NotFoundException("PaymentMethodId đã bị xóa");
             }
 
-            withdrawExist.CustomerID = request.CustomerID;
+            withdrawExist.ApplicationUserID = request.ApplicationUserID;
             withdrawExist.PaymentMethodID = request.PaymentMethodID;
             withdrawExist.Balance = request.Balance;
             withdrawExist.Deposit = request.Deposit;

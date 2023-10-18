@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using MediatR;
+using MetroDelivery.Application.Common.Exceptions;
 using MetroDelivery.Application.Common.Interface;
+using MetroDelivery.Application.Features.Customers;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -29,13 +31,13 @@ namespace MetroDelivery.Application.Features.Orders.Queries.GetByIdOrder
         {
             var order = await _metroPickUpDbContext.Order.Where(o => !o.IsDelete && o.Id == request.OrderId)
                                                             .Join(
-                                                                _metroPickUpDbContext.Customer,
-                                                                orders => orders.CustomerID,
-                                                                customer => customer.Id,
-                                                                (orders, customer) => new
+                                                                _metroPickUpDbContext.ApplicationUsers,
+                                                                orders => orders.ApplicationUserID,
+                                                                applicationUser => applicationUser.Id,
+                                                                (orders, applicationUser) => new
                                                                 {
                                                                     Orders = orders,
-                                                                    Customers = customer
+                                                                    ApplicationUser = applicationUser
                                                                 }
                                                             )
                                                             .Join(
@@ -54,15 +56,18 @@ namespace MetroDelivery.Application.Features.Orders.Queries.GetByIdOrder
                                                                     TotalPrice = orderCutomerTrip.OrderCustomer.Orders.TotalPrice,
                                                                     OrderTokenQR = orderCutomerTrip.OrderCustomer.Orders.OrderTokenQR,
 
-                                                                    CustomerId = orderCutomerTrip.OrderCustomer.Orders.CustomerID,
+                                                                    ApplicationUserID = orderCutomerTrip.OrderCustomer.Orders.ApplicationUserID,
                                                                     TripId = orderCutomerTrip.OrderCustomer.Orders.TripID,
                                                                     StoreId = orderCutomerTrip.OrderCustomer.Orders.StoreID,
 
-                                                                    CustomerData = orderCutomerTrip.OrderCustomer.Customers,
+                                                                    CustomerData = _mapper.Map<CustomerResponse>(orderCutomerTrip.OrderCustomer.ApplicationUser),
                                                                     TripData = orderCutomerTrip.Trips,
                                                                     StoreData = store
                                                                 }
                                                             ).SingleOrDefaultAsync();
+            if(order == null) {
+                throw new NotFoundException("Order is not existed");
+            }
 
             return order;
         }

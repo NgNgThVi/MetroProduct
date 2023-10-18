@@ -8,15 +8,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MetroDelivery.Application.Features.Customers.Queries.GetCustomerById
 {
-    public class GetCustomerByIdQueryHandler : IRequestHandler<GetCustomerByIdQuery, CustomerDto>
+    public class GetCustomerByIdQueryHandler : IRequestHandler<GetCustomerByIdQuery, CustomerResponse>
     {
-        /*private readonly ICustomerRepository _customerRepository;
-        private readonly IMapper _mapper;
-        public GetCustomerByIdQueryHandler(ICustomerRepository customerRepository, IMapper mapper)
-        {
-            _customerRepository = customerRepository;
-            _mapper = mapper;
-        }*/
         private readonly IMetroPickUpDbContext _metroPickUpDbContext;
         private readonly IMapper _mapper;
         public GetCustomerByIdQueryHandler(IMetroPickUpDbContext metroPickUpDbContext, IMapper mapper)
@@ -25,21 +18,20 @@ namespace MetroDelivery.Application.Features.Customers.Queries.GetCustomerById
             _mapper = mapper;
         }
 
-        public async Task<CustomerDto> Handle(GetCustomerByIdQuery request, CancellationToken cancellationToken)
+        public async Task<CustomerResponse> Handle(GetCustomerByIdQuery request, CancellationToken cancellationToken)
         {
             //add to datbase 
-            /* var userById = await _customerRepository.CustomerIdMusBeExist(request.id);*/
-            var userById = await _metroPickUpDbContext.Customer.Where(c => c.Id == request.id).SingleOrDefaultAsync();
+            var userById = await _metroPickUpDbContext.ApplicationUsers.Where(c => c.Id == request.id).SingleOrDefaultAsync();
 
             if (userById == null) {
-                throw new NotFoundException(nameof(userById.ApplicationUser.UserName), request.id);
+                throw new NotFoundException(nameof(userById.UserName), request.id);
             }
-            else if (userById.IsDelete == true) {
+            else if (userById.EmailConfirmed == false) {
                 throw new NotFoundException("The customer have been deleted");
             }
 
             //convert data to dto
-            var data = _mapper.Map<CustomerDto>(userById);
+            var data = _mapper.Map<CustomerResponse>(userById);
 
             //return
             return data;
