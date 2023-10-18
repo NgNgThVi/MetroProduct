@@ -7,6 +7,8 @@ using MetroDelivery.Application.Features.Products.Queries;
 using Microsoft.AspNetCore.Mvc;
 using MetroDelivery.Application.Features.Orders.Queries;
 using MetroDelivery.Application.Features.Orders.Queries.GetAllOrder;
+using MetroDelivery.Application.Features.Products.Queries.GetProductById;
+using MetroDelivery.Application.Features.Orders.Queries.GetByIdOrder;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -30,6 +32,14 @@ namespace MetroDelivery.API.Controllers.Orders
         public async Task<List<OrderResponse>> GetAll()
         {
             var response = await _mediator.Send(new GetListOrderQuery());
+            return response;
+        }
+
+        [HttpGet]
+        [Route("get-by-id")]
+        public async Task<OrderResponse> Get([FromQuery] GetByIdOrderQuery request)
+        {
+            var response = await _mediator.Send(request);
             return response;
         }
 

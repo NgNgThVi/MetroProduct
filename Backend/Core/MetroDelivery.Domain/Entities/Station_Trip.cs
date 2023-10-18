@@ -9,7 +9,7 @@ namespace MetroDelivery.Domain.Entities
         public Guid TripID { get; set; }
         [ForeignKey("Station")]
         public Guid StationID { get; set; }
-        public DateTime? Arrived { get; set; }
+        public DateTime Arrived { get; set; }
 
         //relationship
         public virtual Trip Trip { get; set; }

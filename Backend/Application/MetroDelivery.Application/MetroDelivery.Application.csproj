@@ -20,14 +20,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Menus\Commands\DeleteMenu\" />
-    <Folder Include="Features\Menus\Commands\UpdateMenu\" />
     <Folder Include="Features\OrderDetails\Commands\DeleteOrderDetail\" />
     <Folder Include="Features\OrderDetails\Commands\UpdateOrderDetail\" />
     <Folder Include="Features\OrderDetails\Queries\GetByIdOrderDetail\" />
     <Folder Include="Features\Orders\Commands\DeleteOrder\" />
     <Folder Include="Features\Orders\Commands\UpdateOrder\" />
-    <Folder Include="Features\Station_Trips\Commands\CreateStationTrip\" />
   </ItemGroup>
 
 </Project>

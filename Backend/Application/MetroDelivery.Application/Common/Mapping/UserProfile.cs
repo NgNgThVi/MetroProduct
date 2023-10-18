@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MetroDelivery.Application.Features.Categorys.Queries;
 using MetroDelivery.Application.Features.Customers;
+using MetroDelivery.Application.Features.Customers.Queries.GetCustomerByApplicationUserId;
 using MetroDelivery.Application.Features.Menu_Products;
 using MetroDelivery.Application.Features.Menus.Queries;
 using MetroDelivery.Application.Features.OrderDetails.Queries;
@@ -14,6 +15,7 @@ using MetroDelivery.Application.Features.Stores;
 using MetroDelivery.Application.Features.Trips.Queries;
 using MetroDelivery.Application.Features.Withdraws.Queries;
 using MetroDelivery.Domain.Entities;
+using MetroDelivery.Domain.IdentityModels;
 
 namespace MetroDelivery.Application.Common.MappingProfiles
 {
@@ -23,6 +25,9 @@ namespace MetroDelivery.Application.Common.MappingProfiles
         {
             CreateMap<CustomerDto, Customer>().ReverseMap();
             CreateMap<Customer, CustomerDto>().ReverseMap();
+
+            CreateMap<ApplicationUserData, ApplicationUser>().ReverseMap();
+            CreateMap<ApplicationUser, ApplicationUserData>().ReverseMap();
             /*CreateMap<CreateCustomerCommand, User>().ReverseMap();
             CreateMap<UpdateUserCommand, User>().ReverseMap();*/
 

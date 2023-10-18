@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using MetroDelivery.Application.Common.Exceptions;
 using MetroDelivery.Application.Common.Interface;
 using MetroDelivery.Application.Features.Stations.Queries;
 using MetroDelivery.Application.Features.Trips.Queries;
@@ -74,6 +75,9 @@ namespace MetroDelivery.Application.Features.Station_Trips.Queries.GetStationByT
                                                                      }
                                                                  }
                                                              ).ToListAsync();
+            if(listStationTrip.Count() == 0) {
+                throw new NotFoundException($"chuyến tàu {request.TripId} này ko đến sân ga nào hết");
+            }
             return listStationTrip;
         }
     }

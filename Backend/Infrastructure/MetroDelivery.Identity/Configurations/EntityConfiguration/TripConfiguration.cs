@@ -8,8 +8,6 @@ namespace MetroDelivery.Identity.Configurations.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Trip> builder)
         {
-            builder.Property(p => p.Id);
-
             builder.HasData(
             new Trip
             {

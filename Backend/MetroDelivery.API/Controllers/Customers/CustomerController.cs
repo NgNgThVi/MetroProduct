@@ -5,6 +5,7 @@ using MetroDelivery.Application.Features.Customers.Commands.CreateCustomer;
 using MetroDelivery.Application.Features.Customers.Commands.DeleteCustomer;
 using MetroDelivery.Application.Features.Customers.Commands.UpdateCustomer;
 using MetroDelivery.Application.Features.Customers.Queries.GetAllCustomers;
+using MetroDelivery.Application.Features.Customers.Queries.GetCustomerByApplicationUserId;
 using MetroDelivery.Application.Features.Customers.Queries.GetCustomerById;
 using MetroDelivery.Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
@@ -63,6 +64,15 @@ namespace MetroDelivery.API.Controllers.Customers
         [Route("get-customer-by-id")]
         /*[Authorize(Roles = "Admin")]*/
         public async Task<ActionResult<CustomerDto>> GetUserById([FromQuery] GetCustomerByIdQuery request)
+        {
+            var response = await _mediator.Send(request);
+            return Ok(response);
+        }
+
+        [HttpGet]
+        [Route("get-aplication-by-id")]
+        /*[Authorize(Roles = "Admin")]*/
+        public async Task<ActionResult<CustomerResponse>> Get([FromQuery] GetCustomerByApplicationIdQuery request)
         {
             var response = await _mediator.Send(request);
             return Ok(response);
