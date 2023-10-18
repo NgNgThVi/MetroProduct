@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+﻿/*using AutoMapper;
 using MediatR;
 using MetroDelivery.Application.Common.Interface;
 using MetroDelivery.Application.Features.PaymentMethods.Queries;
@@ -60,3 +60,4 @@ namespace MetroDelivery.Application.Features.Withdraws.Queries.GetAllWithdraw
         }
     }
 }
+*/

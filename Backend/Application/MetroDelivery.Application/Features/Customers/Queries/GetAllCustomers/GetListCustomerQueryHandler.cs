@@ -14,19 +14,8 @@ using System.Threading.Tasks;
 
 namespace MetroDelivery.Application.Features.Customers.Queries.GetAllCustomers
 {
-    public class GetListCustomerQueryHandler : IRequestHandler<GetListCustomerQuery, List<CustomerDto>>
+    public class GetListCustomerQueryHandler : IRequestHandler<GetListCustomerQuery, List<CustomerResponse>>
     {
-        /*private readonly ICustomerRepository _customerRepository;
-        private readonly IMapper _mapper;
-        private readonly IAppLogger<GetListCustomerQuery> _logger;
-
-        public GetListCustomerQueryHandler(IMapper mapper, ICustomerRepository customerRepository,
-            IAppLogger<GetListCustomerQuery> logger)
-        {
-            _mapper = mapper;
-            _customerRepository = customerRepository;
-            _logger = logger;
-        }*/
         private readonly IMetroPickUpDbContext _metroPickUpDbContext;
         private readonly IMapper _mapper;
         private readonly IAppLogger<GetListCustomerQuery> _logger;
@@ -37,14 +26,26 @@ namespace MetroDelivery.Application.Features.Customers.Queries.GetAllCustomers
             _logger = logger;
         }
 
-        public async Task<List<CustomerDto>> Handle(GetListCustomerQuery request, CancellationToken cancellationToken)
+        public async Task<List<CustomerResponse>> Handle(GetListCustomerQuery request, CancellationToken cancellationToken)
         {
             // query the database
-            /*var users = await _customerRepository.GetAsync();*/
-            var users = await _metroPickUpDbContext.Customer.Where(c => !c.IsDelete).ToListAsync();
+            var users = await _metroPickUpDbContext.ApplicationUsers
+                            /*.Select(u => new CustomerResponse
+                            {
+                                Id = u.Id,
+                                UserName = u.UserName,
+                                Email = u.Email,
+                                FirstName = u.FirstName,
+                                LastName = u.LastName,
+                                Wallet = u.Wallet,
+                                PhoneNumber = u.PhoneNumber,
+                                Address = u.Address,
+                                Birthday = u.Birthday
+                            })*/
+                            .ToListAsync();
 
             // convert data objects to Dto objects
-            var data = _mapper.Map<List<CustomerDto>>(users);
+            var data = _mapper.Map<List<CustomerResponse>>(users);
 
             //logger
             _logger.LogInformation("Get all Customer retrived successfully");

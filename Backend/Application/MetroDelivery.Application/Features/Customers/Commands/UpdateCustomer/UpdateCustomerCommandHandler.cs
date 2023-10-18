@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+﻿/*using AutoMapper;
 using MediatR;
 using MetroDelivery.Application.Common.Exceptions;
 using MetroDelivery.Application.Common.Interface;
@@ -14,7 +14,7 @@ namespace MetroDelivery.Application.Features.Customers.Commands.UpdateCustomer
 {
     public class UpdateCustomerCommandHandler : IRequestHandler<UpdateCustomerCommand, Unit>
     {
-        /*private readonly IMapper _mapper;
+        *//*private readonly IMapper _mapper;
         private readonly ICustomerRepository _customerRepository;
         private readonly IAppLogger<UpdateCustomerCommand> _logger;
         private readonly UserManager<ApplicationUser> _userManager;
@@ -30,7 +30,7 @@ namespace MetroDelivery.Application.Features.Customers.Commands.UpdateCustomer
             _userManager = userManager;
             _roleManager = roleManager;
             _signInManager = signInManager;
-        }*/
+        }*//*
         private readonly IMetroPickUpDbContext _metroPickUpDbContext;
         private readonly IMapper _mapper;
         private readonly IAppLogger<GetListCustomerQuery> _logger;
@@ -51,7 +51,7 @@ namespace MetroDelivery.Application.Features.Customers.Commands.UpdateCustomer
         public async Task<Unit> Handle(UpdateCustomerCommand request, CancellationToken cancellationToken)
         {
             // validate incoming data
-            /*var customer = await _customerRepository.CustomerIdMusBeExist(request.CustomerId);*/
+            *//*var customer = await _customerRepository.CustomerIdMusBeExist(request.CustomerId);*//*
             var customer = await _metroPickUpDbContext.Customer.Where(c => c.Id == request.CustomerId).SingleOrDefaultAsync();
             if (customer == null) {
                 throw new NotFoundException("Customer does not exist !");
@@ -77,7 +77,7 @@ namespace MetroDelivery.Application.Features.Customers.Commands.UpdateCustomer
             }
 
             // add database
-            /*await _customerRepository.UpdateAsync(customer);*/
+            *//*await _customerRepository.UpdateAsync(customer);*//*
             _metroPickUpDbContext.Customer.Update(customer);
             await _metroPickUpDbContext.SaveChangesAsync();
 
@@ -96,3 +96,4 @@ namespace MetroDelivery.Application.Features.Customers.Commands.UpdateCustomer
         }
     }
 }
+*/

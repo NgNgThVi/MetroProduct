@@ -1,4 +1,4 @@
-﻿using MetroDelivery.Domain.Entities;
+﻿/*using MetroDelivery.Domain.Entities;
 using MetroDelivery.Domain.IdentityModels;
 
 namespace MetroDelivery.Application.Contracts.Persistance
@@ -12,3 +12,4 @@ namespace MetroDelivery.Application.Contracts.Persistance
     }
 
 }
+*/

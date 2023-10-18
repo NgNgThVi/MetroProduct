@@ -2,13 +2,9 @@
 using MediatR;
 using MetroDelivery.Application.Features.Customers;
 using MetroDelivery.Application.Features.Customers.Commands.CreateCustomer;
-using MetroDelivery.Application.Features.Customers.Commands.DeleteCustomer;
-using MetroDelivery.Application.Features.Customers.Commands.UpdateCustomer;
 using MetroDelivery.Application.Features.Customers.Queries.GetAllCustomers;
-using MetroDelivery.Application.Features.Customers.Queries.GetCustomerByApplicationUserId;
 using MetroDelivery.Application.Features.Customers.Queries.GetCustomerById;
 using MetroDelivery.Domain.Entities;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -27,11 +23,11 @@ namespace MetroDelivery.API.Controllers.Customers
         {
             _mediator = mediator;
         }
-        // GET api/<userController>/5
+       
         [HttpGet]
         [Route("get-all-customer")]
-        
-        public async Task<List<CustomerDto>> GetAllUser()
+
+        public async Task<List<CustomerResponse>> GetAllUser()
         {
             var response = await _mediator.Send(new GetListCustomerQuery());
             return response;
@@ -42,15 +38,15 @@ namespace MetroDelivery.API.Controllers.Customers
         [Route("register-customer")]
         [ProducesResponseType(201)]
         [ProducesResponseType(400)]
-        
+
         public async Task<ActionResult> CreateCustomer([FromQuery] CreateCustomerCommand request)
         {
             /*try {*/
-            var response = await _mediator.Send(request);
-            return CreatedAtAction(nameof(GetAllUser), new { id = response });
+                var response = await _mediator.Send(request);
+                return Ok(response);
             /*}
             catch (Exception ex) {
-                if(ex is ValidationException) {
+                if (ex is ValidationException) {
                     ValidationException error = (ValidationException)ex;
                     var errorsDiction = new Dictionary<string, string[]>(error.Errors);
                     return BadRequest(errorsDiction);
@@ -59,19 +55,18 @@ namespace MetroDelivery.API.Controllers.Customers
             }*/
         }
 
-        // GET api/<userController>/5
         [HttpGet]
         [Route("get-customer-by-id")]
-        /*[Authorize(Roles = "Admin")]*/
-        public async Task<ActionResult<CustomerDto>> GetUserById([FromQuery] GetCustomerByIdQuery request)
+       /* [Authorize(Roles = "Admin")]*/
+        public async Task<ActionResult<CustomerResponse>> GetUserById([FromQuery] GetCustomerByIdQuery request)
         {
             var response = await _mediator.Send(request);
             return Ok(response);
         }
 
-        [HttpGet]
+        /*[HttpGet]
         [Route("get-aplication-by-id")]
-        /*[Authorize(Roles = "Admin")]*/
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<CustomerResponse>> Get([FromQuery] GetCustomerByApplicationIdQuery request)
         {
             var response = await _mediator.Send(request);
@@ -101,6 +96,6 @@ namespace MetroDelivery.API.Controllers.Customers
         {
             var response = await _mediator.Send(request);
             return Ok(response);
-        }
+        }*/
     }
 }

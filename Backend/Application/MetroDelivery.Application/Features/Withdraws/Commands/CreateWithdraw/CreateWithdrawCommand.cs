@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+﻿/*using AutoMapper;
 using MediatR;
 using MetroDelivery.Application.Common.Interface;
 using MetroDelivery.Domain.Entities;
@@ -50,3 +50,4 @@ namespace MetroDelivery.Application.Features.Withdraws.Commands.CreateWithdraw
         }
     }
 }
+*/

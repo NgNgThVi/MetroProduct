@@ -1,4 +1,5 @@
 ﻿using MetroDelivery.Domain.Entities;
+using MetroDelivery.Domain.IdentityModels;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -24,7 +25,7 @@ namespace MetroDelivery.Application.Common.Interface
         public DbSet<Store_Menu> Store_Menu { get; set; }
         public DbSet<Trip> Trip { get; set; }
         public DbSet<Station_Trip> Station_Trip { get; set; }
-        public DbSet<Customer> Customer { get; set; }
+        public DbSet<ApplicationUser> ApplicationUsers { get; }
         public DbSet<WithDraw> WithDraw { get; set; }
 
         public Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);

@@ -35,7 +35,7 @@ namespace MetroDelivery.Identity.DbContexts
         public DbSet<Store_Menu> Store_Menu { get; set; }
         public DbSet<Trip> Trip { get; set; }
         public DbSet<Station_Trip> Station_Trip { get; set; }
-        public DbSet<Customer> Customer { get; set; }
+        public DbSet<ApplicationUser> ApplicationUsers { get; }
         public DbSet<WithDraw> WithDraw { get; set; }
 
         public MetroPickupIdentityDbContext(DbContextOptions<MetroPickupIdentityDbContext> options/*,

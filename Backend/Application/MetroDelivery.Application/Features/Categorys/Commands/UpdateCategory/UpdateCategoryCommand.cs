@@ -4,8 +4,6 @@ using MediatR;
 using MetroDelivery.Application.Common.CRUDResponse;
 using MetroDelivery.Application.Common.Exceptions;
 using MetroDelivery.Application.Common.Interface;
-using MetroDelivery.Application.Features.Categorys.Commands.CreateCategory;
-using MetroDelivery.Application.Features.Customers.Commands.CreateCustomer;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

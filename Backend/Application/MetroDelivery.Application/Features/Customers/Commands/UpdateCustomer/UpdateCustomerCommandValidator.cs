@@ -1,4 +1,4 @@
-﻿using FluentValidation;
+﻿/*using FluentValidation;
 using MetroDelivery.Application.Contracts.Persistance;
 using System;
 using System.Collections.Generic;
@@ -40,3 +40,4 @@ namespace MetroDelivery.Application.Features.Customers.Commands.UpdateCustomer
         }
     }
 }
+*/

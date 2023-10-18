@@ -1,17 +1,12 @@
 ﻿using MediatR;
+using MetroDelivery.Application.Common.CRUDResponse;
+using MetroDelivery.Application.Features.Categorys.Commands.CreateCategory;
+using MetroDelivery.Application.Features.Categorys.Commands.DeleteCategory;
+using MetroDelivery.Application.Features.Categorys.Commands.UpdateCategory;
 using MetroDelivery.Application.Features.Categorys.Queries;
 using MetroDelivery.Application.Features.Categorys.Queries.GetAllCategory;
-using MetroDelivery.Application.Features.Customers.Commands.CreateCustomer;
-using MetroDelivery.Application.Features.Customers.Commands.DeleteCustomer;
-using MetroDelivery.Application.Features.Customers.Commands.UpdateCustomer;
-using MetroDelivery.Application.Features.Customers.Queries.GetCustomerById;
-using MetroDelivery.Application.Features.Customers;
-using Microsoft.AspNetCore.Mvc;
 using MetroDelivery.Application.Features.Categorys.Queries.GetCategoryById;
-using MetroDelivery.Application.Features.Categorys.Commands.CreateCategory;
-using MetroDelivery.Application.Features.Categorys.Commands.UpdateCategory;
-using MetroDelivery.Application.Common.CRUDResponse;
-using MetroDelivery.Application.Features.Categorys.Commands.DeleteCategory;
+using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 

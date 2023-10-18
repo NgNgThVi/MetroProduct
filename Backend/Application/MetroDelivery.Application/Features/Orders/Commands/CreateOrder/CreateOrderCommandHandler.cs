@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+﻿/*using AutoMapper;
 using MediatR;
 using MetroDelivery.Application.Common.CRUDResponse;
 using MetroDelivery.Application.Common.Exceptions;
@@ -52,3 +52,4 @@ namespace MetroDelivery.Application.Features.Orders.Commands.CreateOrder
         }
     }
 }
+*/

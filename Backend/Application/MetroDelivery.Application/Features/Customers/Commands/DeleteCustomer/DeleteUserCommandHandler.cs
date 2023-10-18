@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+﻿/*using AutoMapper;
 using MediatR;
 using MetroDelivery.Application.Common.Exceptions;
 using MetroDelivery.Application.Common.Interface;
@@ -9,8 +9,8 @@ namespace MetroDelivery.Application.Features.Customers.Commands.DeleteCustomer
 {
     public class DeleteUserCommandHandler : IRequestHandler<DeleteUserCommand, Unit>
     {
-        /*private readonly ICustomerRepository _customerRepository;
-        public DeleteUserCommandHandler(ICustomerRepository customerRepository) => _customerRepository = customerRepository;*/
+        *//*private readonly ICustomerRepository _customerRepository;
+        public DeleteUserCommandHandler(ICustomerRepository customerRepository) => _customerRepository = customerRepository;*//*
         private readonly IMetroPickUpDbContext _metroPickUpDbContext;
         private readonly IMapper _mapper;
         public DeleteUserCommandHandler(IMetroPickUpDbContext metroPickUpDbContext, IMapper mapper)
@@ -22,7 +22,7 @@ namespace MetroDelivery.Application.Features.Customers.Commands.DeleteCustomer
         public async Task<Unit> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
         {
             // retrieve domain entity object
-            /*var customerDelete = await _customerRepository.CustomerIdMusBeExist(request.Id);*/
+            *//*var customerDelete = await _customerRepository.CustomerIdMusBeExist(request.Id);*//*
             var customerDelete = await _metroPickUpDbContext.Customer.Where(c => c.Id == request.Id).SingleOrDefaultAsync();
             if (customerDelete == null) {
                 throw new NotFoundException(nameof(customerDelete.ApplicationUser.Email), request.Id);
@@ -33,7 +33,7 @@ namespace MetroDelivery.Application.Features.Customers.Commands.DeleteCustomer
 
 
             // rmove database
-           /* await _customerRepository.DeleteAsync(customerDelete);*/
+           *//* await _customerRepository.DeleteAsync(customerDelete);*//*
             customerDelete.IsDelete = true;
             _metroPickUpDbContext.Customer.Update(customerDelete);
             await _metroPickUpDbContext.SaveChangesAsync();
@@ -43,3 +43,4 @@ namespace MetroDelivery.Application.Features.Customers.Commands.DeleteCustomer
         }
     }
 }
+*/

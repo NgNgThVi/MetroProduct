@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+﻿/*using AutoMapper;
 using MediatR;
 using MetroDelivery.Application.Common.Interface;
 using Microsoft.EntityFrameworkCore;
@@ -68,3 +68,4 @@ namespace MetroDelivery.Application.Features.Orders.Queries.GetByIdOrder
         }
     }
 }
+*/

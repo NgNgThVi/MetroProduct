@@ -1,11 +1,4 @@
 ﻿using MediatR;
-using MetroDelivery.Application.Features.Customers.Commands.CreateCustomer;
-using MetroDelivery.Application.Features.Stations.Commands.UpdateStation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MetroDelivery.Application.Features.Menus.Commands.CreateMenu
 {

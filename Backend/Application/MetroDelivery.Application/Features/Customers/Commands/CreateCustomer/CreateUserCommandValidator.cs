@@ -11,15 +11,9 @@ namespace MetroDelivery.Application.Features.Customers.Commands.CreateCustomer
 {
     public class CreateUserCommandValidator : AbstractValidator<CreateCustomerCommand>
     {
-        /*private ICustomerRepository _customerRepository;*/
-        public CreateUserCommandValidator(/*ICustomerRepository customerRepository*/)
+        
+        public CreateUserCommandValidator()
         {
-            RuleFor(p => p.UserName)
-                .NotEmpty().WithMessage("{UserName} is required")
-                .NotNull()
-                .MaximumLength(100).WithMessage("{UserName} must be fewer than 100 characters")
-                /*.MustAsync(BeUniqueCustomerName).WithMessage("UserName already exist!")*/;
-
             RuleFor(p => p.FirstName)
                 .NotEmpty().WithMessage("{FirstName} is required")
                 .NotNull()
@@ -55,16 +49,8 @@ namespace MetroDelivery.Application.Features.Customers.Commands.CreateCustomer
                 .NotNull()
                 .MaximumLength(100).WithMessage("Address must be fewer than 100 chrarcters");
 
-            /*RuleFor(p => p.Birthday)
-                .NotEmpty().WithMessage("Birthday is required")
-                .NotNull();*/
+  
 
-            /*_customerRepository = customerRepository;*/
         }
-
-        /*private Task<bool> BeUniqueCustomerName(string customerName, CancellationToken token)
-        {
-            return _customerRepository.IsBeUniqueCustomerName(customerName);
-        }*/
     }
 }

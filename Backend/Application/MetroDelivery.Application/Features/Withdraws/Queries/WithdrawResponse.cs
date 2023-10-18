@@ -1,4 +1,4 @@
-﻿using MetroDelivery.Application.Features.PaymentMethods.Queries;
+﻿/*using MetroDelivery.Application.Features.PaymentMethods.Queries;
 using MetroDelivery.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -34,3 +34,4 @@ namespace MetroDelivery.Application.Features.Withdraws.Queries
         public DateTime Birthday { get; set; }
     }
 }
+*/

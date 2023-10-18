@@ -17,7 +17,7 @@ namespace MetroDelivery.Identity.Configurations.EntityConfiguration
                     Deposit = 60000,
                     Balance = 150000,
                     CreateTimeOfWithdraw = DateTime.ParseExact("04/05/2023", "dd/MM/yyyy", CultureInfo.InvariantCulture),
-                    CustomerID = Guid.Parse("0512A248-0054-4616-ADE5-AE412F4F07BD"),
+                    ApplicationUserID = "E6DE8827-B7C2-46E9-9227-66E6ECE676A8",
                     PaymentMethodID = Guid.Parse("71B4BF27-E569-47A0-B16A-E484533BD9F2")
                 },
                 new WithDraw
@@ -27,7 +27,7 @@ namespace MetroDelivery.Identity.Configurations.EntityConfiguration
                     Deposit = 30000,
                     Balance = 0,
                     CreateTimeOfWithdraw = DateTime.ParseExact("25/09/2023", "dd/MM/yyyy", CultureInfo.InvariantCulture),
-                    CustomerID = Guid.Parse("ECF95BF5-D766-4B6E-94A7-D33EA29C0618"),
+                    ApplicationUserID = "E6DE8827-B7C2-46E9-9227-66E6ECE676A8",
                     PaymentMethodID = Guid.Parse("71B4BF27-E569-47A0-B16A-E484533BD9F2")
                 },
                 new WithDraw
@@ -37,7 +37,7 @@ namespace MetroDelivery.Identity.Configurations.EntityConfiguration
                     Deposit = 125000,
                     Balance = 2000000,
                     CreateTimeOfWithdraw = DateTime.ParseExact("14/12/2022", "dd/MM/yyyy", CultureInfo.InvariantCulture),
-                    CustomerID = Guid.Parse("01D31C40-14C9-444C-A2FE-F58EA0FBC08A"),
+                    ApplicationUserID = "E6DE8827-B7C2-46E9-9227-66E6ECE676A8",
                     PaymentMethodID = Guid.Parse("71B4BF27-E569-47A0-B16A-E484533BD9F2")
                 }
             );

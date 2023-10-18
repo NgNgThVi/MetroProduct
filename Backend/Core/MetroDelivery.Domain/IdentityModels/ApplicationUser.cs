@@ -12,9 +12,14 @@ namespace MetroDelivery.Domain.IdentityModels
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public string Address { get; set; }
+        public DateTime? Birthday { get; set; }
+        public double? Wallet { get ; set; }
 
         // relationship
-        public virtual Customer Customer { get; set; }
+        
+        public IList<Order> Orders { get; private set; }
+        public IList<WithDraw> WithDraws { get; private set; }
 
     }
 }

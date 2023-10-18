@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System.Globalization;
 
 namespace MetroDelivery.Identity.Configurations
 {
@@ -21,7 +22,11 @@ namespace MetroDelivery.Identity.Configurations
                     UserName = "admin@gmail.com",
                     NormalizedUserName = "ADMIN@GMAIL.COM",
                     PasswordHash = hasher.HashPassword(null, "P@ssw0rd1"),
-                    EmailConfirmed = true
+                    EmailConfirmed = true,
+                    Address = "da nang",
+                    Birthday = DateTime.ParseExact("20/10/2002", "dd/MM/yyyy", CultureInfo.InvariantCulture),
+                    PhoneNumber = "03030303",
+                    Wallet = null
                 },
                 new ApplicationUser
                 {
@@ -33,7 +38,11 @@ namespace MetroDelivery.Identity.Configurations
                     UserName = "enduser@gmail.com",
                     NormalizedUserName = "ENDUSER@GMAIL.COM",
                     PasswordHash = hasher.HashPassword(null, "P@ssw0rd1"),
-                    EmailConfirmed = true
+                    EmailConfirmed = true,
+                    PhoneNumber = "03030303",
+                    Address = "hcm",
+                    Birthday = DateTime.ParseExact("04/03/2010", "dd/MM/yyyy", CultureInfo.InvariantCulture),
+                    Wallet = null
                 },
                 new ApplicationUser
                 {
@@ -45,7 +54,11 @@ namespace MetroDelivery.Identity.Configurations
                     UserName = "staff@gmail.com",
                     NormalizedUserName = "STAFF@GMAIL.COM",
                     PasswordHash = hasher.HashPassword(null, "P@ssw0rd1"),
-                    EmailConfirmed = true
+                    EmailConfirmed = true,
+                    PhoneNumber = "0961868641",
+                    Address = "Cần Thơ",
+                    Birthday = DateTime.ParseExact("04/05/2002", "dd/MM/yyyy", CultureInfo.InvariantCulture),
+                    Wallet = null
                 },
                 new ApplicationUser
                 {
@@ -57,7 +70,11 @@ namespace MetroDelivery.Identity.Configurations
                     UserName = "nguyenthanhn537@gmail.com",
                     NormalizedUserName = "NGUYENTHANHN537@GMAIL.COM",
                     PasswordHash = hasher.HashPassword(null, "P@ssw0rd1"),
-                    EmailConfirmed = true
+                    EmailConfirmed = true,
+                    PhoneNumber = "0903182861",
+                    Address = "Đắk Lắk",
+                    Birthday = DateTime.ParseExact("14/08/1899", "dd/MM/yyyy", CultureInfo.InvariantCulture),
+                    Wallet = null
                 },
                 new ApplicationUser
                 {
@@ -69,7 +86,11 @@ namespace MetroDelivery.Identity.Configurations
                     UserName = "thaivin537@gmail.com",
                     NormalizedUserName = "THAIVIN537@GMAIL.COM",
                     PasswordHash = hasher.HashPassword(null, "P@ssw0rd1"),
-                    EmailConfirmed = true
+                    EmailConfirmed = true,
+                    PhoneNumber = "0914009910",
+                    Address = "Gia Lai",
+                    Birthday = DateTime.ParseExact("26/02/1998", "dd/MM/yyyy", CultureInfo.InvariantCulture),
+                    Wallet = null
                 },
                 new ApplicationUser
                 {
@@ -81,7 +102,11 @@ namespace MetroDelivery.Identity.Configurations
                     UserName = "anhjenda537@gmail.com",
                     NormalizedUserName = "ANHJENDA537@GMAIL.COM",
                     PasswordHash = hasher.HashPassword(null, "P@ssw0rd1"),
-                    EmailConfirmed = true
+                    EmailConfirmed = true,
+                    PhoneNumber = "0123456789",
+                    Address = "Kon Tum",
+                    Birthday = DateTime.ParseExact("26/02/1998", "dd/MM/yyyy", CultureInfo.InvariantCulture),
+                    Wallet = null
                 }
             );
         }

@@ -1,4 +1,4 @@
-﻿using MediatR;
+﻿/*using MediatR;
 using MetroDelivery.Application.Features.Trips.Queries.GetAllTrip;
 using MetroDelivery.Application.Features.Trips.Queries;
 using Microsoft.AspNetCore.Mvc;
@@ -79,3 +79,4 @@ namespace MetroDelivery.API.Controllers.Withdraw
         }
     }
 }
+*/

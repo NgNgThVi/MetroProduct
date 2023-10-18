@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+﻿/*using AutoMapper;
 using MediatR;
 using MetroDelivery.Application.Common.Exceptions;
 using MetroDelivery.Application.Common.Interface;
@@ -65,3 +65,4 @@ namespace MetroDelivery.Application.Features.Withdraws.Queries.GetByIdWithdraw
         }
     }
 }
+*/
