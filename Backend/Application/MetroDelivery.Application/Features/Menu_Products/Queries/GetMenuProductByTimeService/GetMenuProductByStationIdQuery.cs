@@ -52,7 +52,7 @@ namespace MetroDelivery.Application.Features.Menu_Products.Queries.GetMenuProduc
 
             var storeMenu = await _metroPickUpDbContext.Store_Menu.Where(s => !s.IsDelete && s.MenuId == menus.Id && s.StoreId == stationExist.StoreID).SingleOrDefaultAsync();
             if (storeMenu == null) {
-                var storeMenuEntity = new Store_Menu
+                /*var storeMenuEntity = new Store_Menu
                 {
                     MenuId = menus.Id,
                     StoreId = stationExist.StoreID,
@@ -88,7 +88,8 @@ namespace MetroDelivery.Application.Features.Menu_Products.Queries.GetMenuProduc
                                                                     }
                                                                 ).ToListAsync();
 
-                return menuProductList1;
+                return menuProductList1;*/
+                throw new NotFoundException("StoreMenu chưa được tạo, cần phải có storeMenu");
             }
            
             var menuProductList = await _metroPickUpDbContext.Menu_Product.Where(s => !s.IsDelete && s.Menu.StartTimeService == storeMenu.Menu.StartTimeService && s.Menu.EndTimeService == storeMenu.Menu.EndTimeService)

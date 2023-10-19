@@ -18,7 +18,9 @@ namespace MetroDelivery.Application.Features.Products.Commands.CreateProducts
             .GreaterThanOrEqualTo(0).WithMessage("{Price} must be greater than or equal to 0");
 
             RuleFor(p => p.Image)
-                .MaximumLength(255).WithMessage("{Image} must be fewer than 255 characters");
+                .NotEmpty().WithMessage("{Image} is required")
+                .NotNull()
+                .MaximumLength(1000).WithMessage("{Image} must be fewer than 1000 characters");
 
         }
     }
