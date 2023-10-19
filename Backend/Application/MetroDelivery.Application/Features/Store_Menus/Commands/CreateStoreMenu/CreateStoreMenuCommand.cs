@@ -40,6 +40,12 @@ namespace MetroDelivery.Application.Features.Store_Menus.Commands.CreateStoreMen
             }
 
             foreach (var item in menuIds) {
+                var storeMenuExist = await _metroPickUpDbContext.Store_Menu.Where(m => m.MenuId == item.Id 
+                                                            && m.StoreId == Guid.Parse(request.StoreId)
+                                                            && m.Priority == true).SingleOrDefaultAsync();
+                if(storeMenuExist != null) {
+                    throw new NotFoundException($"Cửa hàng này {request.StoreId} đã được tạo với menu này {item.Id} rồi và đang priority = 1");
+                }
                 var storeMenu = new Store_Menu
                 {
                     MenuId = item.Id,
