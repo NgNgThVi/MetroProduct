@@ -107,6 +107,38 @@ namespace MetroDelivery.Identity.Configurations
                     Address = "Kon Tum",
                     Birthday = DateTime.ParseExact("26/02/1998", "dd/MM/yyyy", CultureInfo.InvariantCulture),
                     Wallet = null
+                },
+                new ApplicationUser
+                {
+                    Id = "DB903C85-4C75-428B-A7B0-9B56130F4813",
+                    Email = "dungho537@gmail.com",
+                    NormalizedEmail = "DUNGHO537@GMAIL.COM",
+                    FirstName = "Dũng",
+                    LastName = "Hồ",
+                    UserName = "dungHo537@gmail.com",
+                    NormalizedUserName = "DUNGHO537@GMAIL.COM",
+                    PasswordHash = hasher.HashPassword(null, "P@ssw0rd1"),
+                    EmailConfirmed = true,
+                    PhoneNumber = "0123456789",
+                    Address = "Đồng Nai",
+                    Birthday = DateTime.ParseExact("26/02/1998", "dd/MM/yyyy", CultureInfo.InvariantCulture),
+                    Wallet = null
+                },
+                new ApplicationUser
+                {
+                    Id = "8E48858E-7089-4512-BB79-75AEDC2003D6",
+                    Email = "vinhttran537@gmail.com",
+                    NormalizedEmail = "VINHTTRAN537@GMAIL.COM",
+                    FirstName = "Vinh",
+                    LastName = "Trần",
+                    UserName = "vinhtran537@gmail.com",
+                    NormalizedUserName = "VINHTRAN537@GMAIL.COM",
+                    PasswordHash = hasher.HashPassword(null, "P@ssw0rd1"),
+                    EmailConfirmed = true,
+                    PhoneNumber = "0123456789",
+                    Address = "Suối Tiên",
+                    Birthday = DateTime.ParseExact("26/02/1998", "dd/MM/yyyy", CultureInfo.InvariantCulture),
+                    Wallet = null
                 }
             );
         }

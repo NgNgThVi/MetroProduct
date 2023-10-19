@@ -11,7 +11,7 @@ namespace MetroDelivery.Identity.Configurations.EntityConfiguration
             builder.HasData(
                 new Menu_Product
                 {
-                    MenuID = Guid.Parse("E7A15238-5DB0-49BD-94E6-D5F8B77AE6CE"),
+                    MenuID = Guid.Parse("D3FD2009-C658-4498-BF59-26936918A0C8"),
                     ProductID = Guid.Parse("43203CE4-D82C-4C78-8794-2AEF22D7EC5B"),
                     PriceOfProductBelongToTimeService = 20000
                 },

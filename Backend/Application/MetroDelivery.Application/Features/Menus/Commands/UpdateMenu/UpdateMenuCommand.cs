@@ -17,6 +17,8 @@ namespace MetroDelivery.Application.Features.Menus.Commands.UpdateMenu
         public Guid Id { get; set; }
         public TimeSpan StartTimeService { get; set; }
         public TimeSpan EndTimeService { get; set; }
+        public string ApplyDate { get; set; }
+        public bool Priority { get; set; }
     }
 
     public class UpdateMenuCommandHandler : IRequestHandler<UpdateMenuCommand, MetroPickUpResponse>
@@ -41,6 +43,9 @@ namespace MetroDelivery.Application.Features.Menus.Commands.UpdateMenu
 
             menuExsit.StartTimeService = request.StartTimeService;
             menuExsit.EndTimeService = request.EndTimeService;
+            menuExsit.ApplyDate = request.ApplyDate;
+            menuExsit.Priority = request.Priority; // nếu update về false coi như xóa nha
+
             _metroPickUpDbContext.Menu.Update(menuExsit);
             await _metroPickUpDbContext.SaveChangesAsync();
 
