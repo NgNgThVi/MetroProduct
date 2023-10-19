@@ -7,6 +7,8 @@ namespace MetroDelivery.Domain.Entities
     {   
         public TimeSpan StartTimeService { get; set; }
         public TimeSpan EndTimeService { get; set;}
+        public string ApplyDate { get; set;}
+        public bool Priority { get; set;}
 
         //relationship
         public IList<Store_Menu> Store_Menu { get; set; }

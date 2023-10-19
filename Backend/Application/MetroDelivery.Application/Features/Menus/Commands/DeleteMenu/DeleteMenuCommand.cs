@@ -33,7 +33,7 @@ namespace MetroDelivery.Application.Features.Menus.Commands.DeleteMenu
             if(menuExsit == null) {
                 throw new NotFoundException("Menu này không tồn tại");
             }
-            if (menuExsit.IsDelete == true) {
+            if (menuExsit.Priority == false) {
                 throw new NotFoundException("Menu đã bị xóa rồi");
             }
 

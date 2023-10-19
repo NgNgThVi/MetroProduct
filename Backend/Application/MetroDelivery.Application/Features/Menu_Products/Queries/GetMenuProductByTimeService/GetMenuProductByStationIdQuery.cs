@@ -41,92 +41,54 @@ namespace MetroDelivery.Application.Features.Menu_Products.Queries.GetMenuProduc
 
             // Lấy thông tin về múi giờ của Việt Nam
             TimeZoneInfo vietnamTimeZone = TimeZoneInfo.FindSystemTimeZoneById("SE Asia Standard Time");
-
             // Lấy thời gian hiện tại theo múi giờ của Việt Nam
             DateTime vietnamTime = TimeZoneInfo.ConvertTime(DateTime.Now, vietnamTimeZone);
+            var currentDayOfWeek = vietnamTime.DayOfWeek;
 
-            var menus = await _metroPickUpDbContext.Menu.Where(m => (m.StartTimeService <= vietnamTime.TimeOfDay) && (m.EndTimeService > vietnamTime.TimeOfDay)).SingleOrDefaultAsync();
-            if (menus == null) {
-                throw new NotFoundException("Cửa hàng đã đóng cửa, xin quý khách quay lại vào 6h sáng mai");
-            }
-
-            var menuId = menus.Id;
-            var storeId = stationExist.StoreID;
-            var storeMenu = await _metroPickUpDbContext.Store_Menu.Where(s => !s.IsDelete && s.MenuId == menuId && s.StoreId == storeId).FirstOrDefaultAsync();
-            if (storeMenu == null) {
-                /*var storeMenuEntity = new Store_Menu
-                {
-                    MenuId = menus.Id,
-                    StoreId = stationExist.StoreID,
-                };
-                _metroPickUpDbContext.Store_Menu.Add(storeMenuEntity);
-                await _metroPickUpDbContext.SaveChangesAsync();
-
-                var menuProductList1 = await _metroPickUpDbContext.Menu_Product.Where(s => !s.IsDelete && s.Menu.StartTimeService == storeMenuEntity.Menu.StartTimeService && s.Menu.EndTimeService == storeMenuEntity.Menu.EndTimeService)
-                                                                .Join(
-                                                                    _metroPickUpDbContext.Menu,
-                                                                    menuProduct => menuProduct.MenuID,
-                                                                    menu => menu.Id,
-                                                                    (menuProduct, menu) => new
-                                                                    {
-                                                                        MenuProducts = menuProduct,
-                                                                        Menus = menu
-                                                                    }
-                                                                )
-                                                                .Join(
-                                                                    _metroPickUpDbContext.Product,
-                                                                    combined => combined.MenuProducts.ProductID,
-                                                                    product => product.Id,
-                                                                    (combined, product) => new MenuProductResponse
-                                                                    {
-                                                                        Id = combined.MenuProducts.Id,
-                                                                        MenuID = combined.MenuProducts.MenuID,
-                                                                        ProductID = combined.MenuProducts.ProductID,
-                                                                        PriceOfProductBelongToTimeService = combined.MenuProducts.PriceOfProductBelongToTimeService,
-                                                                        Created = combined.MenuProducts.Created,
-
-                                                                        MenuData = _mapper.Map<MenuResponse>(combined.Menus),
-                                                                        ProductData = _mapper.Map<ProductData>(product)
-                                                                    }
-                                                                ).ToListAsync();
-
-                return menuProductList1;*/
-                if (menus == null) {
-                    throw new ArgumentNullException(nameof(menus), "Menu không được phép là null");
-                }
+            // kiểm tra ngày với priority của cái menu trong StoreMenu nếu thỏa priority thì lấy ra 
+            var storeMenus = await _metroPickUpDbContext.Store_Menu.Where(m => (m.Menu.StartTimeService <= vietnamTime.TimeOfDay)
+                                                                    && (m.Menu.EndTimeService > vietnamTime.TimeOfDay)
+                                                                    && m.Menu.ApplyDate == currentDayOfWeek.ToString()
+                                                                    && m.Menu.Priority == true
+                                                                    && m.StoreId == stationExist.StoreID)
+                                                                    .SingleOrDefaultAsync();
+            if (storeMenus == null) {
                 if (stationExist == null) {
                     throw new ArgumentNullException(nameof(stationExist), "Station không được phép là null");
                 }
                 throw new NotFoundException("StoreMenu chưa được tạo, cần phải có storeMenu");
             }
-           
-            var menuProductList = await _metroPickUpDbContext.Menu_Product.Where(s => !s.IsDelete && s.Menu.StartTimeService == storeMenu.Menu.StartTimeService && s.Menu.EndTimeService == storeMenu.Menu.EndTimeService)
-                                                                .Join(
-                                                                    _metroPickUpDbContext.Menu,
-                                                                    menuProduct => menuProduct.MenuID,
-                                                                    menu => menu.Id,
-                                                                    (menuProduct, menu) => new
-                                                                    {
-                                                                        MenuProducts = menuProduct,
-                                                                        Menus = menu
-                                                                    }
-                                                                )
-                                                                .Join(
-                                                                    _metroPickUpDbContext.Product,
-                                                                    combined => combined.MenuProducts.ProductID,
-                                                                    product => product.Id,
-                                                                    (combined, product) => new MenuProductResponse
-                                                                    {
-                                                                        Id = combined.MenuProducts.Id,
-                                                                        MenuID = combined.MenuProducts.MenuID,
-                                                                        ProductID = combined.MenuProducts.ProductID,
-                                                                        PriceOfProductBelongToTimeService = combined.MenuProducts.PriceOfProductBelongToTimeService,
-                                                                        Created = combined.MenuProducts.Created,
+            var sotrmenu = storeMenus.MenuId;
+            
 
-                                                                        MenuData = _mapper.Map<MenuResponse>(combined.Menus),
-                                                                        ProductData = _mapper.Map<ProductData>(product)
-                                                                    }
-                                                                ).ToListAsync();
+            // get MenuProduct với cái Menu của StoreMenu
+            var menuProductList = await _metroPickUpDbContext.Menu_Product.Where(s => !s.IsDelete && s.MenuID == storeMenus.MenuId)
+                                                        .Join(
+                                                            _metroPickUpDbContext.Menu,
+                                                            menuProduct => menuProduct.MenuID,
+                                                            menu => menu.Id,
+                                                            (menuProduct, menu) => new
+                                                            {
+                                                                MenuProducts = menuProduct,
+                                                                Menus = menu
+                                                            }
+                                                        )
+                                                        .Join(
+                                                            _metroPickUpDbContext.Product,
+                                                            combined => combined.MenuProducts.ProductID,
+                                                            product => product.Id,
+                                                            (combined, product) => new MenuProductResponse
+                                                            {
+                                                                Id = combined.MenuProducts.Id,
+                                                                MenuID = combined.MenuProducts.MenuID,
+                                                                ProductID = combined.MenuProducts.ProductID,
+                                                                PriceOfProductBelongToTimeService = combined.MenuProducts.PriceOfProductBelongToTimeService,
+                                                                Created = combined.MenuProducts.Created,
+
+                                                                MenuData = _mapper.Map<MenuResponse>(combined.Menus),
+                                                                ProductData = _mapper.Map<ProductData>(product)
+                                                            }
+                                                        ).ToListAsync();
 
             return menuProductList;
         }
