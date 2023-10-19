@@ -19,7 +19,7 @@ namespace MetroDelivery.Application.Features.Trips.Commands.DeleteTrip
 
         public async Task<MetroPickUpResponse> Handle(DeleteTripCommand request, CancellationToken cancellationToken)
         {
-            var tripId = await _metroPickUpDbContext.Trip.Where(t => t.Id == request.Id).SingleOrDefaultAsync();
+            var tripId = await _metroPickUpDbContext.Trip.Where(t => t.Id == Guid.Parse(request.Id)).SingleOrDefaultAsync();
 
             if(tripId == null) {
                 throw new NotFoundException($"Not Found Trips {tripId}");

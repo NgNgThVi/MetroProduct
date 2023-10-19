@@ -10,6 +10,6 @@ namespace MetroDelivery.Application.Features.Products.Commands.DeleteProducts
 {
     public class DeleteProductCommand : IRequest<MetroPickUpResponse>
     {
-        public Guid Id { get; set; }
+        public string Id { get; set; }
     }
 }

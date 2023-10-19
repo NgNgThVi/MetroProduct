@@ -8,7 +8,7 @@ namespace MetroDelivery.Application.Features.Categorys.Queries.GetCategoryById
 {
     public class GetByIdCategoryQuery : IRequest<CategoryResponse>
     {
-        public Guid Id { get; set; }
+        public string Id { get; set; }
     }
 
     public class GetByIdCategoryQueryHandler : IRequestHandler<GetByIdCategoryQuery, CategoryResponse>
@@ -23,7 +23,7 @@ namespace MetroDelivery.Application.Features.Categorys.Queries.GetCategoryById
 
         public async Task<CategoryResponse> Handle(GetByIdCategoryQuery request, CancellationToken cancellationToken)
         {
-            var categoryExist = await _metroPickUpDbContext.Categories.Where(c => c.Id == request.Id).SingleOrDefaultAsync();
+            var categoryExist = await _metroPickUpDbContext.Categories.Where(c => c.Id == Guid.Parse(request.Id)).SingleOrDefaultAsync();
             if (categoryExist == null) {
                 throw new NotFoundException("category không tồn tồn tại!");
             }

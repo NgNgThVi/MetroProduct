@@ -11,7 +11,7 @@ namespace MetroDelivery.Application.Features.Stores.Commands.UpdateStore
 {
     public class UpdateStoreCommand : IRequest<MetroPickUpResponse>
     {
-        public Guid Id { get; set; }
+        public string Id { get; set; }
         public string StoreName { get; set; }
         public string StoreLocation { get; set; }
         public TimeSpan? StoreOpenTime { get; set; }

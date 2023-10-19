@@ -9,6 +9,6 @@ namespace MetroDelivery.Application.Features.Products.Queries.GetProductById
 {
     public class GetProductByIdQuery : IRequest<ProductResponse>
     {
-        public Guid Id { get; set; }
+        public string Id { get; set; }
     }
 }

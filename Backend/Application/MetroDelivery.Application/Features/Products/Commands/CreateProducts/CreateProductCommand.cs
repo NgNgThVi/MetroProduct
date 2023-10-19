@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using MetroDelivery.Application.Common.CRUDResponse;
 using MetroDelivery.Application.Features.Routes.Commands.CreateRoute;
 using System;
 using System.Collections.Generic;
@@ -8,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace MetroDelivery.Application.Features.Products.Commands.CreateProducts
 {
-    public class CreateProductCommand : IRequest<Guid>
+    public class CreateProductCommand : IRequest<MetroPickUpResponse>
     {
-        public Guid CategoryID { get; set; }
+        public string CategoryID { get; set; }
         public string ProductName { get; set; }
         public string? ProductDescription { get; set; }
         public string Image { get; set; }

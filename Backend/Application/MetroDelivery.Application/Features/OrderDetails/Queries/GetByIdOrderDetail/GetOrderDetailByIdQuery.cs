@@ -13,7 +13,7 @@ namespace MetroDelivery.Application.Features.OrderDetails.Queries.GetByIdOrderDe
 {
     public class GetOrderDetailByIdQuery : IRequest<OrderDetailResponse>
     {
-        public Guid Id { get; set; }
+        public string Id { get; set; }
     }
 
     public class GetOrderDetailByIdQueryHandler : IRequestHandler<GetOrderDetailByIdQuery, OrderDetailResponse>
@@ -28,7 +28,7 @@ namespace MetroDelivery.Application.Features.OrderDetails.Queries.GetByIdOrderDe
 
         public async Task<OrderDetailResponse> Handle(GetOrderDetailByIdQuery request, CancellationToken cancellationToken)
         {
-            var orderDetailExist = await _metroPickUpDbContext.OrderDetail.Where(o => !o.IsDelete && o.Id == request.Id)
+            var orderDetailExist = await _metroPickUpDbContext.OrderDetail.Where(o => !o.IsDelete && o.Id == Guid.Parse(request.Id))
                                                                         .Join(
                                                                             _metroPickUpDbContext.Order,
                                                                             orderDetail => orderDetail.OrderID,

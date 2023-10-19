@@ -19,7 +19,7 @@ namespace MetroDelivery.Application.Features.Routes.Commands.DeleteRoute
 
         public async Task<MetroPickUpResponse> Handle(DeleteRouteCommand request, CancellationToken cancellationToken)
         {
-            var routeExist = await _metroPickUpDbContext.Route.Where(r => r.Id == request.Id).SingleOrDefaultAsync();
+            var routeExist = await _metroPickUpDbContext.Route.Where(r => r.Id == Guid.Parse(request.Id)).SingleOrDefaultAsync();
             if (routeExist == null) {
                 throw new NotFoundException("RouteId do not exsit!!!");
             }

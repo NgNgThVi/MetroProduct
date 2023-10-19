@@ -16,12 +16,12 @@ namespace MetroDelivery.Domain.IdentityModels
         public string Address { get; set; }
         public DateTime? Birthday { get; set; }
         public double? Wallet { get ; set; }
+        public DateTime? Created { get; set; }
 
 
         // relationship
 
         public IList<Order> Orders { get; private set; }
         public IList<WithDraw> WithDraws { get; private set; }
-
     }
 }

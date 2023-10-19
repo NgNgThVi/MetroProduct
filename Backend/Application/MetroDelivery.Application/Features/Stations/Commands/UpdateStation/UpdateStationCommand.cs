@@ -11,8 +11,8 @@ namespace MetroDelivery.Application.Features.Stations.Commands.UpdateStation
 {
     public class UpdateStationCommand : IRequest<MetroPickUpResponse>
     {
-        public Guid Id { get; set; }
-        public Guid StoreID { get; set; }
+        public string Id { get; set; }
+        public string StoreID { get; set; }
         public string StationName { get; set; }
     }
 }

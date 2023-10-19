@@ -69,8 +69,8 @@ namespace MetroDelivery.Identity.Configurations.EntityConfiguration
             {
                 Id = Guid.Parse("8a2ba7d5-7019-49c6-a47d-ab0a072e7932"),
                 TripName = "African Safari",
-                TripStartTime = DateTime.Parse("9/28/2023 7:00 AM"),
-                TripEndTime = DateTime.Parse("10/3/2023 5:00 PM"),
+                TripStartTime = DateTime.Parse("10/19/2023 7:00 AM"),
+                TripEndTime = DateTime.Parse("10/19/2023 15:00 PM"),
                 RouteId = Guid.Parse("B9F8F712-92EE-4611-AD55-000A8E1B84C6")
             },
             new Trip

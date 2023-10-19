@@ -32,15 +32,15 @@ namespace MetroDelivery.Application.Features.Orders.Commands.CreateOrder
 
         public async Task<OrderResponseMessage> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
         {
-            var storeId = await _metroPickUpDbContext.Store.Where(s => s.Id == request.StoreId).SingleOrDefaultAsync();
+            var storeId = await _metroPickUpDbContext.Store.Where(s => s.Id == Guid.Parse(request.StoreId)).SingleOrDefaultAsync();
             if (storeId == null) {
                 throw new NotFoundException("không có cửa hàng này, xin nhập lại");
             }
-            var station = await _metroPickUpDbContext.Station.Where(s => s.StoreID == request.StoreId).SingleOrDefaultAsync();
+            var station = await _metroPickUpDbContext.Station.Where(s => s.StoreID == Guid.Parse(request.StoreId)).SingleOrDefaultAsync();
             if (station == null) {
                 throw new NotFoundException("không có station từ cửa hàng, xin nhập lại");
             }
-            var stationTrip = await _metroPickUpDbContext.Station_Trip.Where(s => s.StationID == station.Id && s.TripID == request.TripId).SingleOrDefaultAsync();
+            var stationTrip = await _metroPickUpDbContext.Station_Trip.Where(s => s.StationID == station.Id && s.TripID == Guid.Parse(request.TripId)).SingleOrDefaultAsync();
             if(stationTrip == null) {
                 throw new NotFoundException("Bắt User nhập lại thời gian kết thúc chuyến tàu, tại staionTrip");
             }
@@ -65,8 +65,8 @@ namespace MetroDelivery.Application.Features.Orders.Commands.CreateOrder
                 OrderTokenQR = request.OrderTokenQR,
 
                 ApplicationUserID = request.ApplicationUserID,
-                TripID = request.TripId,
-                StoreID = request.StoreId
+                TripID = Guid.Parse(request.TripId),
+                StoreID = Guid.Parse(request.StoreId)
             };
 
             _metroPickUpDbContext.Order.Add(order);
@@ -76,7 +76,7 @@ namespace MetroDelivery.Application.Features.Orders.Commands.CreateOrder
             foreach (var product in request.Products) {
                 var orderDetail = new OrderDetail
                 {
-                    ProductID = product.ProductId,
+                    ProductID = Guid.Parse(product.ProductId),
                     OrderID = order.Id,
                     Quanity = product.Quantity,
                     Price = product.PriceOfProductBelongToTimeService * product.Quantity

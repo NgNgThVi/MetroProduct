@@ -14,7 +14,7 @@ namespace MetroDelivery.Application.Features.Categorys.Commands.DeleteCategory
 {
     public class DeleteCategoryCommand : IRequest<MetroPickUpResponse>
     {
-        public Guid Id { get; set; }
+        public string Id { get; set; }
     }
 
     public class DeleteCategoryCommandHandler : IRequestHandler<DeleteCategoryCommand, MetroPickUpResponse>
@@ -29,7 +29,7 @@ namespace MetroDelivery.Application.Features.Categorys.Commands.DeleteCategory
 
         public async Task<MetroPickUpResponse> Handle(DeleteCategoryCommand request, CancellationToken cancellationToken)
         {
-            var categoryExist = await _metroPickUpDbContext.Categories.Where(c => c.Id == request.Id).SingleOrDefaultAsync();
+            var categoryExist = await _metroPickUpDbContext.Categories.Where(c => c.Id == Guid.Parse(request.Id)).SingleOrDefaultAsync();
             if(categoryExist == null) {
                 throw new NotFoundException("category không tồn tại!");
             }

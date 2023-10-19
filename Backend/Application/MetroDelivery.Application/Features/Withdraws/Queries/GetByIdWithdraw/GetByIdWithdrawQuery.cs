@@ -14,7 +14,7 @@ namespace MetroDelivery.Application.Features.Withdraws.Queries.GetByIdWithdraw
 {
     public class GetByIdWithdrawQuery : IRequest<WithdrawResponse>
     {
-        public Guid Id { get; set; }
+        public string Id { get; set; }
     }
 
     public class GetByIdWithdrawQueryHandler : IRequestHandler<GetByIdWithdrawQuery, WithdrawResponse>
@@ -29,7 +29,7 @@ namespace MetroDelivery.Application.Features.Withdraws.Queries.GetByIdWithdraw
 
         public async Task<WithdrawResponse> Handle(GetByIdWithdrawQuery request, CancellationToken cancellationToken)
         {
-            var withdraw = await _metroPickUpDbContext.WithDraw.Where(w => !w.IsDelete && w.Id == request.Id)
+            var withdraw = await _metroPickUpDbContext.WithDraw.Where(w => !w.IsDelete && w.Id == Guid.Parse(request.Id))
                                                                  .Join(
                                                                      _metroPickUpDbContext.ApplicationUsers,
                                                                      withdraws => withdraws.ApplicationUserID,

@@ -22,7 +22,7 @@ namespace MetroDelivery.Application.Features.Station_Trips.Commands.CreateStatio
 
     public class StationDataInStationTrip
     {
-        public Guid StationId { get; set; }
+        public string StationId { get; set; }
         public DateTime Arrived { get; set; } // thời gian đến cái trạm
     }
 }

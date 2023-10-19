@@ -14,7 +14,7 @@ namespace MetroDelivery.Application.Features.PaymentMethods.Commands.DeletePayme
 {
     public class DeletePaymentMethodCommand : IRequest<MetroPickUpResponse>
     {
-        public Guid Id { get; set; }
+        public string Id { get; set; }
     }
 
     public class DeletePaymentMethodCommandHandler : IRequestHandler<DeletePaymentMethodCommand, MetroPickUpResponse>
@@ -29,7 +29,7 @@ namespace MetroDelivery.Application.Features.PaymentMethods.Commands.DeletePayme
 
         public async Task<MetroPickUpResponse> Handle(DeletePaymentMethodCommand request, CancellationToken cancellationToken)
         {
-            var paymentExist = await _metroPickUpDbContext.PaymentMethod.Where(p => p.Id == request.Id).SingleOrDefaultAsync();
+            var paymentExist = await _metroPickUpDbContext.PaymentMethod.Where(p => p.Id == Guid.Parse(request.Id)).SingleOrDefaultAsync();
             if (paymentExist == null) {
                 throw new NotFoundException("paymentMethod không tồn tại!");
             }

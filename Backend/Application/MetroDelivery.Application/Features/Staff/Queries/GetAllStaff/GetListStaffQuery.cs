@@ -42,7 +42,7 @@ namespace MetroDelivery.Application.Features.Staff.Queries.GetAllStaff
 
             // Lấy thông tin chi tiết về người dùng từ bảng AspNetUsers
             var staffUsers = await _userManager.Users
-                .Where(user => userIdsInStaffRole.Contains(user.Id))
+                .Where(user => userIdsInStaffRole.Contains(user.Id) && user.EmailConfirmed)
                 .Select(user => new StaffRole
                 {
                     StaffId = user.Id,
@@ -54,9 +54,10 @@ namespace MetroDelivery.Application.Features.Staff.Queries.GetAllStaff
                         LastName = user.LastName,
                         PhoneNumber = user.PhoneNumber,
                         Address = user.Address,
-                        Birthday = user.Birthday
+                        Birthday = user.Birthday,
+                        Created = user.Created,
                     },
-                    RoleId = userIdsInStaffRole.FirstOrDefault(),
+                    RoleId = "647D9649-F5A2-4F24-808F-6FC326EC2AA3",
                     RoleData = new RoleData
                     {
                         Id = "647D9649-F5A2-4F24-808F-6FC326EC2AA3",  // Thay thế "YourRoleId" bằng Id thực tế của vai trò "Staff" trong bảng AspNetRoles

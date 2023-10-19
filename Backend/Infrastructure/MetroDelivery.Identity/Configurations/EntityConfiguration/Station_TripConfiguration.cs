@@ -56,6 +56,36 @@ namespace MetroDelivery.Identity.Configurations.EntityConfiguration
                     TripID = Guid.Parse("9b4d232c-0fda-4ec0-beed-ecd649ee9c52"),
                     StationID = Guid.Parse("50cb67f8-421e-4aec-85ed-7114e763d6c6"),
                     Arrived = DateTime.Parse("6/16/2023 13:00 PM")
+                },
+                new Station_Trip
+                {
+                    TripID = Guid.Parse("8a2ba7d5-7019-49c6-a47d-ab0a072e7932"),
+                    StationID = Guid.Parse("50CB67F8-421E-4AEC-85ED-7114E763D6C5"),
+                    Arrived = DateTime.Parse("10/19/2023 9:00 PM")
+                },
+                new Station_Trip
+                {
+                    TripID = Guid.Parse("8a2ba7d5-7019-49c6-a47d-ab0a072e7932"),
+                    StationID = Guid.Parse("50CB67F8-421E-4AEC-85ED-7114E763D6C6"),
+                    Arrived = DateTime.Parse("10/19/2023 10:00 PM")
+                },
+                new Station_Trip
+                {
+                    TripID = Guid.Parse("8a2ba7d5-7019-49c6-a47d-ab0a072e7932"),
+                    StationID = Guid.Parse("50CB67F8-421E-4AEC-85ED-7114E763D6C7"),
+                    Arrived = DateTime.Parse("10/19/2023 12:00 PM")
+                },
+                new Station_Trip
+                {
+                    TripID = Guid.Parse("8a2ba7d5-7019-49c6-a47d-ab0a072e7932"),
+                    StationID = Guid.Parse("50CB67F8-421E-4AEC-85ED-7114E763D6C8"),
+                    Arrived = DateTime.Parse("10/19/2023 13:00 PM")
+                },
+                new Station_Trip
+                {
+                    TripID = Guid.Parse("8a2ba7d5-7019-49c6-a47d-ab0a072e7932"),
+                    StationID = Guid.Parse("50CB67F8-421E-4AEC-85ED-7114E763D6C9"),
+                    Arrived = DateTime.Parse("10/19/2023 15:00 PM")
                 }
             );
         }

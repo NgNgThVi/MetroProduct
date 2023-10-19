@@ -11,7 +11,7 @@ namespace MetroDelivery.Application.Features.Routes.Commands.UpdateRoute
 {
     public class UpdateRouteCommand : IRequest<MetroPickUpResponse>
     {
-        public Guid Id { get; set; }
+        public string Id { get; set; }
         public string FromLocation { get; set; }
         public string ToLocation { get; set; }
     }

@@ -19,9 +19,9 @@ namespace MetroDelivery.Application.Features.Products.Commands.UpdateProducts
 {
     public class UpdateProductCommand : IRequest<MetroPickUpResponse>
     {
-        public Guid ProductId {  get; set; }
+        public string ProductId {  get; set; }
 
-        public Guid CategoryID { get; set; }
+        public string CategoryID { get; set; }
         public string ProductName { get; set; }
         public string? ProductDescription { get; set; }
         public string Image { get; set; }
@@ -40,7 +40,7 @@ namespace MetroDelivery.Application.Features.Products.Commands.UpdateProducts
 
         public async Task<MetroPickUpResponse> Handle(UpdateProductCommand request, CancellationToken cancellationToken)
         {
-            var productExistId = await _metroPickUpDbContext.Product.Where(p => p.Id == request.ProductId).SingleOrDefaultAsync();
+            var productExistId = await _metroPickUpDbContext.Product.Where(p => p.Id == Guid.Parse(request.ProductId)).SingleOrDefaultAsync();
             if (productExistId == null) {
                 throw new NotFoundException($"ProductId {request.ProductId} không tồn tại");
             }
@@ -48,7 +48,7 @@ namespace MetroDelivery.Application.Features.Products.Commands.UpdateProducts
                 throw new NotFoundException($"ProductId {request.ProductId} đã bị xóa khỏi danh sách Product");
             }
 
-            var checkCategory = await _metroPickUpDbContext.Categories.Where(c => c.Id == request.CategoryID && !c.IsDelete).SingleOrDefaultAsync();
+            var checkCategory = await _metroPickUpDbContext.Categories.Where(c => c.Id == Guid.Parse(request.CategoryID) && !c.IsDelete).SingleOrDefaultAsync();
             if (checkCategory == null) {
                 throw new NotFoundException($"CategoryId này {request.CategoryID} không tồn tại trong danh sách category");
             }

@@ -10,31 +10,14 @@ namespace MetroDelivery.Application.Features.Customers.Commands.CreateCustomer
 {
     public class CreateCustomerCommandHandler : IRequestHandler<CreateCustomerCommand, string>
     {
-        /*private readonly IMapper _mapper;
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly RoleManager<IdentityRole> _roleManager;
-        private readonly SignInManager<ApplicationUser> _signInManager;
-
-
-        public CreateCustomerCommandHandler(IMapper mapper, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, SignInManager<ApplicationUser> signInManager)
-        {
-            _mapper = mapper;
-            _userManager = userManager;
-            _roleManager = roleManager;
-            _signInManager = signInManager;
-        }*/
         private readonly IMetroPickUpDbContext _metroPickUpDbContext;
-        private readonly IMapper _mapper;
-        /*private readonly IAppLogger<GetListCustomerQuery> _logger;*/
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
-        public CreateCustomerCommandHandler(IMetroPickUpDbContext metroPickUpDbContext, /*IMapper mapper,*/ /*IAppLogger<GetListCustomerQuery> logger,*/
+        public CreateCustomerCommandHandler(IMetroPickUpDbContext metroPickUpDbContext,
             UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, SignInManager<ApplicationUser> signInManager)
         {
             _metroPickUpDbContext = metroPickUpDbContext;
-            /*_mapper = mapper;*/
-           /* _logger = logger;*/
             _userManager = userManager;
             _roleManager = roleManager;
             _signInManager = signInManager;
@@ -67,6 +50,7 @@ namespace MetroDelivery.Application.Features.Customers.Commands.CreateCustomer
                 PhoneNumber = request.Phone,
                 PhoneNumberConfirmed = true,
                 EmailConfirmed = true,
+                Created = DateTime.Now
             };
             var result = await _userManager.CreateAsync(user, request.Password);
             if (result.Succeeded) {

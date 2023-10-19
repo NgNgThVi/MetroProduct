@@ -9,13 +9,11 @@ namespace MetroDelivery.Application.Features.Products.Commands.UpdateProducts
         {
             RuleFor(p => p.ProductId)
                 .NotEmpty().WithMessage("{ProductId} is required")
-                .NotNull().WithMessage("{ProductId} cannot be null")
-                .Must(BeValidGuid).WithMessage("Invalid {ProductId}");
+                .NotNull().WithMessage("{ProductId} cannot be null");
 
             RuleFor(p => p.CategoryID)
                 .NotEmpty().WithMessage("{CategoryID} is required")
-                .NotNull().WithMessage("{CategoryID} cannot be null")
-                .Must(BeValidGuid).WithMessage("Invalid {CategoryID}");
+                .NotNull().WithMessage("{CategoryID} cannot be null");
 
             RuleFor(p => p.ProductName)
                 .NotEmpty().WithMessage("{ProductName} is required")
@@ -33,11 +31,6 @@ namespace MetroDelivery.Application.Features.Products.Commands.UpdateProducts
                 .NotNull()
                 .MaximumLength(1000).WithMessage("{Image} must be fewer than 1000 characters");
 
-        }
-
-        private bool BeValidGuid(Guid guid)
-        {
-            return Guid.TryParse(guid.ToString(), out _);
         }
     }
 }
