@@ -49,11 +49,11 @@ namespace MetroDelivery.Application.Features.Orders.Commands.CreateOrder
             // Lấy thời gian hiện tại theo múi giờ của Việt Nam
             DateTime vietnamTime = TimeZoneInfo.ConvertTime(DateTime.Now, vietnamTimeZone);
 
-            /*var validator = new CreateOrderCommandValidator();
-            var validatorResult = await validator.ValidateAsync(request);
+            var validator = new ProductRequestValidator();
+            var validatorResult = await validator.ValidateAsync(new ProductRequest { PriceOfProductBelongToTimeService = request.Products.Select(c => c.PriceOfProductBelongToTimeService).SingleOrDefault() });
             if (validatorResult.Errors.Any()) {
                 throw new BadRequestException("Invalid Create user", validatorResult);
-            }*/
+            }
             var timeDifference =  stationTrip.Arrived.TimeOfDay - vietnamTime.TimeOfDay;
             if (timeDifference.TotalMinutes < 15) {
                 throw new NotFoundException("User phải đặt hàng trước 15p, xin mời đặt lại ở trạm kế tiếp vì bị lố thời gian chuẩn bị");

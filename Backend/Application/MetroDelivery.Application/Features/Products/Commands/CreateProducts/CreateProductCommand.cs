@@ -13,7 +13,7 @@ namespace MetroDelivery.Application.Features.Products.Commands.CreateProducts
         public Guid CategoryID { get; set; }
         public string ProductName { get; set; }
         public string? ProductDescription { get; set; }
-        public string? Image { get; set; }
+        public string Image { get; set; }
         public double? Price { get; set; }
     }
 }

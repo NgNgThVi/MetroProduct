@@ -1,4 +1,4 @@
-﻿/*using FluentValidation;
+﻿using FluentValidation;
 
 namespace MetroDelivery.Application.Features.Orders.Commands.CreateOrder
 {
@@ -6,10 +6,19 @@ namespace MetroDelivery.Application.Features.Orders.Commands.CreateOrder
     {
         public CreateOrderCommandValidator()
         {
-            RuleFor(p => p.TotalPrice)
+           /* RuleFor(p => p.Products)
+            .GreaterThanOrEqualTo(0).WithMessage("{Price} must be greater than or equal to 0");*/
+
+        }
+    }
+
+    public class ProductRequestValidator : AbstractValidator<ProductRequest>
+    {
+        public ProductRequestValidator()
+        {
+            RuleFor(p => p.PriceOfProductBelongToTimeService)
             .GreaterThanOrEqualTo(0).WithMessage("{Price} must be greater than or equal to 0");
 
         }
     }
 }
-*/
