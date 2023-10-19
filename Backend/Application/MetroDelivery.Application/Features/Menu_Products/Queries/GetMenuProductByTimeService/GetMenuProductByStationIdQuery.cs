@@ -50,7 +50,9 @@ namespace MetroDelivery.Application.Features.Menu_Products.Queries.GetMenuProduc
                 throw new NotFoundException("Cửa hàng đã đóng cửa, xin quý khách quay lại vào 6h sáng mai");
             }
 
-            var storeMenu = await _metroPickUpDbContext.Store_Menu.Where(s => !s.IsDelete && s.MenuId == menus.Id && s.StoreId == stationExist.StoreID).SingleOrDefaultAsync();
+            var menuId = menus.Id;
+            var storeId = stationExist.StoreID;
+            var storeMenu = await _metroPickUpDbContext.Store_Menu.Where(s => !s.IsDelete && s.MenuId == menuId && s.StoreId == storeId).FirstOrDefaultAsync();
             if (storeMenu == null) {
                 /*var storeMenuEntity = new Store_Menu
                 {
@@ -89,6 +91,12 @@ namespace MetroDelivery.Application.Features.Menu_Products.Queries.GetMenuProduc
                                                                 ).ToListAsync();
 
                 return menuProductList1;*/
+                if (menus == null) {
+                    throw new ArgumentNullException(nameof(menus), "Menu không được phép là null");
+                }
+                if (stationExist == null) {
+                    throw new ArgumentNullException(nameof(stationExist), "Station không được phép là null");
+                }
                 throw new NotFoundException("StoreMenu chưa được tạo, cần phải có storeMenu");
             }
            
