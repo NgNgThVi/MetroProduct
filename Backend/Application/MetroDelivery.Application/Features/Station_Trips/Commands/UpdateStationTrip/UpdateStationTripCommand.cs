@@ -15,9 +15,9 @@ namespace MetroDelivery.Application.Features.Station_Trips.Commands.UpdateStatio
 {
     public class UpdateStationTripCommand : IRequest<MetroPickUpResponse>
     {
-        public Guid Id { get; set; }
-        public Guid TripId { get; set; }
-        public Guid StationId { get; set; }
+        public string Id { get; set; }
+        public string TripId { get; set; }
+        public string StationId { get; set; }
         public DateTime Arrived { get; set; }
     }
 
@@ -33,7 +33,7 @@ namespace MetroDelivery.Application.Features.Station_Trips.Commands.UpdateStatio
 
         public async Task<MetroPickUpResponse> Handle(UpdateStationTripCommand request, CancellationToken cancellationToken)
         {
-            var stationTripExist = await _metroPickUpDbContext.Station_Trip.Where(s => s.Id == request.Id).SingleOrDefaultAsync();
+            var stationTripExist = await _metroPickUpDbContext.Station_Trip.Where(s => s.Id == Guid.Parse(request.Id)).SingleOrDefaultAsync();
             if(stationTripExist == null) {
                 throw new NotFoundException($"không tìm thấy stationTripId nào hết");
             }
@@ -41,8 +41,8 @@ namespace MetroDelivery.Application.Features.Station_Trips.Commands.UpdateStatio
                 throw new NotFoundException($"stationTripId đã bị xóa");
             }
 
-            stationTripExist.TripID = request.TripId;
-            stationTripExist.StationID = request.StationId;
+            stationTripExist.TripID = Guid.Parse(request.TripId);
+            stationTripExist.StationID = Guid.Parse(request.StationId);
             stationTripExist.Arrived = request.Arrived;
 
             _metroPickUpDbContext.Station_Trip.Update(stationTripExist);

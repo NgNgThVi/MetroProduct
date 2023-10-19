@@ -17,6 +17,7 @@ namespace MetroDelivery.Application.Features.Products.Queries
         public string? ProductDescription { get; set; }
         public string Image { get; set; }
         public double? Price { get; set; }
+        public DateTime Created { get; set; }
 
         public Category? CategoryData { get; set; }
     }

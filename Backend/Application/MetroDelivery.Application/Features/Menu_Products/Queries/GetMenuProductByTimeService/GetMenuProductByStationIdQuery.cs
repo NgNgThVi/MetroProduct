@@ -16,7 +16,7 @@ namespace MetroDelivery.Application.Features.Menu_Products.Queries.GetMenuProduc
 {
     public class GetMenuProductByStationIdQuery : IRequest<List<MenuProductResponse>>
     {
-        public Guid StationId { get; set; }
+        public string StationId { get; set; }
     }
 
     public class GetMenuProductByStationIdQueryQueryHandler : IRequestHandler<GetMenuProductByStationIdQuery, List<MenuProductResponse>>
@@ -31,7 +31,7 @@ namespace MetroDelivery.Application.Features.Menu_Products.Queries.GetMenuProduc
 
         public async Task<List<MenuProductResponse>> Handle(GetMenuProductByStationIdQuery request, CancellationToken cancellationToken)
         {
-            var stationExist = await _metroPickUpDbContext.Station.Where(s => s.Id == request.StationId).SingleOrDefaultAsync();
+            var stationExist = await _metroPickUpDbContext.Station.Where(s => s.Id == Guid.Parse(request.StationId)).SingleOrDefaultAsync();
             if (stationExist == null) {
                 throw new NotFoundException($"Not found station with {stationExist}");
             }
@@ -45,18 +45,18 @@ namespace MetroDelivery.Application.Features.Menu_Products.Queries.GetMenuProduc
             DateTime vietnamTime = TimeZoneInfo.ConvertTime(DateTime.Now, vietnamTimeZone);
             var currentDayOfWeek = vietnamTime.DayOfWeek;
 
-            // kiểm tra ngày với priority của cái menu trong StoreMenu nếu thỏa priority thì lấy ra 
+            // kiểm tra ngày với priority trong StoreMenu nếu thỏa priority thì lấy ra 
             var storeMenus = await _metroPickUpDbContext.Store_Menu.Where(m => (m.Menu.StartTimeService <= vietnamTime.TimeOfDay)
                                                                     && (m.Menu.EndTimeService > vietnamTime.TimeOfDay)
-                                                                    && m.Menu.ApplyDate == currentDayOfWeek.ToString()
-                                                                    && m.Menu.Priority == true
+                                                                    && m.ApplyDate == currentDayOfWeek.ToString()
+                                                                    && m.Priority == true
                                                                     && m.StoreId == stationExist.StoreID)
                                                                     .SingleOrDefaultAsync();
             if (storeMenus == null) {
                 if (stationExist == null) {
                     throw new ArgumentNullException(nameof(stationExist), "Station không được phép là null");
                 }
-                throw new NotFoundException("StoreMenu chưa được tạo, cần phải có storeMenu");
+                throw new NotFoundException("StoreMenu chưa được tạo, cần phải có storeMenu, hoặc hết giờ hoặt động của cửa hàng");
             }
             var sotrmenu = storeMenus.MenuId;
             

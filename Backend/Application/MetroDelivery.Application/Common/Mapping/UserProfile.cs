@@ -7,6 +7,7 @@ using MetroDelivery.Application.Features.OrderDetails.Queries;
 using MetroDelivery.Application.Features.PaymentMethods.Queries;
 using MetroDelivery.Application.Features.Products.Queries;
 using MetroDelivery.Application.Features.Routes.Queries;
+using MetroDelivery.Application.Features.Staff.Queries;
 using MetroDelivery.Application.Features.Stations.Queries;
 using MetroDelivery.Application.Features.Store_Menus.Queries;
 using MetroDelivery.Application.Features.Stores;
@@ -87,6 +88,10 @@ namespace MetroDelivery.Application.Common.MappingProfiles
             //CustomerData
             CreateMap<CustomerData, ApplicationUser>().ReverseMap();
             CreateMap<ApplicationUser, CustomerData>().ReverseMap();
+
+            //Staff Response
+            CreateMap<StaffResponse, ApplicationUser>().ReverseMap();
+            CreateMap<ApplicationUser, StaffResponse>().ReverseMap();
 
         }
 

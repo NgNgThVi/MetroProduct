@@ -14,9 +14,9 @@ namespace MetroDelivery.Application.Features.Withdraws.Commands.UpdateWithdraw
 {
     public class UpdateWithdrawCommand : IRequest<MetroPickUpResponse>
     {
-        public Guid Id { get; set; }
+        public string Id { get; set; }
         public string ApplicationUserID { get; set; }
-        public Guid PaymentMethodID { get; set; }
+        public string PaymentMethodID { get; set; }
         public double? Balance { get; set; }
         public double? Deposit { get; set; }
         public DateTime? CreateTimeOfWithdraw { get; set; }
@@ -34,8 +34,8 @@ namespace MetroDelivery.Application.Features.Withdraws.Commands.UpdateWithdraw
         public async Task<MetroPickUpResponse> Handle(UpdateWithdrawCommand request, CancellationToken cancellationToken)
         {
             var customerExist = await _metroPickUpDbContext.ApplicationUsers.Where(c => c.Id == request.ApplicationUserID).SingleOrDefaultAsync();
-            var paymentMethodExist = await _metroPickUpDbContext.PaymentMethod.Where(c => c.Id == request.PaymentMethodID).SingleOrDefaultAsync();
-            var withdrawExist = await _metroPickUpDbContext.WithDraw.Where(c => c.Id == request.Id).SingleOrDefaultAsync();
+            var paymentMethodExist = await _metroPickUpDbContext.PaymentMethod.Where(c => c.Id == Guid.Parse(request.PaymentMethodID)).SingleOrDefaultAsync();
+            var withdrawExist = await _metroPickUpDbContext.WithDraw.Where(c => c.Id == Guid.Parse(request.Id)).SingleOrDefaultAsync();
             if (withdrawExist == null) {
                 throw new NotFoundException("WithdrawId không tồn tại");
             }
@@ -56,7 +56,7 @@ namespace MetroDelivery.Application.Features.Withdraws.Commands.UpdateWithdraw
             }
 
             withdrawExist.ApplicationUserID = request.ApplicationUserID;
-            withdrawExist.PaymentMethodID = request.PaymentMethodID;
+            withdrawExist.PaymentMethodID = Guid.Parse(request.PaymentMethodID);
             withdrawExist.Balance = request.Balance;
             withdrawExist.Deposit = request.Deposit;
             withdrawExist.CreateTimeOfWithdraw = request.CreateTimeOfWithdraw;

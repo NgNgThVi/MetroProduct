@@ -14,7 +14,7 @@ namespace MetroDelivery.Application.Features.PaymentMethods.Commands.UpdatePayme
 {
     public class UpdatePaymentMethodCommand : IRequest<MetroPickUpResponse>
     {
-        public Guid Id { get; set; }
+        public string Id { get; set; }
         public string PaymentMethodName { get; set; }
     }
 
@@ -30,7 +30,7 @@ namespace MetroDelivery.Application.Features.PaymentMethods.Commands.UpdatePayme
 
         public async Task<MetroPickUpResponse> Handle(UpdatePaymentMethodCommand request, CancellationToken cancellationToken)
         {
-            var response = await _metroPickUpDbContext.PaymentMethod.Where(p => p.Id == request.Id).SingleOrDefaultAsync();
+            var response = await _metroPickUpDbContext.PaymentMethod.Where(p => p.Id == Guid.Parse(request.Id)).SingleOrDefaultAsync();
             if (response == null) {
                 throw new NotFoundException("paymentMethod không tồn tại!");
             }

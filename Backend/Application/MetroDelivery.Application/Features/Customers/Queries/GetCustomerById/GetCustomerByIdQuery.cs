@@ -7,5 +7,5 @@ using System.Threading.Tasks;
 
 namespace MetroDelivery.Application.Features.Customers.Queries.GetCustomerById
 {
-    public record GetCustomerByIdQuery(string id) : IRequest<CustomerResponse>;
+    public record GetCustomerByIdQuery(string id) : IRequest<CustomerRole>;
 }

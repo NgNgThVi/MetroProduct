@@ -15,7 +15,7 @@ namespace MetroDelivery.Application.Features.Categorys.Commands.UpdateCategory
 {
     public class UpdateCategoryCommand : IRequest<MetroPickUpResponse>
     {
-        public Guid Id { get; set; }
+        public string Id { get; set; }
         public string CategoryName { get; set; }
     }
 
@@ -31,7 +31,7 @@ namespace MetroDelivery.Application.Features.Categorys.Commands.UpdateCategory
 
         public async Task<MetroPickUpResponse> Handle(UpdateCategoryCommand request, CancellationToken cancellationToken)
         {
-            var categoryExist = await _metroPickUpDbContext.Categories.Where(c => c.Id == request.Id).SingleOrDefaultAsync();
+            var categoryExist = await _metroPickUpDbContext.Categories.Where(c => c.Id == Guid.Parse(request.Id)).SingleOrDefaultAsync();
             if (categoryExist == null) {
                 throw new NotFoundException("category không tồn tồn tại!");
             }

@@ -11,10 +11,10 @@ namespace MetroDelivery.Application.Features.Trips.Commands.UpdateTrip
 {
     public class UpdateTripCommand : IRequest<MetroPickUpResponse>
     {
-        public Guid TripId { get; set; }
+        public string TripId { get; set; }
         public string TripName { get; set; }
         public DateTime TripStartTime { get; set; }
         public DateTime TripEndTime { get; set; }
-        public Guid RouteId { get; set; }
+        public string RouteId { get; set; }
     }
 }

@@ -91,6 +91,7 @@ namespace MetroDelivery.Identity.Services
                 LastName = request.LastName,
                 UserName = request.UserName,
                 EmailConfirmed = true,
+                Created = DateTime.Now
             };
 
             var result = await _userManager.CreateAsync(user, request.Password);

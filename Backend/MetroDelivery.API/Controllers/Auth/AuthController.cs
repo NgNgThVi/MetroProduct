@@ -71,6 +71,8 @@ namespace MetroDelivery.API.Controllers.Auth
                 FirstName = request.FirstName,
                 LastName = request.LastName,
                 EmailConfirmed = true,
+                Created = DateTime.Now
+
             };
             var result = await _userManager.CreateAsync(user, request.Password);
             if (!result.Succeeded) {
@@ -109,6 +111,7 @@ namespace MetroDelivery.API.Controllers.Auth
                 FirstName = request.FirstName,
                 LastName = request.LastName,
                 EmailConfirmed = true,
+                Created = DateTime.Now
             };
             var result = await _userManager.CreateAsync(user, request.Password);
             if (!result.Succeeded) {

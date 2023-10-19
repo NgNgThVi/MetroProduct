@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using FluentValidation;
 using MediatR;
+using MetroDelivery.Application.Common.CRUDResponse;
 using MetroDelivery.Application.Common.Exceptions;
 using MetroDelivery.Application.Common.Interface;
 using MetroDelivery.Domain.Entities;
@@ -8,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MetroDelivery.Application.Features.Products.Commands.CreateProducts
 {
-    public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand, Guid>
+    public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand, MetroPickUpResponse>
     {
         private readonly IMetroPickUpDbContext _metroPickUpDbContext;
         private readonly IMapper _mapper;
@@ -18,9 +19,9 @@ namespace MetroDelivery.Application.Features.Products.Commands.CreateProducts
             _mapper = mapper;
         }
 
-        public async Task<Guid> Handle(CreateProductCommand request, CancellationToken cancellationToken)
+        public async Task<MetroPickUpResponse> Handle(CreateProductCommand request, CancellationToken cancellationToken)
         {
-            var checkCategory = await _metroPickUpDbContext.Categories.Where(c => c.Id == request.CategoryID && !c.IsDelete).SingleOrDefaultAsync();
+            var checkCategory = await _metroPickUpDbContext.Categories.Where(c => c.Id == Guid.Parse(request.CategoryID) && !c.IsDelete).SingleOrDefaultAsync();
             if(checkCategory == null) {
                 throw new NotFoundException($"CategoryId này {request.CategoryID} không tồn tại trong danh sách category");
             }
@@ -33,7 +34,7 @@ namespace MetroDelivery.Application.Features.Products.Commands.CreateProducts
 
             var product = new Product
             {
-                CategoryID = request.CategoryID,
+                CategoryID = Guid.Parse(request.CategoryID),
                 ProductName = request.ProductName,
                 ProductDescription = request.ProductDescription,
                 Image = request.Image,
@@ -43,7 +44,11 @@ namespace MetroDelivery.Application.Features.Products.Commands.CreateProducts
             _metroPickUpDbContext.Product.Add(product);
             await _metroPickUpDbContext.SaveChangesAsync();
 
-            return product.Id;
+            return new MetroPickUpResponse
+            {
+                Message = "Create product thành công"
+            };
+                
         }
     }
 }

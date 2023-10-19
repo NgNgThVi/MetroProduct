@@ -47,6 +47,8 @@ namespace MetroDelivery.Application.Features.Store_Menus.Queries.GetAllStoreMenu
                                                                         Id = combined.StoreMenus.Id,
                                                                         StoreId = combined.StoreMenus.StoreId,
                                                                         MenuId = combined.StoreMenus.MenuId,
+                                                                        ApplyDate = combined.StoreMenus.ApplyDate,
+                                                                        Priority = combined.StoreMenus.Priority,
                                                                         Create = combined.StoreMenus.Created,
 
                                                                         StoreData = _mapper.Map<StoreData>(combined.Stores),

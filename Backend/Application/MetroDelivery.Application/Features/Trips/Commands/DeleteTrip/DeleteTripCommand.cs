@@ -10,6 +10,6 @@ namespace MetroDelivery.Application.Features.Trips.Commands.DeleteTrip
 {
     public class DeleteTripCommand : IRequest<MetroPickUpResponse>
     {
-        public Guid Id { get; set; }
+        public string Id { get; set; }
     }
 }

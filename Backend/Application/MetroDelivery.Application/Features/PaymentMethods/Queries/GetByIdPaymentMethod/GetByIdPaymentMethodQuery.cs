@@ -13,7 +13,7 @@ namespace MetroDelivery.Application.Features.PaymentMethods.Queries.GetByIdPayme
 {
     public class GetByIdPaymentMethodQuery : IRequest<PaymentMethodResponse>
     {
-        public Guid Id { get; set; }
+        public string Id { get; set; }
     }
 
     public class GetByIdPaymentMethodQueryHandler : IRequestHandler<GetByIdPaymentMethodQuery, PaymentMethodResponse>
@@ -28,7 +28,7 @@ namespace MetroDelivery.Application.Features.PaymentMethods.Queries.GetByIdPayme
 
         public async Task<PaymentMethodResponse> Handle(GetByIdPaymentMethodQuery request, CancellationToken cancellationToken)
         {
-            var paymentMethodExist = await _metroPickUpDbContext.PaymentMethod.Where(p => p.Id == request.Id).SingleOrDefaultAsync();
+            var paymentMethodExist = await _metroPickUpDbContext.PaymentMethod.Where(p => p.Id == Guid.Parse(request.Id)).SingleOrDefaultAsync();
 
             if (paymentMethodExist == null) {
                 throw new NotFoundException("Không có paymentMethod nào hết");

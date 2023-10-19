@@ -10,6 +10,6 @@ namespace MetroDelivery.Application.Features.Stores.Queries.GetStoreById
 {
     public class GetStoreByIdQueries : IRequest<StoreDto>
     {
-        public Guid Id { get; set; }
+        public string Id { get; set; }
     }
 }

@@ -14,7 +14,7 @@ namespace MetroDelivery.Application.Features.Withdraws.Commands.DeleteWithdraw
 {
     public class DeleteWithdrawCommand : IRequest<MetroPickUpResponse>
     {
-        public Guid Id { get; set; }
+        public string Id { get; set; }
     }
 
     public class DeleteWithdrawCommandHandler : IRequestHandler<DeleteWithdrawCommand, MetroPickUpResponse>
@@ -29,7 +29,7 @@ namespace MetroDelivery.Application.Features.Withdraws.Commands.DeleteWithdraw
 
         public async Task<MetroPickUpResponse> Handle(DeleteWithdrawCommand request, CancellationToken cancellationToken)
         {
-            var withdrawExist = await _metroPickUpDbContext.WithDraw.Where(w => w.Id == request.Id).SingleOrDefaultAsync();
+            var withdrawExist = await _metroPickUpDbContext.WithDraw.Where(w => w.Id == Guid.Parse(request.Id)).SingleOrDefaultAsync();
             if (withdrawExist == null) {
                 throw new NotFoundException("WithdraId không tồn tại");
             }

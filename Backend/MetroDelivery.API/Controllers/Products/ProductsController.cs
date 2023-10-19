@@ -47,10 +47,10 @@ namespace MetroDelivery.API.Controllers.Products
         [HttpPost]
         [ProducesResponseType(201)]
         [ProducesResponseType(400)]
-        public async Task<ActionResult> Create([FromBody] CreateProductCommand request)
+        public async Task<MetroPickUpResponse> Create([FromBody] CreateProductCommand request)
         {
             var response = await _mediator.Send(request);
-            return CreatedAtAction(nameof(GetAll), new { id = response });
+            return response;
         }
 
         [HttpPut]

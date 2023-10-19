@@ -14,6 +14,8 @@ namespace MetroDelivery.Domain.Entities
         public Guid StoreId {  get; set; }
         [ForeignKey("Menu")]
         public Guid MenuId { get; set; }
+        public string ApplyDate { get; set; }
+        public bool Priority { get; set; }
 
         //relationship
         public virtual Store Store { get; private set; }

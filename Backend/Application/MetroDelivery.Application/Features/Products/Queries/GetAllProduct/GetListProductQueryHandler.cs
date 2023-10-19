@@ -35,6 +35,7 @@ namespace MetroDelivery.Application.Features.Products.Queries.GetAllProduct
                                                             ProductDescription = products.ProductDescription,
                                                             Image = products.Image,
                                                             Price = products.Price,
+                                                            Created = products.Created,
                                                             CategoryID = products.CategoryID,
                                                             CategoryData = category,
                                                         }

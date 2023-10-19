@@ -10,6 +10,6 @@ namespace MetroDelivery.Application.Features.Routes.Commands.DeleteRoute
 {
     public class DeleteRouteCommand : IRequest<MetroPickUpResponse>
     {
-        public Guid Id { get; set; }
+        public string Id { get; set; }
     }
 }

@@ -15,7 +15,7 @@ namespace MetroDelivery.Application.Features.Station_Trips.Queries.GetStationByT
 {
     public class GetStationByTripIdQuery : IRequest<List<StationTripResponse>>
     {
-        public Guid TripId { get; set; }
+        public string TripId { get; set; }
     }
 
     public class GetStationByTripIdQueryHandler : IRequestHandler<GetStationByTripIdQuery, List<StationTripResponse>>
@@ -30,7 +30,7 @@ namespace MetroDelivery.Application.Features.Station_Trips.Queries.GetStationByT
 
         public async Task<List<StationTripResponse>> Handle(GetStationByTripIdQuery request, CancellationToken cancellationToken)
         {
-            var listStationTrip = await _metroPickUpDbContext.Station_Trip.Where(s => !s.IsDelete && s.Trip.Id == request.TripId)
+            var listStationTrip = await _metroPickUpDbContext.Station_Trip.Where(s => !s.IsDelete && s.Trip.Id == Guid.Parse(request.TripId))
                                                              .Join(
                                                                  _metroPickUpDbContext.Station,
                                                                  stationTrip => stationTrip.StationID,

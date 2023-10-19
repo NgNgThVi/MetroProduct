@@ -26,11 +26,26 @@ namespace MetroDelivery.Application.Features.Staff.Queries
         public string PhoneNumber { get; set; }
         public string Address { get; set; }
         public DateTime? Birthday { get; set; }
+        public DateTime? Created { get; set; }
     }
 
     public class RoleData
     {
         public string Id { get; set; }
         public string Name { get; set; }
+    }
+
+    public class StaffResponse
+    {
+        public string Id { get; set; }
+
+        public string Email { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string PhoneNumber { get; set; }
+        public string Address { get; set; }
+        public DateTime? Birthday { get; set; }
+
+        public DateTime? Created { get; set; }
     }
 }

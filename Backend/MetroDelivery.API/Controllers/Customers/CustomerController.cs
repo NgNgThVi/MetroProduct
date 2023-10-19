@@ -6,7 +6,9 @@ using MetroDelivery.Application.Features.Customers.Commands.CreateCustomer;
 using MetroDelivery.Application.Features.Customers.Commands.DeleteCustomer;
 using MetroDelivery.Application.Features.Customers.Commands.UpdateCustomer;
 using MetroDelivery.Application.Features.Customers.Queries.GetAllCustomers;
+using MetroDelivery.Application.Features.Customers.Queries.GetAllForAdmin;
 using MetroDelivery.Application.Features.Customers.Queries.GetCustomerById;
+using MetroDelivery.Application.Features.Staff.Queries;
 using MetroDelivery.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 
@@ -28,15 +30,22 @@ namespace MetroDelivery.API.Controllers.Customers
         }
        
         [HttpGet]
-        [Route("get-all-customer")]
+        [Route("get-all-customer-for-admin")]
 
         public async Task<List<CustomerResponse>> GetAllUser()
+        {
+            var response = await _mediator.Send(new GetListForAdminQuery());
+            return response;
+        }
+
+        [HttpGet]
+        [Route("get-all-customer-only-customer")]
+        public async Task<List<CustomerRole>> Get()
         {
             var response = await _mediator.Send(new GetListCustomerQuery());
             return response;
         }
 
-        // POST api/<userController> same vs cai register o AuthSerice cho user
         [HttpPost]
         [Route("register-customer")]
         [ProducesResponseType(201)]
@@ -61,13 +70,12 @@ namespace MetroDelivery.API.Controllers.Customers
         [HttpGet]
         [Route("get-customer-by-id")]
        /* [Authorize(Roles = "Admin")]*/
-        public async Task<ActionResult<CustomerResponse>> GetUserById([FromQuery] GetCustomerByIdQuery request)
+        public async Task<ActionResult<CustomerRole>> GetUserById([FromQuery] GetCustomerByIdQuery request)
         {
             var response = await _mediator.Send(request);
             return Ok(response);
         }
 
-        // PUT api/<userController>/5
         [HttpPut]
         [Route("update-customer-by-id")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]

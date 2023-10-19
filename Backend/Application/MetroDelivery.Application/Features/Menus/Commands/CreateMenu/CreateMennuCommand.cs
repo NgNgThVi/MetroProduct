@@ -6,7 +6,6 @@ namespace MetroDelivery.Application.Features.Menus.Commands.CreateMenu
     {
         public TimeSpan StartTimeService { get; set; }
         public TimeSpan EndTimeService { get; set; }
-        public string ApplyDate { get; set; }
-        public bool Priority { get; set; }
+        
     }
 }

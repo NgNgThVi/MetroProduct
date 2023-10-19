@@ -14,11 +14,9 @@ namespace MetroDelivery.Application.Features.Menus.Commands.UpdateMenu
 {
     public class UpdateMenuCommand : IRequest<MetroPickUpResponse>
     {
-        public Guid Id { get; set; }
+        public string Id { get; set; }
         public TimeSpan StartTimeService { get; set; }
         public TimeSpan EndTimeService { get; set; }
-        public string ApplyDate { get; set; }
-        public bool Priority { get; set; }
     }
 
     public class UpdateMenuCommandHandler : IRequestHandler<UpdateMenuCommand, MetroPickUpResponse>
@@ -33,7 +31,7 @@ namespace MetroDelivery.Application.Features.Menus.Commands.UpdateMenu
 
         public async Task<MetroPickUpResponse> Handle(UpdateMenuCommand request, CancellationToken cancellationToken)
         {
-            var menuExsit = await _metroPickUpDbContext.Menu.Where(m => m.Id == request.Id).SingleOrDefaultAsync();
+            var menuExsit = await _metroPickUpDbContext.Menu.Where(m => m.Id == Guid.Parse(request.Id)).SingleOrDefaultAsync();
             if (menuExsit == null) {
                 throw new NotFoundException("Menu này không tồn tại");
             }
@@ -43,8 +41,6 @@ namespace MetroDelivery.Application.Features.Menus.Commands.UpdateMenu
 
             menuExsit.StartTimeService = request.StartTimeService;
             menuExsit.EndTimeService = request.EndTimeService;
-            menuExsit.ApplyDate = request.ApplyDate;
-            menuExsit.Priority = request.Priority; // nếu update về false coi như xóa nha
 
             _metroPickUpDbContext.Menu.Update(menuExsit);
             await _metroPickUpDbContext.SaveChangesAsync();

@@ -14,7 +14,7 @@ namespace MetroDelivery.Application.Features.Menus.Commands.DeleteMenu
 {
     public class DeleteMenuCommand : IRequest<MetroPickUpResponse>
     {
-        public Guid Id { get; set; }
+        public string Id { get; set; }
     }
 
     public class DeleteMenuCommandHandler : IRequestHandler<DeleteMenuCommand, MetroPickUpResponse>
@@ -29,11 +29,11 @@ namespace MetroDelivery.Application.Features.Menus.Commands.DeleteMenu
 
         public async Task<MetroPickUpResponse> Handle(DeleteMenuCommand request, CancellationToken cancellationToken)
         {
-            var menuExsit = await _metroPickUpDbContext.Menu.Where(m => m.Id == request.Id).SingleOrDefaultAsync();
+            var menuExsit = await _metroPickUpDbContext.Menu.Where(m => m.Id == Guid.Parse(request.Id)).SingleOrDefaultAsync();
             if(menuExsit == null) {
                 throw new NotFoundException("Menu này không tồn tại");
             }
-            if (menuExsit.Priority == false) {
+            if (menuExsit.IsDelete == true) {
                 throw new NotFoundException("Menu đã bị xóa rồi");
             }
 

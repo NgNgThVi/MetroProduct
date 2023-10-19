@@ -14,7 +14,7 @@ namespace MetroDelivery.Application.Features.Station_Trips.Commands.DeleteStatio
 {
     public class DeleteStationTripCommand : IRequest<MetroPickUpResponse>
     { 
-        public Guid Id { get; set; }
+        public string Id { get; set; }
     }
 
     public class DeleteStationTripCommandHandler : IRequestHandler<DeleteStationTripCommand, MetroPickUpResponse>
@@ -29,7 +29,7 @@ namespace MetroDelivery.Application.Features.Station_Trips.Commands.DeleteStatio
 
         public async Task<MetroPickUpResponse> Handle(DeleteStationTripCommand request, CancellationToken cancellationToken)
         {
-            var stationTripExist = await _metroPickUpDbContext.Station_Trip.Where(s => s.Id == request.Id).SingleOrDefaultAsync();
+            var stationTripExist = await _metroPickUpDbContext.Station_Trip.Where(s => s.Id == Guid.Parse(request.Id)).SingleOrDefaultAsync();
             if(stationTripExist == null) {
                 throw new NotFoundException($"không tìm thấy stationTripId nào hết");
             }

@@ -20,7 +20,7 @@ namespace MetroDelivery.Application.Features.Stores.Queries.GetStoreById
 
         public async Task<StoreDto> Handle(GetStoreByIdQueries request, CancellationToken cancellationToken)
         {
-            var storeId = await _metroPickUpDbContext.Store.Where(s => s.Id == request.Id).SingleOrDefaultAsync();
+            var storeId = await _metroPickUpDbContext.Store.Where(s => s.Id == Guid.Parse(request.Id)).SingleOrDefaultAsync();
             if (storeId == null) {
                 throw new NotFoundException(nameof(Store), request.Id);
             }

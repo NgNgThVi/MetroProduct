@@ -24,7 +24,7 @@ namespace MetroDelivery.Application.Features.Menu_Products.Commands.CreateMenuPr
     }
     public class ProductList
     {
-        public Guid ProductID { get; init; }
+        public string ProductID { get; init; }
         public double? PriceOfProductBelongToTimeService { get; set; }
     }
 
@@ -40,7 +40,7 @@ namespace MetroDelivery.Application.Features.Menu_Products.Commands.CreateMenuPr
 
         public async Task<Guid> Handle(CreateMenuProductCommand request, CancellationToken cancellationToken)
         {
-            var productIs = request.ProductData.Select(s => s.ProductID).ToList();
+            var productIs = request.ProductData.Select(s => Guid.Parse(s.ProductID)).ToList();
             var productExist = await _metroPickUpDbContext.Product.Where(p => productIs.Contains(p.Id) && !p.IsDelete).ToListAsync();
 
             // tạo menu
@@ -63,7 +63,7 @@ namespace MetroDelivery.Application.Features.Menu_Products.Commands.CreateMenuPr
             }
 
             foreach ( var productData in request.ProductData) {
-                var product = productExist.FirstOrDefault(p => p.Id == productData.ProductID);
+                var product = productExist.FirstOrDefault(p => p.Id == Guid.Parse(productData.ProductID));
                 if(product == null) {
                     throw new NotFoundException($"Không tìm thấy product {product} này!");
                 }

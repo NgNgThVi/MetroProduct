@@ -16,10 +16,10 @@ namespace MetroDelivery.Application.Features.Orders.Commands.CreateOrder
         public string ApplicationUserID { get; set; }
 
         // Trip
-        public Guid TripId { get; set; }
+        public string TripId { get; set; }
 
         //Store
-        public Guid StoreId { get; set; }
+        public string StoreId { get; set; }
 
         
         // order
@@ -32,7 +32,7 @@ namespace MetroDelivery.Application.Features.Orders.Commands.CreateOrder
 
     public class ProductRequest
     {
-        public Guid ProductId { get; set; }
+        public string ProductId { get; set; }
         public int Quantity { get; set; }
         public double PriceOfProductBelongToTimeService { get; set; }
     }

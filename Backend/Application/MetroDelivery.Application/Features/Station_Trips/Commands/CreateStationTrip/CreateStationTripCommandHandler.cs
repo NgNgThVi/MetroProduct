@@ -44,14 +44,14 @@ namespace MetroDelivery.Application.Features.Station_Trips.Commands.CreateStatio
                     _metroPickUpDbContext.Trip.Add(trip);
                     await _metroPickUpDbContext.SaveChangesAsync();
                     // tạo stationTrip, Trip với List station
-                    var requestStation = request.StationList.Select(s => s.StationId).ToList();
+                    var requestStation = request.StationList.Select(s => Guid.Parse(s.StationId)).ToList();
                     var stationExist = await _metroPickUpDbContext.Station.Where(s => requestStation.Contains(s.Id) && !s.IsDelete).ToListAsync();
 
                     if (stationExist.Count() == 0) {
                         throw new NotFoundException($"không tìm thấy station nào hết, cần phải tạo station");
                     }
                     foreach (var stationData in request.StationList) {
-                        var station = stationExist.FirstOrDefault(s => s.Id == stationData.StationId);
+                        var station = stationExist.FirstOrDefault(s => s.Id == Guid.Parse(stationData.StationId));
                         if (station == null) {
                             throw new NotFoundException($"Không tìm thấy station {station} này!");
                         }
@@ -87,14 +87,14 @@ namespace MetroDelivery.Application.Features.Station_Trips.Commands.CreateStatio
                     _metroPickUpDbContext.Trip.Add(trip);
                     await _metroPickUpDbContext.SaveChangesAsync();
                     // tạo stationTrip, Trip với List station
-                    var requestStation = request.StationList.Select(s => s.StationId).ToList();
+                    var requestStation = request.StationList.Select(s => Guid.Parse(s.StationId)).ToList();
                     var stationExist = await _metroPickUpDbContext.Station.Where(s => requestStation.Contains(s.Id) && !s.IsDelete).ToListAsync();
 
                     if (stationExist.Count() == 0) {
                         throw new NotFoundException($"không tìm thấy station nào hết, cần phải tạo station");
                     }
                     foreach (var stationData in request.StationList) {
-                        var station = stationExist.FirstOrDefault(s => s.Id == stationData.StationId);
+                        var station = stationExist.FirstOrDefault(s => s.Id == Guid.Parse(stationData.StationId));
                         if (station == null) {
                             throw new NotFoundException($"Không tìm thấy station {station} này!");
                         }
@@ -112,7 +112,7 @@ namespace MetroDelivery.Application.Features.Station_Trips.Commands.CreateStatio
             }
             else {
                 // tạo stationTrip, Trip với List station
-                var requestStation = request.StationList.Select(s => s.StationId).ToList();
+                var requestStation = request.StationList.Select(s => Guid.Parse(s.StationId)).ToList();
                 var stationTripExist = await _metroPickUpDbContext.Station_Trip.Where(s => requestStation.Contains(s.Station.Id)
                                                                                         && s.Trip.TripName == request.TripName
                                                                                         && s.Trip.TripStartTime == request.TripStartTime
@@ -129,7 +129,7 @@ namespace MetroDelivery.Application.Features.Station_Trips.Commands.CreateStatio
                     throw new NotFoundException($"không tìm thấy station nào hết, cần phải tạo station");
                 }
                 foreach (var stationData in request.StationList) {
-                    var station = stationExist.FirstOrDefault(s => s.Id == stationData.StationId);
+                    var station = stationExist.FirstOrDefault(s => s.Id == Guid.Parse(stationData.StationId));
                     if (station == null) {
                         throw new NotFoundException($"Không tìm thấy station {station} này!");
                     }
