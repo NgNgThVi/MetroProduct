@@ -48,7 +48,7 @@ namespace MetroDelivery.Application.Features.Menu_Products.Queries.GetMenuProduc
             // kiểm tra ngày với priority trong StoreMenu nếu thỏa priority thì lấy ra 
             var storeMenus = await _metroPickUpDbContext.Store_Menu.Where(m => (m.Menu.StartTimeService <= vietnamTime.TimeOfDay)
                                                                     && (m.Menu.EndTimeService > vietnamTime.TimeOfDay)
-                                                                    && m.ApplyDate == currentDayOfWeek.ToString()
+                                                                    && m.ApplyDate == currentDayOfWeek.ToString() // chỗ này là thứ mấy
                                                                     && m.Priority == true
                                                                     && m.StoreId == stationExist.StoreID)
                                                                     .SingleOrDefaultAsync();
