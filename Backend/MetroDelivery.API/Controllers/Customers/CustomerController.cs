@@ -88,7 +88,6 @@ namespace MetroDelivery.API.Controllers.Customers
             return response;
         }
 
-        // DELETE api/<userController>/5
         [HttpDelete]
         [Route("delete-customer-by-id")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
