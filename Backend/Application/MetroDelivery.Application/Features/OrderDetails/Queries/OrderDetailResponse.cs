@@ -29,7 +29,7 @@ namespace MetroDelivery.Application.Features.OrderDetails.Queries
 
     public class OrderData
     {
-        public Guid CustomerID { get; set; }
+        public string ApplicationUserID { get; set; }
         public Guid TripID { get; set; }
         public Guid StoreID { get; set; }
         public double? TotalPrice { get; set; }

@@ -31,7 +31,15 @@ namespace MetroDelivery.Identity.Configurations
                     Id = "647D9649-F5A2-4F24-808F-6FC326EC2AA3",
                     Name = "Staff",
                     NormalizedName = "Staff",
-                });
+                },
+                new IdentityRole
+                {
+                    Id = "04D67210-257D-4DD5-BAFC-13DDE8CA0DFE",
+                    Name = "Manager",
+                    NormalizedName = "Manager",
+                }
+
+            );
         }
     }
 }

@@ -28,8 +28,8 @@ namespace MetroDelivery.API.Controllers.OrderDetails
         }
 
         [HttpGet]
-        [Route("get-product-by-id")]
-        public async Task<OrderDetailResponse> Get([FromQuery] GetOrderDetailByIdQuery request)
+        [Route("get-by-id-order")]
+        public async Task<List<OrderDetailResponse>> Get([FromQuery] GetOrderDetailByIdQuery request)
         {
             var response = await _mediator.Send(request);
             return response;

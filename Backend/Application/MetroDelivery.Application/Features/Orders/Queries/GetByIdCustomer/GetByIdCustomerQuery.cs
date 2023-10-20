@@ -1,26 +1,36 @@
 ﻿using AutoMapper;
 using MediatR;
+using MetroDelivery.Application.Common.Exceptions;
 using MetroDelivery.Application.Common.Interface;
 using MetroDelivery.Application.Features.Customers;
 using MetroDelivery.Application.Features.Stations.Queries;
-using MetroDelivery.Domain.IdentityModels;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace MetroDelivery.Application.Features.Orders.Queries.GetAllOrder
+namespace MetroDelivery.Application.Features.Orders.Queries.GetByIdCustomer
 {
-    public class GetListOrderQueryHandler : IRequestHandler<GetListOrderQuery, List<OrderResponse>>
+    public class GetByIdCustomerQuery : IRequest<List<OrderResponse>>
+    {
+        public string CustomerId { get; set; }
+    }
+
+    public class GetByIdCustomerQueryHandler : IRequestHandler<GetByIdCustomerQuery, List<OrderResponse>>
     {
         private readonly IMetroPickUpDbContext _metroPickUpDbContext;
         private readonly IMapper _mapper;
-        public GetListOrderQueryHandler(IMetroPickUpDbContext metroPickUpDbContext, IMapper mapper)
+        public GetByIdCustomerQueryHandler(IMetroPickUpDbContext metroPickUpDbContext, IMapper mapper)
         {
             _metroPickUpDbContext = metroPickUpDbContext;
             _mapper = mapper;
         }
 
-        public async Task<List<OrderResponse>> Handle(GetListOrderQuery request, CancellationToken cancellationToken)
+        public async Task<List<OrderResponse>> Handle(GetByIdCustomerQuery request, CancellationToken cancellationToken)
         {
-            var orderList = await _metroPickUpDbContext.Order.Where(o => !o.IsDelete)
+            var order = await _metroPickUpDbContext.Order.Where(o => !o.IsDelete && o.ApplicationUserID == request.CustomerId)
                                                             .Join(
                                                                 _metroPickUpDbContext.ApplicationUsers,
                                                                 orders => orders.ApplicationUserID,
@@ -56,7 +66,11 @@ namespace MetroDelivery.Application.Features.Orders.Queries.GetAllOrder
                                                                     StoreData = _mapper.Map<StoreData>(store)
                                                                 }
                                                             ).ToListAsync();
-            return orderList;
+            if (order == null) {
+                throw new NotFoundException("Order is not existed");
+            }
+
+            return order;
         }
     }
 }

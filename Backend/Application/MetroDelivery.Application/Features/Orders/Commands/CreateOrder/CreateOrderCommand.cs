@@ -22,8 +22,6 @@ namespace MetroDelivery.Application.Features.Orders.Commands.CreateOrder
         public string StoreId { get; set; }
 
         
-        // order
-        public string? OrderTokenQR { get; set; }
         /*public double? TotalPrice { get; set; }*/
 
         // 1 list product được chọn từ MenuProduct

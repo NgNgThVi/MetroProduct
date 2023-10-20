@@ -1,4 +1,6 @@
 ﻿using MetroDelivery.Application.Features.Customers;
+using MetroDelivery.Application.Features.OrderDetails.Queries;
+using MetroDelivery.Application.Features.Stations.Queries;
 using MetroDelivery.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -26,8 +28,8 @@ namespace MetroDelivery.Application.Features.Orders.Queries
         public double? TotalPrice { get; set; }
 
         public CustomerResponse? CustomerData { get; set; }
-        public Trip? TripData { get; set; }
-        public Store? StoreData { get; set; }
+        public TripData? TripData { get; set; }
+        public StoreData? StoreData { get; set; }
     }
 
     public class OrderResponseMessage
@@ -35,4 +37,12 @@ namespace MetroDelivery.Application.Features.Orders.Queries
         public Guid OrderId { get; set; }
         public Guid OrderDetailId { get; set; }
     }
+
+    public class TripData
+    {
+        public Guid Id { get; set; }
+        public string TripName { get; set; }
+    }
+
+
 }
