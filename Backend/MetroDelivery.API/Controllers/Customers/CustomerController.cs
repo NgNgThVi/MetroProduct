@@ -10,6 +10,7 @@ using MetroDelivery.Application.Features.Customers.Queries.GetAllForAdmin;
 using MetroDelivery.Application.Features.Customers.Queries.GetCustomerById;
 using MetroDelivery.Application.Features.Staff.Queries;
 using MetroDelivery.Domain.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -31,7 +32,7 @@ namespace MetroDelivery.API.Controllers.Customers
        
         [HttpGet]
         [Route("get-all-customer-for-admin")]
-
+        [Authorize(Roles = "Admin")]
         public async Task<List<CustomerResponse>> GetAllUser()
         {
             var response = await _mediator.Send(new GetListForAdminQuery());
@@ -40,6 +41,7 @@ namespace MetroDelivery.API.Controllers.Customers
 
         [HttpGet]
         [Route("get-all-customer-only-customer")]
+        [Authorize(Roles = "EndUser")]
         public async Task<List<CustomerRole>> Get()
         {
             var response = await _mediator.Send(new GetListCustomerQuery());
@@ -69,7 +71,7 @@ namespace MetroDelivery.API.Controllers.Customers
 
         [HttpGet]
         [Route("get-customer-by-id")]
-       /* [Authorize(Roles = "Admin")]*/
+        [Authorize(Roles = "Admin, EndUser")]
         public async Task<ActionResult<CustomerRole>> GetUserById([FromQuery] GetCustomerByIdQuery request)
         {
             var response = await _mediator.Send(request);
