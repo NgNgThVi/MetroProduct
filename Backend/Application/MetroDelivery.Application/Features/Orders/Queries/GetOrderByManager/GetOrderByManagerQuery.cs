@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using MediatR;
+using MetroDelivery.Application.Common.CRUDResponse;
 using MetroDelivery.Application.Common.Exceptions;
 using MetroDelivery.Application.Common.Interface;
 using MetroDelivery.Application.Features.Customers;
+using MetroDelivery.Application.Features.Stations.Queries;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -10,26 +12,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MetroDelivery.Application.Features.Orders.Queries.GetByIdOrder
+namespace MetroDelivery.Application.Features.Orders.Queries.GetOrderByManager
 {
-    public class GetByIdOrderQuery : IRequest<OrderResponse>
+    public class GetOrderByManagerQuery : IRequest<List<OrderResponse>>
     {
-        public string OrderId { get; set; }
+        public string StoreId { get; set; }
     }
 
-    public class GetByIdOrderQueryHandler : IRequestHandler<GetByIdOrderQuery, OrderResponse>
+    public class GetOrderByManagerQueryHandler : IRequestHandler<GetOrderByManagerQuery, List<OrderResponse>>
     {
         private readonly IMetroPickUpDbContext _metroPickUpDbContext;
         private readonly IMapper _mapper;
-        public GetByIdOrderQueryHandler(IMetroPickUpDbContext metroPickUpDbContext, IMapper mapper)
+        public GetOrderByManagerQueryHandler(IMetroPickUpDbContext metroPickUpDbContext, IMapper mapper)
         {
             _metroPickUpDbContext = metroPickUpDbContext;
             _mapper = mapper;
         }
 
-        public async Task<OrderResponse> Handle(GetByIdOrderQuery request, CancellationToken cancellationToken)
+        public async Task<List<OrderResponse>> Handle(GetOrderByManagerQuery request, CancellationToken cancellationToken)
         {
-            var order = await _metroPickUpDbContext.Order.Where(o => !o.IsDelete && o.Id == Guid.Parse(request.OrderId))
+            var order = await _metroPickUpDbContext.Order.Where(o => !o.IsDelete && o.StoreID == Guid.Parse(request.StoreId))
                                                             .Join(
                                                                 _metroPickUpDbContext.ApplicationUsers,
                                                                 orders => orders.ApplicationUserID,
@@ -61,11 +63,11 @@ namespace MetroDelivery.Application.Features.Orders.Queries.GetByIdOrder
                                                                     StoreId = orderCutomerTrip.OrderCustomer.Orders.StoreID,
 
                                                                     CustomerData = _mapper.Map<CustomerResponse>(orderCutomerTrip.OrderCustomer.ApplicationUser),
-                                                                    TripData = orderCutomerTrip.Trips,
-                                                                    StoreData = store
+                                                                    TripData = _mapper.Map<TripData>(orderCutomerTrip.Trips),
+                                                                    StoreData = _mapper.Map<StoreData>(store)
                                                                 }
-                                                            ).SingleOrDefaultAsync();
-            if(order == null) {
+                                                            ).ToListAsync();
+            if (order == null) {
                 throw new NotFoundException("Order is not existed");
             }
 

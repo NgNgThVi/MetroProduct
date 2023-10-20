@@ -11,12 +11,12 @@ using System.Threading.Tasks;
 
 namespace MetroDelivery.Application.Features.OrderDetails.Queries.GetByIdOrderDetail
 {
-    public class GetOrderDetailByIdQuery : IRequest<OrderDetailResponse>
+    public class GetOrderDetailByIdQuery : IRequest<List<OrderDetailResponse>>
     {
-        public string Id { get; set; }
+        public string OrderId { get; set; }
     }
 
-    public class GetOrderDetailByIdQueryHandler : IRequestHandler<GetOrderDetailByIdQuery, OrderDetailResponse>
+    public class GetOrderDetailByIdQueryHandler : IRequestHandler<GetOrderDetailByIdQuery, List<OrderDetailResponse>>
     {
         private readonly IMetroPickUpDbContext _metroPickUpDbContext;
         private readonly IMapper _mapper;
@@ -26,9 +26,9 @@ namespace MetroDelivery.Application.Features.OrderDetails.Queries.GetByIdOrderDe
             _mapper = mapper;
         }
 
-        public async Task<OrderDetailResponse> Handle(GetOrderDetailByIdQuery request, CancellationToken cancellationToken)
+        public async Task<List<OrderDetailResponse>> Handle(GetOrderDetailByIdQuery request, CancellationToken cancellationToken)
         {
-            var orderDetailExist = await _metroPickUpDbContext.OrderDetail.Where(o => !o.IsDelete && o.Id == Guid.Parse(request.Id))
+            var orderDetailExist = await _metroPickUpDbContext.OrderDetail.Where(o => !o.IsDelete && o.OrderID == Guid.Parse(request.OrderId))
                                                                         .Join(
                                                                             _metroPickUpDbContext.Order,
                                                                             orderDetail => orderDetail.OrderID,
@@ -56,7 +56,7 @@ namespace MetroDelivery.Application.Features.OrderDetails.Queries.GetByIdOrderDe
                                                                                 ProductData = _mapper.Map<ProductData>(product)
 
                                                                             }
-                                                                        ).SingleOrDefaultAsync();
+                                                                        ).ToListAsync();
             if(orderDetailExist == null) {
                 throw new NotFoundException("orderDetail ko tồn tại");
             }

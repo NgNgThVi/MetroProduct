@@ -26,7 +26,7 @@ namespace MetroDelivery.Identity.Configurations
                     Address = "da nang",
                     Birthday = DateTime.ParseExact("20/10/2002", "dd/MM/yyyy", CultureInfo.InvariantCulture),
                     PhoneNumber = "03030303",
-                    Wallet = null
+                    Wallet = null,
                 },
                 new ApplicationUser
                 {
@@ -42,7 +42,7 @@ namespace MetroDelivery.Identity.Configurations
                     PhoneNumber = "03030303",
                     Address = "hcm",
                     Birthday = DateTime.ParseExact("04/03/2010", "dd/MM/yyyy", CultureInfo.InvariantCulture),
-                    Wallet = null
+                    Wallet = null,
                 },
                 new ApplicationUser
                 {
@@ -58,8 +58,10 @@ namespace MetroDelivery.Identity.Configurations
                     PhoneNumber = "0961868641",
                     Address = "Cần Thơ",
                     Birthday = DateTime.ParseExact("04/05/2002", "dd/MM/yyyy", CultureInfo.InvariantCulture),
-                    Wallet = null
+                    Wallet = null,
                 },
+
+                // manager
                 new ApplicationUser
                 {
                     Id = "2E089AF6-3437-4DD6-9956-BB792E783AFB",
@@ -74,7 +76,8 @@ namespace MetroDelivery.Identity.Configurations
                     PhoneNumber = "0903182861",
                     Address = "Đắk Lắk",
                     Birthday = DateTime.ParseExact("14/08/1899", "dd/MM/yyyy", CultureInfo.InvariantCulture),
-                    Wallet = null
+                    Wallet = null,
+                    StoreId = Guid.Parse("6507B7DB-7255-4274-87A4-6E2DC3D8A3C4"),
                 },
                 new ApplicationUser
                 {
@@ -106,7 +109,7 @@ namespace MetroDelivery.Identity.Configurations
                     PhoneNumber = "0123456789",
                     Address = "Kon Tum",
                     Birthday = DateTime.ParseExact("26/02/1998", "dd/MM/yyyy", CultureInfo.InvariantCulture),
-                    Wallet = null
+                    Wallet = null,
                 },
                 new ApplicationUser
                 {
@@ -122,7 +125,7 @@ namespace MetroDelivery.Identity.Configurations
                     PhoneNumber = "0123456789",
                     Address = "Đồng Nai",
                     Birthday = DateTime.ParseExact("26/02/1998", "dd/MM/yyyy", CultureInfo.InvariantCulture),
-                    Wallet = null
+                    Wallet = null,
                 },
                 new ApplicationUser
                 {
@@ -138,7 +141,25 @@ namespace MetroDelivery.Identity.Configurations
                     PhoneNumber = "0123456789",
                     Address = "Suối Tiên",
                     Birthday = DateTime.ParseExact("26/02/1998", "dd/MM/yyyy", CultureInfo.InvariantCulture),
-                    Wallet = null
+                    Wallet = null,
+                },
+
+                // end user
+                new ApplicationUser
+                {
+                    Id = "B76C9C1E-7F7F-4175-93B3-39B1285F0E71",
+                    Email = "nguyentrieu537@gmail.com",
+                    NormalizedEmail = "NGUYENTRIEU537@GMAIL.COM",
+                    FirstName = "Nguyên",
+                    LastName = "Triệu",
+                    UserName = "nguyentrieu537@gmail.com",
+                    NormalizedUserName = "NGUYENTRIEU537@GMAIL.COM",
+                    PasswordHash = hasher.HashPassword(null, "P@ssw0rd1"),
+                    EmailConfirmed = true,
+                    PhoneNumber = "0123456789",
+                    Address = "Tây NGuyên",
+                    Birthday = DateTime.ParseExact("26/02/1998", "dd/MM/yyyy", CultureInfo.InvariantCulture),
+                    Wallet = 123456789
                 }
             );
         }

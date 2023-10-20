@@ -23,11 +23,11 @@ namespace MetroDelivery.Application.Features.Orders.Commands.CreateOrder
     public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, OrderResponseMessage>
     {
         private readonly IMetroPickUpDbContext _metroPickUpDbContext;
-        private readonly IMapper _mapper;
-        public CreateOrderCommandHandler(IMetroPickUpDbContext metroPickUpDbContext, IMapper mapper)
+        /*private readonly IMapper _mapper;*/
+        public CreateOrderCommandHandler(IMetroPickUpDbContext metroPickUpDbContext/*, IMapper mapper*/)
         {
             _metroPickUpDbContext = metroPickUpDbContext;
-            _mapper = mapper;
+            /*_mapper = mapper;*/
         }
 
         public async Task<OrderResponseMessage> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
@@ -49,20 +49,27 @@ namespace MetroDelivery.Application.Features.Orders.Commands.CreateOrder
             // Lấy thời gian hiện tại theo múi giờ của Việt Nam
             DateTime vietnamTime = TimeZoneInfo.ConvertTime(DateTime.Now, vietnamTimeZone);
 
-            var validator = new ProductRequestValidator();
-            var validatorResult = await validator.ValidateAsync(new ProductRequest { PriceOfProductBelongToTimeService = request.Products.Select(c => c.PriceOfProductBelongToTimeService).SingleOrDefault() });
-            if (validatorResult.Errors.Any()) {
-                throw new BadRequestException("Invalid Create user", validatorResult);
-            }
             var timeDifference =  stationTrip.Arrived.TimeOfDay - vietnamTime.TimeOfDay;
             if (timeDifference.TotalMinutes < 15) {
                 throw new NotFoundException("User phải đặt hàng trước 15p, xin mời đặt lại ở trạm kế tiếp vì bị lố thời gian chuẩn bị");
             }
             var totalPrice = request.Products.Sum(product => product.PriceOfProductBelongToTimeService * product.Quantity);
+
+            // lấy wallet người dùng ra check coi có tiền ko, đủ thì trừ tiền r update lại
+            var cutomer = await _metroPickUpDbContext.ApplicationUsers.Where(c => c.Id == request.ApplicationUserID).SingleOrDefaultAsync();
+            if(cutomer == null) {
+                throw new BadRequestException("Không có customer này");
+            }
+            if(cutomer.Wallet < totalPrice || cutomer.Wallet == null) {
+                throw new BadRequestException("Số dư trong ví không đủ, cần nạp thêm");
+            }
+            cutomer.Wallet = cutomer.Wallet - totalPrice;
+            _metroPickUpDbContext.ApplicationUsers.Update(cutomer);
+
             var order = new Order
             {
                 TotalPrice = totalPrice,
-                OrderTokenQR = request.OrderTokenQR,
+                OrderTokenQR = GenerateRandomTokenQR(),
 
                 ApplicationUserID = request.ApplicationUserID,
                 TripID = Guid.Parse(request.TripId),
@@ -96,6 +103,31 @@ namespace MetroDelivery.Application.Features.Orders.Commands.CreateOrder
                 OrderId = order.Id,
                 OrderDetailId = lastOrderDetailId,
             };
+        }
+
+        private string GenerateRandomTokenQR()
+        {
+            try {
+                const string validChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+                var random = new Random();
+                var token = new StringBuilder();
+
+
+                for (int i = 0; i < 10; i++) {
+                    token.Append(validChars[random.Next(validChars.Length)]);
+                }
+
+
+                for (int i = token.Length - 1; i > 0; i--) {
+                    int j = random.Next(i + 1);
+                    char temp = token[i];
+                    token[i] = token[j];
+                    token[j] = temp;
+                }
+
+                return token.ToString();
+            }
+            catch (Exception ex) { throw new BadRequestException($"Error at GenerateRandomTokenQR: {ex}"); }
         }
     }
 }

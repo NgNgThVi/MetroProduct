@@ -52,6 +52,12 @@ namespace MetroDelivery.Application.Features.Menu_Products.Queries.GetMenuProduc
                                                                     && m.Priority == true
                                                                     && m.StoreId == stationExist.StoreID)
                                                                     .SingleOrDefaultAsync();
+            /* var storeMenus = await _metroPickUpDbContext.Store_Menu.Where(m => (m.Menu.StartTimeService <= vietnamTime.TimeOfDay && m.Menu.EndTimeService > vietnamTime.TimeOfDay) // Khoảng thời gian từ 13:00:00 đến 23:59:59
+                                                                     || ((m.Menu.StartTimeService <= vietnamTime.TimeOfDay.Add(new TimeSpan(5, 0, 0))) && (m.Menu.EndTimeService > vietnamTime.TimeOfDay.Add(new TimeSpan(5, 0, 0)))) // Khoảng thời gian từ 00:00:00 đến 02:00:00
+                                                                     && m.ApplyDate == currentDayOfWeek.ToString() // chỗ này là thứ mấy
+                                                                     && m.Priority == true
+                                                                     && m.StoreId == stationExist.StoreID)
+                                                                     .SingleOrDefaultAsync();*/
             if (storeMenus == null) {
                 if (stationExist == null) {
                     throw new ArgumentNullException(nameof(stationExist), "Station không được phép là null");

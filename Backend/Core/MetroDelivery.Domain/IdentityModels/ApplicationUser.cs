@@ -18,7 +18,7 @@ namespace MetroDelivery.Domain.IdentityModels
         public double? Wallet { get ; set; }
         public DateTime? Created { get; set; }
 
-
+        public Guid? StoreId { get; set; }
         // relationship
 
         public IList<Order> Orders { get; private set; }

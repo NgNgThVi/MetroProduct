@@ -8,7 +8,8 @@ using Microsoft.AspNetCore.Mvc;
 using MetroDelivery.Application.Features.Orders.Queries;
 using MetroDelivery.Application.Features.Orders.Queries.GetAllOrder;
 using MetroDelivery.Application.Features.Products.Queries.GetProductById;
-using MetroDelivery.Application.Features.Orders.Queries.GetByIdOrder;
+using MetroDelivery.Application.Features.Orders.Queries.GetByIdCustomer;
+using MetroDelivery.Application.Features.Orders.Queries.GetOrderByManager;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -36,8 +37,16 @@ namespace MetroDelivery.API.Controllers.Orders
         }
 
         [HttpGet]
-        [Route("get-by-id")]
-        public async Task<OrderResponse> Get([FromQuery] GetByIdOrderQuery request)
+        [Route("get-by-id-customer")]
+        public async Task<List<OrderResponse>> Get([FromQuery] GetByIdCustomerQuery request)
+        {
+            var response = await _mediator.Send(request);
+            return response;
+        }
+
+        [HttpGet]
+        [Route("get-by-id-store-of-manager")]
+        public async Task<List<OrderResponse>> Get([FromQuery] GetOrderByManagerQuery request)
         {
             var response = await _mediator.Send(request);
             return response;

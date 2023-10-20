@@ -30,33 +30,39 @@ namespace MetroDelivery.Identity.Configurations
                 ,
                 new IdentityUserRole<string>
                 {
-                    // anh da den staff
-                    RoleId = "647D9649-F5A2-4F24-808F-6FC326EC2AA3",
+                    // anh da den Manager
+                    RoleId = "04D67210-257D-4DD5-BAFC-13DDE8CA0DFE",
                     UserId = "C4EE82A1-DB88-49A6-81A8-4B9521FF01F9"
                 },
                 new IdentityUserRole<string>
                 {
-                    // nguyễn thành nhân staff
-                    RoleId = "647D9649-F5A2-4F24-808F-6FC326EC2AA3",
+                    // nguyễn thành nhân Manager
+                    RoleId = "04D67210-257D-4DD5-BAFC-13DDE8CA0DFE",
                     UserId = "2E089AF6-3437-4DD6-9956-BB792E783AFB"
                 },
                 new IdentityUserRole<string>
                 {
-                    // trần ngọc thái vĩ staff
-                    RoleId = "647D9649-F5A2-4F24-808F-6FC326EC2AA3",
+                    // trần ngọc thái vĩ Manager
+                    RoleId = "04D67210-257D-4DD5-BAFC-13DDE8CA0DFE",
                     UserId = "1F11BA64-2870-43F7-BB03-867112867F25"
                 },
                 new IdentityUserRole<string>
                 {
-                    // Dũng Hồ staff
-                    RoleId = "647D9649-F5A2-4F24-808F-6FC326EC2AA3",
+                    // Dũng Hồ Manager
+                    RoleId = "04D67210-257D-4DD5-BAFC-13DDE8CA0DFE",
                     UserId = "DB903C85-4C75-428B-A7B0-9B56130F4813"
                 },
                 new IdentityUserRole<string>
                 {
-                    // Vinh Trần staff
-                    RoleId = "647D9649-F5A2-4F24-808F-6FC326EC2AA3",
+                    // Vinh Trần Manager
+                    RoleId = "04D67210-257D-4DD5-BAFC-13DDE8CA0DFE",
                     UserId = "8E48858E-7089-4512-BB79-75AEDC2003D6"
+                },
+                new IdentityUserRole<string>
+                {
+                    // Nguyên Triệu EndUser
+                    RoleId = "CF531396-C1CD-427B-9D17-0383B7675394",
+                    UserId = "B76C9C1E-7F7F-4175-93B3-39B1285F0E71"
                 }
             );
         }

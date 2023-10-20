@@ -4,6 +4,7 @@ using MetroDelivery.Application.Features.Customers;
 using MetroDelivery.Application.Features.Menu_Products;
 using MetroDelivery.Application.Features.Menus.Queries;
 using MetroDelivery.Application.Features.OrderDetails.Queries;
+using MetroDelivery.Application.Features.Orders.Queries;
 using MetroDelivery.Application.Features.PaymentMethods.Queries;
 using MetroDelivery.Application.Features.Products.Queries;
 using MetroDelivery.Application.Features.Routes.Queries;
@@ -49,7 +50,9 @@ namespace MetroDelivery.Application.Common.MappingProfiles
             //Trip
             CreateMap<TripResponse, Trip>().ReverseMap();
             CreateMap<Trip, TripResponse>().ReverseMap();
-            
+            CreateMap<TripData, Trip>().ReverseMap();
+            CreateMap<Trip, TripData>().ReverseMap();
+
             //Route
             CreateMap<RouteData, Route>().ReverseMap();
             CreateMap<Route, RouteData>().ReverseMap();
