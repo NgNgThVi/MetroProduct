@@ -50,12 +50,15 @@ namespace MetroDelivery.Application.Features.Orders.Queries.GetAllOrder
                                                                     ApplicationUserID = orderCutomerTrip.OrderCustomer.Orders.ApplicationUserID,
                                                                     TripId = orderCutomerTrip.OrderCustomer.Orders.TripID,
                                                                     StoreId = orderCutomerTrip.OrderCustomer.Orders.StoreID,
+                                                                    Created = orderCutomerTrip.OrderCustomer.Orders.Created,
 
                                                                     CustomerData = _mapper.Map<CustomerResponse>(orderCutomerTrip.OrderCustomer.ApplicationUser),
                                                                     TripData = _mapper.Map<TripData>(orderCutomerTrip.Trips),
                                                                     StoreData = _mapper.Map<StoreData>(store)
                                                                 }
-                                                            ).ToListAsync();
+                                                            )
+                                                            .OrderByDescending(o => o.Created)
+                                                            .ToListAsync();
             return orderList;
         }
     }

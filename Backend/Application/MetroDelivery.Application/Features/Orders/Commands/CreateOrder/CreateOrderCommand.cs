@@ -32,7 +32,7 @@ namespace MetroDelivery.Application.Features.Orders.Commands.CreateOrder
     {
         public string ProductId { get; set; }
         public int Quantity { get; set; }
-        public double TotalPriceOfProductBelongToTimeService { get; set; }
+        public double PriceOfProductBelongToTimeService { get; set; }
     }
 
 }

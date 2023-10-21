@@ -26,6 +26,7 @@ namespace MetroDelivery.Application.Features.Orders.Queries
         // order
         public string? OrderTokenQR { get; set; }
         public double? TotalPrice { get; set; }
+        public DateTime? Created { get; set; }
 
         public CustomerResponse? CustomerData { get; set; }
         public TripData? TripData { get; set; }
