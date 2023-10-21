@@ -9,7 +9,9 @@ using MetroDelivery.Application.Features.Stores.Commands.DeleteStore;
 using MetroDelivery.Application.Features.Stores.Commands.UpdateStore;
 using MetroDelivery.Application.Features.Stores.Queries.GetAllStores;
 using MetroDelivery.Application.Features.Stores.Queries.GetStoreById;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Data;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -45,6 +47,7 @@ namespace MetroDelivery.API.Controllers.Stores
         [HttpPost]
         [ProducesResponseType(201)]
         [ProducesResponseType(400)]
+        /*[Authorize(Roles = "Manager")]*/
         public async Task<ActionResult> Create([FromBody] CreateStoreCommand request)
         {
                 /*"storeName": "Metro PickUp 2",
@@ -60,6 +63,7 @@ namespace MetroDelivery.API.Controllers.Stores
         [ProducesResponseType(400)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
+        /*[Authorize(Roles = "Manager")]*/
         public async Task<MetroPickUpResponse> Update(UpdateStoreCommand request)
         {
             var response = await _mediator.Send(request);
@@ -70,6 +74,7 @@ namespace MetroDelivery.API.Controllers.Stores
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
+        /*[Authorize(Roles = "Manager")]*/
         public async Task<MetroPickUpResponse> Delete([FromQuery] DeleteStoreCommand request)
         {
             var response = await _mediator.Send(request);

@@ -6,7 +6,9 @@ using MetroDelivery.Application.Features.Trips.Commands.UpdateTrip;
 using MetroDelivery.Application.Features.Trips.Queries;
 using MetroDelivery.Application.Features.Trips.Queries.GetAllTrip;
 using MetroDelivery.Application.Features.Trips.Queries.GetRouteInTrips;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Data;
 
 namespace MetroDelivery.API.Controllers.Trips
 {
@@ -42,6 +44,7 @@ namespace MetroDelivery.API.Controllers.Trips
         [Route("register-trip")]
         [ProducesResponseType(201)]
         [ProducesResponseType(400)]
+        /*[Authorize(Roles = "Manager")]*/
         public async Task<ActionResult> Create([FromQuery] CreateTripCommand request)
         {
             var response = await _mediator.Send(request);
@@ -54,6 +57,7 @@ namespace MetroDelivery.API.Controllers.Trips
         [ProducesResponseType(400)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
+        /*[Authorize(Roles = "Manager")]*/
         public async Task<MetroPickUpResponse> Update(UpdateTripCommand request)
         {
             var response = await _mediator.Send(request);
@@ -65,6 +69,7 @@ namespace MetroDelivery.API.Controllers.Trips
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
+        /*[Authorize(Roles = "Manager")]*/
         public async Task<MetroPickUpResponse> Delete([FromQuery] DeleteTripCommand request)
         {
             var response = await _mediator.Send(request);

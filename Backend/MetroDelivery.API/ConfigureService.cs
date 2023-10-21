@@ -1,4 +1,6 @@
-﻿using MetroDelivery.API.Services;
+﻿using FluentValidation.AspNetCore;
+using MetroDelivery.API.Filters;
+using MetroDelivery.API.Services;
 using MetroDelivery.Application.Contracts.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,7 +16,9 @@ public static class ConfigureService
 
         services.AddHttpContextAccessor();
 
-       
+        services.AddControllersWithViews(options =>
+            options.Filters.Add<ApiExceptionFilterAttribute>())
+                .AddFluentValidation(x => x.AutomaticValidationEnabled = false);
 
         // Customise default API behaviour
         services.Configure<ApiBehaviorOptions>(options =>

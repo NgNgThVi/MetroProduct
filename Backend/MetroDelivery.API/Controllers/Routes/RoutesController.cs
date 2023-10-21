@@ -6,7 +6,9 @@ using MetroDelivery.Application.Features.Routes.Commands.UpdateRoute;
 using MetroDelivery.Application.Features.Routes.Queries;
 using MetroDelivery.Application.Features.Routes.Queries.GetAllRoute;
 using MetroDelivery.Application.Features.Routes.Queries.GetByFromToRoute;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Data;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -42,6 +44,7 @@ namespace MetroDelivery.API.Controllers.Routes
         [HttpPost]
         [ProducesResponseType(201)]
         [ProducesResponseType(400)]
+        /*[Authorize(Roles = "Manager")]*/
         public async Task<ActionResult> Create([FromBody] CreateRouteCommand request)
         {
             var response = await _mediator.Send(request);
@@ -53,6 +56,7 @@ namespace MetroDelivery.API.Controllers.Routes
         [ProducesResponseType(400)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
+        /*[Authorize(Roles = "Manager")]*/
         public async Task<MetroPickUpResponse> Update(UpdateRouteCommand request)
         {
             var response = await _mediator.Send(request);
@@ -63,6 +67,7 @@ namespace MetroDelivery.API.Controllers.Routes
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
+        /*[Authorize(Roles = "Manager")]*/
         public async Task<MetroPickUpResponse> Delete([FromQuery] DeleteRouteCommand request)
         {
             var response = await _mediator.Send(request);

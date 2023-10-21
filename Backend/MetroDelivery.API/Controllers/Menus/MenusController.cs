@@ -12,6 +12,8 @@ using Microsoft.AspNetCore.Mvc;
 using MetroDelivery.Application.Features.Menus.Queries.GetByIdMenu;
 using MetroDelivery.Application.Features.Menus.Commands.UpdateMenu;
 using MetroDelivery.Application.Features.Menus.Commands.DeleteMenu;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -46,6 +48,7 @@ namespace MetroDelivery.API.Controllers.Menus
         [HttpPost]
         [ProducesResponseType(201)]
         [ProducesResponseType(400)]
+        /*[Authorize(Roles = "Manager")]*/
         public async Task<ActionResult> Create([FromBody] CreateMennuCommand request)
         {
             var response = await _mediator.Send(request);
@@ -57,6 +60,7 @@ namespace MetroDelivery.API.Controllers.Menus
         [ProducesResponseType(400)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
+        /*[Authorize(Roles = "Manager")]*/
         public async Task<MetroPickUpResponse> Update(UpdateMenuCommand request)
         {
             var response = await _mediator.Send(request);
@@ -67,6 +71,7 @@ namespace MetroDelivery.API.Controllers.Menus
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
+        /*[Authorize(Roles = "Manager")]*/
         public async Task<MetroPickUpResponse> Delete([FromQuery] DeleteMenuCommand request)
         {
             var response = await _mediator.Send(request);

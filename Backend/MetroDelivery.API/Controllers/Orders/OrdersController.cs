@@ -10,6 +10,8 @@ using MetroDelivery.Application.Features.Orders.Queries.GetAllOrder;
 using MetroDelivery.Application.Features.Products.Queries.GetProductById;
 using MetroDelivery.Application.Features.Orders.Queries.GetByIdCustomer;
 using MetroDelivery.Application.Features.Orders.Queries.GetOrderByManager;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -38,6 +40,7 @@ namespace MetroDelivery.API.Controllers.Orders
 
         [HttpGet]
         [Route("get-by-id-customer")]
+        /*[Authorize(Roles = "EndUser")]*/
         public async Task<List<OrderResponse>> Get([FromQuery] GetByIdCustomerQuery request)
         {
             var response = await _mediator.Send(request);
@@ -46,6 +49,7 @@ namespace MetroDelivery.API.Controllers.Orders
 
         [HttpGet]
         [Route("get-by-id-store-of-manager")]
+        /*[Authorize(Roles = "Manager")]*/
         public async Task<List<OrderResponse>> Get([FromQuery] GetOrderByManagerQuery request)
         {
             var response = await _mediator.Send(request);
@@ -56,6 +60,7 @@ namespace MetroDelivery.API.Controllers.Orders
         [Route("orders")]
         [ProducesResponseType(201)]
         [ProducesResponseType(400)]
+        /*[Authorize(Roles = "EndUser")]*/
         public async Task<OrderResponseMessage> CreateOrder(CreateOrderCommand request)
         {
             var response = await _mediator.Send(request);

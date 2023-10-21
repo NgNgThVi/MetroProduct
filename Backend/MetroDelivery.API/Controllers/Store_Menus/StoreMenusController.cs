@@ -7,6 +7,8 @@ using MetroDelivery.Application.Features.Store_Menus.Queries.GetAllStoreMenu;
 using MetroDelivery.Application.Features.Stores.Commands.CreateStores;
 using Microsoft.AspNetCore.Mvc;
 using MetroDelivery.Application.Features.Store_Menus.Queries.GetStoreMenuWithTripStartTime;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -41,6 +43,7 @@ namespace MetroDelivery.API.Controllers.Store_Menus
         [HttpPost]
         [ProducesResponseType(201)]
         [ProducesResponseType(400)]
+        /*[Authorize(Roles = "Manager")]*/
         public async Task<ActionResult> Create([FromBody] CreateStoreMenuCommand request)
         {
             var response = await _mediator.Send(request);
