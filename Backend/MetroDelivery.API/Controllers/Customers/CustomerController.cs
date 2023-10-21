@@ -1,6 +1,7 @@
 ﻿
 using MediatR;
 using MetroDelivery.Application.Common.CRUDResponse;
+using MetroDelivery.Application.Common.Exceptions;
 using MetroDelivery.Application.Features.Customers;
 using MetroDelivery.Application.Features.Customers.Commands.CreateCustomer;
 using MetroDelivery.Application.Features.Customers.Commands.DeleteCustomer;
@@ -10,7 +11,9 @@ using MetroDelivery.Application.Features.Customers.Queries.GetAllForAdmin;
 using MetroDelivery.Application.Features.Customers.Queries.GetCustomerById;
 using MetroDelivery.Application.Features.Staff.Queries;
 using MetroDelivery.Domain.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Data;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -19,7 +22,7 @@ namespace MetroDelivery.API.Controllers.Customers
 
     [Route("api/v1/customer")]
     [ApiController]
-
+    [Authorize]
     public class CustomerController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -28,20 +31,29 @@ namespace MetroDelivery.API.Controllers.Customers
         {
             _mediator = mediator;
         }
-       
+
         [HttpGet]
         [Route("get-all-customer-for-admin")]
-
-        public async Task<List<CustomerResponse>> GetAllUser()
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult<List<CustomerResponse>>> GetAllUser()
         {
-            var response = await _mediator.Send(new GetListForAdminQuery());
-            return response;
+            try {
+                var response = await _mediator.Send(new GetListForAdminQuery());
+                return response;
+            }
+            catch (Exception ex) {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpGet]
         [Route("get-all-customer-only-customer")]
+        [Authorize(Roles = "EndUser")]
         public async Task<List<CustomerRole>> Get()
         {
+            if (!User.IsInRole("EndUser")) {
+                throw new ForbiddenAccessException("Bạn không có quyền get-all-customer-only-customer");
+            }
             var response = await _mediator.Send(new GetListCustomerQuery());
             return response;
         }
@@ -50,12 +62,11 @@ namespace MetroDelivery.API.Controllers.Customers
         [Route("register-customer")]
         [ProducesResponseType(201)]
         [ProducesResponseType(400)]
-
         public async Task<ActionResult> CreateCustomer([FromQuery] CreateCustomerCommand request)
         {
             /*try {*/
-                var response = await _mediator.Send(request);
-                return Ok(response);
+            var response = await _mediator.Send(request);
+            return Ok(response);
             /*}
             catch (Exception ex) {
                 if (ex is ValidationException) {
@@ -69,7 +80,7 @@ namespace MetroDelivery.API.Controllers.Customers
 
         [HttpGet]
         [Route("get-customer-by-id")]
-       /* [Authorize(Roles = "Admin")]*/
+        [Authorize(Roles = "Admin, EndUser")]
         public async Task<ActionResult<CustomerRole>> GetUserById([FromQuery] GetCustomerByIdQuery request)
         {
             var response = await _mediator.Send(request);
@@ -82,6 +93,7 @@ namespace MetroDelivery.API.Controllers.Customers
         [ProducesResponseType(400)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
+        /*[Authorize(Roles = "EndUser")]*/
         public async Task<MetroPickUpResponse> UpdateCustomer(UpdateCustomerCommand request)
         {
             var response = await _mediator.Send(request);
@@ -94,6 +106,7 @@ namespace MetroDelivery.API.Controllers.Customers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
+        /*[Authorize(Roles = "EndUser")]*/
         public async Task<MetroPickUpResponse> Delete([FromQuery] DeleteCustomerCommand request)
         {
             var response = await _mediator.Send(request);

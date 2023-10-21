@@ -6,12 +6,15 @@ using MetroDelivery.Application.Features.Customers.Commands.CreateCustomer;
 using MetroDelivery.Application.Features.Customers.Commands.DeleteCustomer;
 using MetroDelivery.Application.Features.Customers.Commands.UpdateCustomer;
 using MetroDelivery.Application.Features.Customers.Queries.GetCustomerById;
+using MetroDelivery.Application.Features.Staff.Commands.CreateStaff;
 using MetroDelivery.Application.Features.Staff.Commands.DeleteStaff;
 using MetroDelivery.Application.Features.Staff.Commands.UpdateStaff;
 using MetroDelivery.Application.Features.Staff.Queries;
 using MetroDelivery.Application.Features.Staff.Queries.GetAllStaff;
 using MetroDelivery.Application.Features.Staff.Queries.GetByIdStaff;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Data;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -29,6 +32,7 @@ namespace MetroDelivery.API.Controllers.Staff
         }
 
         [HttpGet]
+        /*[Authorize(Roles = "Manager, Staff")]*/
         public async Task<List<StaffRole>> Get()
         {
             var response = await _mediator.Send(new GetListStaffQuery());
@@ -37,6 +41,7 @@ namespace MetroDelivery.API.Controllers.Staff
 
         [HttpGet]
         [Route("get-staff-by-id")]
+        /*[Authorize(Roles = "Manager, Staff")]*/
         public async Task<ActionResult<StaffRole>> GetUserById([FromQuery] GetByIdStaffQuery request)
         {
             var response = await _mediator.Send(request);
@@ -44,11 +49,11 @@ namespace MetroDelivery.API.Controllers.Staff
         }
 
         [HttpPost]
-        [Route("register-customer")]
+        [Route("register-staff")]
         [ProducesResponseType(201)]
         [ProducesResponseType(400)]
-
-        public async Task<ActionResult> CreateCustomer([FromQuery] CreateCustomerCommand request)
+        /*[Authorize(Roles = "Manager")]*/
+        public async Task<ActionResult> CreateCustomer([FromQuery] CreateStaffCommand request)
         {
             var response = await _mediator.Send(request);
             return Ok(response);   
@@ -60,18 +65,19 @@ namespace MetroDelivery.API.Controllers.Staff
         [ProducesResponseType(400)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
+        /*[Authorize(Roles = "Manager")]*/
         public async Task<MetroPickUpResponse> UpdateCustomer(UpdateStaffCommand request)
         {
             var response = await _mediator.Send(request);
             return response;
         }
 
-        // DELETE api/<userController>/5
         [HttpDelete]
         [Route("delete-staff-by-id")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
+        /*[Authorize(Roles = "Manager")]*/
         public async Task<MetroPickUpResponse> Delete([FromQuery] DeleteStaffCommand request)
         {
             var response = await _mediator.Send(request);

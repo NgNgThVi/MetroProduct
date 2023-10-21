@@ -53,7 +53,7 @@ namespace MetroDelivery.Application.Features.Orders.Commands.CreateOrder
             if (timeDifference.TotalMinutes < 15) {
                 throw new NotFoundException("User phải đặt hàng trước 15p, xin mời đặt lại ở trạm kế tiếp vì bị lố thời gian chuẩn bị");
             }
-            var totalPrice = request.Products.Sum(product => product.PriceOfProductBelongToTimeService * product.Quantity);
+            var totalPrice = request.Products.Sum(product => product.TotalPriceOfProductBelongToTimeService);
 
             // lấy wallet người dùng ra check coi có tiền ko, đủ thì trừ tiền r update lại
             var cutomer = await _metroPickUpDbContext.ApplicationUsers.Where(c => c.Id == request.ApplicationUserID).SingleOrDefaultAsync();
@@ -86,7 +86,7 @@ namespace MetroDelivery.Application.Features.Orders.Commands.CreateOrder
                     ProductID = Guid.Parse(product.ProductId),
                     OrderID = order.Id,
                     Quanity = product.Quantity,
-                    Price = product.PriceOfProductBelongToTimeService * product.Quantity
+                    Price = product.TotalPriceOfProductBelongToTimeService
                 };
                 _metroPickUpDbContext.OrderDetail.Add(orderDetail);
             }

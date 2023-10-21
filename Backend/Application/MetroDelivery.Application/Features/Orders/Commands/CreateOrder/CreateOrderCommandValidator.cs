@@ -16,7 +16,7 @@ namespace MetroDelivery.Application.Features.Orders.Commands.CreateOrder
     {
         public ProductRequestValidator()
         {
-            RuleFor(p => p.PriceOfProductBelongToTimeService)
+            RuleFor(p => p.TotalPriceOfProductBelongToTimeService)
             .GreaterThanOrEqualTo(0).WithMessage("{Price} must be greater than or equal to 0");
 
         }
