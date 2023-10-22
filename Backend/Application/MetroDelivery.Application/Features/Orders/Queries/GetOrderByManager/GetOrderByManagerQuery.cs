@@ -78,16 +78,16 @@ namespace MetroDelivery.Application.Features.Orders.Queries.GetOrderByManager
             return order;
         }
 
-        private string GetOrderStatusName(int? orderStatus)
+        private static string GetOrderStatusName(int? orderStatus)
         {
             switch (orderStatus) {
                 case 0:
                     return "Pending";
                 case 1:
                     return "Accepted";
-                case 3:
+                case 2:
                     return "Finished";
-                case 4:
+                case 3:
                     return "Cancel";
                 default:
                     return "Unknown";

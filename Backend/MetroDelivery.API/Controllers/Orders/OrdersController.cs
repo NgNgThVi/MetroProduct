@@ -2,17 +2,14 @@
 using MetroDelivery.Application.Common.CRUDResponse;
 using MetroDelivery.Application.Contracts.Persistance;
 using MetroDelivery.Application.Features.Orders.Commands.CreateOrder;
-using MetroDelivery.Application.Features.Products.Queries.GetAllProduct;
-using MetroDelivery.Application.Features.Products.Queries;
-using Microsoft.AspNetCore.Mvc;
+using MetroDelivery.Application.Features.Orders.Commands.UpdateOrder;
 using MetroDelivery.Application.Features.Orders.Queries;
 using MetroDelivery.Application.Features.Orders.Queries.GetAllOrder;
-using MetroDelivery.Application.Features.Products.Queries.GetProductById;
 using MetroDelivery.Application.Features.Orders.Queries.GetByIdCustomer;
 using MetroDelivery.Application.Features.Orders.Queries.GetOrderByManager;
-using Microsoft.AspNetCore.Authorization;
-using System.Data;
-using MetroDelivery.Application.Features.Orders.Queries.GetOrderWithOrderDetail;
+using MetroDelivery.Application.Features.Orders.Queries.GetOrderWithDetailByManager;
+using MetroDelivery.Application.Features.Orders.Queries.GetOrderWithOrderDetailByIdCustomer;
+using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -60,7 +57,15 @@ namespace MetroDelivery.API.Controllers.Orders
         [HttpGet]
         [Route("get-order-with-order-detail")]
         /*[Authorize(Roles = "EndUser")]*/
-        public async Task<List<OrderRequest>> Get([FromQuery] GetOrderWithOrderDetailQuery request)
+        public async Task<List<OrderRequest>> Get([FromQuery] GetOrderWithOrderDetailByIdCustomerQuery request)
+        {
+            var response = await _mediator.Send(request);
+            return response;
+        }
+
+        [HttpGet]
+        [Route("get-order-with-detail-by-manager")]
+        public async Task<List<OrderRequest>> Get([FromQuery] GetOrderWithDetailByManagerQuery request)
         {
             var response = await _mediator.Send(request);
             return response;
@@ -72,6 +77,18 @@ namespace MetroDelivery.API.Controllers.Orders
         [ProducesResponseType(400)]
         /*[Authorize(Roles = "EndUser")]*/
         public async Task<MetroPickUpResponse> CreateOrder(CreateOrderCommand request)
+        {
+            var response = await _mediator.Send(request);
+            return response;
+        }
+
+        [HttpPut]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesDefaultResponseType]
+        /* [Authorize(Roles = "Manager")]*/
+        public async Task<MetroPickUpResponse> Update(UpdateOrderCommand request)
         {
             var response = await _mediator.Send(request);
             return response;
