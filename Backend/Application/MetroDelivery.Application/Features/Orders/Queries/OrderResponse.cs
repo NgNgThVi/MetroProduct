@@ -21,11 +21,11 @@ namespace MetroDelivery.Application.Features.Orders.Queries
 
         //Store
         public Guid StoreId { get; set; }
-
-
+        
         // order
         public string? OrderTokenQR { get; set; }
         public double? TotalPrice { get; set; }
+        public string OrderStatus { get; set; }
         public DateTime? Created { get; set; }
 
         public CustomerResponse? CustomerData { get; set; }
@@ -46,4 +46,40 @@ namespace MetroDelivery.Application.Features.Orders.Queries
     }
 
 
+
+    #region
+    public class OrderRequest
+    {
+        public Guid OrderId { get; set; }
+        //Customer
+        public string ApplicationUserID { get; set; }
+        // Trip
+        public Guid TripId { get; set; }
+        //Store
+        public Guid StoreId { get; set; }
+
+        // order
+        public string? OrderTokenQR { get; set; }
+        public double? TotalPrice { get; set; }
+        public string OrderStatus { get; set; }
+        public DateTime? Created { get; set; }
+
+        public CustomerResponse? CustomerData { get; set; }
+        public TripData? TripData { get; set; }
+        public StoreData? StoreData { get; set; }
+        public List<OrderDetailRequest> OrderDetailRequest { get; set; }
+    }
+
+    public class OrderDetailRequest
+    {
+        public Guid OrderDetailId { get; set; }
+        public int? Quanity { get; set; }
+        public double? Price { get; set; }
+
+        public Guid OrderID { get; set; }
+        public Guid ProductID { get; set; }
+        public DateTime Created { get; set; }
+    }
+
+    #endregion
 }

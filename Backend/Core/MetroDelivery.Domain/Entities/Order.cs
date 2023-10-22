@@ -12,6 +12,7 @@ namespace MetroDelivery.Domain.Entities
         public Guid TripID { get; set; }
         [ForeignKey("Store")]
         public Guid StoreID { get; set; }
+        public int? OrderStatus { get; set; }
 
         public double? TotalPrice { get; set; }
         public string? OrderTokenQR { get; set; }

@@ -20,7 +20,7 @@ using System.Threading.Tasks;
 
 namespace MetroDelivery.Application.Features.Orders.Commands.CreateOrder
 {
-    public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, OrderResponseMessage>
+    public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, MetroPickUpResponse>
     {
         private readonly IMetroPickUpDbContext _metroPickUpDbContext;
         /*private readonly IMapper _mapper;*/
@@ -30,7 +30,7 @@ namespace MetroDelivery.Application.Features.Orders.Commands.CreateOrder
             /*_mapper = mapper;*/
         }
 
-        public async Task<OrderResponseMessage> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
+        public async Task<MetroPickUpResponse> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
         {
             var storeId = await _metroPickUpDbContext.Store.Where(s => s.Id == Guid.Parse(request.StoreId)).SingleOrDefaultAsync();
             if (storeId == null) {
@@ -70,6 +70,8 @@ namespace MetroDelivery.Application.Features.Orders.Commands.CreateOrder
             {
                 TotalPrice = totalPrice,
                 OrderTokenQR = GenerateRandomTokenQR(),
+                // nếu lần đầu tạo order thì trạng thái là chờ xử lí
+                OrderStatus = 0,
 
                 ApplicationUserID = request.ApplicationUserID,
                 TripID = Guid.Parse(request.TripId),
@@ -99,9 +101,9 @@ namespace MetroDelivery.Application.Features.Orders.Commands.CreateOrder
                 throw new NotFoundException("chưa có order nào được tạo hết");
             }
             var lastOrderDetailId = lastOrderDetail.Id;
-            return new OrderResponseMessage { 
-                OrderId = order.Id,
-                OrderDetailId = lastOrderDetailId,
+            return new MetroPickUpResponse
+            { 
+                Message = "Create Order Successfully"
             };
         }
 

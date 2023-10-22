@@ -12,6 +12,7 @@ using MetroDelivery.Application.Features.Orders.Queries.GetByIdCustomer;
 using MetroDelivery.Application.Features.Orders.Queries.GetOrderByManager;
 using Microsoft.AspNetCore.Authorization;
 using System.Data;
+using MetroDelivery.Application.Features.Orders.Queries.GetOrderWithOrderDetail;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -56,12 +57,21 @@ namespace MetroDelivery.API.Controllers.Orders
             return response;
         }
 
+        [HttpGet]
+        [Route("get-order-with-order-detail")]
+        /*[Authorize(Roles = "EndUser")]*/
+        public async Task<List<OrderRequest>> Get([FromQuery] GetOrderWithOrderDetailQuery request)
+        {
+            var response = await _mediator.Send(request);
+            return response;
+        }
+
         [HttpPost]
         [Route("orders")]
         [ProducesResponseType(201)]
         [ProducesResponseType(400)]
         /*[Authorize(Roles = "EndUser")]*/
-        public async Task<OrderResponseMessage> CreateOrder(CreateOrderCommand request)
+        public async Task<MetroPickUpResponse> CreateOrder(CreateOrderCommand request)
         {
             var response = await _mediator.Send(request);
             return response;

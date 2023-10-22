@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace MetroDelivery.Application.Features.Orders.Commands.CreateOrder
 {
-    public class CreateOrderCommand : IRequest<OrderResponseMessage>
+    public class CreateOrderCommand : IRequest<MetroPickUpResponse>
     {
         //Customer
         public string ApplicationUserID { get; set; }

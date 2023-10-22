@@ -60,6 +60,7 @@ namespace MetroDelivery.Application.Features.Orders.Queries.GetByIdCustomer
                                                                     ApplicationUserID = orderCutomerTrip.OrderCustomer.Orders.ApplicationUserID,
                                                                     TripId = orderCutomerTrip.OrderCustomer.Orders.TripID,
                                                                     StoreId = orderCutomerTrip.OrderCustomer.Orders.StoreID,
+                                                                    OrderStatus = GetOrderStatusName(orderCutomerTrip.OrderCustomer.Orders.OrderStatus),
                                                                     Created = orderCutomerTrip.OrderCustomer.Orders.Created,
 
                                                                     CustomerData = _mapper.Map<CustomerResponse>(orderCutomerTrip.OrderCustomer.ApplicationUser),
@@ -74,6 +75,22 @@ namespace MetroDelivery.Application.Features.Orders.Queries.GetByIdCustomer
             }
 
             return order;
+        }
+
+        private string GetOrderStatusName(int? orderStatus)
+        {
+            switch (orderStatus) {
+                case 0:
+                    return "Pending";
+                case 1:
+                    return "Accepted";
+                case 3:
+                    return "Finished";
+                case 4:
+                    return "Cancel";
+                default:
+                    return "Unknown";
+            }
         }
     }
 }
