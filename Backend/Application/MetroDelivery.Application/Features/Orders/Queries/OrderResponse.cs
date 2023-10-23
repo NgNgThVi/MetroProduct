@@ -79,6 +79,14 @@ namespace MetroDelivery.Application.Features.Orders.Queries
         public Guid OrderID { get; set; }
         public Guid ProductID { get; set; }
         public DateTime Created { get; set; }
+
+        public ProductResponseData? ProductResponseData { get; set; }
+    }
+
+    public class ProductResponseData
+    {
+        public string ProductName { get; set; }
+        public string Image { get; set; }
     }
 
     #endregion

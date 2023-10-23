@@ -55,7 +55,7 @@ namespace MetroDelivery.API.Controllers.Orders
         }
 
         [HttpGet]
-        [Route("get-order-with-order-detail")]
+        [Route("get-order-with-order-detail-by-cutomer-id")]
         /*[Authorize(Roles = "EndUser")]*/
         public async Task<List<OrderRequest>> Get([FromQuery] GetOrderWithOrderDetailByIdCustomerQuery request)
         {

@@ -34,7 +34,7 @@ namespace MetroDelivery.API.Controllers.Customers
 
         [HttpGet]
         [Route("get-all-customer-for-admin")]
-        [Authorize(Roles = "Admin")]
+        /*[Authorize(Roles = "Admin")]*/
         public async Task<ActionResult<List<CustomerResponse>>> GetAllUser()
         {
             try {
@@ -48,7 +48,7 @@ namespace MetroDelivery.API.Controllers.Customers
 
         [HttpGet]
         [Route("get-all-customer-only-customer")]
-        [Authorize(Roles = "EndUser")]
+       /* [Authorize(Roles = "EndUser")]*/
         public async Task<List<CustomerRole>> Get()
         {
             if (!User.IsInRole("EndUser")) {
@@ -80,7 +80,7 @@ namespace MetroDelivery.API.Controllers.Customers
 
         [HttpGet]
         [Route("get-customer-by-id")]
-        [Authorize(Roles = "Admin, EndUser")]
+        /*[Authorize(Roles = "Admin, EndUser")]*/
         public async Task<ActionResult<CustomerRole>> GetUserById([FromQuery] GetCustomerByIdQuery request)
         {
             var response = await _mediator.Send(request);

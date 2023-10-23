@@ -110,6 +110,8 @@ namespace MetroDelivery.Application.Features.Orders.Queries.GetOrderWithOrderDet
                         ProductID = orderDetail.ProductID,
                         OrderID = orderDetail.OrderID,
                         Created = orderDetail.Created,
+
+                        ProductResponseData = _mapper.Map<ProductResponseData>(product)
                     }
                 )
                 .ToList();

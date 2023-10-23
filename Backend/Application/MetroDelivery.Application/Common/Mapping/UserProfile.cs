@@ -63,6 +63,8 @@ namespace MetroDelivery.Application.Common.MappingProfiles
             //Product
             CreateMap<ProductResponse, Product>().ReverseMap();
             CreateMap<Product, ProductResponse>().ReverseMap();
+            CreateMap<ProductResponseData, Product>().ReverseMap();
+            CreateMap<Product, ProductResponseData>().ReverseMap();
 
             //Category
             CreateMap<CategoryResponse, Category>().ReverseMap();
