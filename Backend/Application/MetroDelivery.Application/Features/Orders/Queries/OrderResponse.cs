@@ -71,6 +71,7 @@ namespace MetroDelivery.Application.Features.Orders.Queries
         public TripData? TripData { get; set; }
         public StoreData? StoreData { get; set; }
         public List<OrderDetailRequest> OrderDetailRequest { get; set; }
+        public StationData? StationData { get; set; }
     }
 
     public class OrderDetailRequest

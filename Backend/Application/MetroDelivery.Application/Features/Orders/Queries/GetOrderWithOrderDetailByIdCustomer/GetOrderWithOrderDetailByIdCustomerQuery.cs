@@ -84,6 +84,7 @@ namespace MetroDelivery.Application.Features.Orders.Queries.GetOrderWithOrderDet
                                         ).FirstOrDefault(),
                     },
                     StoreData = _mapper.Map<StoreData>(store),
+                    StationData = _mapper.Map<StationData>(_metroPickUpDbContext.Station.Where(s => s.StoreID == store.Id).SingleOrDefault())
                 }
             )
             .OrderByDescending(o => o.Created)
@@ -110,6 +111,7 @@ namespace MetroDelivery.Application.Features.Orders.Queries.GetOrderWithOrderDet
                         RouteResponse = orderItem.TripData.RouteResponse,
                     },
                     StoreData = orderItem.StoreData,
+                    StationData = orderItem.StationData,
                     OrderDetailRequest = GetOrderDetailData(orderItem.OrderId)
                 })
                 .ToList();
