@@ -1,17 +1,12 @@
 ﻿using MediatR;
 using MetroDelivery.Application.Common.CRUDResponse;
-using MetroDelivery.Application.Features.Routes.Commands.CreateRoute;
-using MetroDelivery.Application.Features.Routes.Commands.DeleteRoute;
-using MetroDelivery.Application.Features.Routes.Commands.UpdateRoute;
 using MetroDelivery.Application.Features.Stations.Commands.CreateStation;
 using MetroDelivery.Application.Features.Stations.Commands.DeleteStation;
 using MetroDelivery.Application.Features.Stations.Commands.UpdateStation;
 using MetroDelivery.Application.Features.Stations.Queries;
 using MetroDelivery.Application.Features.Stations.Queries.GetAllStation;
-using MetroDelivery.Application.Features.Stations.Queries.GetByIdStation;
-using Microsoft.AspNetCore.Authorization;
+using MetroDelivery.Application.Features.Stations.Queries.GetByIdStore;
 using Microsoft.AspNetCore.Mvc;
-using System.Data;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -38,8 +33,8 @@ namespace MetroDelivery.API.Controllers.Stations
 
         // GET api/<StationsController>/5
         [HttpGet]
-        [Route("get-by-id")]
-        public async Task<StationResponse> Get([FromQuery] GetStationByIdQuery request)
+        [Route("get-by-id-store")]
+        public async Task<StationResponse> Get([FromQuery] GetStationByIdStoreQuery request)
         {
             var response = await _mediator.Send(request);
             return response;

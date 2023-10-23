@@ -5,22 +5,22 @@ using MetroDelivery.Application.Common.Interface;
 using MetroDelivery.Application.Features.Stores.Queries.GetStoreById;
 using Microsoft.EntityFrameworkCore;
 
-namespace MetroDelivery.Application.Features.Stations.Queries.GetByIdStation
+namespace MetroDelivery.Application.Features.Stations.Queries.GetByIdStore
 {
-    public class GetStationByIdQueryHandler : IRequestHandler<GetStationByIdQuery, StationResponse>
+    public class GetStationByIdStoreQueryHandler : IRequestHandler<GetStationByIdStoreQuery, StationResponse>
     {
         private readonly IMetroPickUpDbContext _metroPickUpDbContext;
         private readonly IMapper _mapper;
-        public GetStationByIdQueryHandler(IMetroPickUpDbContext metroPickUpDbContext, IMapper mapper)
+        public GetStationByIdStoreQueryHandler(IMetroPickUpDbContext metroPickUpDbContext, IMapper mapper)
         {
             _metroPickUpDbContext = metroPickUpDbContext;
             _mapper = mapper;
         }
 
-        public async Task<StationResponse> Handle(GetStationByIdQuery request, CancellationToken cancellationToken)
+        public async Task<StationResponse> Handle(GetStationByIdStoreQuery request, CancellationToken cancellationToken)
         {
-            var station = await _metroPickUpDbContext.Station.Where(s => s.Id == Guid.Parse(request.Id)).SingleOrDefaultAsync();
-            if(station == null) {
+            var station = await _metroPickUpDbContext.Station.Where(s => s.Id == Guid.Parse(request.StoreId)).SingleOrDefaultAsync();
+            if (station == null) {
                 throw new NotFoundException($"Not found station with {station}");
             }
 

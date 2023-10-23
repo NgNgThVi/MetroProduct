@@ -2,6 +2,7 @@
 using MediatR;
 using MetroDelivery.Application.Common.Interface;
 using MetroDelivery.Application.Features.Customers;
+using MetroDelivery.Application.Features.Routes.Queries;
 using MetroDelivery.Application.Features.Stations.Queries;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -62,7 +63,19 @@ namespace MetroDelivery.Application.Features.Orders.Queries.GetOrderWithDetailBy
                     orderCutomerTrip.OrderCustomer.Orders.OrderStatus,
                     orderCutomerTrip.OrderCustomer.Orders.Created,
                     CustomerData = _mapper.Map<CustomerResponse>(orderCutomerTrip.OrderCustomer.ApplicationUser),
-                    TripData = _mapper.Map<TripData>(orderCutomerTrip.Trips),
+                    TripData = new TripData
+                    {
+                        Id = orderCutomerTrip.Trips.Id,
+                        TripName = orderCutomerTrip.Trips.TripName,
+
+                        RouteResponse = _metroPickUpDbContext.Trip.Where(t => t.Id == orderCutomerTrip.Trips.Id)
+                                        .Join(
+                                            _metroPickUpDbContext.Route,
+                                            trip => trip.RouteId,
+                                            route => route.Id,
+                                            (trip, route) => _mapper.Map<RouteResponse>(route)
+                                        ).FirstOrDefault(),
+                    },
                     StoreData = _mapper.Map<StoreData>(store),
                 }
             )
@@ -82,7 +95,13 @@ namespace MetroDelivery.Application.Features.Orders.Queries.GetOrderWithDetailBy
                     OrderStatus = GetOrderStatusName(orderItem.OrderStatus),
                     Created = orderItem.Created,
                     CustomerData = orderItem.CustomerData,
-                    TripData = orderItem.TripData,
+                    TripData = new TripData
+                    {
+                        Id = orderItem.TripData.Id,
+                        TripName = orderItem.TripData.TripName,
+
+                        RouteResponse = orderItem.TripData.RouteResponse,
+                    },
                     StoreData = orderItem.StoreData,
                     OrderDetailRequest = GetOrderDetailData(orderItem.OrderId)
                 })

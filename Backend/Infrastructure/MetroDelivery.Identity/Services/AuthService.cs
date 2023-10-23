@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using Org.BouncyCastle.Asn1.Ocsp;
 using System.Collections.Concurrent;
 using System.Data;
 using System.IdentityModel.Tokens.Jwt;
@@ -22,9 +23,9 @@ namespace MetroDelivery.Identity.Services
         private readonly JwtSettings _jwtSettings;
         private readonly IConfiguration _configuration;
 
-        public AuthService(UserManager<ApplicationUser> userManager, 
-            SignInManager<ApplicationUser> siginInManager, 
-            IOptions<JwtSettings> jwtSettings, 
+        public AuthService(UserManager<ApplicationUser> userManager,
+            SignInManager<ApplicationUser> siginInManager,
+            IOptions<JwtSettings> jwtSettings,
             IConfiguration configuration)
         {
             this._userManager = userManager;
@@ -35,40 +36,52 @@ namespace MetroDelivery.Identity.Services
         public async Task<AuthResponse> Login(AuthRequest request)
         {
             var user = await _userManager.FindByEmailAsync(request.Email);
-            if(user == null) {
+            if (user == null) {
                 throw new NotFoundException($"User with {request.Email} not found.", request.Email);
             }
 
             var result = await _siginInManager.CheckPasswordSignInAsync(user, request.Password, false);
-            if(result.Succeeded == false) {
+            if (result.Succeeded == false) {
                 throw new BadRequestException($"Credentials for '{request.Email} aren't valid '.");
             }
 
             JwtSecurityToken jwtSecurityToken = await GenerateToken(user);
+            var isManager = await _userManager.IsInRoleAsync(user, "Manager");
+            AuthResponse response = new AuthResponse();
+            if (isManager) {
+                response.Id = user.Id;
+                response.AccessToken = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
+                response.Email = user.Email;
+                response.UserName = user.UserName;
+                response.RefreshToken = GenerateRefreshToken(user.UserName).ToString("D");
+                response.Expires = DateTime.Now.AddHours(7).AddMinutes(_jwtSettings.DurationInMinutes);
+                response.StoreId = user.StoreId;
+                
+                return response;
+            }
 
-            var response = new AuthResponse
-            {
-                Id = user.Id,
-                AccessToken = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken),
-                Email = user.Email,
-                UserName = user.UserName,
-                RefreshToken = GenerateRefreshToken(user.UserName).ToString("D"),
-                Expires = DateTime.Now.AddHours(7).AddMinutes(_jwtSettings.DurationInMinutes)
-        };
+            response.Id = user.Id;
+            response.AccessToken = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
+            response.Email = user.Email;
+            response.UserName = user.UserName;
+            response.RefreshToken = GenerateRefreshToken(user.UserName).ToString("D");
+            response.Expires = DateTime.Now.AddHours(7).AddMinutes(_jwtSettings.DurationInMinutes);
+
             return response;
+
         }
 
         public async Task<AuthenticationResult> Refresh(AuthenticationResult request)
         {
-            
-            if(!IsValid(request, out string userName)) {
+
+            if (!IsValid(request, out string userName)) {
                 return null;
             }
             var user = await _userManager.FindByNameAsync(userName);
             JwtSecurityToken jwtSecurityToken = await GenerateToken(user);
 
             var response = new AuthenticationResult
-            { 
+            {
                 AccessToken = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken),
                 RefreshToken = GenerateRefreshToken(user.UserName).ToString("D"),
                 Expires = DateTime.Now.AddHours(7).AddMinutes(_jwtSettings.DurationInMinutes)
@@ -96,13 +109,13 @@ namespace MetroDelivery.Identity.Services
 
             var result = await _userManager.CreateAsync(user, request.Password);
 
-            if(result.Succeeded) {
+            if (result.Succeeded) {
                 await _userManager.AddToRoleAsync(user, "EndUser");
                 return new RegistrationResponse() { UserId = user.Id };
             }
             else {
                 StringBuilder str = new StringBuilder();
-                foreach(var err in result.Errors) {
+                foreach (var err in result.Errors) {
                     str.AppendFormat("{0}\n", err.Description);
                 }
                 throw new BadRequestException($"{str}");
@@ -113,21 +126,21 @@ namespace MetroDelivery.Identity.Services
         {
             userName = string.Empty;
             ClaimsPrincipal principal = GetPrincipalFromExpiredToken(authResult.AccessToken);
-            if(principal is null) {
+            if (principal is null) {
                 throw new UnauthorizedAccessException("No principal");
             }
             userName = principal.FindFirstValue(ClaimTypes.NameIdentifier);
-            if(string.IsNullOrEmpty(userName)) {
+            if (string.IsNullOrEmpty(userName)) {
                 throw new UnauthorizedAccessException("No user name");
             }
-            if(!Guid.TryParse(authResult.RefreshToken, out Guid givenRefreshToken)) {
+            if (!Guid.TryParse(authResult.RefreshToken, out Guid givenRefreshToken)) {
                 throw new UnauthorizedAccessException("Refresh token malformed");
             }
-            if(!_refreshTokens.TryGetValue(userName, out Guid currentRefreshToken)) {
+            if (!_refreshTokens.TryGetValue(userName, out Guid currentRefreshToken)) {
                 throw new UnauthorizedAccessException("No valid refresh token in system");
             }
 
-            if(currentRefreshToken != givenRefreshToken) {
+            if (currentRefreshToken != givenRefreshToken) {
                 throw new UnauthorizedAccessException("Invalid refesh token");
             }
             return true;
@@ -135,7 +148,8 @@ namespace MetroDelivery.Identity.Services
 
         private ClaimsPrincipal GetPrincipalFromExpiredToken(string accessToken)
         {
-            TokenValidationParameters tokenValidationParameters = new TokenValidationParameters {
+            TokenValidationParameters tokenValidationParameters = new TokenValidationParameters
+            {
                 ValidateIssuerSigningKey = true,
                 ValidateIssuer = true,
                 ValidateAudience = true,
@@ -149,7 +163,7 @@ namespace MetroDelivery.Identity.Services
 
             JwtSecurityTokenHandler token = new JwtSecurityTokenHandler();
             ClaimsPrincipal principal = token.ValidateToken(accessToken, tokenValidationParameters, out SecurityToken securityToken);
-            if(securityToken is not JwtSecurityToken jwtSecurityToken ||
+            if (securityToken is not JwtSecurityToken jwtSecurityToken ||
                 !jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256, StringComparison.InvariantCulture)) {
                 throw new SecurityTokenException("Invalid token");
             }
@@ -228,6 +242,6 @@ namespace MetroDelivery.Identity.Services
             return newToken;
         }
 
-        
+
     }
 }

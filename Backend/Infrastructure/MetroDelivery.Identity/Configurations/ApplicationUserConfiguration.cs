@@ -77,7 +77,7 @@ namespace MetroDelivery.Identity.Configurations
                     Address = "Đắk Lắk",
                     Birthday = DateTime.ParseExact("14/08/1899", "dd/MM/yyyy", CultureInfo.InvariantCulture),
                     Wallet = null,
-                    StoreId = Guid.Parse("6507B7DB-7255-4274-87A4-6E2DC3D8A3C4"),
+                    StoreId = Guid.Parse("ef443e4b-886c-4c06-8528-51e9cf623867"),
                 },
                 new ApplicationUser
                 {

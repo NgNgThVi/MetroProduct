@@ -10,8 +10,8 @@ namespace MetroDelivery.Domain.Entities
         public TimeSpan? StoreCloseTime { get; set;}
 
         // relationship
+        public virtual Station Station { get; set; }
         public IList<Order> Orders { get; private set; }
-        public IList<Station> Stations { get; private set; }
         public IList<Store_Menu> Store_Menu { get; private set; }
         
     }

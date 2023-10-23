@@ -1,5 +1,6 @@
 ﻿using MetroDelivery.Application.Features.Customers;
 using MetroDelivery.Application.Features.OrderDetails.Queries;
+using MetroDelivery.Application.Features.Routes.Queries;
 using MetroDelivery.Application.Features.Stations.Queries;
 using MetroDelivery.Domain.Entities;
 using System;
@@ -43,6 +44,8 @@ namespace MetroDelivery.Application.Features.Orders.Queries
     {
         public Guid Id { get; set; }
         public string TripName { get; set; }
+
+        public RouteResponse? RouteResponse { get; set; }
     }
 
 
