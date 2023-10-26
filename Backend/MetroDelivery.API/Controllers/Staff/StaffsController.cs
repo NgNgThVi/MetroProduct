@@ -53,7 +53,7 @@ namespace MetroDelivery.API.Controllers.Staff
         [ProducesResponseType(201)]
         [ProducesResponseType(400)]
         /*[Authorize(Roles = "Manager")]*/
-        public async Task<ActionResult> CreateCustomer([FromQuery] CreateStaffCommand request)
+        public async Task<ActionResult> CreateCustomer(CreateStaffCommand request)
         {
             var response = await _mediator.Send(request);
             return Ok(response);   
