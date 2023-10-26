@@ -38,10 +38,10 @@ namespace MetroDelivery.Application.Features.Store_Menus.Queries.GetStoreMenuWit
             // đến trạm lúc thời gian phục vụ và bắt đầu, chứ đến trạm mà hết thời gian phụ vụ coi như menu đó ko hiện, chuyển đến menu tiếp theo
             /*var menus = await _metroPickUpDbContext.Menu.Where(m => (m.StartTimeService <= tripTime.TimeOfDay) && (m.EndTimeService > tripTime.TimeOfDay)).SingleOrDefaultAsync();*/
 
-            var menus = await _metroPickUpDbContext.Store_Menu.Where(s => (s.Menu.StartTimeService <= tripTime.TimeOfDay)
+            /*var menus = await _metroPickUpDbContext.Store_Menu.Where(s => (s.Menu.StartTimeService <= tripTime.TimeOfDay)
                                                                        && (s.Menu.EndTimeService > tripTime.TimeOfDay)
                                                                        && s.Priority == true
-                                                                       ).Select(s => s.MenuId).SingleOrDefaultAsync();
+                                                                       ).Select(s => s.MenuId).SingleOrDefaultAsync();*/
 
             if (tripStationByStoreId == null) {
                 throw new NotFoundException("Station does not exist!!!");
