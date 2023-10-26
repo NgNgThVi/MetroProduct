@@ -47,12 +47,11 @@ namespace MetroDelivery.API.Controllers.Customers
 
         [HttpGet]
         [Route("get-all-customer-only-customer")]
-       /* [Authorize(Roles = "EndUser")]*/
         public async Task<List<CustomerRole>> Get()
         {
-            if (!User.IsInRole("EndUser")) {
+            /*if (!User.IsInRole("EndUser") || !User.IsInRole("Admin")) {
                 throw new ForbiddenAccessException("Bạn không có quyền get-all-customer-only-customer");
-            }
+            }*/
             var response = await _mediator.Send(new GetListCustomerQuery());
             return response;
         }

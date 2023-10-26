@@ -14,7 +14,7 @@ namespace MetroDelivery.Application.Features.Store_Menus.Queries
         public Guid Id { get; set; }
         public Guid StoreId { get; set; }
         public Guid MenuId { get; set; }
-        public string ApplyDate { get; set; }
+        public string? ApplyDate { get; set; }
         public bool Priority { get; set; }
 
         public DateTime Create { get; set; }
