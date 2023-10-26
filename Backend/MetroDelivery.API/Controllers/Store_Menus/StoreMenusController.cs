@@ -9,6 +9,12 @@ using Microsoft.AspNetCore.Mvc;
 using MetroDelivery.Application.Features.Store_Menus.Queries.GetStoreMenuWithTripStartTime;
 using Microsoft.AspNetCore.Authorization;
 using System.Data;
+using MetroDelivery.Application.Common.CRUDResponse;
+using MetroDelivery.Application.Features.Menus.Commands.UpdateMenu;
+using MetroDelivery.Application.Features.Store_Menus.Commands.UpdateStoreMenu;
+using MetroDelivery.Application.Features.Stations.Queries.GetByIdStore;
+using MetroDelivery.Application.Features.Stations.Queries;
+using MetroDelivery.Application.Features.Store_Menus.Queries.GetStoreMenuByIdStore;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -40,16 +46,33 @@ namespace MetroDelivery.API.Controllers.Store_Menus
             return response;
         }
 
+        [HttpGet]
+        [Route("get-by-id-store")]
+        public async Task<List<StoreMenuResponse>> Get([FromQuery] GetStoreMenuByStoreIdQuery request)
+        {
+            var response = await _mediator.Send(request);
+            return response;
+        }
+
         [HttpPost]
         [ProducesResponseType(201)]
         [ProducesResponseType(400)]
         /*[Authorize(Roles = "Manager")]*/
-        public async Task<ActionResult> Create([FromBody] CreateStoreMenuCommand request)
+        public async Task<MetroPickUpResponse> Create([FromBody] CreateStoreMenuCommand request)
         {
             var response = await _mediator.Send(request);
-            return CreatedAtAction(nameof(GetAll), new { id = response });
+            return response;
         }
 
-        
+        [HttpPut]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesDefaultResponseType]
+        public async Task<MetroPickUpResponse> Update(UpdateStoreMenuCommand request)
+        {
+            var response = await _mediator.Send(request);
+            return response;
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using MetroDelivery.Application.Common.CRUDResponse;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MetroDelivery.Application.Features.Customers.Commands.CreateCustomer
 {
-    public class CreateCustomerCommand : IRequest<string>
+    public class CreateCustomerCommand : IRequest<MetroPickUpResponse>
     {
         public string Email { get; set; }
         public string Password { get; set; }

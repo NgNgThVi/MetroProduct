@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using MetroDelivery.Application.Common.CRUDResponse;
 using MetroDelivery.Application.Common.Exceptions;
 using MetroDelivery.Application.Common.Interface;
 using MetroDelivery.Application.Contracts.Logging;
@@ -8,7 +9,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace MetroDelivery.Application.Features.Customers.Commands.CreateCustomer
 {
-    public class CreateCustomerCommandHandler : IRequestHandler<CreateCustomerCommand, string>
+    public class CreateCustomerCommandHandler : IRequestHandler<CreateCustomerCommand, MetroPickUpResponse>
     {
         private readonly IMetroPickUpDbContext _metroPickUpDbContext;
         private readonly UserManager<ApplicationUser> _userManager;
@@ -23,7 +24,7 @@ namespace MetroDelivery.Application.Features.Customers.Commands.CreateCustomer
             _signInManager = signInManager;
         }
 
-        public async Task<string> Handle(CreateCustomerCommand request, CancellationToken cancellationToken)
+        public async Task<MetroPickUpResponse> Handle(CreateCustomerCommand request, CancellationToken cancellationToken)
         {
             // check email
             var emailExist = await _userManager.FindByEmailAsync(request.Email);
@@ -65,7 +66,9 @@ namespace MetroDelivery.Application.Features.Customers.Commands.CreateCustomer
             await _metroPickUpDbContext.SaveChangesAsync();
 
             // return record id
-            return user.Id;
+            return new MetroPickUpResponse { 
+                Message = "Create account Successfully"
+            };
         }
 
     }

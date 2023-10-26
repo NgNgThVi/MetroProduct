@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using MetroDelivery.Application.Common.CRUDResponse;
 using MetroDelivery.Application.Common.Exceptions;
 using MetroDelivery.Application.Common.Interface;
 using MetroDelivery.Application.Features.OrderDetails.Queries;
@@ -14,9 +15,9 @@ using System.Threading.Tasks;
 
 namespace MetroDelivery.Application.Features.Menu_Products.Commands.CreateMenuProduct
 {
-    public class CreateMenuProductCommand : IRequest<Guid>
+    public class CreateMenuProductCommand : IRequest<MetroPickUpResponse>
     {
-        /*public Guid MenuID { get; set; }*/
+        public string MenuName { get; set; }
         public TimeSpan StartTimeService { get; set; }
         public TimeSpan EndTimeService { get; set; }
 
@@ -28,7 +29,7 @@ namespace MetroDelivery.Application.Features.Menu_Products.Commands.CreateMenuPr
         public double? PriceOfProductBelongToTimeService { get; set; }
     }
 
-    public class CreateMenuProductCommandHandler : IRequestHandler<CreateMenuProductCommand, Guid>
+    public class CreateMenuProductCommandHandler : IRequestHandler<CreateMenuProductCommand, MetroPickUpResponse>
     {
         private readonly IMetroPickUpDbContext _metroPickUpDbContext;
         private readonly IMapper _mapper;
@@ -38,18 +39,19 @@ namespace MetroDelivery.Application.Features.Menu_Products.Commands.CreateMenuPr
             _mapper = mapper;
         }
 
-        public async Task<Guid> Handle(CreateMenuProductCommand request, CancellationToken cancellationToken)
+        public async Task<MetroPickUpResponse> Handle(CreateMenuProductCommand request, CancellationToken cancellationToken)
         {
             var productIs = request.ProductData.Select(s => Guid.Parse(s.ProductID)).ToList();
             var productExist = await _metroPickUpDbContext.Product.Where(p => productIs.Contains(p.Id) && !p.IsDelete).ToListAsync();
 
             // tạo menu
-            var checkMenuExist = await _metroPickUpDbContext.Menu.Where(m => m.StartTimeService == request.StartTimeService && m.EndTimeService == request.EndTimeService && !m.IsDelete).SingleOrDefaultAsync();
+            var checkMenuExist = await _metroPickUpDbContext.Menu.Where(m => m.MenuName == request.MenuName && m.StartTimeService == request.StartTimeService && m.EndTimeService == request.EndTimeService && !m.IsDelete).SingleOrDefaultAsync();
             if (checkMenuExist != null) {
-                throw new NotFoundException("Menu này đã tạo trong Menu_Product rồi");
+                throw new NotFoundException("MenuName này đã tạo trong Menu_Product rồi");
             }
             var menu = new Menu
             {
+                MenuName = request.MenuName,
                 StartTimeService = request.StartTimeService,
                 EndTimeService = request.EndTimeService,
             };
@@ -75,8 +77,11 @@ namespace MetroDelivery.Application.Features.Menu_Products.Commands.CreateMenuPr
                 _metroPickUpDbContext.Menu_Product.Add(entityMenuProduct);
             }
 
-            await _metroPickUpDbContext.SaveChangesAsync(); 
-            return productExist[0].Id;
+            await _metroPickUpDbContext.SaveChangesAsync();
+            return new MetroPickUpResponse
+            {
+                Message = "Create Menu Product Successfully"
+            };
         }
     }
 }

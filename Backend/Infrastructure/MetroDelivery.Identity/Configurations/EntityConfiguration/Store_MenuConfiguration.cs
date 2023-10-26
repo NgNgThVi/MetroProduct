@@ -319,7 +319,7 @@ namespace MetroDelivery.Identity.Configurations.EntityConfiguration
                 new Store_Menu
                 {
                     StoreId = Guid.Parse("6507B7DB-7255-4274-87A4-6E2DC3D8A3C4"),
-                    MenuId = Guid.Parse("5263453C-DAE9-45E4-8204-5430A7256CDE"),
+                    MenuId = Guid.Parse("e7a15238-5db0-49bd-94e6-d5f8b77ae6ce"),
                     ApplyDate = "Saturday",
                     Priority = true
                 },

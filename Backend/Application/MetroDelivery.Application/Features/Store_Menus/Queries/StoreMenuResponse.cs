@@ -36,6 +36,7 @@ namespace MetroDelivery.Application.Features.Store_Menus.Queries
     public class MenuData
     {
         public Guid Id { get; set; }
+        public string MenuName { get; set; }
         public TimeSpan StartTimeService { get; set; }
         public TimeSpan EndTimeService { get; set; }
         public DateTime Create { get; set; }

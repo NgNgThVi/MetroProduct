@@ -22,7 +22,6 @@ namespace MetroDelivery.API.Controllers.Customers
 
     [Route("api/v1/customer")]
     [ApiController]
-    [Authorize]
     public class CustomerController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -62,11 +61,11 @@ namespace MetroDelivery.API.Controllers.Customers
         [Route("register-customer")]
         [ProducesResponseType(201)]
         [ProducesResponseType(400)]
-        public async Task<ActionResult> CreateCustomer([FromQuery] CreateCustomerCommand request)
+        public async Task<MetroPickUpResponse> CreateCustomer([FromBody] CreateCustomerCommand request)
         {
             /*try {*/
             var response = await _mediator.Send(request);
-            return Ok(response);
+            return response;
             /*}
             catch (Exception ex) {
                 if (ex is ValidationException) {

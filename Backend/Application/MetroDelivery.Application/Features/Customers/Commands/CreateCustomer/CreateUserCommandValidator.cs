@@ -49,7 +49,7 @@ namespace MetroDelivery.Application.Features.Customers.Commands.CreateCustomer
                 .NotNull()
                 .MaximumLength(100).WithMessage("Address must be fewer than 100 chrarcters");
 
-  
+
 
         }
     }

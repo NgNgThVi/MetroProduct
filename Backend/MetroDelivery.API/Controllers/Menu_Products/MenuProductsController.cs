@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using MetroDelivery.Application.Common.CRUDResponse;
 using MetroDelivery.Application.Features.Menu_Products;
 using MetroDelivery.Application.Features.Menu_Products.Commands.CreateMenuProduct;
 using MetroDelivery.Application.Features.Menu_Products.Queries.GetListMenu_Product;
@@ -39,10 +40,10 @@ namespace MetroDelivery.API.Controllers.Menu_Products
         [HttpPost]
         [ProducesResponseType(201)]
         [ProducesResponseType(400)]
-        public async Task<ActionResult> Create([FromBody] CreateMenuProductCommand request)
+        public async Task<MetroPickUpResponse> Create([FromBody] CreateMenuProductCommand request)
         {
             var response = await _mediator.Send(request);
-            return CreatedAtAction(nameof(GetAll), new { id = response });
+            return response;
         }
     }
 }
