@@ -17,9 +17,10 @@ namespace MetroDelivery.Application.Features.Menu_Products.Commands.CreateMenuPr
 {
     public class CreateMenuProductCommand : IRequest<MetroPickUpResponse>
     {
-        public string MenuName { get; set; }
+        /*public string MenuName { get; set; }
         public TimeSpan StartTimeService { get; set; }
-        public TimeSpan EndTimeService { get; set; }
+        public TimeSpan EndTimeService { get; set; }*/
+        public string MenuId { get; set; }
 
         public List<ProductList> ProductData { get; init; }
     }
@@ -45,7 +46,7 @@ namespace MetroDelivery.Application.Features.Menu_Products.Commands.CreateMenuPr
             var productExist = await _metroPickUpDbContext.Product.Where(p => productIs.Contains(p.Id) && !p.IsDelete).ToListAsync();
 
             // tạo menu
-            var checkMenuExist = await _metroPickUpDbContext.Menu.Where(m => m.MenuName == request.MenuName && m.StartTimeService == request.StartTimeService && m.EndTimeService == request.EndTimeService && !m.IsDelete).SingleOrDefaultAsync();
+           /* var checkMenuExist = await _metroPickUpDbContext.Menu.Where(m => m.MenuName == request.MenuName && m.StartTimeService == request.StartTimeService && m.EndTimeService == request.EndTimeService && !m.IsDelete).SingleOrDefaultAsync();
             if (checkMenuExist != null) {
                 throw new NotFoundException("MenuName này đã tạo trong Menu_Product rồi");
             }
@@ -54,10 +55,10 @@ namespace MetroDelivery.Application.Features.Menu_Products.Commands.CreateMenuPr
                 MenuName = request.MenuName,
                 StartTimeService = request.StartTimeService,
                 EndTimeService = request.EndTimeService,
-            };
+            };*//*
 
             _metroPickUpDbContext.Menu.Add(menu);
-            await _metroPickUpDbContext.SaveChangesAsync();
+            await _metroPickUpDbContext.SaveChangesAsync();*/
 
             // tạo menu_product
             if (productExist.Count() == 0) {
@@ -70,7 +71,7 @@ namespace MetroDelivery.Application.Features.Menu_Products.Commands.CreateMenuPr
                     throw new NotFoundException($"Không tìm thấy product {product} này!");
                 }
                 var entityMenuProduct = new Menu_Product();
-                entityMenuProduct.MenuID = menu.Id;
+                entityMenuProduct.MenuID = Guid.Parse(request.MenuId);
                 entityMenuProduct.ProductID = product.Id;
                 entityMenuProduct.PriceOfProductBelongToTimeService = productData.PriceOfProductBelongToTimeService;
             

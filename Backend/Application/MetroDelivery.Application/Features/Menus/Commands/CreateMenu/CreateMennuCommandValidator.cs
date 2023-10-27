@@ -6,6 +6,10 @@ namespace MetroDelivery.Application.Features.Menus.Commands.CreateMenu
     {
         public CreateMennuCommandValidator()
         {
+            RuleFor(p => p.MenuName)
+               .NotEmpty().WithMessage("{MenuName} is required")
+               .NotNull();
+
             RuleFor(p => p.StartTimeService)
                 .NotEmpty().WithMessage("{StartTimeService} is required")
                 .NotNull();

@@ -47,6 +47,7 @@ namespace MetroDelivery.API.Controllers.Customers
 
         [HttpGet]
         [Route("get-all-customer-only-customer")]
+        [Authorize(Roles = "Admin, EndUser")]
         public async Task<List<CustomerRole>> Get()
         {
             /*if (!User.IsInRole("EndUser") || !User.IsInRole("Admin")) {

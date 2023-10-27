@@ -15,6 +15,7 @@ namespace MetroDelivery.Application.Features.Menus.Commands.UpdateMenu
     public class UpdateMenuCommand : IRequest<MetroPickUpResponse>
     {
         public string Id { get; set; }
+        /*public string MenuName { get; set; }*/ // tên menu là độc nhất nên 1 là xóa menu tạo lại, chứ ko đc update tên menu
         public TimeSpan StartTimeService { get; set; }
         public TimeSpan EndTimeService { get; set; }
     }

@@ -24,12 +24,13 @@ namespace MetroDelivery.Application.Features.Menus.Commands.CreateMenu
             if (validatorResult.Errors.Any()) {
                 throw new BadRequestException("Invalid Create user", validatorResult);
             }
-            var checkMenuExist = await _metroPickUpDbContext.Menu.Where(m => m.StartTimeService == request.StartTimeService && m.EndTimeService == request.EndTimeService && !m.IsDelete).SingleOrDefaultAsync();
+            var checkMenuExist = await _metroPickUpDbContext.Menu.Where(m => m.MenuName == request.MenuName && m.StartTimeService == request.StartTimeService && m.EndTimeService == request.EndTimeService && !m.IsDelete).SingleOrDefaultAsync();
             if(checkMenuExist != null) {
                 throw new NotFoundException("Menu này đã tạo rồi");
             }
             var menu = new Menu
             {
+                MenuName = request.MenuName,
                 StartTimeService = request.StartTimeService,
                 EndTimeService = request.EndTimeService, 
             };
