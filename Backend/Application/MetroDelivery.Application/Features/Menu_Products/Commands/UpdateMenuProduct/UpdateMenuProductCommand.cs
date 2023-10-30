@@ -16,8 +16,7 @@ namespace MetroDelivery.Application.Features.Menu_Products.Commands.UpdateMenuPr
 {
     public class UpdateMenuProductCommand : IRequest<MetroPickUpResponse>
     {
-        public string MenuId { get; set; }
-        public string ProductID { get; init; }
+        public string MenuProductId { get; set; }
         // update gia tien thoi
         public double? PriceOfProductBelongToTimeService { get; set; }
     }
@@ -36,7 +35,7 @@ namespace MetroDelivery.Application.Features.Menu_Products.Commands.UpdateMenuPr
         {
             // check productId đã tồn tại trong menuProductId này chưa
             var existingMenuProducts = await _metroPickUpDbContext.Menu_Product
-                                            .Where(mp => mp.Id == Guid.Parse(request.MenuId) && mp.ProductID == Guid.Parse(request.ProductID))
+                                            .Where(mp => mp.Id == Guid.Parse(request.MenuProductId))
                                             .SingleOrDefaultAsync();
             if (existingMenuProducts == null) {
                 throw new NotFoundException($"product menu does not exist!");

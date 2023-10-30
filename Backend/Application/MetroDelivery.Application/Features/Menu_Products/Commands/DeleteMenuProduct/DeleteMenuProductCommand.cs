@@ -15,8 +15,7 @@ namespace MetroDelivery.Application.Features.Menu_Products.Commands.DeleteMenuPr
 {
     public class DeleteMenuProductCommand : IRequest<MetroPickUpResponse>
     {
-        public string MenuId { get; set; }
-        public string ProductId { get; set; }
+        public string MenuProductId { get; set; }
     }
 
     public class DeleteMenuProductCommandHandler : IRequestHandler<DeleteMenuProductCommand, MetroPickUpResponse>
@@ -31,8 +30,7 @@ namespace MetroDelivery.Application.Features.Menu_Products.Commands.DeleteMenuPr
 
         public async Task<MetroPickUpResponse> Handle(DeleteMenuProductCommand request, CancellationToken cancellationToken)
         {
-            var productMenuExist = await _metroPickUpDbContext.Menu_Product.Where(m => m.ProductID == Guid.Parse(request.ProductId) 
-                                                                                        && m.MenuID == Guid.Parse(request.MenuId)).SingleOrDefaultAsync();
+            var productMenuExist = await _metroPickUpDbContext.Menu_Product.Where(m => m.Id == Guid.Parse(request.MenuProductId)).SingleOrDefaultAsync();
             if (productMenuExist == null) {
                 throw new NotFoundException($"MenuProduct does not exist !");
             }
