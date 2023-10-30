@@ -2,6 +2,7 @@
 using MediatR;
 using MetroDelivery.Application.Common.Exceptions;
 using MetroDelivery.Application.Common.Interface;
+using MetroDelivery.Application.Features.Stations.Queries;
 using MetroDelivery.Domain.IdentityModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -58,6 +59,7 @@ namespace MetroDelivery.Application.Features.Staff.Queries.GetStaffByStoreId
                                 Address = users.Address,
                                 Birthday = users.Birthday,
                                 StoreId = users.StoreId,
+                                StoreData = GetStoreData(users.StoreId),
                                 Created = users.Created,
                             },
                             RoleId = "647D9649-F5A2-4F24-808F-6FC326EC2AA3",
@@ -78,6 +80,12 @@ namespace MetroDelivery.Application.Features.Staff.Queries.GetStaffByStoreId
 
             // Nếu không tìm thấy hoặc Email chưa được xác nhận, trả về null hoặc thực hiện xử lý phù hợp.
             throw new NotFoundException("Không tìm thấy nhân viên có vai trò 'Staff'");
+        }
+        private StoreData GetStoreData(Guid? id)
+        {
+            var storeExist = _metroPickUpDbContext.Store.Where(s => s.Id == id).SingleOrDefault();
+            var data = _mapper.Map<StoreData>(storeExist);
+            return data;
         }
     }
 }

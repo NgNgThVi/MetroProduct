@@ -3,6 +3,8 @@ using MediatR;
 using MetroDelivery.Application.Common.Exceptions;
 using MetroDelivery.Application.Common.Interface;
 using MetroDelivery.Application.Features.Customers;
+using MetroDelivery.Application.Features.Stations.Queries;
+using MetroDelivery.Domain.Entities;
 using MetroDelivery.Domain.IdentityModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -19,13 +21,15 @@ namespace MetroDelivery.Application.Features.Staff.Queries.GetByIdStaff
     public class GetByIdStaffQueryHandler : IRequestHandler<GetByIdStaffQuery, StaffRole>
     {
         private readonly IMetroPickUpDbContext _metroPickUpDbContext;
+        private readonly IMapper _mapper;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
-        public GetByIdStaffQueryHandler(IMetroPickUpDbContext metroPickUpDbContext,
+        public GetByIdStaffQueryHandler(IMetroPickUpDbContext metroPickUpDbContext, IMapper mapper,
             UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, SignInManager<ApplicationUser> signInManager)
         {
             _metroPickUpDbContext = metroPickUpDbContext;
+            _mapper = mapper;
             _userManager = userManager;
             _roleManager = roleManager;
             _signInManager = signInManager;
@@ -52,6 +56,7 @@ namespace MetroDelivery.Application.Features.Staff.Queries.GetByIdStaff
                             Address = user.Address,
                             Birthday = user.Birthday,
                             StoreId = user.StoreId,
+                            StoreData = _mapper.Map<StoreData>(_metroPickUpDbContext.Store.Where(s => s.Id == user.StoreId).SingleOrDefault()),
                             Created = user.Created,
                         },
                         RoleId = "647D9649-F5A2-4F24-808F-6FC326EC2AA3",

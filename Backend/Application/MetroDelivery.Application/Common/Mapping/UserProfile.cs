@@ -99,9 +99,9 @@ namespace MetroDelivery.Application.Common.MappingProfiles
             CreateMap<StaffResponse, ApplicationUser>().ReverseMap();
             CreateMap<ApplicationUser, StaffResponse>().ReverseMap();
 
-            //Manager 
+           /* //Manager 
             CreateMap<ManagerData, ApplicationUser>().ReverseMap();
-            CreateMap<ApplicationUser, ManagerData>().ReverseMap();
+            CreateMap<ApplicationUser, ManagerData>().ReverseMap();*/
 
         }
 

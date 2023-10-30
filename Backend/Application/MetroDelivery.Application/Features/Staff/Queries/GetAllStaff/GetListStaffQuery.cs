@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using MetroDelivery.Application.Common.Interface;
+using MetroDelivery.Application.Features.Stations.Queries;
 using MetroDelivery.Domain.IdentityModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -43,6 +44,7 @@ namespace MetroDelivery.Application.Features.Staff.Queries.GetAllStaff
             // Lấy thông tin chi tiết về người dùng từ bảng AspNetUsers
             var staffUsers = await _userManager.Users
                 .Where(user => userIdsInStaffRole.Contains(user.Id) && user.EmailConfirmed)
+                .AsNoTracking()
                 .Select(user => new StaffRole
                 {
                     StaffId = user.Id,
@@ -56,6 +58,7 @@ namespace MetroDelivery.Application.Features.Staff.Queries.GetAllStaff
                         Address = user.Address,
                         Birthday = user.Birthday,
                         StoreId = user.StoreId,
+                        StoreData = _mapper.Map<StoreData>(_metroPickUpDbContext.Store.Where(s => s.Id == user.StoreId).SingleOrDefault()),
                         Created = user.Created,
                     },
                     RoleId = "647D9649-F5A2-4F24-808F-6FC326EC2AA3",

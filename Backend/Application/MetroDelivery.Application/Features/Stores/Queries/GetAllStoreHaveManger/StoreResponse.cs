@@ -14,10 +14,10 @@ namespace MetroDelivery.Application.Features.Stores.Queries.GetAllStoreHaveMange
         public TimeSpan? StoreOpenTime { get; set; }
         public TimeSpan? StoreCloseTime { get; set; }
         
-        public List<ManagerData> ManagerData { get; set; }
+        public List<ManagerInformation> ManagerInformation { get; set; }
     }
 
-    public class ManagerData
+    public class ManagerInformation
     {
         public string Id { get; set; }
 
@@ -29,6 +29,6 @@ namespace MetroDelivery.Application.Features.Stores.Queries.GetAllStoreHaveMange
         public DateTime? Birthday { get; set; }
         public DateTime? Created { get; set; }
 
-        public string StoreId { get; set; }
+        public Guid StoreId { get; set; }
     }
 }
