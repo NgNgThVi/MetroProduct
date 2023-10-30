@@ -15,6 +15,8 @@ using MetroDelivery.Application.Features.Store_Menus.Commands.UpdateStoreMenu;
 using MetroDelivery.Application.Features.Stations.Queries.GetByIdStore;
 using MetroDelivery.Application.Features.Stations.Queries;
 using MetroDelivery.Application.Features.Store_Menus.Queries.GetStoreMenuByIdStore;
+using MetroDelivery.Application.Features.Menus.Commands.DeleteMenu;
+using MetroDelivery.Application.Features.Store_Menus.Commands.DeleteStoreMenu;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -70,6 +72,16 @@ namespace MetroDelivery.API.Controllers.Store_Menus
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
         public async Task<MetroPickUpResponse> Update(UpdateStoreMenuCommand request)
+        {
+            var response = await _mediator.Send(request);
+            return response;
+        }
+
+        [HttpDelete]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesDefaultResponseType]
+        public async Task<MetroPickUpResponse> Delete([FromQuery] DeleteStoreMenuCommand request)
         {
             var response = await _mediator.Send(request);
             return response;

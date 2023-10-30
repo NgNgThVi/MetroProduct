@@ -8,11 +8,11 @@ namespace MetroDelivery.Application.Features.Stores.Queries.GetAllStoreHaveMange
 {
     public class StoreResponse
     {
-        public Guid Id { get; set; }
+        public Guid StoreId { get; set; }
         public string StoreName { get; set; }
         public string StoreLocation { get; set; }
-        public TimeSpan StoreOpenTime { get; set; }
-        public TimeSpan StoreCloseTime { get; set; }
+        public TimeSpan? StoreOpenTime { get; set; }
+        public TimeSpan? StoreCloseTime { get; set; }
         
         public List<ManagerData> ManagerData { get; set; }
     }

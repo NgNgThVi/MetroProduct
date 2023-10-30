@@ -12,6 +12,7 @@ using MetroDelivery.Application.Features.Staff.Queries;
 using MetroDelivery.Application.Features.Stations.Queries;
 using MetroDelivery.Application.Features.Store_Menus.Queries;
 using MetroDelivery.Application.Features.Stores;
+using MetroDelivery.Application.Features.Stores.Queries.GetAllStoreHaveManger;
 using MetroDelivery.Application.Features.Trips.Queries;
 using MetroDelivery.Application.Features.Withdraws.Queries;
 using MetroDelivery.Domain.Entities;
@@ -97,6 +98,10 @@ namespace MetroDelivery.Application.Common.MappingProfiles
             //Staff Response
             CreateMap<StaffResponse, ApplicationUser>().ReverseMap();
             CreateMap<ApplicationUser, StaffResponse>().ReverseMap();
+
+            //Manager 
+            CreateMap<ManagerData, ApplicationUser>().ReverseMap();
+            CreateMap<ApplicationUser, ManagerData>().ReverseMap();
 
         }
 

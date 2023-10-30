@@ -41,7 +41,7 @@ namespace MetroDelivery.API.Controllers.Auth
         }
 
         [HttpPost("refresh")]
-        public async Task<ActionResult<AuthenticationResult>> GetRefreshToken(AuthenticationResult request)
+        public async Task<ActionResult<AuthenticationResultResponse>> GetRefreshToken(AuthenticationResult request)
         {
             if (User.Identity.IsAuthenticated) {
                 return BadRequest("You have logged in.");

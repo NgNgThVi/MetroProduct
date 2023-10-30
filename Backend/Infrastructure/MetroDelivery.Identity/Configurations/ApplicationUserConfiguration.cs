@@ -59,6 +59,7 @@ namespace MetroDelivery.Identity.Configurations
                     Address = "Cần Thơ",
                     Birthday = DateTime.ParseExact("04/05/2002", "dd/MM/yyyy", CultureInfo.InvariantCulture),
                     Wallet = null,
+                    StoreId = Guid.Parse("2f3eee35-1b8e-43af-956f-eacd94eea7cd")
                 },
 
                 // manager

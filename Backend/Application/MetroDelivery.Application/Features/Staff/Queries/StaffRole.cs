@@ -27,6 +27,7 @@ namespace MetroDelivery.Application.Features.Staff.Queries
         public string Address { get; set; }
         public DateTime? Birthday { get; set; }
         public DateTime? Created { get; set; }
+        public Guid? StoreId { get; set; }
     }
 
     public class RoleData

@@ -73,7 +73,7 @@ namespace MetroDelivery.Identity.Services
 
         }
 
-        public async Task<AuthenticationResult> Refresh(AuthenticationResult request)
+        public async Task<AuthenticationResultResponse> Refresh(AuthenticationResult request)
         {
 
             if (!IsValid(request, out string userName)) {
@@ -82,8 +82,13 @@ namespace MetroDelivery.Identity.Services
             var user = await _userManager.FindByNameAsync(userName);
             JwtSecurityToken jwtSecurityToken = await GenerateToken(user);
 
-            var response = new AuthenticationResult
+            var response = new AuthenticationResultResponse
             {
+                Id = user.Id,
+                UserName = user.UserName,
+                Email = user.Email,
+                StoreId = user.StoreId,
+
                 AccessToken = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken),
                 RefreshToken = GenerateRefreshToken(user.UserName).ToString("D"),
                 Expires = DateTime.Now.AddMinutes(_jwtSettings.DurationInMinutes)

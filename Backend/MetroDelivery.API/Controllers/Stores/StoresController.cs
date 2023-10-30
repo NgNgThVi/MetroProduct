@@ -7,6 +7,7 @@ using MetroDelivery.Application.Features.Stores;
 using MetroDelivery.Application.Features.Stores.Commands.CreateStores;
 using MetroDelivery.Application.Features.Stores.Commands.DeleteStore;
 using MetroDelivery.Application.Features.Stores.Commands.UpdateStore;
+using MetroDelivery.Application.Features.Stores.Queries.GetAllStoreHaveManger;
 using MetroDelivery.Application.Features.Stores.Queries.GetAllStores;
 using MetroDelivery.Application.Features.Stores.Queries.GetStoreById;
 using Microsoft.AspNetCore.Authorization;
@@ -33,6 +34,14 @@ namespace MetroDelivery.API.Controllers.Stores
         public Task<List<StoreDto>> GetAll()
         {
             var response = _mediator.Send(new GetListStoreQueries());
+            return response;
+        }
+
+        [HttpGet]
+        [Route("get-all-store-have-manager")]
+        public Task<List<StoreResponse>> Get()
+        {
+            var response = _mediator.Send(new GetAllStoreHaveManagerQuery());
             return response;
         }
 

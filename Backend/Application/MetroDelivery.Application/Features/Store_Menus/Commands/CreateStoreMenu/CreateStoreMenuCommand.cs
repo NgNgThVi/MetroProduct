@@ -15,9 +15,12 @@ namespace MetroDelivery.Application.Features.Store_Menus.Commands.CreateStoreMen
 {
     public class CreateStoreMenuCommand : IRequest<MetroPickUpResponse>
     {
-        public List<string> MenuIds { get; init; }
+        public List<MenuIdsList> MenuData { get; init; }
         public string StoreId { get; init; }
-        
+    }
+    public class MenuIdsList
+    {
+        public string MenuIds { get; init; }
     }
 
     public class CreateStoreMenuCommandHandler : IRequestHandler<CreateStoreMenuCommand, MetroPickUpResponse>
@@ -32,8 +35,8 @@ namespace MetroDelivery.Application.Features.Store_Menus.Commands.CreateStoreMen
 
         public async Task<MetroPickUpResponse> Handle(CreateStoreMenuCommand request, CancellationToken cancellationToken)
         {
-            var menuIdParse = request.MenuIds.Select(Guid.Parse).ToList();
-            var menuIds = await _metroPickUpDbContext.Menu.Where(m => menuIdParse.Contains(m.Id)).ToListAsync();
+            var menuIdParse = request.MenuData.Select(s => Guid.Parse(s.MenuIds)).ToList();
+            var menuIds = await _metroPickUpDbContext.Menu.Where(m => menuIdParse.Contains(m.Id) && !m.IsDelete).ToListAsync();
 
             if (menuIds.Count() == 0) {
                 throw new NotFoundException($"Không tìm thấy Menu nào!");
@@ -41,10 +44,11 @@ namespace MetroDelivery.Application.Features.Store_Menus.Commands.CreateStoreMen
 
             foreach (var item in menuIds) {
                 var storeMenuExist = await _metroPickUpDbContext.Store_Menu.Where(m => m.MenuId == item.Id 
-                                                            && m.StoreId == Guid.Parse(request.StoreId)).SingleOrDefaultAsync();
+                                                            && m.StoreId == Guid.Parse(request.StoreId) && !m.IsDelete).SingleOrDefaultAsync();
                 if(storeMenuExist != null) {
                     throw new NotFoundException($"Cửa hàng này {request.StoreId} đã được tạo với menu này {item.Id} rồi");
                 }
+                
                 var storeMenu = new Store_Menu
                 {
                     MenuId = item.Id,

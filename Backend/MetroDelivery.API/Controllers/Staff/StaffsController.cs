@@ -12,6 +12,7 @@ using MetroDelivery.Application.Features.Staff.Commands.UpdateStaff;
 using MetroDelivery.Application.Features.Staff.Queries;
 using MetroDelivery.Application.Features.Staff.Queries.GetAllStaff;
 using MetroDelivery.Application.Features.Staff.Queries.GetByIdStaff;
+using MetroDelivery.Application.Features.Staff.Queries.GetStaffByStoreId;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
@@ -43,6 +44,15 @@ namespace MetroDelivery.API.Controllers.Staff
         [Route("get-staff-by-id")]
         /*[Authorize(Roles = "Manager, Staff")]*/
         public async Task<ActionResult<StaffRole>> GetUserById([FromQuery] GetByIdStaffQuery request)
+        {
+            var response = await _mediator.Send(request);
+            return Ok(response);
+        }
+
+        [HttpGet]
+        [Route("get-staff-by-store-id")]
+        /*[Authorize(Roles = "Manager, Staff")]*/
+        public async Task<ActionResult<StaffRole>> Get([FromQuery] GetStaffByStoreIdQuery request)
         {
             var response = await _mediator.Send(request);
             return Ok(response);

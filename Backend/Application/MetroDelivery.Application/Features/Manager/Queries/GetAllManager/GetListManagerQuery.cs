@@ -38,7 +38,7 @@ namespace MetroDelivery.Application.Features.Manager.Queries.GetAllManager
 
         public async Task<List<ManagerRole>> Handle(GetListManagerQuery request, CancellationToken cancellationToken)
         {
-            // Lấy danh sách UserId của những người dùng có vai trò "Staff"
+            // Lấy danh sách UserId của những người dùng có vai trò "Manager"
             var userIdsInStaffRole = _userManager.GetUsersInRoleAsync("Manager").Result.Select(user => user.Id);
 
             // Lấy thông tin chi tiết về người dùng từ bảng AspNetUsers

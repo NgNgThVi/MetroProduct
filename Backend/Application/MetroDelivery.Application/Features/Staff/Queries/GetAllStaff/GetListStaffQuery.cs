@@ -55,6 +55,7 @@ namespace MetroDelivery.Application.Features.Staff.Queries.GetAllStaff
                         PhoneNumber = user.PhoneNumber,
                         Address = user.Address,
                         Birthday = user.Birthday,
+                        StoreId = user.StoreId,
                         Created = user.Created,
                     },
                     RoleId = "647D9649-F5A2-4F24-808F-6FC326EC2AA3",

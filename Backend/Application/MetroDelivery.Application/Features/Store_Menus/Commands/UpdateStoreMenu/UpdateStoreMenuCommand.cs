@@ -32,17 +32,19 @@ namespace MetroDelivery.Application.Features.Store_Menus.Commands.UpdateStoreMen
 
         public async Task<MetroPickUpResponse> Handle(UpdateStoreMenuCommand request, CancellationToken cancellationToken)
         {
-            var storeMenuExist = await _metroPickUpDbContext.Store_Menu.Where(s => s.StoreId == Guid.Parse(request.StoreId) && s.MenuId == Guid.Parse(request.MenuId)).SingleOrDefaultAsync();
+            var storeMenuExist = await _metroPickUpDbContext.Store_Menu.Where(s => s.StoreId == Guid.Parse(request.StoreId) && s.MenuId == Guid.Parse(request.MenuId) && !s.IsDelete).SingleOrDefaultAsync();
             if(storeMenuExist == null) {
-                throw new NotFoundException($"Not Exist StoreMenuId {request.StoreId}");
+                throw new NotFoundException($"Not Exist StoreMenuId with {request.StoreId} and {request.MenuId}");
             }
             var menu = await _metroPickUpDbContext.Menu.Where(m => m.Id == storeMenuExist.MenuId).SingleOrDefaultAsync();
-
+            if (menu == null) {
+                throw new NotFoundException($"Not Exist MenuId {request.MenuId}");
+            }
             // kiểm tra coi có bao nhiêu menu theo khuing thười gian đó
             var storeMenuByTime = await _metroPickUpDbContext.Store_Menu.Where(s => s.Menu.StartTimeService == menu.StartTimeService
                                                                         && s.Menu.EndTimeService == menu.EndTimeService
-                                                                        ).Select(s => s.MenuId).ToListAsync();
-            var store = await _metroPickUpDbContext.Store_Menu.Where(s => s.StoreId == Guid.Parse(request.StoreId) && storeMenuByTime.Contains(s.MenuId)).ToListAsync();
+                                                                        && !s.IsDelete).Select(s => s.MenuId).ToListAsync();
+            var store = await _metroPickUpDbContext.Store_Menu.Where(s => s.StoreId == Guid.Parse(request.StoreId) && storeMenuByTime.Contains(s.MenuId) && !s.IsDelete).ToListAsync();
 
             if (storeMenuByTime.Count() == 0) {
                 throw new NotFoundException("Cửa hàng chưa có menu này, bạn hãy tạo nó đi");
