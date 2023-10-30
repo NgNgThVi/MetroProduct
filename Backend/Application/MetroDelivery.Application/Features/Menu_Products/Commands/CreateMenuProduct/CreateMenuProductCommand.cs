@@ -70,6 +70,11 @@ namespace MetroDelivery.Application.Features.Menu_Products.Commands.CreateMenuPr
                 if(product == null) {
                     throw new NotFoundException($"Không tìm thấy product {product} này!");
                 }
+                var productMenuExist = await _metroPickUpDbContext.Menu_Product.Where(m => m.ProductID == product.Id && m.MenuID == Guid.Parse(request.MenuId) && !m.IsDelete).SingleOrDefaultAsync();
+                if (productMenuExist != null) {
+                    throw new NotFoundException($"{product.ProductName}: already existed !!");
+                }
+
                 var entityMenuProduct = new Menu_Product();
                 entityMenuProduct.MenuID = Guid.Parse(request.MenuId);
                 entityMenuProduct.ProductID = product.Id;

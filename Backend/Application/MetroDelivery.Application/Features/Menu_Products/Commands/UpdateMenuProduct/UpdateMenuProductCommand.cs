@@ -16,12 +16,9 @@ namespace MetroDelivery.Application.Features.Menu_Products.Commands.UpdateMenuPr
 {
     public class UpdateMenuProductCommand : IRequest<MetroPickUpResponse>
     {
-        public string MenuProductId { get; set; }
-        public List<ProductList> ProductData { get; init; }
-    }
-    public class ProductList
-    {
+        public string MenuId { get; set; }
         public string ProductID { get; init; }
+        // update gia tien thoi
         public double? PriceOfProductBelongToTimeService { get; set; }
     }
 
@@ -37,46 +34,25 @@ namespace MetroDelivery.Application.Features.Menu_Products.Commands.UpdateMenuPr
 
         public async Task<MetroPickUpResponse> Handle(UpdateMenuProductCommand request, CancellationToken cancellationToken)
         {
-            var productIs = request.ProductData.Select(s => Guid.Parse(s.ProductID)).ToList();
-            var productExist = await _metroPickUpDbContext.Product.Where(p => productIs.Contains(p.Id) && !p.IsDelete).ToListAsync();
-
-            // tạo menu_product
-            if (productExist.Count() == 0) {
-                throw new NotFoundException($"Không tìm thấy Product nào!");
+            // check productId đã tồn tại trong menuProductId này chưa
+            var existingMenuProducts = await _metroPickUpDbContext.Menu_Product
+                                            .Where(mp => mp.Id == Guid.Parse(request.MenuId) && mp.ProductID == Guid.Parse(request.ProductID))
+                                            .SingleOrDefaultAsync();
+            if (existingMenuProducts == null) {
+                throw new NotFoundException($"product menu does not exist!");
+            }
+            if (existingMenuProducts.IsDelete == true) {
+                throw new NotFoundException($"product menu is deleted!");
             }
 
-            var menuProductExist = await _metroPickUpDbContext.Menu_Product
-                                                .Where(mp => mp.Id == Guid.Parse(request.MenuProductId))
-                                                .SingleOrDefaultAsync();
-            if(menuProductExist == null) {
-                throw new NotFoundException($"không có menuProdcutId này {request.MenuProductId}");
-            }
+            existingMenuProducts.PriceOfProductBelongToTimeService = request.PriceOfProductBelongToTimeService;
 
-            foreach (var productData in request.ProductData) {
-                // check productId đã tồn tại trong menuProductId này chưa
-                var existingMenuProducts = await _metroPickUpDbContext.Menu_Product
-                                                .Where(mp => mp.Id == Guid.Parse(request.MenuProductId) && mp.ProductID == Guid.Parse(productData.ProductID))
-                                                .Include(mp => mp.Products)
-                                                .SingleOrDefaultAsync();
-                if(existingMenuProducts != null) {
-                    throw new NotFoundException($"product đã tồn tại trong menuProduct {existingMenuProducts} này!");
-                }
-                var product = productExist.FirstOrDefault(p => p.Id == Guid.Parse(productData.ProductID));
-                if (product == null) {
-                    throw new NotFoundException($"Không tìm thấy product {product} này!");
-                }
-                var entityMenuProduct = new Menu_Product();
-                entityMenuProduct.ProductID = product.Id;
-                entityMenuProduct.MenuID = menuProductExist.MenuID;
-                entityMenuProduct.PriceOfProductBelongToTimeService = productData.PriceOfProductBelongToTimeService;
-
-                _metroPickUpDbContext.Menu_Product.Add(entityMenuProduct);
-            }
+            _metroPickUpDbContext.Menu_Product.Update(existingMenuProducts);
 
             await _metroPickUpDbContext.SaveChangesAsync();
             return new MetroPickUpResponse
             {
-                Message = "Create Menu Product Successfully"
+                Message = "Update Menu Product Successfully"
             };
         }
     }
