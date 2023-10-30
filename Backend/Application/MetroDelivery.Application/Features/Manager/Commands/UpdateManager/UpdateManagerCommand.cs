@@ -28,6 +28,7 @@ namespace MetroDelivery.Application.Features.Manager.Commands.UpdateManager
 
         public string Address { get; set; }
         public DateTime Birthday { get; set; }
+        public string StoreId { get; set; }
     }
 
     public class UpdateManagerCommandHandler : IRequestHandler<UpdateManagerCommand, MetroPickUpResponse>
@@ -70,6 +71,7 @@ namespace MetroDelivery.Application.Features.Manager.Commands.UpdateManager
             staff.Address = request.Address;
             staff.FirstName = request.FirstName;
             staff.LastName = request.LastName;
+            staff.StoreId = Guid.Parse(request.StoreId);
 
 
             // add database
