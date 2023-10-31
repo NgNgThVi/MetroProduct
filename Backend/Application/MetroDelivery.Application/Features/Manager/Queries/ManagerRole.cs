@@ -27,6 +27,7 @@ namespace MetroDelivery.Application.Features.Manager.Queries
         public string PhoneNumber { get; set; }
         public string Address { get; set; }
         public DateTime? Birthday { get; set; }
+        public Guid? StoreId { get; set; }
         public DateTime? Created { get; set; }
     }
 

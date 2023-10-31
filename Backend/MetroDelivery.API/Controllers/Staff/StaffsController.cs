@@ -63,10 +63,10 @@ namespace MetroDelivery.API.Controllers.Staff
         [ProducesResponseType(201)]
         [ProducesResponseType(400)]
         /*[Authorize(Roles = "Manager")]*/
-        public async Task<ActionResult> CreateCustomer(CreateStaffCommand request)
+        public async Task<MetroPickUpResponse> CreateCustomer(CreateStaffCommand request)
         {
             var response = await _mediator.Send(request);
-            return Ok(response);   
+            return response;   
         }
 
         [HttpPut]

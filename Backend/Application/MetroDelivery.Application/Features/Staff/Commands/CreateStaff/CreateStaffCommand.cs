@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using MediatR;
+using MetroDelivery.Application.Common.CRUDResponse;
 using MetroDelivery.Application.Common.Exceptions;
 using MetroDelivery.Application.Common.Interface;
 using MetroDelivery.Application.Features.Customers.Commands.CreateCustomer;
@@ -13,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace MetroDelivery.Application.Features.Staff.Commands.CreateStaff
 {
-    public class CreateStaffCommand : IRequest<string>
+    public class CreateStaffCommand : IRequest<MetroPickUpResponse>
     {
         public string Email { get; set; }
         public string Password { get; set; }
@@ -22,9 +23,10 @@ namespace MetroDelivery.Application.Features.Staff.Commands.CreateStaff
 
         public string Address { get; set; }
         public string Phone { get; set; }
+        public string StoreId { get; set; }
     }
 
-    public class CreateStaffCommandHandler : IRequestHandler<CreateStaffCommand, string>
+    public class CreateStaffCommandHandler : IRequestHandler<CreateStaffCommand, MetroPickUpResponse>
     {
         private readonly IMetroPickUpDbContext _metroPickUpDbContext;
         private readonly UserManager<ApplicationUser> _userManager;
@@ -39,7 +41,7 @@ namespace MetroDelivery.Application.Features.Staff.Commands.CreateStaff
             _signInManager = signInManager;
         }
 
-        public async Task<string> Handle(CreateStaffCommand request, CancellationToken cancellationToken)
+        public async Task<MetroPickUpResponse> Handle(CreateStaffCommand request, CancellationToken cancellationToken)
         {
             // check email
             var emailExist = await _userManager.FindByEmailAsync(request.Email);
@@ -64,6 +66,7 @@ namespace MetroDelivery.Application.Features.Staff.Commands.CreateStaff
                 LastName = request.LastName,
                 Address = request.Address,
                 PhoneNumber = request.Phone,
+                StoreId = Guid.Parse(request.StoreId),
                 PhoneNumberConfirmed = true,
                 EmailConfirmed = true,
                 Created = DateTime.Now
@@ -81,7 +84,9 @@ namespace MetroDelivery.Application.Features.Staff.Commands.CreateStaff
             await _metroPickUpDbContext.SaveChangesAsync();
 
             // return record id
-            return user.Id;
+            return new MetroPickUpResponse { 
+                Message = "Create Staff Successfully"
+            };
         }
     }
     public class CreateStaffCommandValidator : AbstractValidator<CreateStaffCommand>
