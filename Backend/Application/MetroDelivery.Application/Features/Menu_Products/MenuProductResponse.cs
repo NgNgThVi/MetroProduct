@@ -1,5 +1,6 @@
 ﻿using MetroDelivery.Application.Features.Menus.Queries;
 using MetroDelivery.Application.Features.OrderDetails.Queries;
+using MetroDelivery.Application.Features.Stations.Queries;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -19,5 +20,6 @@ namespace MetroDelivery.Application.Features.Menu_Products
 
         public MenuResponse? MenuData { get; set; }
         public ProductData? ProductData { get; set; }
+        public StoreData? StoreData { get; set; }
     }
 }

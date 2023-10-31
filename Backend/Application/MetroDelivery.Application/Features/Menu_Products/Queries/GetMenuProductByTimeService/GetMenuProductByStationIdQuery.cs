@@ -4,6 +4,7 @@ using MetroDelivery.Application.Common.Exceptions;
 using MetroDelivery.Application.Common.Interface;
 using MetroDelivery.Application.Features.Menus.Queries;
 using MetroDelivery.Application.Features.OrderDetails.Queries;
+using MetroDelivery.Application.Features.Stations.Queries;
 using MetroDelivery.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -38,6 +39,8 @@ namespace MetroDelivery.Application.Features.Menu_Products.Queries.GetMenuProduc
             if (stationExist.IsDelete == true) {
                 throw new NotFoundException($"station đã bị xóa");
             }
+            var storeExist = await _metroPickUpDbContext.Store.Where(s => s.Id == stationExist.StoreID).SingleOrDefaultAsync();
+
 
             // Lấy thông tin về múi giờ của Việt Nam
             TimeZoneInfo vietnamTimeZone = TimeZoneInfo.FindSystemTimeZoneById("SE Asia Standard Time");
@@ -92,7 +95,8 @@ namespace MetroDelivery.Application.Features.Menu_Products.Queries.GetMenuProduc
                                                                 Created = combined.MenuProducts.Created,
 
                                                                 MenuData = _mapper.Map<MenuResponse>(combined.Menus),
-                                                                ProductData = _mapper.Map<ProductData>(product)
+                                                                ProductData = _mapper.Map<ProductData>(product),
+                                                                StoreData = _mapper.Map<StoreData>(storeExist)
                                                             }
                                                         ).ToListAsync();
 

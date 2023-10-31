@@ -54,8 +54,8 @@ namespace MetroDelivery.Identity.Services
                 response.Email = user.Email;
                 response.UserName = user.UserName;
                 response.RefreshToken = GenerateRefreshToken(user.UserName).ToString("D");
-                /*response.Expires = DateTime.Now.AddHours(7).AddMinutes(_jwtSettings.DurationInMinutes);*/
-                response.Expires = DateTime.Now.AddSeconds(_jwtSettings.DurationInMinutes);
+                response.Expires = DateTime.Now.AddHours(7).AddMinutes(_jwtSettings.DurationInMinutes);
+                /*response.Expires = DateTime.Now.AddSeconds(_jwtSettings.DurationInMinutes);*/
                 response.StoreId = user.StoreId;
                 
                 return response;
@@ -66,8 +66,8 @@ namespace MetroDelivery.Identity.Services
             response.Email = user.Email;
             response.UserName = user.UserName;
             response.RefreshToken = GenerateRefreshToken(user.UserName).ToString("D");
-            /*response.Expires = DateTime.Now.AddHours(7).AddMinutes(_jwtSettings.DurationInMinutes);*/
-            response.Expires = DateTime.Now.AddSeconds(_jwtSettings.DurationInMinutes);
+            response.Expires = DateTime.Now.AddHours(7).AddMinutes(_jwtSettings.DurationInMinutes);
+           /* response.Expires = DateTime.Now.AddSeconds(_jwtSettings.DurationInMinutes);*/
 
             return response;
 
@@ -91,8 +91,8 @@ namespace MetroDelivery.Identity.Services
 
                 AccessToken = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken),
                 RefreshToken = GenerateRefreshToken(user.UserName).ToString("D"),
-                Expires = DateTime.Now.AddMinutes(_jwtSettings.DurationInMinutes)
-                /*Expires = DateTime.Now.AddHours(7).AddMinutes(_jwtSettings.DurationInMinutes)*/
+                /*Expires = DateTime.Now.AddMinutes(_jwtSettings.DurationInMinutes)*/
+                Expires = DateTime.Now.AddHours(7).AddMinutes(_jwtSettings.DurationInMinutes)
             };
 
             return response;
@@ -202,8 +202,8 @@ namespace MetroDelivery.Identity.Services
                 issuer: _jwtSettings.Issuer,
                 audience: _jwtSettings.Audience,
                 claims: claims,
-                /*expires: DateTime.Now.AddHours(7).AddMinutes(_jwtSettings.DurationInMinutes),*/
-                expires: DateTime.Now.AddSeconds(_jwtSettings.DurationInMinutes),
+                expires: DateTime.Now.AddHours(7).AddMinutes(_jwtSettings.DurationInMinutes),
+                /*expires: DateTime.Now.AddSeconds(_jwtSettings.DurationInMinutes),*/
                 signingCredentials: sigingCredentials);
             return jwtSecurityToken;
         }
