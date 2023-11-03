@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MetroDelivery.API.Controllers.Products
 {
-    [Route("api/v1/product")]
+    [Route("api/v1/products")]
     [ApiController]
     public class ProductsController : ControllerBase
     {
