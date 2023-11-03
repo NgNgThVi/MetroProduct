@@ -1,4 +1,6 @@
-﻿namespace MetroDelivery.Application.Models.Identity
+﻿using MetroDelivery.Application.Features.Stations.Queries;
+
+namespace MetroDelivery.Application.Models.Identity
 {
     public class AuthResponse
     {
@@ -12,5 +14,6 @@
         // ngay het han
         public DateTime Expires { get; set; }
         public Guid? StoreId { get; set; }
+        public StoreData? StoreData { get; set; }
     }
 }

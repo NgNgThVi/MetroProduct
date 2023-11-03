@@ -1,8 +1,12 @@
-﻿using MetroDelivery.Application.Common.Exceptions;
+﻿using AutoMapper;
+using MetroDelivery.Application.Common.Exceptions;
+using MetroDelivery.Application.Common.Interface;
 using MetroDelivery.Application.Contracts.Identity;
+using MetroDelivery.Application.Features.Stations.Queries;
 using MetroDelivery.Application.Models.Identity;
 using MetroDelivery.Domain.IdentityModels;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -22,16 +26,20 @@ namespace MetroDelivery.Identity.Services
         private readonly SignInManager<ApplicationUser> _siginInManager;
         private readonly JwtSettings _jwtSettings;
         private readonly IConfiguration _configuration;
+        private readonly IMetroPickUpDbContext _metroPickUpDbContext;
+        private readonly IMapper _mapper;
 
         public AuthService(UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> siginInManager,
             IOptions<JwtSettings> jwtSettings,
-            IConfiguration configuration)
+            IConfiguration configuration, IMetroPickUpDbContext metroPickUpDbContext, IMapper mapper)
         {
             this._userManager = userManager;
             this._siginInManager = siginInManager;
             this._jwtSettings = jwtSettings.Value;
             this._configuration = configuration;
+            this._metroPickUpDbContext = metroPickUpDbContext;
+            this._mapper = mapper;
         }
         public async Task<AuthResponse> Login(AuthRequest request)
         {
@@ -47,8 +55,9 @@ namespace MetroDelivery.Identity.Services
 
             JwtSecurityToken jwtSecurityToken = await GenerateToken(user);
             var isManager = await _userManager.IsInRoleAsync(user, "Manager");
+            var isStaff = await _userManager.IsInRoleAsync(user, "Staff");
             AuthResponse response = new AuthResponse();
-            if (isManager) {
+            if (isManager || isStaff) {
                 response.Id = user.Id;
                 response.AccessToken = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
                 response.Email = user.Email;
@@ -56,8 +65,11 @@ namespace MetroDelivery.Identity.Services
                 response.RefreshToken = GenerateRefreshToken(user.UserName).ToString("D");
                 response.Expires = DateTime.Now.AddHours(7).AddMinutes(_jwtSettings.DurationInMinutes);
                 /*response.Expires = DateTime.Now.AddSeconds(_jwtSettings.DurationInMinutes);*/
+                //storeData
                 response.StoreId = user.StoreId;
-                
+                var storeExist = await _metroPickUpDbContext.Store.Where(x => x.Id == response.StoreId).SingleOrDefaultAsync();
+                response.StoreData = _mapper.Map<StoreData>(storeExist);
+
                 return response;
             }
 
