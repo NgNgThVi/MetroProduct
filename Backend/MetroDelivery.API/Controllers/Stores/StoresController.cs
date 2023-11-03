@@ -1,8 +1,5 @@
 ﻿using MediatR;
 using MetroDelivery.Application.Common.CRUDResponse;
-using MetroDelivery.Application.Features.Routes.Commands.CreateRoute;
-using MetroDelivery.Application.Features.Routes.Commands.DeleteRoute;
-using MetroDelivery.Application.Features.Routes.Commands.UpdateRoute;
 using MetroDelivery.Application.Features.Stores;
 using MetroDelivery.Application.Features.Stores.Commands.CreateStores;
 using MetroDelivery.Application.Features.Stores.Commands.DeleteStore;
@@ -10,9 +7,7 @@ using MetroDelivery.Application.Features.Stores.Commands.UpdateStore;
 using MetroDelivery.Application.Features.Stores.Queries.GetAllStoreHaveManger;
 using MetroDelivery.Application.Features.Stores.Queries.GetAllStores;
 using MetroDelivery.Application.Features.Stores.Queries.GetStoreById;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Data;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -30,7 +25,6 @@ namespace MetroDelivery.API.Controllers.Stores
         }
 
         [HttpGet]
-        [Route("get-all-store")]
         public Task<List<StoreDto>> GetAll()
         {
             var response = _mediator.Send(new GetListStoreQueries());
@@ -46,10 +40,13 @@ namespace MetroDelivery.API.Controllers.Stores
         }
 
         [HttpGet]
-        [Route("get-by-id")]
-        public async Task<StoreDto> Get([FromQuery] GetStoreByIdQueries request)
+        [Route("{id}")]
+        public async Task<StoreDto> Get(string id)
         {
-            var response = await _mediator.Send(request);
+            var response = await _mediator.Send(new GetStoreByIdQueries
+            {
+                Id = id
+            });
             return response;
         }
 
@@ -59,10 +56,10 @@ namespace MetroDelivery.API.Controllers.Stores
         /*[Authorize(Roles = "Manager")]*/
         public async Task<ActionResult> Create([FromBody] CreateStoreCommand request)
         {
-                /*"storeName": "Metro PickUp 2",
-                "storeLocation": "Số 3, Vincom, Quận Bình Thạnh",
-                "storeOpenTime": "06:00:00",
-                "storeCloseTime": "11:00:00"*/
+            /*"storeName": "Metro PickUp 2",
+            "storeLocation": "Số 3, Vincom, Quận Bình Thạnh",
+            "storeOpenTime": "06:00:00",
+            "storeCloseTime": "11:00:00"*/
             var response = await _mediator.Send(request);
             return CreatedAtAction(nameof(GetAll), new { id = response });
         }

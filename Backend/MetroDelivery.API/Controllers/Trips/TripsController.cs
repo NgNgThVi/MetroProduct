@@ -6,13 +6,11 @@ using MetroDelivery.Application.Features.Trips.Commands.UpdateTrip;
 using MetroDelivery.Application.Features.Trips.Queries;
 using MetroDelivery.Application.Features.Trips.Queries.GetAllTrip;
 using MetroDelivery.Application.Features.Trips.Queries.GetRouteInTrips;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Data;
 
 namespace MetroDelivery.API.Controllers.Trips
 {
-    [Route("api/v1/trip")]
+    [Route("api/v1/trips")]
     [ApiController]
     public class TripsController : ControllerBase
     {
@@ -24,7 +22,6 @@ namespace MetroDelivery.API.Controllers.Trips
         }
 
         [HttpGet]
-        [Route("get-all-trip")]
         public async Task<List<TripResponse>> GetAllTrip()
         {
             var response = await _mediator.Send(new GetListTripQuery());
@@ -32,16 +29,19 @@ namespace MetroDelivery.API.Controllers.Trips
         }
 
         [HttpGet]
-        [Route("get-route-in-trip")]
-        public async Task<List<TripResponse>> GetRouteInTrip([FromQuery]GetRouteInTripQuery request)
+        [Route("routes/{fromlocation}/{tolocation}")]
+        public async Task<List<TripResponse>> GetRouteInTrip(string fromlocation, string tolocation)
         {
-            var response = await _mediator.Send(request);
+            var response = await _mediator.Send(new GetRouteInTripQuery
+            {
+                FromLocation = fromlocation,
+                ToLocation = tolocation
+            });
             return response;
         }
 
 
         [HttpPost]
-        [Route("register-trip")]
         [ProducesResponseType(201)]
         [ProducesResponseType(400)]
         /*[Authorize(Roles = "Manager")]*/
@@ -52,7 +52,6 @@ namespace MetroDelivery.API.Controllers.Trips
         }
 
         [HttpPut]
-        [Route("update-trip-by-id")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(400)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -65,14 +64,17 @@ namespace MetroDelivery.API.Controllers.Trips
         }
 
         [HttpDelete]
-        [Route("delete-trip-by-id")]
+        [Route("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
         /*[Authorize(Roles = "Manager")]*/
-        public async Task<MetroPickUpResponse> Delete([FromQuery] DeleteTripCommand request)
+        public async Task<MetroPickUpResponse> Delete(string id)
         {
-            var response = await _mediator.Send(request);
+            var response = await _mediator.Send(new DeleteTripCommand
+            {
+                Id = id
+            });
             return response;
         }
     }

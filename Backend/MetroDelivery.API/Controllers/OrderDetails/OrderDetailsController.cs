@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MetroDelivery.API.Controllers.OrderDetails
 {
-    [Route("api/v1/order-detail")]
+    [Route("api/v1/order-details")]
     [ApiController]
     public class OrderDetailsController : ControllerBase
     {
@@ -28,10 +28,13 @@ namespace MetroDelivery.API.Controllers.OrderDetails
         }
 
         [HttpGet]
-        [Route("get-by-id-order")]
-        public async Task<List<OrderDetailResponse>> Get([FromQuery] GetOrderDetailByIdQuery request)
+        [Route("{orderid}")]
+        public async Task<List<OrderDetailResponse>> Get(string orderid)
         {
-            var response = await _mediator.Send(request);
+            var response = await _mediator.Send(new GetOrderDetailByIdQuery
+            {
+                OrderId = orderid
+            });
             return response;
         }
 

@@ -15,7 +15,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MetroDelivery.API.Controllers.Orders
 {
-    [Route("api/v1/order")]
+    [Route("api/v1/orders")]
     [ApiController]
     public class OrdersController : ControllerBase
     {
@@ -29,7 +29,6 @@ namespace MetroDelivery.API.Controllers.Orders
         }
 
         [HttpGet]
-        [Route("get-all")]
         public async Task<List<OrderResponse>> GetAll()
         {
             var response = await _mediator.Send(new GetListOrderQuery());
@@ -37,42 +36,53 @@ namespace MetroDelivery.API.Controllers.Orders
         }
 
         [HttpGet]
-        [Route("get-by-id-customer")]
+        [Route("customers/{customerid}")]
         /*[Authorize(Roles = "EndUser")]*/
-        public async Task<List<OrderResponse>> Get([FromQuery] GetByIdCustomerQuery request)
+        public async Task<List<OrderResponse>> Get(string customerid)
         {
-            var response = await _mediator.Send(request);
+            var response = await _mediator.Send(new GetByIdCustomerQuery
+            {
+                CustomerId = customerid
+            });
             return response;
         }
 
         [HttpGet]
-        [Route("get-by-id-store-of-manager")]
+        [Route("stores/{storeid}")]
         /*[Authorize(Roles = "Manager")]*/
-        public async Task<List<OrderResponse>> Get([FromQuery] GetOrderByManagerQuery request)
+        public async Task<List<OrderResponse>> GetByStoreId(string storeid)
         {
-            var response = await _mediator.Send(request);
+            var response = await _mediator.Send(new GetOrderByManagerQuery
+            {
+                StoreId = storeid
+            });
             return response;
         }
 
         [HttpGet]
-        [Route("get-order-with-order-detail-by-cutomer-id")]
+        [Route("orderdetails/customers/{customerid}")]
         /*[Authorize(Roles = "EndUser")]*/
-        public async Task<List<OrderRequest>> Get([FromQuery] GetOrderWithOrderDetailByIdCustomerQuery request)
+        public async Task<List<OrderRequest>> GetWithDetailCus(string customerid)
         {
-            var response = await _mediator.Send(request);
+            var response = await _mediator.Send(new GetOrderWithOrderDetailByIdCustomerQuery
+            {
+                CustomerId = customerid
+            });
             return response;
         }
 
         [HttpGet]
-        [Route("get-order-with-detail-by-manager")]
-        public async Task<List<OrderRequest>> Get([FromQuery] GetOrderWithDetailByManagerQuery request)
+        [Route("orderdetails/stores/{storeid}")]
+        public async Task<List<OrderRequest>> GetWithDetailStore(string storeid)
         {
-            var response = await _mediator.Send(request);
+            var response = await _mediator.Send(new GetOrderWithDetailByManagerQuery
+            {
+                StoreId = storeid
+            });
             return response;
         }
 
-        [HttpPost]
-        [Route("orders")]
+        [HttpPost] 
         [ProducesResponseType(201)]
         [ProducesResponseType(400)]
         /*[Authorize(Roles = "EndUser")]*/

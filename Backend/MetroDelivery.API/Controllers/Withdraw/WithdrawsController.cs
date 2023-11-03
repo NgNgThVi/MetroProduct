@@ -1,27 +1,18 @@
 ﻿using MediatR;
-using MetroDelivery.Application.Features.Trips.Queries.GetAllTrip;
-using MetroDelivery.Application.Features.Trips.Queries;
-using Microsoft.AspNetCore.Mvc;
+using MetroDelivery.Application.Common.CRUDResponse;
+using MetroDelivery.Application.Features.Withdraws.Commands.CreateWithdraw;
+using MetroDelivery.Application.Features.Withdraws.Commands.DeleteWithdraw;
+using MetroDelivery.Application.Features.Withdraws.Commands.UpdateWithdraw;
 using MetroDelivery.Application.Features.Withdraws.Queries;
 using MetroDelivery.Application.Features.Withdraws.Queries.GetAllWithdraw;
-using MetroDelivery.Application.Features.Trips.Commands.CreateTrip;
-using MetroDelivery.Application.Common.CRUDResponse;
-using MetroDelivery.Application.Features.Trips.Commands.UpdateTrip;
-using MetroDelivery.Application.Features.Stores.Queries.GetStoreById;
-using MetroDelivery.Application.Features.Stores;
 using MetroDelivery.Application.Features.Withdraws.Queries.GetByIdWithdraw;
-using MetroDelivery.Application.Features.Stores.Commands.CreateStores;
-using MetroDelivery.Application.Features.Stores.Commands.DeleteStore;
-using MetroDelivery.Application.Features.Stores.Commands.UpdateStore;
-using MetroDelivery.Application.Features.Withdraws.Commands.CreateWithdraw;
-using MetroDelivery.Application.Features.Withdraws.Commands.UpdateWithdraw;
-using MetroDelivery.Application.Features.Withdraws.Commands.DeleteWithdraw;
+using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace MetroDelivery.API.Controllers.Withdraw
 {
-    [Route("api/v1/with-draw")]
+    [Route("api/v1/withdraws")]
     [ApiController]
     public class WithdrawsController : ControllerBase
     {
@@ -33,7 +24,6 @@ namespace MetroDelivery.API.Controllers.Withdraw
         }
 
         [HttpGet]
-        [Route("get-all")]
         public async Task<List<WithdrawResponse>> GetAll()
         {
             var response = await _mediator.Send(new GetListWithdrawQuery());
@@ -41,10 +31,13 @@ namespace MetroDelivery.API.Controllers.Withdraw
         }
 
         [HttpGet]
-        [Route("by-id")]
-        public async Task<WithdrawResponse> Get([FromQuery] GetByIdWithdrawQuery request)
+        [Route("{id}")]
+        public async Task<WithdrawResponse> Get(string id)
         {
-            var response = await _mediator.Send(request);
+            var response = await _mediator.Send(new GetByIdWithdrawQuery()
+            {
+                Id = id
+            });
             return response;
         }
 

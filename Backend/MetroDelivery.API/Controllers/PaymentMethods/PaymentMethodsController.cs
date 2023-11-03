@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MetroDelivery.API.Controllers.PaymentMethods
 {
-    [Route("api/v1/payment-method")]
+    [Route("api/v1/payment-methods")]
     [ApiController]
     public class PaymentMethodsController : ControllerBase
     {
@@ -27,10 +27,13 @@ namespace MetroDelivery.API.Controllers.PaymentMethods
         }
 
         [HttpGet]
-        [Route("get-payment-method-by-id")]
-        public async Task<ActionResult<PaymentMethodResponse>> GetUserById([FromQuery] GetByIdPaymentMethodQuery request)
+        [Route("{id}")]
+        public async Task<ActionResult<PaymentMethodResponse>> GetUserById(string id)
         {
-            var response = await _mediator.Send(request);
+            var response = await _mediator.Send(new GetByIdPaymentMethodQuery
+            {
+                Id = id
+            });
             return Ok(response);
         }
     }

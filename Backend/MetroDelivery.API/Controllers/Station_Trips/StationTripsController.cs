@@ -6,18 +6,13 @@ using MetroDelivery.Application.Features.Station_Trips.Commands.UpdateStationTri
 using MetroDelivery.Application.Features.Station_Trips.Queries;
 using MetroDelivery.Application.Features.Station_Trips.Queries.GetAllStationTrip;
 using MetroDelivery.Application.Features.Station_Trips.Queries.GetStationByTripId;
-using MetroDelivery.Application.Features.Stations.Commands.CreateStation;
-using MetroDelivery.Application.Features.Stations.Commands.DeleteStation;
-using MetroDelivery.Application.Features.Stations.Commands.UpdateStation;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Data;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace MetroDelivery.API.Controllers.Station_Trips
 {
-    [Route("api/v1/station-trip")]
+    [Route("api/v1/station-trips")]
     [ApiController]
     public class StationTripsController : ControllerBase
     {
@@ -29,7 +24,6 @@ namespace MetroDelivery.API.Controllers.Station_Trips
         }
 
         [HttpGet]
-        [Route("list")]
         public async Task<List<StationTripResponse>> GetAll()
         {
             var response = await _mediator.Send(new GetListStationTripQuery());
@@ -37,10 +31,13 @@ namespace MetroDelivery.API.Controllers.Station_Trips
         }
 
         [HttpGet]
-        [Route("station-by-trip-id")]
-        public async Task<List<StationTripResponse>> Get([FromQuery] GetStationByTripIdQuery request)
+        [Route("{tripid}")]
+        public async Task<List<StationTripResponse>> Get(string tripid)
         {
-            var response = await _mediator.Send(request);
+            var response = await _mediator.Send(new GetStationByTripIdQuery
+            {
+                TripId = tripid
+            });
             return response;
         }
 

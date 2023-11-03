@@ -1,28 +1,19 @@
 ﻿using MediatR;
-using MetroDelivery.Application.Features.Station_Trips.Queries.GetStationByTripId;
-using MetroDelivery.Application.Features.Station_Trips.Queries;
+using MetroDelivery.Application.Common.CRUDResponse;
 using MetroDelivery.Application.Features.Store_Menus.Commands.CreateStoreMenu;
+using MetroDelivery.Application.Features.Store_Menus.Commands.DeleteStoreMenu;
+using MetroDelivery.Application.Features.Store_Menus.Commands.UpdateStoreMenu;
 using MetroDelivery.Application.Features.Store_Menus.Queries;
 using MetroDelivery.Application.Features.Store_Menus.Queries.GetAllStoreMenu;
-using MetroDelivery.Application.Features.Stores.Commands.CreateStores;
-using Microsoft.AspNetCore.Mvc;
-using MetroDelivery.Application.Features.Store_Menus.Queries.GetStoreMenuWithTripStartTime;
-using Microsoft.AspNetCore.Authorization;
-using System.Data;
-using MetroDelivery.Application.Common.CRUDResponse;
-using MetroDelivery.Application.Features.Menus.Commands.UpdateMenu;
-using MetroDelivery.Application.Features.Store_Menus.Commands.UpdateStoreMenu;
-using MetroDelivery.Application.Features.Stations.Queries.GetByIdStore;
-using MetroDelivery.Application.Features.Stations.Queries;
 using MetroDelivery.Application.Features.Store_Menus.Queries.GetStoreMenuByIdStore;
-using MetroDelivery.Application.Features.Menus.Commands.DeleteMenu;
-using MetroDelivery.Application.Features.Store_Menus.Commands.DeleteStoreMenu;
+using MetroDelivery.Application.Features.Store_Menus.Queries.GetStoreMenuWithTripStartTime;
+using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace MetroDelivery.API.Controllers.Store_Menus
 {
-    [Route("api/v1/store-menu")]
+    [Route("api/v1/store-menus")]
     [ApiController]
     public class StoreMenusController : ControllerBase
     {
@@ -41,18 +32,24 @@ namespace MetroDelivery.API.Controllers.Store_Menus
         }
 
         [HttpGet]
-        [Route("store-and-menu-with-time-start-trip")]
-        public async Task<StoreMenuResponse> Get([FromQuery] GetStoreMenuTripStartTimeQuery request)
+        [Route("stations/{stationtripid}")]
+        public async Task<StoreMenuResponse> GetWithTimeStartTrip(string stationtripid)
         {
-            var response = await _mediator.Send(request);
+            var response = await _mediator.Send(new GetStoreMenuTripStartTimeQuery
+            {
+                StationTripId = stationtripid
+            });
             return response;
         }
 
         [HttpGet]
-        [Route("get-by-id-store")]
-        public async Task<List<StoreMenuResponse>> Get([FromQuery] GetStoreMenuByStoreIdQuery request)
+        [Route("{storeid}")]
+        public async Task<List<StoreMenuResponse>> Get(string storeid)
         {
-            var response = await _mediator.Send(request);
+            var response = await _mediator.Send(new GetStoreMenuByStoreIdQuery
+            {
+                StoreId = storeid
+            });
             return response;
         }
 
