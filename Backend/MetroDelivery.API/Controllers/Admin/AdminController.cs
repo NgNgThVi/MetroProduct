@@ -9,7 +9,7 @@ using MetroDelivery.Application.Features.Customers.Queries.GetAllForAdmin;
 
 namespace MetroDelivery.API.Controllers.Admin
 {
-    [Route("api/v1/admin")]
+    [Route("api/v1/admins")]
     [ApiController]
     public class AdminController : ControllerBase
     {

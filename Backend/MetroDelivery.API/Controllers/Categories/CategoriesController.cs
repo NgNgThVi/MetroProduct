@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MetroDelivery.API.Controllers.Categories
 {
-    [Route("api/v1/category")]
+    [Route("api/v1/categories")]
     [ApiController]
     public class CategoriesController : ControllerBase
     {
@@ -24,7 +24,6 @@ namespace MetroDelivery.API.Controllers.Categories
         }
 
         [HttpGet]
-        [Route("get-all")]
         public async Task<List<CategoryResponse>> GetAll()
         {
             var response = await _mediator.Send(new GetListCategoryQuery());  
@@ -32,9 +31,10 @@ namespace MetroDelivery.API.Controllers.Categories
         }
 
         [HttpGet]
-        [Route("get-by-id")]
-        public async Task<ActionResult<CategoryResponse>> GetUserById([FromQuery] GetByIdCategoryQuery request)
+        [Route("{categoryid}")]
+        public async Task<ActionResult<CategoryResponse>> GetUserById(string categoryid)
         {
+            var request = new GetByIdCategoryQuery { Id = categoryid };
             var response = await _mediator.Send(request);
             return Ok(response);
         }
@@ -42,7 +42,7 @@ namespace MetroDelivery.API.Controllers.Categories
         [HttpPost]
         [ProducesResponseType(201)]
         [ProducesResponseType(400)]
-        public async Task<ActionResult> Create([FromQuery] CreateCategoryCommand request)
+        public async Task<ActionResult> Create([FromBody] CreateCategoryCommand request)
         {
             var response = await _mediator.Send(request);
             return CreatedAtAction(nameof(GetAll), new { id = response });
@@ -53,18 +53,20 @@ namespace MetroDelivery.API.Controllers.Categories
         [ProducesResponseType(400)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
-        public async Task<MetroPickUpResponse> Update(UpdateCategoryCommand request)
+        public async Task<MetroPickUpResponse> Update([FromBody]UpdateCategoryCommand request)
         {
             var response = await _mediator.Send(request);
             return response;
         }
 
         [HttpDelete]
+        [Route("{categoryid}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
-        public async Task<MetroPickUpResponse> Delete([FromQuery] DeleteCategoryCommand request)
+        public async Task<MetroPickUpResponse> Delete(string categoryid)
         {
+            var request = new DeleteCategoryCommand { Id = categoryid };
             var response = await _mediator.Send(request);
             return response;
         }

@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MetroDelivery.API.Controllers.Auth
 {
-    [Route("api/v1/auth")]
+    [Route("api/v1/auths")]
     [ApiController]
     public class AuthController : ControllerBase
     {

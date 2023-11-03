@@ -20,7 +20,7 @@ using System.Data;
 namespace MetroDelivery.API.Controllers.Customers
 {
 
-    [Route("api/v1/customer")]
+    [Route("api/v1/customers")]
     [ApiController]
     public class CustomerController : ControllerBase
     {
@@ -32,7 +32,6 @@ namespace MetroDelivery.API.Controllers.Customers
         }
 
         [HttpGet]
-        [Route("get-all-customer-only-customer")]
         [Authorize(Roles = "Admin, EndUser")]
         public async Task<List<CustomerRole>> Get()
         {
@@ -44,10 +43,9 @@ namespace MetroDelivery.API.Controllers.Customers
         }
 
         [HttpPost]
-        [Route("register-customer")]
         [ProducesResponseType(201)]
         [ProducesResponseType(400)]
-        public async Task<MetroPickUpResponse> CreateCustomer([FromBody] CreateCustomerCommand request)
+        public async Task<MetroPickUpResponse> Create([FromBody] CreateCustomerCommand request)
         {
             /*try {*/
             var response = await _mediator.Send(request);
@@ -64,28 +62,27 @@ namespace MetroDelivery.API.Controllers.Customers
         }
 
         [HttpGet]
-        [Route("get-customer-by-id")]
+        [Route("{applicationuserid}")]
         /*[Authorize(Roles = "Admin, EndUser")]*/
-        public async Task<ActionResult<CustomerRole>> GetUserById([FromQuery] GetCustomerByIdQuery request)
+        public async Task<ActionResult<CustomerRole>> GetUserById(string applicationuserid)
         {
+            var request = new GetCustomerByIdQuery(applicationuserid);
             var response = await _mediator.Send(request);
             return Ok(response);
         }
 
         [HttpPut]
-        /*[Route("update-customer-by-id")]*/
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(400)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
         /*[Authorize(Roles = "EndUser")]*/
-        public async Task<MetroPickUpResponse> UpdateCustomer([FromBody]UpdateCustomerCommand request)
+        public async Task<MetroPickUpResponse> Update([FromBody]UpdateCustomerCommand request)
         {
             var response = await _mediator.Send(request);
             return response;
         }
 
-        // DELETE api/<userController>/5
         [HttpDelete]
         [Route("{applicationuserid}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]

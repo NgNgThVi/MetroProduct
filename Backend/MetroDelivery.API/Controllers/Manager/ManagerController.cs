@@ -19,7 +19,7 @@ using MetroDelivery.Application.Features.Manager.Commands.UpdateManager;
 
 namespace MetroDelivery.API.Controllers.Manager
 {
-    [Route("api/v1/manager")]
+    [Route("api/v1/managers")]
     [ApiController]
     public class ManagerController : ControllerBase
     {
@@ -31,8 +31,7 @@ namespace MetroDelivery.API.Controllers.Manager
         }
 
         [HttpGet]
-        [Route("get-all")]
-        public async Task<ActionResult<List<ManagerRole>>> GetAll()
+        public async Task<ActionResult<List<ManagerRole>>> Get()
         {
             try {
                 var response = await _mediator.Send(new GetListManagerQuery());
@@ -44,42 +43,42 @@ namespace MetroDelivery.API.Controllers.Manager
         }
 
         [HttpGet]
-        [Route("get-manager-by-id")]
-        public async Task<ActionResult<ManagerRole>> Get([FromQuery] GetByIdManagerQuery request)
+        [Route("{applicationuserid}")]
+        public async Task<ActionResult<ManagerRole>> Get(string applicationuserid)
         {
+            var request = new GetByIdManagerQuery(applicationuserid);
             var response = await _mediator.Send(request);
             return Ok(response);
         }
 
         [HttpPost]
-        [Route("register-manager")]
         [ProducesResponseType(201)]
         [ProducesResponseType(400)]
-        public async Task<ActionResult> Create(CreateManagerCommand request)
+        public async Task<ActionResult> Create([FromBody] CreateManagerCommand request)
         {
             var response = await _mediator.Send(request);
             return Ok(response);
         }
 
         [HttpPut]
-        [Route("update-manager-by-id")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(400)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
-        public async Task<MetroPickUpResponse> Update(UpdateManagerCommand request)
+        public async Task<MetroPickUpResponse> Update([FromBody] UpdateManagerCommand request)
         {
             var response = await _mediator.Send(request);
             return response;
         }
 
         [HttpDelete]
-        [Route("delete-manager-by-id")]
+        [Route("{applicationuserid}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
-        public async Task<MetroPickUpResponse> Delete([FromQuery] DeleteManagerCommand request)
+        public async Task<MetroPickUpResponse> Delete(string applicationuserid)
         {
+            var request = new DeleteManagerCommand { Id = applicationuserid };
             var response = await _mediator.Send(request);
             return response;
         }

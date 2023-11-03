@@ -37,6 +37,7 @@ namespace MetroDelivery.Identity.DbContexts
         public DbSet<Station_Trip> Station_Trip { get; set; }
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public DbSet<WithDraw> WithDraw { get; set; }
+        public DbSet<PaymentHistory> PaymentHistory { get; set; }
 
         public MetroPickupIdentityDbContext(DbContextOptions<MetroPickupIdentityDbContext> options/*,
             IMediator mediator,
