@@ -22,4 +22,11 @@ namespace MetroDelivery.Application.Features.Menu_Products
         public ProductData? ProductData { get; set; }
         public StoreData? StoreData { get; set; }
     }
+
+    public class MenuProductResponseData
+    {
+        public MenuResponse? MenuData { get; set; }
+
+        public List<MenuProductResponse> MenuProductResponse { get; set; }
+    }
 }

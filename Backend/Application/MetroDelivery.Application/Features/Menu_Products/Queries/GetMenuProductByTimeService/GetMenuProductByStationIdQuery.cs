@@ -15,12 +15,12 @@ using System.Threading.Tasks;
 
 namespace MetroDelivery.Application.Features.Menu_Products.Queries.GetMenuProductByTimeService
 {
-    public class GetMenuProductByStationIdQuery : IRequest<List<MenuProductResponse>>
+    public class GetMenuProductByStationIdQuery : IRequest<MenuProductResponseData>
     {
         public string StationId { get; set; }
     }
 
-    public class GetMenuProductByStationIdQueryQueryHandler : IRequestHandler<GetMenuProductByStationIdQuery, List<MenuProductResponse>>
+    public class GetMenuProductByStationIdQueryQueryHandler : IRequestHandler<GetMenuProductByStationIdQuery, MenuProductResponseData>
     {
         private readonly IMetroPickUpDbContext _metroPickUpDbContext;
         private readonly IMapper _mapper;
@@ -30,7 +30,7 @@ namespace MetroDelivery.Application.Features.Menu_Products.Queries.GetMenuProduc
             _mapper = mapper;
         }
 
-        public async Task<List<MenuProductResponse>> Handle(GetMenuProductByStationIdQuery request, CancellationToken cancellationToken)
+        public async Task<MenuProductResponseData> Handle(GetMenuProductByStationIdQuery request, CancellationToken cancellationToken)
         {
             var stationExist = await _metroPickUpDbContext.Station.Where(s => s.Id == Guid.Parse(request.StationId)).SingleOrDefaultAsync();
             if (stationExist == null) {
@@ -51,7 +51,7 @@ namespace MetroDelivery.Application.Features.Menu_Products.Queries.GetMenuProduc
             // kiểm tra ngày với priority trong StoreMenu nếu thỏa priority thì lấy ra 
             var storeMenus = await _metroPickUpDbContext.Store_Menu.Where(m => (m.Menu.StartTimeService <= vietnamTime.TimeOfDay)
                                                                     && (m.Menu.EndTimeService > vietnamTime.TimeOfDay)
-                                                                   /* && m.ApplyDate == currentDayOfWeek.ToString()*/ // chỗ này là thứ mấy
+                                                                    /* && m.ApplyDate == currentDayOfWeek.ToString()*/ // chỗ này là thứ mấy
                                                                     && m.Priority == true
                                                                     && m.StoreId == stationExist.StoreID)
                                                                     .SingleOrDefaultAsync();
@@ -68,7 +68,8 @@ namespace MetroDelivery.Application.Features.Menu_Products.Queries.GetMenuProduc
                 throw new NotFoundException("StoreMenu chưa được tạo, cần phải có storeMenu, hoặc hết giờ hoặt động của cửa hàng");
             }
             var sotrmenu = storeMenus.MenuId;
-            
+            var menuExist = await _metroPickUpDbContext.Menu.Where(m => m.Id == sotrmenu && !m.IsDelete).SingleOrDefaultAsync();
+
 
             // get MenuProduct với cái Menu của StoreMenu
             var menuProductList = await _metroPickUpDbContext.Menu_Product.Where(s => !s.IsDelete && s.MenuID == storeMenus.MenuId)
@@ -94,13 +95,17 @@ namespace MetroDelivery.Application.Features.Menu_Products.Queries.GetMenuProduc
                                                                 PriceOfProductBelongToTimeService = combined.MenuProducts.PriceOfProductBelongToTimeService,
                                                                 Created = combined.MenuProducts.Created,
 
-                                                                MenuData = _mapper.Map<MenuResponse>(combined.Menus),
                                                                 ProductData = _mapper.Map<ProductData>(product),
                                                                 StoreData = _mapper.Map<StoreData>(storeExist)
                                                             }
                                                         ).ToListAsync();
+            var data = new MenuProductResponseData
+            {
+                MenuData = _mapper.Map<MenuResponse>(menuExist),
+                MenuProductResponse = menuProductList
+            };
 
-            return menuProductList;
+            return data;
         }
     }
 }
