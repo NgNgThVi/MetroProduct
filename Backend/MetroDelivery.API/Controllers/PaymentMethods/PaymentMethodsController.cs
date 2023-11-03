@@ -75,6 +75,43 @@ namespace MetroDelivery.API.Controllers.PaymentMethods
             var response = await _mediator.Send(request);
             return Ok(response);
         }
+
+        [HttpPost]
+        [ProducesResponseType(201)]
+        [ProducesResponseType(400)]
+        /*[Authorize(Roles = "EndUser")]*/
+        public IActionResult CreateOrder([FromBody] PaymentInformation request)
+        {
+            if (ModelState.IsValid) {
+                var url = _vnPayService.CreatePaymentUrl(request, HttpContext);
+                var response = new PaymentUrlResponse { PaymentUrl = url };
+                return Ok(response);
+            }
+            else {
+                return BadRequest("Invalid payment information.");
+            }
+        }
+
+        [HttpGet("PaymentCallback")]
+        public IActionResult PaymentCallback()
+        {
+            var response = _vnPayService.PaymentExecute(Request.Query);
+            return Ok(response);
+        }
+
+        // history
+        [HttpGet]
+        [Route("get-payment-history-by-order-id")]
+        public async Task<ActionResult<PaymentMethodResponse>> Get([FromQuery] GetPaymentHistoryQuery request)
+        {
+            var response = await _mediator.Send(request);
+            return Ok(response);
+        }
+    }
+
+    public class PaymentUrlResponse
+    {
+        public string PaymentUrl { get; set; }
     }
 
     public class PaymentUrlResponse
