@@ -102,7 +102,7 @@ namespace MetroDelivery.Application.Features.Menu_Products.Queries.GetMenuProduc
             var data = new MenuProductResponseData
             {
                 MenuData = _mapper.Map<MenuResponse>(menuExist),
-                MenuProductResponse = menuProductList
+                MenuProductData = menuProductList
             };
 
             return data;

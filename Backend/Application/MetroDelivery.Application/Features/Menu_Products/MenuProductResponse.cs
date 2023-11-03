@@ -27,6 +27,6 @@ namespace MetroDelivery.Application.Features.Menu_Products
     {
         public MenuResponse? MenuData { get; set; }
 
-        public List<MenuProductResponse> MenuProductResponse { get; set; }
+        public List<MenuProductResponse> MenuProductData { get; set; }
     }
 }
