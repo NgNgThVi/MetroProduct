@@ -32,20 +32,6 @@ namespace MetroDelivery.API.Controllers.Customers
         }
 
         [HttpGet]
-        [Route("get-all-customer-for-admin")]
-        /*[Authorize(Roles = "Admin")]*/
-        public async Task<ActionResult<List<CustomerResponse>>> GetAllUser()
-        {
-            try {
-                var response = await _mediator.Send(new GetListForAdminQuery());
-                return response;
-            }
-            catch (Exception ex) {
-                return BadRequest(ex.Message);
-            }
-        }
-
-        [HttpGet]
         [Route("get-all-customer-only-customer")]
         [Authorize(Roles = "Admin, EndUser")]
         public async Task<List<CustomerRole>> Get()
@@ -87,13 +73,13 @@ namespace MetroDelivery.API.Controllers.Customers
         }
 
         [HttpPut]
-        [Route("update-customer-by-id")]
+        /*[Route("update-customer-by-id")]*/
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(400)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
         /*[Authorize(Roles = "EndUser")]*/
-        public async Task<MetroPickUpResponse> UpdateCustomer(UpdateCustomerCommand request)
+        public async Task<MetroPickUpResponse> UpdateCustomer([FromBody]UpdateCustomerCommand request)
         {
             var response = await _mediator.Send(request);
             return response;
@@ -101,13 +87,14 @@ namespace MetroDelivery.API.Controllers.Customers
 
         // DELETE api/<userController>/5
         [HttpDelete]
-        [Route("delete-customer-by-id")]
+        [Route("{applicationuserid}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
         /*[Authorize(Roles = "EndUser")]*/
-        public async Task<MetroPickUpResponse> Delete([FromQuery] DeleteCustomerCommand request)
+        public async Task<MetroPickUpResponse> Delete(string applicationuserid)
         {
+            var request = new DeleteCustomerCommand { Id = applicationuserid };
             var response = await _mediator.Send(request);
             return response;
         }
