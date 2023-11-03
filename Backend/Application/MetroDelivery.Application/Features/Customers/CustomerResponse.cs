@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MetroDelivery.Application.Common.Mapping;
 using MetroDelivery.Application.Features.Staff.Queries;
+using MetroDelivery.Application.Features.Stations.Queries;
 using MetroDelivery.Domain.Entities;
 using MetroDelivery.Domain.IdentityModels;
 using System;
@@ -49,5 +50,7 @@ namespace MetroDelivery.Application.Features.Customers
         public string Address { get; set; }
         public DateTime? Birthday { get; set; }
         public DateTime? Created { get; set; }
+        public Guid? StoreId { get; set; }
+        public StoreData? StoreData { get; set; }
     }
 }
