@@ -27,6 +27,7 @@ namespace MetroDelivery.Application.Common.Interface
         public DbSet<Station_Trip> Station_Trip { get; set; }
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public DbSet<WithDraw> WithDraw { get; set; }
+        public DbSet<PaymentHistory> PaymentHistory { get; set; }
 
         public Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
         public int SaveChanges(CancellationToken cancellationToken = default);

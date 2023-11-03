@@ -60,6 +60,9 @@ app.UseCors(MyAllowSpecificOrigins);
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapControllers();
+/*app.Map("/Home/PaymentCallback", HandlePaymentCallback);*/
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();

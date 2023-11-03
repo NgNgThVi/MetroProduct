@@ -1,5 +1,6 @@
 ﻿using MetroDelivery.API.Models;
 using MetroDelivery.Application.Common.Exceptions;
+using MetroDelivery.Identity.Services.VnPay;
 using System.Net;
 
 namespace MetroDelivery.API.Middleware
@@ -72,6 +73,17 @@ namespace MetroDelivery.API.Middleware
 
             httpContext.Response.StatusCode = (int)statusCode;
             await httpContext.Response.WriteAsJsonAsync(problem);
+        }
+
+        private static void HandlePaymentCallback(IApplicationBuilder app)
+        {
+            app.Run(async context =>
+            {
+                var response = app.ApplicationServices.GetRequiredService<IVnPayService>()
+                    .PaymentExecute(context.Request.Query);
+
+                await context.Response.WriteAsJsonAsync(response);
+            });
         }
     }
 }

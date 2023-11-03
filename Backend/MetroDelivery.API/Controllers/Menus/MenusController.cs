@@ -19,7 +19,7 @@ using System.Data;
 
 namespace MetroDelivery.API.Controllers.Menus
 {
-    [Route("api/v1/menu")]
+    [Route("api/v1/menus")]
     [ApiController]
     public class MenusController : ControllerBase
     {
@@ -38,10 +38,10 @@ namespace MetroDelivery.API.Controllers.Menus
         }
 
         [HttpGet]
-        [Route("get-by-id")]
-        public async Task<ActionResult<MenuResponse>> GetUserById([FromQuery] GetMenuByIdQuery request)
+        [Route("{id}")]
+        public async Task<ActionResult<MenuResponse>> Get(string id)
         {
-            var response = await _mediator.Send(request);
+            var response = await _mediator.Send(new GetMenuByIdQuery { Id = id});
             return Ok(response);
         }
 
@@ -61,20 +61,21 @@ namespace MetroDelivery.API.Controllers.Menus
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
         /*[Authorize(Roles = "Manager")]*/
-        public async Task<MetroPickUpResponse> Update(UpdateMenuCommand request)
+        public async Task<MetroPickUpResponse> Update([FromBody] UpdateMenuCommand request)
         {
             var response = await _mediator.Send(request);
             return response;
         }
 
         [HttpDelete]
+        [Route("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
         /*[Authorize(Roles = "Manager")]*/
-        public async Task<MetroPickUpResponse> Delete([FromQuery] DeleteMenuCommand request)
+        public async Task<MetroPickUpResponse> Delete(string id)
         {
-            var response = await _mediator.Send(request);
+            var response = await _mediator.Send(new DeleteMenuCommand { Id = id});
             return response;
         }
     }

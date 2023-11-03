@@ -7,6 +7,7 @@ using MetroDelivery.Identity.DbContexts;
 using MetroDelivery.Identity.DbContexts.Interceptor;
 using MetroDelivery.Identity.Repositories;
 using MetroDelivery.Identity.Services;
+using MetroDelivery.Identity.Services.VnPay;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -142,6 +143,7 @@ namespace MetroDelivery.Identity
             services.AddScoped<IStoreRepository, StoreRepository>();
             services.AddScoped<ITripRepository, TripRepository>();
             services.AddScoped<IWithDrawRepository, WithDrawRepository>();
+            services.AddScoped<IVnPayService, VnPayService>();
 
             return services;
         }
