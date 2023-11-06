@@ -6,9 +6,7 @@ using MetroDelivery.Application.Features.Routes.Commands.UpdateRoute;
 using MetroDelivery.Application.Features.Routes.Queries;
 using MetroDelivery.Application.Features.Routes.Queries.GetAllRoute;
 using MetroDelivery.Application.Features.Routes.Queries.GetByFromToRoute;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Data;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -26,7 +24,6 @@ namespace MetroDelivery.API.Controllers.Routes
         }
 
         [HttpGet]
-        [Route("get-all")]
         public async Task<List<RouteResponse>> GetAll()
         {
             var response = await _mediator.Send(new GetListRouteQuery());
@@ -34,10 +31,14 @@ namespace MetroDelivery.API.Controllers.Routes
         }
 
         [HttpGet]
-        [Route("get-route-by-id")]
-        public async Task<ActionResult<RouteResponse>> GetUserById([FromQuery] GetRouteByFromToQuery request)
+        [Route("{fromlocation}/{tolocation}")]
+        public async Task<ActionResult<RouteResponse>> GetUserById(string fromlocation, string tolocation)
         {
-            var response = await _mediator.Send(request);
+            var response = await _mediator.Send(new GetRouteByFromToQuery
+            {
+                FromLocation = fromlocation,
+                ToLocation = tolocation
+            });
             return Ok(response);
         }
 

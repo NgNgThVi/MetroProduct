@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MetroDelivery.API.Controllers.Stations
 {
-    [Route("api/v1/station")]
+    [Route("api/v1/stations")]
     [ApiController]
     public class StationsController : ControllerBase
     {
@@ -24,7 +24,7 @@ namespace MetroDelivery.API.Controllers.Stations
         }
 
         [HttpGet]
-        [Route("get-all-station")]
+        
         public async Task<List<StationResponse>> GetAllStation()
         {
             var response = await _mediator.Send(new GetListStationQuery());   
@@ -33,10 +33,13 @@ namespace MetroDelivery.API.Controllers.Stations
 
         // GET api/<StationsController>/5
         [HttpGet]
-        [Route("get-by-id-store")]
-        public async Task<StationResponse> Get([FromQuery] GetStationByIdStoreQuery request)
+        [Route("{storeid}")]
+        public async Task<StationResponse> Get(string storeid)
         {
-            var response = await _mediator.Send(request);
+            var response = await _mediator.Send(new GetStationByIdStoreQuery
+            {
+                StoreId = storeid
+            });
             return response;
         }
 

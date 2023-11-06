@@ -6,19 +6,13 @@ using MetroDelivery.Application.Features.Products.Commands.UpdateProducts;
 using MetroDelivery.Application.Features.Products.Queries;
 using MetroDelivery.Application.Features.Products.Queries.GetAllProduct;
 using MetroDelivery.Application.Features.Products.Queries.GetProductById;
-using MetroDelivery.Application.Features.Stores.Commands.CreateStores;
-using MetroDelivery.Application.Features.Trips.Commands.CreateTrip;
-using MetroDelivery.Application.Features.Trips.Commands.DeleteTrip;
-using MetroDelivery.Application.Features.Trips.Commands.UpdateTrip;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Data;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace MetroDelivery.API.Controllers.Products
 {
-    [Route("api/v1/product")]
+    [Route("api/v1/products")]
     [ApiController]
     public class ProductsController : ControllerBase
     {
@@ -29,8 +23,7 @@ namespace MetroDelivery.API.Controllers.Products
             _mediator = mediator;
         }
 
-        [HttpGet]
-        [Route("get-all")]
+        [HttpGet]   
         public async Task<List<ProductResponse>> GetAll()
         {
             var response = await _mediator.Send(new GetListProductQuery());
@@ -39,10 +32,13 @@ namespace MetroDelivery.API.Controllers.Products
 
 
         [HttpGet]
-        [Route("get-by-id")]
-        public async Task<ProductResponse> Get([FromQuery] GetProductByIdQuery request)
+        [Route("{id}")]
+        public async Task<ProductResponse> Get(string id)
         {
-            var response = await _mediator.Send(request);
+            var response = await _mediator.Send(new GetProductByIdQuery
+            {
+                Id = id
+            });
             return response;
         }
 

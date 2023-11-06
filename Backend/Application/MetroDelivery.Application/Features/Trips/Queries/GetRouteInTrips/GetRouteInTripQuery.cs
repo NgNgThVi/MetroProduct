@@ -14,8 +14,8 @@ namespace MetroDelivery.Application.Features.Trips.Queries.GetRouteInTrips
 {
     public class GetRouteInTripQuery : IRequest<List<TripResponse>>
     {
-        public string FromLocation { get; set; }
-        public string ToLocation { get; set; }
+        public string? FromLocation { get; set; }
+        public string? ToLocation { get; set; }
     }
 
     public class GetRouteInTripQueryHandler : IRequestHandler<GetRouteInTripQuery, List<TripResponse>>

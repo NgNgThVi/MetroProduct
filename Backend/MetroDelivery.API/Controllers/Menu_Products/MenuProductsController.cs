@@ -10,13 +10,14 @@ using MetroDelivery.Application.Features.Menu_Products.Queries.GetMenuProductByM
 using MetroDelivery.Application.Features.Menu_Products.Queries.GetMenuProductByTimeService;
 using MetroDelivery.Application.Features.Menus.Commands.CreateMenu;
 using MetroDelivery.Application.Features.Menus.Commands.DeleteMenu;
+using MetroDelivery.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace MetroDelivery.API.Controllers.Menu_Products
 {
-    [Route("api/v1/menu-product")]
+    [Route("api/v1/menu-products")]
     [ApiController]
     public class MenuProductsController : ControllerBase
     {
@@ -28,24 +29,26 @@ namespace MetroDelivery.API.Controllers.Menu_Products
         }
 
         [HttpGet]
-        public async Task<List<MenuProductResponse>> GetAll()
+        public async Task<List<MenuProductResponse>> Get()
         {
             var response = await _mediator.Send(new GetAllMenu_Products());
             return response;
         }
 
         [HttpGet]
-        [Route("get-menu-product-by-station-id")]
-        public async Task<MenuProductResponseData> Get([FromQuery] GetMenuProductByStationIdQuery request)
+        [Route("stations/{stationid}")]
+        public async Task<MenuProductResponseData> GetStationId(string stationid)
         {
+            var request = new GetMenuProductByStationIdQuery { StationId = stationid };
             var response = await _mediator.Send(request);
             return response;
         }
 
         [HttpGet]
-        [Route("get-menu-product-by-menu-id")]
-        public async Task<List<MenuProductResponse>> Get([FromQuery] GetMenuProducByMenuIdQuery request)
+        [Route("menus/{menuid}")]
+        public async Task<List<MenuProductResponse>> GetMenuId(string menuid)
         {
+            var request = new GetMenuProducByMenuIdQuery { menuId = menuid };
             var response = await _mediator.Send(request);
             return response;
         }
@@ -71,11 +74,13 @@ namespace MetroDelivery.API.Controllers.Menu_Products
         }
 
         [HttpDelete]
+        [Route("{menuproductid}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
-        public async Task<MetroPickUpResponse> Delete([FromQuery] DeleteMenuProductCommand request)
+        public async Task<MetroPickUpResponse> Delete(string menuproductid)
         {
+            var request = new DeleteMenuProductCommand { MenuProductId = menuproductid };
             var response = await _mediator.Send(request);
             return response;
         }

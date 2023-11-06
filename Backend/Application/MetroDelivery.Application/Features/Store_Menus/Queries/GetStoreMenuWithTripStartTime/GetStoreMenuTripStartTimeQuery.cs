@@ -15,7 +15,7 @@ namespace MetroDelivery.Application.Features.Store_Menus.Queries.GetStoreMenuWit
 {
     public class GetStoreMenuTripStartTimeQuery : IRequest<StoreMenuResponse>
     {
-        public string StationTripId { get; set; }
+        public string? StationTripId { get; set; }
     }
 
     public class GetStoreMenuTripStartTimeQueryHandler : IRequestHandler<GetStoreMenuTripStartTimeQuery, StoreMenuResponse>

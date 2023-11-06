@@ -15,6 +15,7 @@ using MetroDelivery.Application.Features.Stores;
 using MetroDelivery.Application.Features.Stores.Queries.GetAllStoreHaveManger;
 using MetroDelivery.Application.Features.Trips.Queries;
 using MetroDelivery.Application.Features.Withdraws.Queries;
+using MetroDelivery.Application.Models.VnPay;
 using MetroDelivery.Domain.Entities;
 using MetroDelivery.Domain.IdentityModels;
 
@@ -99,9 +100,13 @@ namespace MetroDelivery.Application.Common.MappingProfiles
             CreateMap<StaffResponse, ApplicationUser>().ReverseMap();
             CreateMap<ApplicationUser, StaffResponse>().ReverseMap();
 
-           /* //Manager 
-            CreateMap<ManagerData, ApplicationUser>().ReverseMap();
-            CreateMap<ApplicationUser, ManagerData>().ReverseMap();*/
+            /* //Manager 
+             CreateMap<ManagerData, ApplicationUser>().ReverseMap();
+             CreateMap<ApplicationUser, ManagerData>().ReverseMap();*/
+
+            //paymentHistory Response
+            CreateMap<PaymentResponse, PaymentHistory>().ReverseMap();
+            CreateMap<PaymentHistory, PaymentResponse>().ReverseMap();
 
         }
 

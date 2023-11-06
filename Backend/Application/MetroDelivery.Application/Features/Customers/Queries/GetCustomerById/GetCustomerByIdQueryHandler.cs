@@ -3,7 +3,9 @@ using MediatR;
 using MetroDelivery.Application.Common.Exceptions;
 using MetroDelivery.Application.Common.Interface;
 using MetroDelivery.Application.Contracts.Persistance;
+using MetroDelivery.Application.Features.Manager.Queries;
 using MetroDelivery.Application.Features.Staff.Queries;
+using MetroDelivery.Application.Features.Stations.Queries;
 using MetroDelivery.Domain.Entities;
 using MetroDelivery.Domain.IdentityModels;
 using Microsoft.AspNetCore.Identity;
@@ -14,13 +16,15 @@ namespace MetroDelivery.Application.Features.Customers.Queries.GetCustomerById
     public class GetCustomerByIdQueryHandler : IRequestHandler<GetCustomerByIdQuery, CustomerRole>
     {
         private readonly IMetroPickUpDbContext _metroPickUpDbContext;
+        private readonly IMapper _mapper;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
-        public GetCustomerByIdQueryHandler(IMetroPickUpDbContext metroPickUpDbContext,
+        public GetCustomerByIdQueryHandler(IMetroPickUpDbContext metroPickUpDbContext, IMapper mapper,
             UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, SignInManager<ApplicationUser> signInManager)
         {
             _metroPickUpDbContext = metroPickUpDbContext;
+            _mapper = mapper;
             _userManager = userManager;
             _roleManager = roleManager;
             _signInManager = signInManager;

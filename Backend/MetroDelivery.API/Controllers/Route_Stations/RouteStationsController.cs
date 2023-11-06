@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MetroDelivery.API.Controllers.Route_Stations
 {
-    [Route("api/v1/route-station")]
+    [Route("api/v1/route-stations")]
     [ApiController]
     public class RouteStationsController : ControllerBase
     {
@@ -27,10 +27,14 @@ namespace MetroDelivery.API.Controllers.Route_Stations
         }
 
         [HttpGet]
-        [Route("route-in-station")]
-        public async Task<List<RouteStationResponse>> Get([FromQuery] GetRouteInStationQuery request)
+        [Route("{fromlocation}/{tolocation}")]
+        public async Task<List<RouteStationResponse>> Get(string fromlocation, string tolocation)
         {
-            var response = await _mediator.Send(request);
+            var response = await _mediator.Send(new GetRouteInStationQuery
+            {
+                FromLocation = fromlocation,
+                ToLocation = tolocation
+            });
             return response;
         }
 
