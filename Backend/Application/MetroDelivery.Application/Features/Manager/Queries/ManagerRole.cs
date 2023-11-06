@@ -1,5 +1,6 @@
 ﻿using MetroDelivery.Application.Features.Customers;
 using MetroDelivery.Application.Features.Staff.Queries;
+using MetroDelivery.Application.Features.Stations.Queries;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,6 +30,7 @@ namespace MetroDelivery.Application.Features.Manager.Queries
         public DateTime? Birthday { get; set; }
         public Guid? StoreId { get; set; }
         public DateTime? Created { get; set; }
+        public StoreData? StoreData { get; set; }
     }
 
     public class ManagerResponse

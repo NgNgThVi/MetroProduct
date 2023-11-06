@@ -2,6 +2,7 @@
 using MediatR;
 using MetroDelivery.Application.Common.Interface;
 using MetroDelivery.Application.Features.Staff.Queries;
+using MetroDelivery.Application.Features.Stations.Queries;
 using MetroDelivery.Domain.IdentityModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -58,6 +59,7 @@ namespace MetroDelivery.Application.Features.Manager.Queries.GetAllManager
                         Birthday = user.Birthday,
                         StoreId = user.StoreId,
                         Created = user.Created,
+                        StoreData = _mapper.Map<StoreData>(_metroPickUpDbContext.Store.Where(s => s.Id == user.StoreId).SingleOrDefault()),
                     },
                     RoleId = "04D67210-257D-4DD5-BAFC-13DDE8CA0DFE",
                     RoleData = new RoleData

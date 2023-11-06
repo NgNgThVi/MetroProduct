@@ -128,6 +128,13 @@ namespace MetroDelivery.Identity
 
             });
 
+            //Vn Pay
+            /*configuration = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("appsettings.json")
+            .Build();
+            services.AddSingleton(configuration);*/
+
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             /*services.AddScoped<ICustomerRepository, CustomerRepository>();*/
             services.AddScoped<ICategoryRepository, CategoryRepository>();

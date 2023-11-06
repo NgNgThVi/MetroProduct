@@ -60,11 +60,16 @@ namespace MetroDelivery.API.Controllers.PaymentMethods
             }
         }
 
-        [HttpGet("PaymentCallback")]
+        [HttpPost("PaymentCallback")]
         public IActionResult PaymentCallback()
         {
-            var response = _vnPayService.PaymentExecute(Request.Query);
-            return Ok(response);
+            IQueryCollection queryCollection = HttpContext.Request.Query;
+
+            // Execute the payment and get the response
+            PaymentResponse paymentResponse = _vnPayService.PaymentExecute(queryCollection);
+
+            /*var response = _vnPayService.PaymentExecute(Request.Query);*/
+            return Ok(paymentResponse);
         }
 
         // history
