@@ -70,9 +70,9 @@ namespace MetroDelivery.Application.Features.Orders.Queries.GetByIdCustomer
                                                             )
                                                             .OrderByDescending(o => o.Created)
                                                             .ToListAsync();
-            if (order == null) {
+            /*if (order == null) {
                 throw new NotFoundException("Order is not existed");
-            }
+            }*/
 
             return order;
         }
