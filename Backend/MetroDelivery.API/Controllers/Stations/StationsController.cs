@@ -33,12 +33,12 @@ namespace MetroDelivery.API.Controllers.Stations
 
         // GET api/<StationsController>/5
         [HttpGet]
-        [Route("{storeid}")]
-        public async Task<StationResponse> Get(string storeid)
+        [Route("{stationid}")]
+        public async Task<StationResponse> Get(string stationid)
         {
             var response = await _mediator.Send(new GetStationByIdStoreQuery
             {
-                StoreId = storeid
+                StationId = stationid
             });
             return response;
         }
