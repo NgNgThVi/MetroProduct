@@ -22,7 +22,7 @@ namespace MetroDelivery.Identity.Configurations.EntityConfiguration
                 new PaymentMethod
                 {
                     Id = Guid.Parse("47BD4DD4-3FB4-463E-B9B9-5EBFB7E1F960"),
-                    PaymentMethodName = "thanh toán qua momo"
+                    PaymentMethodName = "Paypal"
                 },
                 new PaymentMethod
                 {
