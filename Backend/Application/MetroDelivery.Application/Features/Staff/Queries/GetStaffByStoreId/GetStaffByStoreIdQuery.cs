@@ -79,7 +79,8 @@ namespace MetroDelivery.Application.Features.Staff.Queries.GetStaffByStoreId
             }
 
             // Nếu không tìm thấy hoặc Email chưa được xác nhận, trả về null hoặc thực hiện xử lý phù hợp.
-            throw new NotFoundException("Không tìm thấy nhân viên có vai trò 'Staff'");
+            return staffRoles;
+            /*throw new NotFoundException("Không tìm thấy nhân viên có vai trò 'Staff'");*/
         }
         private StoreData GetStoreData(Guid? id)
         {

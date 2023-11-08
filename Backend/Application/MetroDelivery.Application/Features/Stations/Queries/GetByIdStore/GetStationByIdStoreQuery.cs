@@ -9,6 +9,6 @@ namespace MetroDelivery.Application.Features.Stations.Queries.GetByIdStore
 {
     public class GetStationByIdStoreQuery : IRequest<StationResponse>
     {
-        public string StoreId { get; set; }
+        public string StationId { get; set; }
     }
 }

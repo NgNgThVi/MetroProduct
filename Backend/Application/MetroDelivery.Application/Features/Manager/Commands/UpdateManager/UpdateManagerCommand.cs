@@ -21,13 +21,6 @@ namespace MetroDelivery.Application.Features.Manager.Commands.UpdateManager
     {
         public string Id { get; set; }
 
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-
-        public string Phone { get; set; }
-
-        public string Address { get; set; }
-        public DateTime Birthday { get; set; }
         public string StoreId { get; set; }
     }
 
@@ -58,19 +51,7 @@ namespace MetroDelivery.Application.Features.Manager.Commands.UpdateManager
             else if (staff.EmailConfirmed == false) {
                 throw new NotFoundException("The Manager have been deleted");
             }
-            var validator = new UpdateManagerCommandValidator();
-            var validationResult = await validator.ValidateAsync(request);
 
-            if (validationResult.Errors.Any()) {
-
-                throw new BadRequestException("Invalid Manager", validationResult);
-            }
-
-            staff.PhoneNumber = request.Phone;
-            staff.Birthday = request.Birthday;
-            staff.Address = request.Address;
-            staff.FirstName = request.FirstName;
-            staff.LastName = request.LastName;
             staff.StoreId = Guid.Parse(request.StoreId);
 
 
@@ -93,36 +74,6 @@ namespace MetroDelivery.Application.Features.Manager.Commands.UpdateManager
             {
                 Message = "Update Manager Successfully"
             };
-        }
-    }
-
-    public class UpdateManagerCommandValidator : AbstractValidator<UpdateManagerCommand>
-    {
-
-        public UpdateManagerCommandValidator()
-        {
-
-            RuleFor(p => p.FirstName)
-                .NotEmpty().WithMessage("{FirstName} is required")
-                .NotNull()
-                .MaximumLength(10).WithMessage("{FirstName} must be fewer than 10 characters");
-
-            RuleFor(p => p.LastName)
-                .NotEmpty().WithMessage("{LastName} is required")
-                .NotNull()
-                .MaximumLength(10).WithMessage("{LastName} must be fewer than 10 characters");
-
-            RuleFor(p => p.Phone)
-                .NotEmpty().WithMessage("Phone number is required")
-                .NotNull()
-                .Matches(@"^\d{10}$")
-                .WithMessage("Invalid phone number");
-
-            RuleFor(p => p.Address)
-                .NotEmpty().WithMessage("Address is required")
-                .NotNull()
-                .MaximumLength(100).WithMessage("Address must be fewer than 100 chrarcters");
-
         }
     }
 }

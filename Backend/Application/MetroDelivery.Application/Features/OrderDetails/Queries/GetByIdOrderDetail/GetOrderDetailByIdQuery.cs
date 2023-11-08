@@ -57,9 +57,9 @@ namespace MetroDelivery.Application.Features.OrderDetails.Queries.GetByIdOrderDe
 
                                                                             }
                                                                         ).ToListAsync();
-            if(orderDetailExist == null) {
+            /*if(orderDetailExist == null) {
                 throw new NotFoundException("orderDetail ko tồn tại");
-            }
+            }*/
             return orderDetailExist;
         }
     }

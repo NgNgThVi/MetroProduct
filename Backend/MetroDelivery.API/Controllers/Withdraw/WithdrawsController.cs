@@ -6,6 +6,7 @@ using MetroDelivery.Application.Features.Withdraws.Commands.UpdateWithdraw;
 using MetroDelivery.Application.Features.Withdraws.Queries;
 using MetroDelivery.Application.Features.Withdraws.Queries.GetAllWithdraw;
 using MetroDelivery.Application.Features.Withdraws.Queries.GetByIdWithdraw;
+using MetroDelivery.Application.Features.Withdraws.Queries.GetByUserId;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -49,6 +50,19 @@ namespace MetroDelivery.API.Controllers.Withdraw
             var response = await _mediator.Send(request);
             return CreatedAtAction(nameof(GetAll), new { id = response });
         }
+        [HttpGet]
+        [Route("customers/{id}")]
+        [ProducesResponseType(201)]
+        [ProducesResponseType(400)]
+        public async Task<ActionResult> GetByUserId(string id)
+        {
+            var response = await _mediator.Send(new GetByUserIdCommand
+            {
+                UserId = id
+            });
+            return CreatedAtAction(nameof(GetAll), new { id = response });
+        }
+
 
         [HttpPut]
         [ProducesResponseType(StatusCodes.Status204NoContent)]

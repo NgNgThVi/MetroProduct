@@ -19,7 +19,7 @@ namespace MetroDelivery.Application.Features.Stations.Queries.GetByIdStore
 
         public async Task<StationResponse> Handle(GetStationByIdStoreQuery request, CancellationToken cancellationToken)
         {
-            var station = await _metroPickUpDbContext.Station.Where(s => s.Id == Guid.Parse(request.StoreId)).SingleOrDefaultAsync();
+            var station = await _metroPickUpDbContext.Station.Where(s => s.Id == Guid.Parse(request.StationId)).SingleOrDefaultAsync();
             if (station == null) {
                 throw new NotFoundException($"Not found station with {station}");
             }
