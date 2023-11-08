@@ -17,7 +17,7 @@ namespace MetroDelivery.Application.Features.Withdraws.Queries
         public Guid PaymentMethodID { get; set; }
         public double? Balance { get; set; }
         public double? Deposit { get; set; }
-        public DateTime? CreateTimeOfWithdraw { get; set; }
+        public DateTime? Created { get; set; }
 
         // relationship
         public CustomerData? CustomerData { get; set; }

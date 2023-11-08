@@ -49,7 +49,7 @@ namespace MetroDelivery.Application.Features.Withdraws.Queries.GetAllWithdraw
                                                                         Deposit = combined.WithDraws.Deposit,
                                                                         ApplicationUserID = combined.WithDraws.ApplicationUserID,
                                                                         PaymentMethodID = combined.WithDraws.PaymentMethodID,
-                                                                        CreateTimeOfWithdraw = combined.WithDraws.CreateTimeOfWithdraw,
+                                                                        Created = combined.WithDraws.Created,
 
                                                                         CustomerData = _mapper.Map<CustomerData>(combined.ApplicationUsers),
                                                                         PaymentMethodData = _mapper.Map<PaymentMethodResponse>(payment)

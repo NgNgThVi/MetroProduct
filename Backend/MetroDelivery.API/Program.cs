@@ -25,7 +25,7 @@ builder.Services.AddControllers();
     .AllowAnyMethod());
 });*/
 builder.Services.AddHttpContextAccessor();
-var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+/*var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: MyAllowSpecificOrigins,
@@ -33,7 +33,7 @@ builder.Services.AddCors(options =>
                       {
                           policy.WithOrigins("*").AllowAnyHeader().AllowAnyMethod();
                       });
-});
+});*/
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -56,7 +56,9 @@ app.UseMiddleware<ExceptionMiddleware>();
 
 app.UseHttpsRedirection();
 
-app.UseCors(MyAllowSpecificOrigins);
+/*app.UseCors(MyAllowSpecificOrigins);*/
+app.UseRouting();
+app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
 app.UseAuthentication();
 app.UseAuthorization();
